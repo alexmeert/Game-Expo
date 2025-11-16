@@ -12,8 +12,7 @@ public partial class Player : BasicEntity
     {
         base._Ready();
 
-        // Assign gun owner
-        var gun = GetNode<Gun>("Gun");  // <-- Make sure "Gun" matches the node name/path
+        var gun = GetNode<Gun>("Gun");
         gun.Owner = this;
     }
 

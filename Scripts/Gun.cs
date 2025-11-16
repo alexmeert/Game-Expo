@@ -6,7 +6,7 @@ public partial class Gun : Node2D
     [Export] public Marker2D Muzzle;
     [Export] public AudioStreamPlayer2D ShotSound;
 
-    [Export] public float FireCooldown = 0.50f;
+    [Export] public float FireCooldown = 0.20f;
     private float fireTimer = 0f;
 
     public BasicEntity Owner { get; set; }

@@ -7,7 +7,7 @@ public partial class BasicEntity : CharacterBody2D
     public Dictionary<string, float> Stats = new Dictionary<string, float>()
     {
         { "HP", 100 },
-        { "ATK", 10 },
+        { "DMG", 10 },
         { "ATKSPD", 1.0f },
         { "DEF", 0 },
         { "SPD", 100 },
@@ -19,10 +19,10 @@ public partial class BasicEntity : CharacterBody2D
         set => Stats["HP"] = value;
     }
 
-    public float ATK
+    public float DMG
     {
-        get => Stats["ATK"];
-        set => Stats["ATK"] = value;
+        get => Stats["DMG"];
+        set => Stats["DMG"] = value;
     }
 
     public float ATKSPD
@@ -43,9 +43,18 @@ public partial class BasicEntity : CharacterBody2D
         set => Stats["SPD"] = value;
     }
 
-    public virtual void TakeDamage(float amount)
+    public void SetStats(float hp, float dmg, float atkspd, float def, float spd)
     {
-        float finalDamage = MathF.Max(1, amount - DEF);
+        HP = hp;
+        DMG = dmg;
+        ATKSPD = atkspd;
+        DEF = def;
+        SPD = spd;
+    }
+
+    public virtual void TakeDamage(float dmg)
+    {
+        float finalDamage = MathF.Max(1, dmg - DEF);
         HP -= finalDamage;
 
         if (HP <= 0)

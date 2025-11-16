@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://c1aw4q02ut5i1"]
+[gd_scene load_steps=6 format=3 uid="uid://c1aw4q02ut5i1"]
 
 [ext_resource type="Script" uid="uid://bh5qd48qpm15n" path="res://Scripts/Player.cs" id="1_4flse"]
-[ext_resource type="Texture2D" uid="uid://dh30y8vqrma3d" path="res://Sprites/Characters/MainCharacterRight.png" id="2_cbltj"]
+[ext_resource type="Texture2D" uid="uid://c6r4bel1vt52" path="res://Sprites/Characters/Chip_Sprite.png" id="2_j5d3a"]
 [ext_resource type="PackedScene" uid="uid://bbbipgyewtvo5" path="res://Scenes/Weapons/Gun.tscn" id="3_j5d3a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4flse"]
 radius = 7.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j5d3a"]
+size = Vector2(21, 21)
 
 [node name="MainCharacter" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_4flse")
@@ -13,9 +16,10 @@ sprite = NodePath("ChipSprite")
 
 [node name="ChipSprite" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("2_cbltj")
+texture = ExtResource("2_j5d3a")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 5)
 shape = SubResource("CircleShape2D_4flse")
 
@@ -23,4 +27,12 @@ shape = SubResource("CircleShape2D_4flse")
 zoom = Vector2(2.5, 2.5)
 
 [node name="Gun" parent="." instance=ExtResource("3_j5d3a")]
+visible = false
 position = Vector2(0, 5)
+
+[node name="Hitbox" type="Area2D" parent="." groups=["Player"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+visible = false
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_j5d3a")

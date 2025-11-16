@@ -21,7 +21,7 @@ public partial class PlayerProjectile : Node
         projectile.SetDirection(Vector2.Right.Rotated(rotation));
 
         projectile.Owner = Owner;
-        projectile.SetDamage(Owner.ATK);
+        projectile.SetDamage(Owner.DMG);
 
         GetTree().CurrentScene.AddChild(projectile);
     }
