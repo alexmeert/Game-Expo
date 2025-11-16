@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1aw4q02ut5i1"]
+
+[ext_resource type="Script" uid="uid://bh5qd48qpm15n" path="res://Scripts/Player.cs" id="1_4flse"]
+[ext_resource type="Texture2D" uid="uid://dh30y8vqrma3d" path="res://Sprites/Characters/MainCharacterRight.png" id="2_cbltj"]
+[ext_resource type="PackedScene" uid="uid://bbbipgyewtvo5" path="res://Scenes/Weapons/Gun.tscn" id="3_j5d3a"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4flse"]
+radius = 7.0
+
+[node name="MainCharacter" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
+script = ExtResource("1_4flse")
+sprite = NodePath("ChipSprite")
+
+[node name="ChipSprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_cbltj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = SubResource("CircleShape2D_4flse")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2.5, 2.5)
+
+[node name="Gun" parent="." instance=ExtResource("3_j5d3a")]
+position = Vector2(0, 5)
