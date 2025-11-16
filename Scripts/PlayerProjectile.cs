@@ -13,18 +13,16 @@ public partial class PlayerProjectile : Node
     {
         var projectileScene = _useFirstProjectile ? Projectile0Scene : Projectile1Scene;
         _useFirstProjectile = !_useFirstProjectile;
-    
+
         var projectile = projectileScene.Instantiate<BasicProjectile>();
-    
+
         projectile.GlobalPosition = position;
-        projectile.Rotation = rotation;
-    
-        // THIS NOW MATCHES THE GUN ROTATION
+
         projectile.SetDirection(Vector2.Right.Rotated(rotation));
-    
+
         projectile.Owner = Owner;
         projectile.SetDamage(Owner.ATK);
-    
+
         GetTree().CurrentScene.AddChild(projectile);
     }
 
