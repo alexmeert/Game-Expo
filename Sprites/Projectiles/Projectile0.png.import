@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmhuxxffe8ui"
-path="res://.godot/imported/Chip_Item.png-efc973d4d2db705c5f88a041bb7d7410.ctex"
+uid="uid://cjsyntcito63t"
+path="res://.godot/imported/Projectile0.png-8a00ab9e2861efe6f391e88d1a8bbf45.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Items/Chip_Item.png"
-dest_files=["res://.godot/imported/Chip_Item.png-efc973d4d2db705c5f88a041bb7d7410.ctex"]
+source_file="res://Sprites/Projectiles/Projectile0.png"
+dest_files=["res://.godot/imported/Projectile0.png-8a00ab9e2861efe6f391e88d1a8bbf45.ctex"]
 
 [params]
 

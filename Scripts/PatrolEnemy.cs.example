@@ -1,0 +1,95 @@
+using Godot;
+using System;
+
+// Example: Another enemy type showing different movement pattern
+public partial class PatrolEnemy : BasicEntity
+{
+    [Export] public Vector2[] PatrolPoints;
+    [Export] public float PatrolWaitTime = 2.0f;
+    
+    private int _currentPatrolIndex = 0;
+    private float _waitTimer = 0f;
+    private bool _isWaiting = false;
+    protected Node2D TargetPlayer { get; private set; }
+
+    protected override void InitializeEntity()
+    {
+        base.InitializeEntity();
+        SetStats(hp: 75, dmg: 2, atkspd: 1.0f, def: 2, spd: 30);
+        FindPlayer();
+    }
+
+    protected override void HandleMovement(double delta)
+    {
+        if (TargetPlayer == null)
+            FindPlayer();
+
+        // If player is nearby, chase them
+        if (TargetPlayer != null && GlobalPosition.DistanceTo(TargetPlayer.GlobalPosition) < 300f)
+        {
+            _isWaiting = false;
+            Vector2 direction = (TargetPlayer.GlobalPosition - GlobalPosition).Normalized();
+            Velocity = direction * SPD;
+        }
+        else
+        {
+            // Otherwise, patrol
+            Patrol(delta);
+        }
+    }
+
+    private void Patrol(double delta)
+    {
+        if (PatrolPoints == null || PatrolPoints.Length == 0)
+            return;
+
+        Vector2 targetPoint = PatrolPoints[_currentPatrolIndex];
+        float distance = GlobalPosition.DistanceTo(targetPoint);
+
+        if (distance < 10f)
+        {
+            // Reached patrol point, wait
+            if (!_isWaiting)
+            {
+                _isWaiting = true;
+                _waitTimer = PatrolWaitTime;
+            }
+
+            _waitTimer -= (float)delta;
+            if (_waitTimer <= 0f)
+            {
+                _isWaiting = false;
+                _currentPatrolIndex = (_currentPatrolIndex + 1) % PatrolPoints.Length;
+            }
+
+            Velocity = Vector2.Zero;
+        }
+        else
+        {
+            // Move towards patrol point
+            Vector2 direction = (targetPoint - GlobalPosition).Normalized();
+            Velocity = direction * SPD * 0.7f; // Slower when patrolling
+        }
+    }
+
+    protected virtual void FindPlayer()
+    {
+        var scene = GetTree().CurrentScene;
+        if (scene != null)
+        {
+            TargetPlayer = scene.GetNodeOrNull<Node2D>("MainCharacter");
+        }
+    }
+
+    // Example: Custom damage handling - becomes enraged at low HP
+    protected override void OnTakeDamage(float damage)
+    {
+        if (HPPercent < 0.3f && SPD < 60f)
+        {
+            SPD *= 1.5f; // Speed boost when low on health
+            DMG *= 1.2f; // Damage boost
+            GD.Print($"{Name} is enraged!");
+        }
+    }
+}
+

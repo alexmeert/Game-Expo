@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://c8u16gw00jovv"]
+
+[ext_resource type="AudioStream" uid="uid://ct31v0hjrxn48" path="res://Sounds/Chest/ChestOpen.mp3" id="1_2ottt"]
+[ext_resource type="Script" uid="uid://bleu878g0spno" path="res://Scripts/Chest.cs" id="1_pkf2e"]
+[ext_resource type="Texture2D" uid="uid://bhhab0mso0kk4" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/chest/chest_open.png" id="1_wn0sm"]
+[ext_resource type="Texture2D" uid="uid://gsm3tkbhvosn" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/chest/chest0_enabled.png" id="2_wn0sm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pkf2e"]
+size = Vector2(51, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_07ymt"]
+size = Vector2(26, 16)
+
+[node name="Chest" type="StaticBody2D" node_paths=PackedStringArray("OpenSound", "ClosedSprite", "OpenSprite")]
+script = ExtResource("1_pkf2e")
+OpenSound = NodePath("AudioStreamPlayer2D")
+ClosedSprite = NodePath("ClosedChest")
+OpenSprite = NodePath("OpenChest")
+
+[node name="ClosedChest" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_wn0sm")
+
+[node name="OpenChest" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+texture = ExtResource("1_wn0sm")
+
+[node name="Area2D" type="Area2D" parent="." groups=["Chest"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+shape = SubResource("RectangleShape2D_pkf2e")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_2ottt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_07ymt")
