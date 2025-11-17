@@ -13,16 +13,20 @@ public partial class Player : BasicEntity
         base._Ready();
 
         var gun = GetNode<Gun>("Gun");
-        gun.Owner = this;
+        if (gun != null)
+            gun.Owner = this;
     }
 
-    public override void _PhysicsProcess(double delta)
+    protected override void HandleMovement(double delta)
     {
         // Flip sprite based on mouse direction
-        if (GetGlobalMousePosition().X < GlobalPosition.X)
-            sprite.FlipH = true;
-        else
-            sprite.FlipH = false;
+        if (sprite != null)
+        {
+            if (GetGlobalMousePosition().X < GlobalPosition.X)
+                sprite.FlipH = true;
+            else
+                sprite.FlipH = false;
+        }
 
         Vector2 input = GetInput();
 
@@ -30,8 +34,6 @@ public partial class Player : BasicEntity
             Velocity = Velocity.Lerp(input * SPD, (float)delta * ACCEL);
         else
             Velocity = Velocity.Lerp(Vector2.Zero, (float)delta * FRICTION);
-
-        MoveAndSlide();
     }
 
     private Vector2 GetInput()

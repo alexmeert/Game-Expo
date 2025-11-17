@@ -30,7 +30,6 @@ public partial class Chest : Node2D
 
         OpenSound?.Play();
 
-        // Roll for reward
         var reward = RollReward();
         GD.Print("Player received: " + reward);
 
@@ -39,21 +38,19 @@ public partial class Chest : Node2D
 
     private string RollReward()
     {
-        // Example reward pool
         string[] rewards = new string[]
         {
-            "Attack +1",
-            "Speed +1",
-            "Health +5",
-            "Fire Rate +10%",
-            "Special Item"
+            "GPU Upgrade",
+            "Case Upgrade",
+            "RAM Upgrade",
+            "Memory Upgrade",
+            "Upgrade All"
         };
 
-        int index = GD.RandRange(0, rewards.Length); // random index
+        int index = GD.RandRange(0, rewards.Length);
         return rewards[index];
     }
 
-    // Area2D signals
     private void _on_Area2D_body_entered(Node body)
     {
         if (body is Player)

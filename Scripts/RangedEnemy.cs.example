@@ -1,0 +1,81 @@
+using Godot;
+using System;
+
+// Example: How easy it is to create a new enemy type with the improved inheritance
+public partial class RangedEnemy : BasicEntity
+{
+    [Export] public PackedScene ProjectileScene;
+    [Export] public Marker2D FirePoint;
+    
+    private float _attackTimer = 0f;
+    protected Node2D TargetPlayer { get; private set; }
+
+    protected override void InitializeEntity()
+    {
+        base.InitializeEntity();
+        SetStats(hp: 30, dmg: 5, atkspd: 2.0f, def: 0, spd: 50);
+        FindPlayer();
+    }
+
+    protected override void HandleMovement(double delta)
+    {
+        if (TargetPlayer == null || !TargetPlayer.IsInsideTree())
+        {
+            FindPlayer();
+            if (TargetPlayer == null)
+                return;
+        }
+
+        // Keep distance from player
+        Vector2 direction = (TargetPlayer.GlobalPosition - GlobalPosition).Normalized();
+        float distance = GlobalPosition.DistanceTo(TargetPlayer.GlobalPosition);
+        
+        // Move away if too close, move closer if too far
+        if (distance < 200f)
+            Velocity = -direction * SPD; // Move away
+        else if (distance > 400f)
+            Velocity = direction * SPD * 0.5f; // Move closer slowly
+        else
+            Velocity = Vector2.Zero; // Stay in range
+
+        // Attack logic
+        _attackTimer -= (float)delta;
+        if (_attackTimer <= 0f && distance < 500f)
+        {
+            Attack();
+            _attackTimer = 1.0f / ATKSPD;
+        }
+    }
+
+    private void Attack()
+    {
+        if (ProjectileScene == null || FirePoint == null || TargetPlayer == null)
+            return;
+
+        var projectile = ProjectileScene.Instantiate<BasicProjectile>();
+        GetTree().CurrentScene.AddChild(projectile);
+        
+        projectile.GlobalPosition = FirePoint.GlobalPosition;
+        Vector2 direction = (TargetPlayer.GlobalPosition - FirePoint.GlobalPosition).Normalized();
+        projectile.SetDirection(direction);
+        projectile.Owner = this;
+        projectile.SetDamage(DMG);
+    }
+
+    protected virtual void FindPlayer()
+    {
+        var scene = GetTree().CurrentScene;
+        if (scene != null)
+        {
+            TargetPlayer = scene.GetNodeOrNull<Node2D>("MainCharacter");
+        }
+    }
+
+    // Example: Custom death behavior - drop loot
+    protected override void OnDeath()
+    {
+        GD.Print($"{Name} died and dropped loot!");
+        // Add loot drop logic here
+    }
+}
+
