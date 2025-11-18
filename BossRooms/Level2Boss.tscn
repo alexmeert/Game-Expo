@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=4 uid="uid://m76xdjbtr7p8"]
+[gd_scene load_steps=5 format=4 uid="uid://m76xdjbtr7p8"]
 
 [ext_resource type="Texture2D" uid="uid://dx5xusixt7bfv" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/tileset.png" id="1_3g12k"]
+[ext_resource type="PackedScene" uid="uid://c1aw4q02ut5i1" path="res://Scenes/Characters/MainCharacter.tscn" id="2_xbbjl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wcc2u"]
 texture = ExtResource("1_3g12k")
@@ -101,3 +102,6 @@ tile_map_data = PackedByteArray("AAADAAIAAAAJAAEAAAADAAMAAAAJAAEAAAADAAQAAAAJAAE
 tile_set = SubResource("TileSet_nn734")
 
 [node name="Obstacles" type="TileMapLayer" parent="."]
+
+[node name="MainCharacter" parent="." instance=ExtResource("2_xbbjl")]
+position = Vector2(206, 315)

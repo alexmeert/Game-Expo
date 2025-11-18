@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public partial class RandomSceneLoader : Node
 {
+	public static RandomSceneLoader Instance { get; private set; }
+
 	[Export] public string NormalRoomsFolder = "res://Rooms/";
 	[Export] public string BossRoomsFolder = "res://BossRooms/";
 	[Export] public int RoomsPerCycle = 3;
@@ -14,8 +16,15 @@ public partial class RandomSceneLoader : Node
 
 	public override void _Ready()
 	{
+		Instance = this;
+
+		GD.Randomize();
+
 		LoadSceneList(NormalRoomsFolder, _normalRooms);
 		LoadSceneList(BossRoomsFolder, _bossRooms);
+
+		Shuffle(_normalRooms);
+		Shuffle(_bossRooms);
 	}
 
 	private void LoadSceneList(string folder, List<string> list)
@@ -35,9 +44,7 @@ public partial class RandomSceneLoader : Node
 		while ((fileName = dir.GetNext()) != "")
 		{
 			if (!dir.CurrentIsDir() && fileName.EndsWith(".tscn"))
-			{
 				list.Add(folder + fileName);
-			}
 		}
 
 		dir.ListDirEnd();
@@ -46,34 +53,42 @@ public partial class RandomSceneLoader : Node
 			GD.PrintErr($"No scenes found in folder: {folder}");
 	}
 
-	// Call this when the player finishes a room
+	private void Shuffle(List<string> list)
+	{
+		for (int i = list.Count - 1; i > 0; i--)
+		{
+			int j = (int)GD.Randi() % (i + 1);
+			(list[i], list[j]) = (list[j], list[i]);
+		}
+	}
+
 	public void LoadNextRoom()
 	{
 		if (_roomsCleared < RoomsPerCycle)
 		{
-			// Load normal room
-			LoadRandomRoom(_normalRooms);
+			LoadNextFromDeck(_normalRooms);
 			_roomsCleared++;
 		}
 		else
 		{
-			// Load boss room
-			LoadRandomRoom(_bossRooms);
-			_roomsCleared = 0; // Reset for next loop
+			LoadNextFromDeck(_bossRooms);
+			_roomsCleared = 0;
 		}
 	}
 
-	private void LoadRandomRoom(List<string> pool)
+	private void LoadNextFromDeck(List<string> deck)
 	{
-		if (pool.Count == 0)
+		if (deck.Count == 0)
 		{
-			GD.PrintErr("Room pool is empty!");
-			return;
+			GD.Print("Deck empty — reshuffling.");
+			LoadSceneList(deck == _normalRooms ? NormalRoomsFolder : BossRoomsFolder, deck);
+			Shuffle(deck);
 		}
 
-		int index = GD.RandRange(0, pool.Count - 1);
-		string path = pool[index];
+		string path = deck[0];
+		deck.RemoveAt(0);
 
+		GD.Print($"Loading room: {path}");
 		GetTree().ChangeSceneToFile(path);
 	}
 }

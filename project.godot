@@ -14,6 +14,10 @@ config/name="Game Expo"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+RandomSceneLoader="*res://Scripts/RandomSceneLoader.cs"
+
 [display]
 
 window/vsync/vsync_mode=0

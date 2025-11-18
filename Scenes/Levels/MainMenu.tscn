@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://cx3lqx1ofvcm"]
+
+[ext_resource type="Script" uid="uid://bmxsy3nkmy1un" path="res://Scripts/MainMenu.cs" id="1_mke16"]
+
+[node name="MainMenu" type="Node2D"]
+
+[node name="MainMenu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1153.0
+offset_bottom = 650.0
+script = ExtResource("1_mke16")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu"]
+layout_mode = 0
+offset_top = 189.0
+offset_right = 1150.0
+offset_bottom = 318.0
+alignment = 1
+
+[node name="StartButton" type="Button" parent="MainMenu/VBoxContainer"]
+layout_mode = 2
+text = "Start Game"
+
+[node name="QuitButton" type="Button" parent="MainMenu/VBoxContainer"]
+layout_mode = 2
+text = "Quit Game"

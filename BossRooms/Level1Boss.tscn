@@ -1,6 +1,7 @@
-[gd_scene load_steps=26 format=4 uid="uid://8tm2ibpoxiq4"]
+[gd_scene load_steps=27 format=4 uid="uid://8tm2ibpoxiq4"]
 
 [ext_resource type="Texture2D" uid="uid://dx5xusixt7bfv" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/tileset.png" id="1_xfiuw"]
+[ext_resource type="PackedScene" uid="uid://c1aw4q02ut5i1" path="res://Scenes/Characters/MainCharacter.tscn" id="2_sc1g5"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_3hls8"]
 vertices = PackedVector2Array(13.7578, -13.4922, -16, -13.3828, -16, -16, 16, -16, 16, -13.0625, 14.1172, 16, 16, 16)
@@ -598,3 +599,6 @@ tile_set = SubResource("TileSet_hn12h")
 [node name="Walls" type="TileMapLayer" parent="."]
 texture_filter = 1
 tile_set = SubResource("TileSet_hbghi")
+
+[node name="MainCharacter" parent="." instance=ExtResource("2_sc1g5")]
+position = Vector2(296, 402)
