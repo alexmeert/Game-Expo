@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6r4bel1vt52"
-path="res://.godot/imported/Chip_Sprite.png-8ac017b4b49ddf4ae563285cbd6b053d.ctex"
+uid="uid://c0q6mx7djlx06"
+path="res://.godot/imported/GPU.png-1a676517eb9c995f3446d3b94b157f0f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Characters/Chip_Sprite.png"
-dest_files=["res://.godot/imported/Chip_Sprite.png-8ac017b4b49ddf4ae563285cbd6b053d.ctex"]
+source_file="res://Sprites/Items/GPU.png"
+dest_files=["res://.godot/imported/GPU.png-1a676517eb9c995f3446d3b94b157f0f.ctex"]
 
 [params]
 

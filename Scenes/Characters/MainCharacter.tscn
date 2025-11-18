@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://c1aw4q02ut5i1"]
 
 [ext_resource type="Script" uid="uid://bh5qd48qpm15n" path="res://Scripts/Player.cs" id="1_4flse"]
-[ext_resource type="Texture2D" uid="uid://c6r4bel1vt52" path="res://Sprites/Characters/Chip_Sprite.png" id="2_j5d3a"]
+[ext_resource type="Texture2D" uid="uid://c6r4bel1vt52" path="res://Sprites/Characters/Player/Chip_Sprite.png" id="2_j5d3a"]
 [ext_resource type="PackedScene" uid="uid://bbbipgyewtvo5" path="res://Scenes/Weapons/Gun.tscn" id="3_j5d3a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4flse"]

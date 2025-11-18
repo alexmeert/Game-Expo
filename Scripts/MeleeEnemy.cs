@@ -3,12 +3,26 @@ using System;
 
 public partial class MeleeEnemy : BasicEntity
 {
+    [Export] private int Hp = 50;
+    [Export] private int Dmg = 1;
+    [Export] private float AtkSpd = 1.2f;
+    [Export] private int Def = 1;
+    [Export] private float Spd = 20;
+
     protected Node2D TargetPlayer { get; private set; }
 
     protected override void InitializeEntity()
     {
         base.InitializeEntity();
-        SetStats(hp: 50, dmg: 1, atkspd: 1.2f, def: 1, spd: 20);
+
+        SetStats(
+            hp: Hp,
+            dmg: Dmg,
+            atkspd: AtkSpd,
+            def: Def,
+            spd: Spd
+        );
+
         FindPlayer();
     }
 

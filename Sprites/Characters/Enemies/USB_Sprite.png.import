@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ddncteexvagm6"
-path="res://.godot/imported/USB_Sprite.png-95fb84c50e5280a152cbcb9f51591f16.ctex"
+path="res://.godot/imported/USB_Sprite.png-3502fcb21331c2b0d386837f543f6b48.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Characters/USB_Sprite.png"
-dest_files=["res://.godot/imported/USB_Sprite.png-95fb84c50e5280a152cbcb9f51591f16.ctex"]
+source_file="res://Sprites/Characters/Enemies/USB_Sprite.png"
+dest_files=["res://.godot/imported/USB_Sprite.png-3502fcb21331c2b0d386837f543f6b48.ctex"]
 
 [params]
 

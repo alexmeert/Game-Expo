@@ -7,6 +7,11 @@ public partial class Player : BasicEntity
     private const float FRICTION = 12.0f;
 
     [Export] private Sprite2D sprite;
+    [Export] private int Hp = 100;
+    [Export] private int Dmg = 10;
+    [Export] private float AtkSpd = 1.0f;
+    [Export] private int Def = 0;
+    [Export] private float Spd = 100;
 
     public override void _Ready()
     {
@@ -15,6 +20,19 @@ public partial class Player : BasicEntity
         var gun = GetNode<Gun>("Gun");
         if (gun != null)
             gun.Owner = this;
+    }
+
+    protected override void InitializeEntity()
+    {
+        base.InitializeEntity();
+
+        SetStats(
+            hp: Hp,
+            dmg: Dmg,
+            atkspd: AtkSpd,
+            def: Def,
+            spd: Spd
+        );
     }
 
     protected override void HandleMovement(double delta)

@@ -1,10 +1,10 @@
 [gd_scene load_steps=5 format=3 uid="uid://bt7gih2h8lrlu"]
 
-[ext_resource type="Texture2D" uid="uid://ddncteexvagm6" path="res://Sprites/Characters/USB_Sprite.png" id="1_mhmch"]
+[ext_resource type="Texture2D" uid="uid://ddncteexvagm6" path="res://Sprites/Characters/Enemies/USB_Sprite.png" id="1_mhmch"]
 [ext_resource type="Script" uid="uid://cnfapurknranv" path="res://Scripts/MeleeEnemy.cs" id="1_rtru1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rtru1"]
-radius = 6.0
+radius = 5.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mhmch"]
 size = Vector2(10, 25)
@@ -17,7 +17,6 @@ texture_filter = 1
 texture = ExtResource("1_mhmch")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(-1, 10)
 shape = SubResource("CircleShape2D_rtru1")
 
