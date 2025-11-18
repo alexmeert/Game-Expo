@@ -8,6 +8,7 @@ radius = 3.0
 height = 10.0
 
 [node name="Projectile1" type="Area2D"]
+z_index = 10
 script = ExtResource("1_sil0g")
 
 [node name="Sprite" type="Sprite2D" parent="."]
