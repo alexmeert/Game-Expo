@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://c1aw4q02ut5i1"]
+[gd_scene load_steps=7 format=3 uid="uid://c1aw4q02ut5i1"]
 
 [ext_resource type="Script" uid="uid://bh5qd48qpm15n" path="res://Scripts/Player.cs" id="1_4flse"]
 [ext_resource type="Texture2D" uid="uid://c6r4bel1vt52" path="res://Sprites/Characters/Player/Chip_Sprite.png" id="2_j5d3a"]
 [ext_resource type="PackedScene" uid="uid://bbbipgyewtvo5" path="res://Scenes/Weapons/Gun.tscn" id="3_j5d3a"]
+[ext_resource type="AudioStream" uid="uid://b6vtyed1qkwc6" path="res://Sounds/PlayerDeath.mp3" id="4_cbltj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4flse"]
 radius = 7.0
@@ -13,6 +14,8 @@ size = Vector2(21, 21)
 [node name="MainCharacter" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_4flse")
 sprite = NodePath("ChipSprite")
+Hp = 50
+AtkSpd = 5.0
 
 [node name="ChipSprite" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -36,3 +39,6 @@ position = Vector2(0, 5)
 visible = false
 position = Vector2(-0.5, -0.5)
 shape = SubResource("RectangleShape2D_j5d3a")
+
+[node name="PlayerDeath" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_cbltj")

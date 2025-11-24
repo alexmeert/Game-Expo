@@ -12,6 +12,8 @@ public partial class Player : BasicEntity
     [Export] private float AtkSpd = 1.0f;
     [Export] private int Def = 0;
     [Export] private float Spd = 100;
+    [Export] private AudioStreamPlayer2D HitSound;
+    [Export] private AudioStreamPlayer2D DeathSound;
 
     public override void _Ready()
     {
@@ -62,5 +64,33 @@ public partial class Player : BasicEntity
         Vector2 vec = new Vector2(inputX, inputY);
 
         return vec.Length() > 0 ? vec.Normalized() : Vector2.Zero;
+    }
+
+    protected override void OnTakeDamage(float damage)
+    {
+        base.OnTakeDamage(damage);
+        
+        // Play hit sound when player takes damage
+        if (HitSound != null)
+        {
+            HitSound.Play();
+        }
+        
+        GD.Print($"Player took {damage} damage. HP: {HP}/{MaxHP}");
+    }
+
+    protected override void Die()
+    {
+        base.Die();
+        
+        // Play death sound
+        if (DeathSound != null)
+        {
+            DeathSound.Play();
+        }
+        
+        GD.Print("Player died!");
+        
+        // TODO: Add game over logic here (e.g., show game over screen, restart level, etc.)
     }
 }

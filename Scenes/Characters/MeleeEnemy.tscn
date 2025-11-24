@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bt7gih2h8lrlu"]
+[gd_scene load_steps=6 format=3 uid="uid://bt7gih2h8lrlu"]
 
 [ext_resource type="Texture2D" uid="uid://ddncteexvagm6" path="res://Sprites/Characters/Enemies/USB_Sprite.png" id="1_mhmch"]
 [ext_resource type="Script" uid="uid://cnfapurknranv" path="res://Scripts/MeleeEnemy.cs" id="1_rtru1"]
+[ext_resource type="AudioStream" uid="uid://dk6tfcr7ntv6c" path="res://Sounds/EnemyTakeDamage.mp3" id="3_v6ap6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rtru1"]
 radius = 5.0
@@ -9,8 +10,10 @@ radius = 5.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mhmch"]
 size = Vector2(10, 25)
 
-[node name="MeleeEnemy" type="CharacterBody2D"]
+[node name="MeleeEnemy" type="CharacterBody2D" node_paths=PackedStringArray("HitSound")]
 script = ExtResource("1_rtru1")
+Spd = 30.0
+HitSound = NodePath("TakeDamage")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -30,3 +33,6 @@ shape = SubResource("RectangleShape2D_mhmch")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_postprocessing = 1
 debug_enabled = true
+
+[node name="TakeDamage" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_v6ap6")

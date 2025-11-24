@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://bg635lk553wrv"]
+[gd_scene load_steps=37 format=4 uid="uid://bg635lk553wrv"]
 
 [ext_resource type="Texture2D" uid="uid://dx5xusixt7bfv" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/tileset.png" id="1_36ke7"]
 [ext_resource type="Texture2D" uid="uid://bcp2cotlvml5w" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/door/door_spritesheet.png" id="2_8h4de"]
@@ -9,10 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://btmcefauissf4" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server.png" id="8_f3nwb"]
 [ext_resource type="Texture2D" uid="uid://tdc1q346nfrd" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server_disabled.png" id="9_f3nwb"]
 [ext_resource type="Texture2D" uid="uid://b2xqy06cpdcab" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server_down.png" id="10_57lp3"]
-[ext_resource type="Texture2D" uid="uid://4nmdwj07qiqq" path="res://Sprites/Items/CoolingFan.png" id="11_77iba"]
-[ext_resource type="Texture2D" uid="uid://c0q6mx7djlx06" path="res://Sprites/Items/GPU.png" id="12_67y36"]
+[ext_resource type="PackedScene" uid="uid://bt7gih2h8lrlu" path="res://Scenes/Characters/MeleeEnemy.tscn" id="12_n5ptj"]
 [ext_resource type="PackedScene" uid="uid://blu86gs4tjm35" path="res://Scenes/Characters/PlayerSpawnPoint.tscn" id="13_77iba"]
-[ext_resource type="Texture2D" uid="uid://b766x0pp3dh37" path="res://Sprites/Items/RAM.png" id="13_hk4vc"]
+[ext_resource type="PackedScene" uid="uid://c1aw4q02ut5i1" path="res://Scenes/Characters/MainCharacter.tscn" id="14_67y36"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4d3fe"]
 texture = ExtResource("4_xvio3")
@@ -680,28 +679,38 @@ tile_set = SubResource("TileSet_hbghi")
 visible = false
 navigation_polygon = SubResource("NavigationPolygon_kri6y")
 
-[node name="Spawner" parent="." instance=ExtResource("6_3ipdw")]
-position = Vector2(624, 240)
-
 [node name="Decor" type="TileMapLayer" parent="."]
 y_sort_enabled = true
 texture_filter = 1
 tile_map_data = PackedByteArray("AAAtABcAAQAAAAAAAAAtABgAAQAAAAEAAAAvABcAAwAAAAAAAAAvABgAAwAAAAEAAAAwABcAAQAAAAAAAAAwABgAAQAAAAEAAAAtABMAAwAAAAAAAAAtABQAAwAAAAEAAAAvABMAAQAAAAAAAAAvABQAAQAAAAEAAAAwABMAAwAAAAAAAAAwABQAAwAAAAEAAAAdABMAAwAAAAAAAAAdABQAAwAAAAEAAAAfABMAAQAAAAAAAAAfABQAAQAAAAEAAAAgABMAAgAAAAAAAAAgABQAAgAAAAEAAAAdABgAAgAAAAAAAAAdABkAAgAAAAEAAAAeABgAAQAAAAAAAAAeABkAAQAAAAEAAAAgABgAAQAAAAAAAAAgABkAAQAAAAEAAAAXAAsAAwAAAAAAAAAXAAwAAwAAAAEAAAAWAAsAAgAAAAAAAAAWAAwAAgAAAAEAAAAVAAsAAgAAAAAAAAAVAAwAAgAAAAEAAAAVABAAAQAAAAAAAAAVABEAAQAAAAEAAAAXABAAAwAAAAAAAAAXABEAAwAAAAEAAAAYABAAAQAAAAAAAAAYABEAAQAAAAEAAAAlABAAAQAAAAAAAAAlABEAAQAAAAEAAAAoABAAAgAAAAAAAAAoABEAAgAAAAEAAAA1AAsAAQAAAAAAAAA1AAwAAQAAAAEAAAA2AAsAAgAAAAAAAAA2AAwAAgAAAAEAAAA4AAsAAwAAAAAAAAA4AAwAAwAAAAEAAAA1ABEAAwAAAAAAAAA1ABIAAwAAAAEAAAA2ABEAAwAAAAAAAAA2ABIAAwAAAAEAAAA3ABEAAgAAAAAAAAA3ABIAAgAAAAEAAAA4ABEAAgAAAAAAAAA4ABIAAgAAAAEAAAA1ABsAAQAAAAAAAAA1ABwAAQAAAAEAAAA2ABsAAgAAAAAAAAA2ABwAAgAAAAEAAAA4ABsAAwAAAAAAAAA4ABwAAwAAAAEAAAA2ACAAAgAAAAAAAAA2ACEAAgAAAAEAAAA3ACAAAwAAAAAAAAA3ACEAAwAAAAEAAAA4ACAAAQAAAAAAAAA4ACEAAQAAAAEAAAAlACAAAQAAAAAAAAAlACEAAQAAAAEAAAAnACAAAgAAAAAAAAAnACEAAgAAAAEAAAAoACAAAQAAAAAAAAAoACEAAQAAAAEAAAAlABsAAwAAAAAAAAAlABwAAwAAAAEAAAAmABsAAQAAAAAAAAAmABwAAQAAAAEAAAAoABsAAgAAAAAAAAAoABwAAgAAAAEAAAAYABsAAQAAAAAAAAAYABwAAQAAAAEAAAAXABsAAQAAAAAAAAAXABwAAQAAAAEAAAAWABsAAwAAAAAAAAAWABwAAwAAAAEAAAAVABsAAQAAAAAAAAAVABwAAQAAAAEAAAAVACAAAgAAAAAAAAAVACEAAgAAAAEAAAAXACAAAwAAAAAAAAAXACEAAwAAAAEAAAAYACAAAQAAAAAAAAAYACEAAQAAAAEAAAAlAAsAAgAAAAAAAAAlAAwAAgAAAAEAAAAoAAwAAQAAAAEAAAAoAAsAAQAAAAAAAAAkAAsAAQAAAAAAAAAkAAwAAQAAAAEAAAApAAsAAwAAAAAAAAApAAwAAwAAAAEAAAATACAAAwAAAAAAAAATACEAAwAAAAEAAAAUAAsAAwAAAAAAAAAUAAwAAwAAAAEAAAATAAsAAwAAAAAAAAATAAwAAwAAAAEAAAARAAsAAwAAAAAAAAARAAwAAwAAAAEAAAASACAAAwAAAAAAAAASACEAAwAAAAEAAAA=")
 tile_set = SubResource("TileSet_67y36")
 
-[node name="CoolingFan" type="Sprite2D" parent="."]
-position = Vector2(928, 496)
-texture = ExtResource("11_77iba")
-
-[node name="Gpu" type="Sprite2D" parent="."]
-texture_filter = 1
-position = Vector2(984, 496)
-texture = ExtResource("12_67y36")
-
-[node name="Ram" type="Sprite2D" parent="."]
-texture_filter = 1
-position = Vector2(952, 544)
-texture = ExtResource("13_hk4vc")
-
 [node name="PlayerSpawnPoint" parent="." instance=ExtResource("13_77iba")]
 position = Vector2(624, 592)
+
+[node name="MainCharacter" parent="." instance=ExtResource("14_67y36")]
+position = Vector2(624, 592)
+
+[node name="Spawner" parent="." instance=ExtResource("6_3ipdw")]
+position = Vector2(944, 240)
+EnemyScene = ExtResource("12_n5ptj")
+SpawnCount = 10
+InitialDelay = 10.0
+SpawnRadius = 10.0
+
+[node name="Spawner2" parent="." instance=ExtResource("6_3ipdw")]
+position = Vector2(304, 240)
+EnemyScene = ExtResource("12_n5ptj")
+SpawnCount = 10
+InitialDelay = 5.0
+SpawnRadius = 10.0
+
+[node name="Spawner3" parent="." instance=ExtResource("6_3ipdw")]
+position = Vector2(304, 480)
+EnemyScene = ExtResource("12_n5ptj")
+InitialDelay = 20.0
+SpawnRadius = 10.0
+
+[node name="Spawner4" parent="." instance=ExtResource("6_3ipdw")]
+position = Vector2(944, 480)
+SpawnRadius = 10.0

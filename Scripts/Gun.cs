@@ -17,11 +17,9 @@ public partial class Gun : Node2D
         RotationDegrees = Mathf.Wrap(RotationDegrees, 0f, 360f);
         Scale = new Vector2(Scale.X, (RotationDegrees > 90 && RotationDegrees < 270) ? -1 : 1);
 
-        // Count down cooldown timer
         if (fireTimer > 0)
             fireTimer -= (float)delta;
 
-        // Only fire if cooldown finished
         if (Input.IsActionPressed("Shoot") && fireTimer <= 0f)
         {
             FireProjectile();
