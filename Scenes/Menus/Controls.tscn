@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://cud7igc2oi4bc"]
+
+[ext_resource type="FontFile" uid="uid://bjtv1av4o6be8" path="res://Assets/Fonts/vermin-vibes-1989-font/VerminVibes1989Regular-m77m.ttf" id="1_vofmw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_yi47v"]
+font = ExtResource("1_vofmw")
+font_size = 100
+font_color = Color(0, 0, 0, 1)
+
+[node name="Controls" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 1153.0
+offset_bottom = 166.0
+text = "Controls"
+label_settings = SubResource("LabelSettings_yi47v")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 1, 0.858824, 1)

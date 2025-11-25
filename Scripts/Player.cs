@@ -6,7 +6,6 @@ public partial class Player : BasicEntity
     private const float ACCEL = 15.0f;
     private const float FRICTION = 12.0f;
 
-    [Export] private Sprite2D sprite;
     [Export] private int Hp = 100;
     [Export] private int Dmg = 10;
     [Export] private float AtkSpd = 1.0f;
@@ -39,22 +38,40 @@ public partial class Player : BasicEntity
 
     protected override void HandleMovement(double delta)
     {
-        // Flip sprite based on mouse direction
-        if (sprite != null)
-        {
-            if (GetGlobalMousePosition().X < GlobalPosition.X)
-                sprite.FlipH = true;
-            else
-                sprite.FlipH = false;
-        }
-
         Vector2 input = GetInput();
 
+        // Update velocity
         if (input.Length() > 0)
-            Velocity = Velocity.Lerp(input * SPD, (float)delta * ACCEL);
+            Velocity = Velocity.Lerp(input * Spd, (float)delta * ACCEL);
         else
             Velocity = Velocity.Lerp(Vector2.Zero, (float)delta * FRICTION);
+
+        // Move the player
+        Position += Velocity * (float)delta;
+
+        // Handle animation
+        var animSprite = GetNodeOrNull<AnimatedSprite2D>("Sprite");
+        if (animSprite != null)
+        {
+            if (input.Length() == 0)
+            {
+                animSprite.Play("Idle");
+            }
+            else
+            {
+                if (Mathf.Abs(input.X) > Mathf.Abs(input.Y))
+                {
+                    animSprite.Play(input.X > 0 ? "MoveRight" : "MoveLeft");
+                }
+                else
+                {
+                    animSprite.Play(input.Y > 0 ? "MoveDown" : "MoveUp");
+                }
+            }
+        }
     }
+
+
 
     private Vector2 GetInput()
     {

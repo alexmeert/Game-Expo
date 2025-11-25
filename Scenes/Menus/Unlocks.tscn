@@ -1,0 +1,65 @@
+[gd_scene load_steps=5 format=3 uid="uid://baswohu74crho"]
+
+[ext_resource type="FontFile" uid="uid://bjtv1av4o6be8" path="res://Assets/Fonts/vermin-vibes-1989-font/VerminVibes1989Regular-m77m.ttf" id="1_w7kk4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_88ape"]
+font = ExtResource("1_w7kk4")
+font_size = 100
+
+[sub_resource type="LabelSettings" id="LabelSettings_w7kk4"]
+font = ExtResource("1_w7kk4")
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_dthsy"]
+font = ExtResource("1_w7kk4")
+font_size = 40
+
+[node name="Unlocks" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 151.0
+text = "Items"
+label_settings = SubResource("LabelSettings_88ape")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Upgrades" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 256.0
+offset_top = -132.0
+offset_right = 330.0
+offset_bottom = -109.0
+grow_vertical = 2
+text = "Upgrades"
+label_settings = SubResource("LabelSettings_w7kk4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Perks" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -132.0
+offset_right = -246.0
+offset_bottom = -109.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Perks"
+label_settings = SubResource("LabelSettings_dthsy")
+horizontal_alignment = 1
+vertical_alignment = 1

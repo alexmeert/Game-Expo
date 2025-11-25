@@ -1,0 +1,89 @@
+[gd_scene load_steps=3 format=3 uid="uid://byt026nu1wsbk"]
+
+[ext_resource type="FontFile" uid="uid://bjtv1av4o6be8" path="res://Assets/Fonts/vermin-vibes-1989-font/VerminVibes1989Regular-m77m.ttf" id="1_v3fht"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bc4mk"]
+font = ExtResource("1_v3fht")
+font_size = 200
+font_color = Color(0, 0, 0, 1)
+shadow_size = 0
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_right = 1150.0
+offset_bottom = 343.0
+text = "The Game"
+label_settings = SubResource("LabelSettings_bc4mk")
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 171
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+offset_left = 398.0
+offset_top = 253.0
+offset_right = 753.0
+offset_bottom = 294.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_v3fht")
+theme_override_font_sizes/font_size = 30
+text = "Made by Alex Joe & Jimmy"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_top = 253.0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="PlayButton" type="Button" parent="CenterContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_v3fht")
+theme_override_font_sizes/font_size = 50
+text = "Play"
+
+[node name="ItemsButton" type="Button" parent="CenterContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_v3fht")
+theme_override_font_sizes/font_size = 50
+text = "Items"
+
+[node name="ControlsButton" type="Button" parent="CenterContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_v3fht")
+theme_override_font_sizes/font_size = 50
+text = "Controls"
+
+[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_v3fht")
+theme_override_font_sizes/font_size = 50
+text = "Quit"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 1, 0.858824, 1)
