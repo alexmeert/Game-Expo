@@ -3,8 +3,8 @@ using System;
 
 public partial class Player : BasicEntity
 {
-    private const float ACCEL = 15.0f;
-    private const float FRICTION = 12.0f;
+	private const float ACCEL = 15.0f;
+	private const float FRICTION = 12.0f;
 
     [Export] private int Hp = 100;
     [Export] private int Dmg = 10;
@@ -14,14 +14,14 @@ public partial class Player : BasicEntity
     [Export] private AudioStreamPlayer2D HitSound;
     [Export] private AudioStreamPlayer2D DeathSound;
 
-    public override void _Ready()
-    {
-        base._Ready();
+	public override void _Ready()
+	{
+		base._Ready();
 
-        var gun = GetNode<Gun>("Gun");
-        if (gun != null)
-            gun.Owner = this;
-    }
+		var gun = GetNode<Gun>("Gun");
+		if (gun != null)
+			gun.Owner = this;
+	}
 
     protected override void InitializeEntity()
     {
@@ -78,7 +78,7 @@ public partial class Player : BasicEntity
         float inputX = Input.GetActionStrength("D") - Input.GetActionStrength("A");
         float inputY = Input.GetActionStrength("S") - Input.GetActionStrength("W");
 
-        Vector2 vec = new Vector2(inputX, inputY);
+		Vector2 vec = new Vector2(inputX, inputY);
 
         return vec.Length() > 0 ? vec.Normalized() : Vector2.Zero;
     }

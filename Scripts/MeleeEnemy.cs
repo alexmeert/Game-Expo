@@ -30,14 +30,14 @@ public partial class MeleeEnemy : BasicEntity
         FindPlayer();
     }
 
-    protected override void HandleMovement(double delta)
-    {
-        if (TargetPlayer == null || !TargetPlayer.IsInsideTree())
-        {
-            FindPlayer();
-            if (TargetPlayer == null)
-                return;
-        }
+	protected override void HandleMovement(double delta)
+	{
+		if (TargetPlayer == null || !TargetPlayer.IsInsideTree())
+		{
+			FindPlayer();
+			if (TargetPlayer == null)
+				return;
+		}
 
         float distance = GlobalPosition.DistanceTo(TargetPlayer.GlobalPosition);
         
