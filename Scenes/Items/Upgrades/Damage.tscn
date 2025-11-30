@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyhm385qsegw2"]
+
+[ext_resource type="Texture2D" uid="uid://b766x0pp3dh37" path="res://Sprites/Items/Upgrades/RAM.png" id="1_vxyqf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vxyqf"]
+radius = 16.0
+
+[node name="Ram" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_vxyqf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(0.72, 0.72)
+texture = ExtResource("1_vxyqf")

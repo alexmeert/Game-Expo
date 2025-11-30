@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bp13wnub3iscx"]
+
+[ext_resource type="Texture2D" uid="uid://b3ec2wmyji7n" path="res://Sprites/Items/Perks/Firewall.png" id="1_p85f1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p85f1"]
+radius = 13.3468
+
+[node name="Firewall" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(1.19879, 1.22166)
+shape = SubResource("CircleShape2D_p85f1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(0.722656, 0.720002)
+texture = ExtResource("1_p85f1")

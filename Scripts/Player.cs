@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class Player : BasicEntity
 {
@@ -13,6 +14,9 @@ public partial class Player : BasicEntity
     [Export] private float Spd = 100;
     [Export] private AudioStreamPlayer2D HitSound;
     [Export] private AudioStreamPlayer2D DeathSound;
+
+    private List<Upgrade> _activeUpgrades = new List<Upgrade>();
+    private List<Perk> _activePerks = new List<Perk>();
 
 	public override void _Ready()
 	{
@@ -34,6 +38,12 @@ public partial class Player : BasicEntity
             def: Def,
             spd: Spd
         );
+    }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        base._PhysicsProcess(delta);
+        UpdatePerks((float)delta);
     }
 
     protected override void HandleMovement(double delta)
@@ -109,5 +119,69 @@ public partial class Player : BasicEntity
         GD.Print("Player died!");
         
         // TODO: Add game over logic here (e.g., show game over screen, restart level, etc.)
+    }
+
+    /// <summary>
+    /// Applies a permanent upgrade to the player
+    /// </summary>
+    public void ApplyUpgrade(Upgrade upgrade)
+    {
+        if (upgrade == null)
+            return;
+
+        upgrade.Apply(this);
+        _activeUpgrades.Add(upgrade);
+    }
+
+    /// <summary>
+    /// Applies a temporary perk to the player
+    /// </summary>
+    public void ApplyPerk(Perk perk)
+    {
+        if (perk == null)
+            return;
+
+        // If perk is not in the list, add it
+        if (!_activePerks.Contains(perk))
+        {
+            _activePerks.Add(perk);
+        }
+
+        // Apply or refresh the perk
+        perk.Apply(this);
+    }
+
+    /// <summary>
+    /// Updates all active perks and removes expired ones
+    /// </summary>
+    private void UpdatePerks(float delta)
+    {
+        for (int i = _activePerks.Count - 1; i >= 0; i--)
+        {
+            Perk perk = _activePerks[i];
+            perk.Update(delta);
+
+            if (!perk.IsActive)
+            {
+                perk.Remove(this);
+                _activePerks.RemoveAt(i);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Gets all active upgrades
+    /// </summary>
+    public List<Upgrade> GetActiveUpgrades()
+    {
+        return new List<Upgrade>(_activeUpgrades);
+    }
+
+    /// <summary>
+    /// Gets all active perks
+    /// </summary>
+    public List<Perk> GetActivePerks()
+    {
+        return new List<Perk>(_activePerks);
     }
 }
