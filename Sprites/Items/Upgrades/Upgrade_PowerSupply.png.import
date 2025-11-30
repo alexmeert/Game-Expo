@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0q6mx7djlx06"
-path="res://.godot/imported/GPU.png-96b5e138f939f9e9e2b6cbf6907f8f73.ctex"
+uid="uid://4mxm3rjgwtto"
+path="res://.godot/imported/Upgrade_PowerSupply.png-2b17244a0807905cde6001b6155f034b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Items/Upgrades/GPU.png"
-dest_files=["res://.godot/imported/GPU.png-96b5e138f939f9e9e2b6cbf6907f8f73.ctex"]
+source_file="res://Sprites/Items/Upgrades/Upgrade_PowerSupply.png"
+dest_files=["res://.godot/imported/Upgrade_PowerSupply.png-2b17244a0807905cde6001b6155f034b.ctex"]
 
 [params]
 

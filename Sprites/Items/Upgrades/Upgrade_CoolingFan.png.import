@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://4nmdwj07qiqq"
-path="res://.godot/imported/CoolingFan.png-af5f9788992d68234f49f4ebf17b4322.ctex"
+path="res://.godot/imported/Upgrade_CoolingFan.png-42d622161a995df88616545cd477e6f1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Items/Upgrades/CoolingFan.png"
-dest_files=["res://.godot/imported/CoolingFan.png-af5f9788992d68234f49f4ebf17b4322.ctex"]
+source_file="res://Sprites/Items/Upgrades/Upgrade_CoolingFan.png"
+dest_files=["res://.godot/imported/Upgrade_CoolingFan.png-42d622161a995df88616545cd477e6f1.ctex"]
 
 [params]
 

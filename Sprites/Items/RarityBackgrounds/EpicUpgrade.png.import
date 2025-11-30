@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b766x0pp3dh37"
-path="res://.godot/imported/RAM.png-ae062d6adbcec817d4e3c954ba448ff6.ctex"
+uid="uid://csn008hjwmyov"
+path="res://.godot/imported/EpicUpgrade.png-160d5c1dfc551fbcda69aac60009b2b1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Items/Upgrades/RAM.png"
-dest_files=["res://.godot/imported/RAM.png-ae062d6adbcec817d4e3c954ba448ff6.ctex"]
+source_file="res://Sprites/Items/RarityBackgrounds/EpicUpgrade.png"
+dest_files=["res://.godot/imported/EpicUpgrade.png-160d5c1dfc551fbcda69aac60009b2b1.ctex"]
 
 [params]
 

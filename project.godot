@@ -20,7 +20,6 @@ RandomSceneLoader="*res://Scripts/RandomSceneLoader.cs"
 
 [display]
 
-window/size/mode=3
 window/vsync/vsync_mode=0
 
 [dotnet]

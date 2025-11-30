@@ -6,7 +6,7 @@ public partial class Perk : Item
     [Export] public float HpBonus = 0f;
     [Export] public float DmgBonus = 0f;
     [Export] public float AtkSpdBonus = 0f;
-    [Export] public float DefBonus = 0f;
+    [Export(PropertyHint.Range, "0,1,0.01")] public float DefBonus = 0f; // Percentage bonus (0.0 to 1.0)
     [Export] public float SpdBonus = 0f;
     [Export] public float Duration = 10f; // Duration in seconds
 
@@ -34,14 +34,15 @@ public partial class Perk : Item
         player.HP += HpBonus; // Also increase current HP
         player.DMG += DmgBonus;
         player.ATKSPD += AtkSpdBonus;
-        player.DEF += DefBonus;
+        // DEF is a percentage, so we add the bonus and clamp to 0-1
+        player.DEF = MathF.Min(1f, player.DEF + DefBonus);
         player.SPD += SpdBonus;
 
         _remainingTime = Duration;
         _isActive = true;
 
         GD.Print($"Applied perk: {ItemName} (Duration: {Duration}s)");
-        GD.Print($"  HP: +{HpBonus}, DMG: +{DmgBonus}, ATKSPD: +{AtkSpdBonus}, DEF: +{DefBonus}, SPD: +{SpdBonus}");
+        GD.Print($"  HP: +{HpBonus}, DMG: +{DmgBonus}, ATKSPD: +{AtkSpdBonus}, DEF: +{DefBonus * 100:F1}%, SPD: +{SpdBonus}");
     }
 
     public override void Remove(Player player)
@@ -53,7 +54,8 @@ public partial class Perk : Item
         player.MaxHP -= HpBonus;
         player.DMG -= DmgBonus;
         player.ATKSPD -= AtkSpdBonus;
-        player.DEF -= DefBonus;
+        // DEF is a percentage, subtract bonus and clamp to 0-1
+        player.DEF = MathF.Max(0f, player.DEF - DefBonus);
         player.SPD -= SpdBonus;
 
         // Ensure HP doesn't go below 0 or above MaxHP

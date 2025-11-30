@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://bg635lk553wrv"]
+[gd_scene load_steps=43 format=4 uid="uid://bg635lk553wrv"]
 
 [ext_resource type="Texture2D" uid="uid://dx5xusixt7bfv" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/tileset.png" id="1_36ke7"]
 [ext_resource type="Texture2D" uid="uid://bcp2cotlvml5w" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/door/door_spritesheet.png" id="2_8h4de"]
@@ -10,8 +10,14 @@
 [ext_resource type="Texture2D" uid="uid://tdc1q346nfrd" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server_disabled.png" id="9_f3nwb"]
 [ext_resource type="Texture2D" uid="uid://b2xqy06cpdcab" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server_down.png" id="10_57lp3"]
 [ext_resource type="PackedScene" uid="uid://bt7gih2h8lrlu" path="res://Scenes/Characters/MeleeEnemy.tscn" id="12_n5ptj"]
+[ext_resource type="PackedScene" uid="uid://dyhm385qsegw2" path="res://Scenes/Items/Upgrades/Damage.tscn" id="13_67y36"]
 [ext_resource type="PackedScene" uid="uid://blu86gs4tjm35" path="res://Scenes/Characters/PlayerSpawnPoint.tscn" id="13_77iba"]
+[ext_resource type="PackedScene" uid="uid://170k71snx6d3" path="res://Scenes/Items/Upgrades/Cooldown.tscn" id="14_3hula"]
 [ext_resource type="PackedScene" uid="uid://c1aw4q02ut5i1" path="res://Scenes/Characters/MainCharacter.tscn" id="14_67y36"]
+[ext_resource type="PackedScene" uid="uid://dlumqsplwb8xv" path="res://Scenes/Items/Upgrades/FireRate.tscn" id="15_spq4p"]
+[ext_resource type="PackedScene" uid="uid://y7g0ts65vriw" path="res://Scenes/Items/Upgrades/Defense.tscn" id="16_8fhce"]
+[ext_resource type="PackedScene" uid="uid://bjoxxngko37rd" path="res://Scenes/Items/Upgrades/MagSize.tscn" id="17_uqlrs"]
+[ext_resource type="PackedScene" uid="uid://d3aundu586d2f" path="res://Scenes/Items/Upgrades/Health.tscn" id="18_spq4p"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4d3fe"]
 texture = ExtResource("4_xvio3")
@@ -714,3 +720,21 @@ SpawnRadius = 10.0
 [node name="Spawner4" parent="." instance=ExtResource("6_3ipdw")]
 position = Vector2(944, 480)
 SpawnRadius = 10.0
+
+[node name="Ram" parent="." instance=ExtResource("13_67y36")]
+position = Vector2(584, 560)
+
+[node name="Cooldown" parent="." instance=ExtResource("14_3hula")]
+position = Vector2(624, 560)
+
+[node name="FireRate" parent="." instance=ExtResource("15_spq4p")]
+position = Vector2(664, 560)
+
+[node name="Health" parent="." instance=ExtResource("16_8fhce")]
+position = Vector2(544, 560)
+
+[node name="MagSize" parent="." instance=ExtResource("17_uqlrs")]
+position = Vector2(704, 560)
+
+[node name="Health2" parent="." instance=ExtResource("18_spq4p")]
+position = Vector2(512, 560)

@@ -19,22 +19,11 @@ public partial class BasicProjectile : Area2D
     }
 
     private void OnBodyEntered(Node body)
-    {
-        GD.Print($"Projectile hit: {body.Name} (Type: {body.GetType().Name})");
-        
+    {    
         if (body is BasicEntity entity && entity != Owner)
         {
-            GD.Print($"Dealing {DMG} damage to {entity.Name}");
             entity.TakeDamage(DMG);
             QueueFree();
-        }
-        else if (body == Owner)
-        {
-            GD.Print("Projectile hit owner, ignoring");
-        }
-        else
-        {
-            GD.Print($"Projectile hit non-entity: {body.Name}");
         }
     }
 

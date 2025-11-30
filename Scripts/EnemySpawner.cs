@@ -17,18 +17,6 @@ public partial class EnemySpawner : Node2D
     public override void _Ready()
     {
         base._Ready();
-        
-        if (EnemyScene == null)
-        {
-            GD.PrintErr($"Spawner ({Name}): EnemyScene is not assigned!");
-            return;
-        }
-
-        if (SpawnCount <= 0)
-        {
-            GD.PrintErr($"Spawner ({Name}): SpawnCount must be greater than 0!");
-            return;
-        }
 
         // Create and setup initial delay timer
         if (InitialDelay > 0f)
@@ -105,18 +93,7 @@ public partial class EnemySpawner : Node2D
 
     private void SpawnEnemy()
     {
-        if (EnemyScene == null)
-        {
-            GD.PrintErr($"Spawner ({Name}): Cannot spawn - EnemyScene is null!");
-            return;
-        }
-
         var enemy = EnemyScene.Instantiate<Node2D>();
-        if (enemy == null)
-        {
-            GD.PrintErr($"Spawner ({Name}): Failed to instantiate enemy from scene!");
-            return;
-        }
 
         // Calculate random position within spawn radius
         Vector2 spawnPosition = GlobalPosition;
@@ -133,11 +110,9 @@ public partial class EnemySpawner : Node2D
         if (parent != null)
         {
             parent.AddChild(enemy);
-            GD.Print($"Spawner ({Name}): Spawned enemy at {spawnPosition}");
         }
         else
         {
-            GD.PrintErr($"Spawner ({Name}): Cannot spawn - no parent node!");
             enemy.QueueFree();
         }
     }

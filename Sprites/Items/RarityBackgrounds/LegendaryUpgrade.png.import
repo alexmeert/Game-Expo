@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ty7oasxfgr56"
-path="res://.godot/imported/Overclocking.png-869319cb1988e9c698b08dbae76121d0.ctex"
+uid="uid://egpmj8imbrcf"
+path="res://.godot/imported/LegendaryUpgrade.png-053052122b7e90f6fd6c576823221918.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Items/Perks/Overclocking.png"
-dest_files=["res://.godot/imported/Overclocking.png-869319cb1988e9c698b08dbae76121d0.ctex"]
+source_file="res://Sprites/Items/RarityBackgrounds/LegendaryUpgrade.png"
+dest_files=["res://.godot/imported/LegendaryUpgrade.png-053052122b7e90f6fd6c576823221918.ctex"]
 
 [params]
 

@@ -46,7 +46,7 @@ public partial class BasicEntity : CharacterBody2D
     public float DEF
     {
         get => _def;
-        set => _def = MathF.Max(0, value);
+        set => _def = MathF.Max(0, MathF.Min(1, value)); // Clamp between 0 and 1 (0% to 100% damage reduction)
     }
 
     public float SPD
@@ -75,7 +75,7 @@ public partial class BasicEntity : CharacterBody2D
 
     protected virtual void InitializeEntity()
     {
-        SetStats(hp: 100, dmg: 10, atkspd: 1.0f, def: 0, spd: 100);
+        SetStats(hp: 100, dmg: 10, atkspd: 1.0f, def: 0f, spd: 100);
         OnEntityInitialized();
     }
 
@@ -98,7 +98,17 @@ public partial class BasicEntity : CharacterBody2D
         if (!IsAlive)
             return;
 
-        float finalDamage = MathF.Max(1, dmg - DEF);
+        // DEF is a percentage (0-1) that determines damage reduction
+        // If DEF is 0.5 (50%), you take 50% of the damage (block 50%)
+        float damageMultiplier = 1f - DEF;
+        float finalDamage = dmg * damageMultiplier;
+        
+        // Ensure at least 1 damage is taken (unless DEF is 100%)
+        if (DEF < 1f)
+        {
+            finalDamage = MathF.Max(1, finalDamage);
+        }
+        
         HP -= finalDamage;
 
         OnTakeDamage(finalDamage);

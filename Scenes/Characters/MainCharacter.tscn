@@ -193,6 +193,7 @@ size = Vector2(21, 21)
 script = ExtResource("1_4flse")
 Hp = 50
 AtkSpd = 5.0
+Spd = 70.0
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

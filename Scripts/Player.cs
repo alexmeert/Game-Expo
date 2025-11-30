@@ -10,13 +10,20 @@ public partial class Player : BasicEntity
     [Export] private int Hp = 100;
     [Export] private int Dmg = 10;
     [Export] private float AtkSpd = 1.0f;
-    [Export] private int Def = 0;
+    [Export] private float Def = 0f; // Percentage (0.0 = 0%, 1.0 = 100% damage reduction)
     [Export] private float Spd = 100;
     [Export] private AudioStreamPlayer2D HitSound;
     [Export] private AudioStreamPlayer2D DeathSound;
 
     private List<Upgrade> _activeUpgrades = new List<Upgrade>();
     private List<Perk> _activePerks = new List<Perk>();
+
+    // Base stats (before upgrades) - used for percentage calculations
+    private float _baseMaxHP;
+    private float _baseDMG;
+    private float _baseATKSPD;
+    private float _baseDEF;
+    private float _baseSPD;
 
 	public override void _Ready()
 	{
@@ -38,6 +45,13 @@ public partial class Player : BasicEntity
             def: Def,
             spd: Spd
         );
+
+        // Store base stats for percentage calculations
+        _baseMaxHP = MaxHP;
+        _baseDMG = DMG;
+        _baseATKSPD = ATKSPD;
+        _baseDEF = DEF;
+        _baseSPD = SPD;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -184,4 +198,11 @@ public partial class Player : BasicEntity
     {
         return new List<Perk>(_activePerks);
     }
+
+    // Base stat getters for upgrade percentage calculations
+    public float GetBaseMaxHP() => _baseMaxHP;
+    public float GetBaseDMG() => _baseDMG;
+    public float GetBaseATKSPD() => _baseATKSPD;
+    public float GetBaseDEF() => _baseDEF;
+    public float GetBaseSPD() => _baseSPD;
 }

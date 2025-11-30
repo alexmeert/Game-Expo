@@ -1,11 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://blmvtokpudqpq"]
+[gd_scene load_steps=4 format=3 uid="uid://blmvtokpudqpq"]
 
-[ext_resource type="Texture2D" uid="uid://ty7oasxfgr56" path="res://Sprites/Items/Perks/Overclocking.png" id="1_yg1l2"]
+[ext_resource type="Script" uid="uid://c7bbfkpiiu25p" path="res://Scripts/Perk.cs" id="1_gk0mw"]
+[ext_resource type="Texture2D" uid="uid://ty7oasxfgr56" path="res://Sprites/Items/Perks/Perk_Overclock.png" id="1_yg1l2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yg1l2"]
 radius = 16.0
 
 [node name="Overclocking" type="Node2D"]
+script = ExtResource("1_gk0mw")
+DmgBonus = 10.0
+AtkSpdBonus = 10.0
+ItemName = "Overclock"
+Description = "Your entire system feels as if it's been injected with pure adrenaline. Briefly increases damage and attack speed."
 
 [node name="Area2D" type="Area2D" parent="."]
 
