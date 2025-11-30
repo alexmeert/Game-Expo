@@ -1,7 +1,9 @@
-[gd_scene load_steps=37 format=4 uid="uid://bg635lk553wrv"]
+[gd_scene load_steps=39 format=4 uid="uid://bg635lk553wrv"]
 
 [ext_resource type="Texture2D" uid="uid://dx5xusixt7bfv" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/tileset.png" id="1_36ke7"]
+[ext_resource type="PackedScene" uid="uid://3mdpl08kn7yk" path="res://Scenes/Levels/LevelController.tscn" id="1_67y36"]
 [ext_resource type="Texture2D" uid="uid://bcp2cotlvml5w" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/door/door_spritesheet.png" id="2_8h4de"]
+[ext_resource type="PackedScene" uid="uid://c8u16gw00jovv" path="res://Scenes/Rewards/Chest.tscn" id="2_hk4vc"]
 [ext_resource type="Texture2D" uid="uid://bmcm2bssfqwou" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/tileset_top.png" id="2_xvio3"]
 [ext_resource type="Texture2D" uid="uid://cwrlsra5b1d46" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/door/door2_bis.png" id="3_jcebb"]
 [ext_resource type="Texture2D" uid="uid://y0s0p8xfsi5p" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/door/door_closed.png" id="4_xvio3"]
@@ -659,6 +661,9 @@ sources/3 = SubResource("TileSetAtlasSource_hk4vc")
 [node name="Level1" type="Node2D"]
 y_sort_enabled = true
 
+[node name="LevelController" parent="." node_paths=PackedStringArray("Chest") instance=ExtResource("1_67y36")]
+Chest = NodePath("../Chest")
+
 [node name="Door" type="TileMapLayer" parent="." groups=["Navigation"]]
 z_index = 1
 texture_filter = 1
@@ -691,26 +696,34 @@ position = Vector2(624, 592)
 [node name="MainCharacter" parent="." instance=ExtResource("14_67y36")]
 position = Vector2(624, 592)
 
-[node name="Spawner" parent="." instance=ExtResource("6_3ipdw")]
+[node name="Spawner" parent="." node_paths=PackedStringArray("LevelController") instance=ExtResource("6_3ipdw")]
 position = Vector2(944, 240)
 EnemyScene = ExtResource("12_n5ptj")
-SpawnCount = 10
-InitialDelay = 10.0
-SpawnRadius = 10.0
-
-[node name="Spawner2" parent="." instance=ExtResource("6_3ipdw")]
-position = Vector2(304, 240)
-EnemyScene = ExtResource("12_n5ptj")
-SpawnCount = 10
+LevelController = NodePath("../LevelController")
 InitialDelay = 5.0
 SpawnRadius = 10.0
 
-[node name="Spawner3" parent="." instance=ExtResource("6_3ipdw")]
-position = Vector2(304, 480)
+[node name="Spawner2" parent="." node_paths=PackedStringArray("LevelController") instance=ExtResource("6_3ipdw")]
+position = Vector2(304, 240)
 EnemyScene = ExtResource("12_n5ptj")
-InitialDelay = 20.0
+LevelController = NodePath("../LevelController")
+InitialDelay = 5.0
 SpawnRadius = 10.0
 
-[node name="Spawner4" parent="." instance=ExtResource("6_3ipdw")]
-position = Vector2(944, 480)
+[node name="Spawner3" parent="." node_paths=PackedStringArray("LevelController") instance=ExtResource("6_3ipdw")]
+position = Vector2(304, 480)
+EnemyScene = ExtResource("12_n5ptj")
+LevelController = NodePath("../LevelController")
+InitialDelay = 5.0
 SpawnRadius = 10.0
+
+[node name="Spawner4" parent="." node_paths=PackedStringArray("LevelController") instance=ExtResource("6_3ipdw")]
+position = Vector2(944, 480)
+EnemyScene = ExtResource("12_n5ptj")
+LevelController = NodePath("../LevelController")
+InitialDelay = 5.0
+SpawnRadius = 10.0
+
+[node name="Chest" parent="." instance=ExtResource("2_hk4vc")]
+visible = false
+position = Vector2(626, 225)
