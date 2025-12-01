@@ -11,7 +11,7 @@ public partial class MeleeEnemy : BasicEntity
 	[Export] private int Hp = 50;
 	[Export] private int Dmg = 1;
 	[Export] private float AtkSpd = 1.2f;
-	[Export] private float Def = 0f; // Percentage (0.0 = 0%, 1.0 = 100% damage reduction)
+	[Export] private float Def = 0f;
 	[Export] private float Spd = 20;
 	[Export] private AudioStreamPlayer2D HitSound;
 	[Export] private float AttackRange = 30f;

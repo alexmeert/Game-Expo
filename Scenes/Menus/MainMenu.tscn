@@ -1,6 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://byt026nu1wsbk"]
+[gd_scene load_steps=8 format=3 uid="uid://byt026nu1wsbk"]
 
+[ext_resource type="Script" uid="uid://bmxsy3nkmy1un" path="res://Scripts/MainMenu.cs" id="1_b42ut"]
 [ext_resource type="FontFile" uid="uid://bjtv1av4o6be8" path="res://Assets/Fonts/vermin-vibes-1989-font/VerminVibes1989Regular-m77m.ttf" id="1_v3fht"]
+[ext_resource type="Texture2D" uid="uid://dkbi2qmrosleb" path="res://Sprites/Characters/Player/CPUManIdle-Sheet.png" id="3_hqtmt"]
+[ext_resource type="Texture2D" uid="uid://djxy43ftbube0" path="res://Sprites/Characters/Enemies/PowerBrick/PowerBrickFront-Sheet.png" id="4_tfrft"]
+[ext_resource type="Texture2D" uid="uid://byfg6klnwfcv7" path="res://Sprites/Characters/Enemies/FanCrab/FanCrabDown-Sheet.png" id="5_mc63j"]
+[ext_resource type="Texture2D" uid="uid://bowgl1s81qbu2" path="res://Sprites/Characters/Enemies/USB/USBWalkDownm-Sheet.png" id="5_uv623"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_bc4mk"]
 font = ExtResource("1_v3fht")
@@ -15,6 +20,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_b42ut")
 
 [node name="Title" type="Label" parent="."]
 texture_filter = 1
@@ -87,3 +94,35 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 1, 0.858824, 1)
+
+[node name="Player" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(224, 440)
+scale = Vector2(4.52, 4.52)
+texture = ExtResource("3_hqtmt")
+hframes = 2
+frame = 1
+
+[node name="Plug" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(824, 392)
+scale = Vector2(6.56, 6.56)
+texture = ExtResource("4_tfrft")
+hframes = 4
+frame = 1
+
+[node name="Fan" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1024, 392)
+scale = Vector2(6.56, 6.56)
+texture = ExtResource("5_mc63j")
+hframes = 4
+frame = 1
+
+[node name="USB2" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(912, 512)
+scale = Vector2(5.52, 5.52)
+texture = ExtResource("5_uv623")
+hframes = 6
+frame = 1

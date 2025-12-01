@@ -226,11 +226,11 @@ Spd = 30.0
 HitSound = NodePath("TakeDamage")
 Healthbar = NodePath("Healthbar")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 scale = Vector2(1, 0.995352)
 sprite_frames = SubResource("SpriteFrames_clyi6")
-animation = &"WalkLeft"
+animation = &"WalkUp"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

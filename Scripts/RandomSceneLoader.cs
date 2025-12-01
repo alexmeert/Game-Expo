@@ -5,8 +5,8 @@ public partial class RandomSceneLoader : Node
 {
 	public static RandomSceneLoader Instance { get; private set; }
 
-	[Export] public string NormalRoomsFolder = "res://Rooms/";
-	[Export] public string BossRoomsFolder = "res://BossRooms/";
+	[Export] public string NormalRoomsFolder = "res://Scenes/Levels/";
+	[Export] public string BossRoomsFolder = "res://Scenes/BossLevels/";
 	[Export] public int RoomsPerCycle = 3;
 
 	private List<string> _normalRooms = new();

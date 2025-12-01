@@ -11,14 +11,13 @@ public enum UpgradeRarity
 
 public partial class Upgrade : Item
 {
-	[Export] public UpgradeRarity Rarity = UpgradeRarity.Uncommon;
-	
-	[Export(PropertyHint.Range, "0,1,0.01")] public float HpPercent = 0f;
-	[Export(PropertyHint.Range, "0,1,0.01")] public float DmgPercent = 0f;
-	[Export(PropertyHint.Range, "0,1,0.01")] public float AtkSpdPercent = 0f;
-	[Export(PropertyHint.Range, "0,1,0.01")] public float DefPercent = 0f;
-	[Export(PropertyHint.Range, "0,1,0.01")] public float SpdPercent = 0f;
+    [Export(PropertyHint.Range, "0,1,0.01")] public float HpPercent = 0f;
+    [Export(PropertyHint.Range, "0,1,0.01")] public float DmgPercent = 0f;
+    [Export(PropertyHint.Range, "0,1,0.01")] public float AtkSpdPercent = 0f;
+    [Export(PropertyHint.Range, "0,1,0.01")] public float DefPercent = 0f;
+    [Export(PropertyHint.Range, "0,1,0.01")] public float SpdPercent = 0f;
 
+    public UpgradeRarity Rarity { get; set; }
 
 	public static PackedScene UncommonAura;
 	public static PackedScene RareAura;
@@ -86,40 +85,29 @@ public partial class Upgrade : Item
 		LegendaryAura = legendary;
 	}
 
-	private void SetupAura()
-	{
-		// Remove existing aura if it exists
-		var existingAura = GetNodeOrNull<Node2D>("Aura");
-		if (existingAura != null)
-		{
-			existingAura.QueueFree();
-		}
+    private void SetupAura()
+    {
+        PackedScene auraScene = Rarity switch
+        {
+            UpgradeRarity.Uncommon => UncommonAura,
+            UpgradeRarity.Rare => RareAura,
+            UpgradeRarity.Epic => EpicAura,
+            UpgradeRarity.Legendary => LegendaryAura,
+            _ => UncommonAura
+        };
 
-		// Get the appropriate aura scene based on rarity
-		PackedScene auraScene = Rarity switch
-		{
-			UpgradeRarity.Uncommon => UncommonAura,
-			UpgradeRarity.Rare => RareAura,
-			UpgradeRarity.Epic => EpicAura,
-			UpgradeRarity.Legendary => LegendaryAura,
-			_ => UncommonAura
-		};
-
-		if (auraScene != null)
-		{
-			// Instantiate the aura scene
-			var auraInstance = auraScene.Instantiate<Node2D>();
-			if (auraInstance != null)
-			{
-				auraInstance.Name = "Aura";
-				AddChild(auraInstance);
-				// Move aura to back (lower z-index) - ensures it renders behind other sprites
-				MoveChild(auraInstance, 0);
-				// Set z-index to be behind everything
-				auraInstance.ZIndex = -1;
-			}
-		}
-	}
+        if (auraScene != null)
+        {
+            var auraInstance = auraScene.Instantiate<Node2D>();
+            if (auraInstance != null)
+            {
+                auraInstance.Name = "Aura";
+                AddChild(auraInstance);
+                MoveChild(auraInstance, 0);
+                auraInstance.ZIndex = -1;
+            }
+        }
+    }
 
 	public void SetRarity(UpgradeRarity rarity)
 	{
@@ -127,42 +115,38 @@ public partial class Upgrade : Item
 		SetupAura();
 	}
 
-	private void OnPickup(Node body)
-	{
-		if (body is Player player)
-		{
-			// Play collect sound
-			if (CollectSound != null)
-			{
-				CollectSound.Play();
-			}
+    private void OnPickup(Node body)
+    {
+        if (body is Player player)
+        {
+            if (CollectSound != null)
+            {
+                CollectSound.Play();
+            }
 
-			player.ApplyUpgrade(this); // applies stats
-			GD.Print($"{Rarity} {ItemName} collected!");
-			QueueFree(); // removes the upgrade scene from the map
-		}
-	}
+            player.ApplyUpgrade(this);
+            GD.Print($"{Rarity} {ItemName} collected!");
+            QueueFree();
+        }
+    }
 
+    private float GetRarityMultiplier()
+    {
+        return Rarity switch
+        {
+            UpgradeRarity.Uncommon => 0.05f,    // 5%
+            UpgradeRarity.Rare => 0.10f,      // 10%
+            UpgradeRarity.Epic => 0.20f,      // 20%
+            UpgradeRarity.Legendary => 0.35f, // 35%
+            _ => 0.05f
+        };
+    }
 
-	// Get the rarity multiplier
-	private float GetRarityMultiplier()
-	{
-		return Rarity switch
-		{
-			UpgradeRarity.Uncommon => 0.05f,    // 5%
-			UpgradeRarity.Rare => 0.10f,      // 10%
-			UpgradeRarity.Epic => 0.20f,      // 20%
-			UpgradeRarity.Legendary => 0.35f, // 35%
-			_ => 0.05f
-		};
-	}
-
-	// Store the actual stat increases for removal
-	private float _appliedHpIncrease = 0f;
-	private float _appliedDmgIncrease = 0f;
-	private float _appliedAtkSpdIncrease = 0f;
-	private float _appliedDefIncrease = 0f;
-	private float _appliedSpdIncrease = 0f;
+    private float _appliedHpIncrease = 0f;
+    private float _appliedDmgIncrease = 0f;
+    private float _appliedAtkSpdIncrease = 0f;
+    private float _appliedDefIncrease = 0f;
+    private float _appliedSpdIncrease = 0f;
 
 	public override void Apply(Player player)
 	{
@@ -172,11 +156,11 @@ public partial class Upgrade : Item
 		float rarityMultiplier = GetRarityMultiplier();
 
 
-		_appliedHpIncrease = HpPercent > 0 ? player.GetBaseMaxHP() * rarityMultiplier * HpPercent : 0f;
-		_appliedDmgIncrease = DmgPercent > 0 ? player.GetBaseDMG() * rarityMultiplier * DmgPercent : 0f;
-		_appliedAtkSpdIncrease = AtkSpdPercent > 0 ? player.GetBaseATKSPD() * rarityMultiplier * AtkSpdPercent : 0f;
-		_appliedDefIncrease = DefPercent > 0 ? rarityMultiplier * DefPercent : 0f; // DEF is already a percentage
-		_appliedSpdIncrease = SpdPercent > 0 ? player.GetBaseSPD() * rarityMultiplier * SpdPercent : 0f;
+        _appliedHpIncrease = HpPercent > 0 ? player.GetBaseMaxHP() * rarityMultiplier * HpPercent : 0f;
+        _appliedDmgIncrease = DmgPercent > 0 ? player.GetBaseDMG() * rarityMultiplier * DmgPercent : 0f;
+        _appliedAtkSpdIncrease = AtkSpdPercent > 0 ? player.GetBaseATKSPD() * rarityMultiplier * AtkSpdPercent : 0f;
+        _appliedDefIncrease = DefPercent > 0 ? rarityMultiplier * DefPercent : 0f;
+        _appliedSpdIncrease = SpdPercent > 0 ? player.GetBaseSPD() * rarityMultiplier * SpdPercent : 0f;
 
 
 		player.MaxHP += _appliedHpIncrease;

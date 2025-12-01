@@ -1,13 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://dyhm385qsegw2"]
+[gd_scene load_steps=5 format=3 uid="uid://dyhm385qsegw2"]
 
 [ext_resource type="Script" uid="uid://rsa0qhq1qnbh" path="res://Scripts/Upgrade.cs" id="1_djxu2"]
 [ext_resource type="Texture2D" uid="uid://b766x0pp3dh37" path="res://Sprites/Items/Upgrades/Upgrade_RAM.png" id="1_vxyqf"]
+[ext_resource type="AudioStream" uid="uid://dpj873y8k2ohn" path="res://Sounds/Chest/CollectUpgrade.mp3" id="3_awnd5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vxyqf"]
 radius = 16.0
 
-[node name="Damage" type="Node2D"]
+[node name="Damage" type="Node2D" node_paths=PackedStringArray("CollectSound")]
 script = ExtResource("1_djxu2")
+CollectSound = NodePath("AudioStreamPlayer2D")
 
 [node name="PickupArea" type="Area2D" parent="."]
 
@@ -19,3 +21,6 @@ shape = SubResource("CircleShape2D_vxyqf")
 texture_filter = 1
 scale = Vector2(0.72, 0.72)
 texture = ExtResource("1_vxyqf")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_awnd5")

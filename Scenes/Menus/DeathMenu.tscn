@@ -1,6 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://c1isfpk5eafvu"]
+[gd_scene load_steps=8 format=3 uid="uid://c1isfpk5eafvu"]
 
+[ext_resource type="Script" uid="uid://cnwtn2nqqnmnn" path="res://Scripts/DeathMenu.cs" id="1_2vbci"]
 [ext_resource type="FontFile" uid="uid://bjtv1av4o6be8" path="res://Assets/Fonts/vermin-vibes-1989-font/VerminVibes1989Regular-m77m.ttf" id="1_6gm2i"]
+[ext_resource type="Texture2D" uid="uid://bsfb2g84q8w2e" path="res://Sprites/Characters/Player/DeadPlayer.png" id="2_0bac5"]
+[ext_resource type="Texture2D" uid="uid://byfg6klnwfcv7" path="res://Sprites/Characters/Enemies/FanCrab/FanCrabDown-Sheet.png" id="3_k20bw"]
+[ext_resource type="Texture2D" uid="uid://djxy43ftbube0" path="res://Sprites/Characters/Enemies/PowerBrick/PowerBrickFront-Sheet.png" id="4_n26i4"]
+[ext_resource type="Texture2D" uid="uid://bowgl1s81qbu2" path="res://Sprites/Characters/Enemies/USB/USBWalkDownm-Sheet.png" id="5_2vbci"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1lcdd"]
 font = ExtResource("1_6gm2i")
@@ -14,6 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_2vbci")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
@@ -25,6 +31,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
 offset_top = 253.0
 offset_right = 1152.0
 offset_bottom = 648.0
@@ -56,3 +63,40 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="PlayerDead" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(576, 232)
+scale = Vector2(6.86176, 6.86176)
+texture = ExtResource("2_0bac5")
+
+[node name="FanEnemy" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(224, 240)
+scale = Vector2(7.115, 7.115)
+texture = ExtResource("3_k20bw")
+hframes = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(952, 256)
+scale = Vector2(9.84883, 9.84883)
+texture = ExtResource("4_n26i4")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(448, 253)
+scale = Vector2(6.48, 6.48)
+texture = ExtResource("5_2vbci")
+hframes = 6
+frame = 3
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(720, 253)
+scale = Vector2(6.48, 6.48)
+texture = ExtResource("5_2vbci")
+hframes = 6
+frame = 3
