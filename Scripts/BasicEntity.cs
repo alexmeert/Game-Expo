@@ -3,6 +3,10 @@ using System;
 
 public partial class BasicEntity : CharacterBody2D
 {
+	[Signal] 
+	public delegate void EnemyDiedEventHandler();
+
+	
 	private float _hp;
 	private float _maxHp;
 	private float _dmg;

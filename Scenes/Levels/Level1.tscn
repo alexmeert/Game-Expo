@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=4 uid="uid://bg635lk553wrv"]
+[gd_scene load_steps=46 format=4 uid="uid://bg635lk553wrv"]
 
 [ext_resource type="Texture2D" uid="uid://dx5xusixt7bfv" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/tileset.png" id="1_36ke7"]
 [ext_resource type="PackedScene" uid="uid://3mdpl08kn7yk" path="res://Scenes/Levels/LevelController.tscn" id="1_67y36"]
@@ -10,7 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://btmcefauissf4" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server.png" id="8_f3nwb"]
 [ext_resource type="Texture2D" uid="uid://tdc1q346nfrd" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server_disabled.png" id="9_f3nwb"]
 [ext_resource type="Texture2D" uid="uid://b2xqy06cpdcab" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server_down.png" id="10_57lp3"]
+[ext_resource type="PackedScene" uid="uid://dmfv1i20k17vl" path="res://Scenes/Characters/Enemy/RangedEnemy.tscn" id="12_htexa"]
 [ext_resource type="PackedScene" uid="uid://bt7gih2h8lrlu" path="res://Scenes/Characters/Enemy/MeleeEnemy.tscn" id="12_n5ptj"]
+[ext_resource type="PackedScene" uid="uid://cq782euxa61ii" path="res://Scenes/Characters/Enemy/TankEnemy.tscn" id="13_2oprd"]
 [ext_resource type="PackedScene" uid="uid://170k71snx6d3" path="res://Scenes/Items/Upgrades/Cooldown.tscn" id="14_8fhce"]
 [ext_resource type="PackedScene" uid="uid://c1aw4q02ut5i1" path="res://Scenes/Characters/Player/MainCharacter.tscn" id="14_67y36"]
 [ext_resource type="PackedScene" uid="uid://dyhm385qsegw2" path="res://Scenes/Items/Upgrades/Damage.tscn" id="15_uqlrs"]
@@ -711,14 +713,14 @@ SpawnRadius = 10.0
 
 [node name="Spawner3" parent="." node_paths=PackedStringArray("LevelController") instance=ExtResource("6_3ipdw")]
 position = Vector2(304, 240)
-EnemyScene = ExtResource("12_n5ptj")
+EnemyScene = ExtResource("12_htexa")
 LevelController = NodePath("../LevelController")
 InitialDelay = 5.0
 SpawnRadius = 10.0
 
 [node name="Spawner4" parent="." node_paths=PackedStringArray("LevelController") instance=ExtResource("6_3ipdw")]
 position = Vector2(944, 480)
-EnemyScene = ExtResource("12_n5ptj")
+EnemyScene = ExtResource("13_2oprd")
 LevelController = NodePath("../LevelController")
 InitialDelay = 5.0
 SpawnRadius = 10.0

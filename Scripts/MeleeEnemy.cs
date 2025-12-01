@@ -4,8 +4,7 @@ using System.Linq;
 
 public partial class MeleeEnemy : BasicEntity
 {	
-	[Signal] 
-	public delegate void EnemyDiedEventHandler();
+	
 	
 	
 	[Export] private int Hp = 50;

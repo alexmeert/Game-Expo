@@ -4,6 +4,9 @@ using System.Linq;
 
 public partial class RangedEnemy : BasicEntity
 {
+	
+
+
 	[Export] private int Hp = 30;
 	[Export] private int Dmg = 5;
 	[Export] private float AtkSpd = 1.5f;
@@ -171,4 +174,11 @@ public partial class RangedEnemy : BasicEntity
 			HitSound.Play();
 		}
 	}
+	
+	protected override void Die()
+	{
+		EmitSignal(SignalName.EnemyDied); // notify LevelController
+		base.Die(); // existing cleanup
+	}
+
 }
