@@ -1,7 +1,7 @@
 [gd_scene load_steps=44 format=4 uid="uid://bg635lk553wrv"]
 
 [ext_resource type="Texture2D" uid="uid://dx5xusixt7bfv" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/tileset.png" id="1_36ke7"]
-[ext_resource type="PackedScene" uid="uid://3mdpl08kn7yk" path="res://Scenes/Levels/LevelController.tscn" id="1_67y36"]
+[ext_resource type="PackedScene" path="res://Scenes/Levels/LevelController.tscn" id="1_67y36"]
 [ext_resource type="Texture2D" uid="uid://bcp2cotlvml5w" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/door/door_spritesheet.png" id="2_8h4de"]
 [ext_resource type="Texture2D" uid="uid://bmcm2bssfqwou" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/tileset_top.png" id="2_xvio3"]
 [ext_resource type="Texture2D" uid="uid://cwrlsra5b1d46" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/door/door2_bis.png" id="3_jcebb"]
@@ -724,10 +724,12 @@ InitialDelay = 5.0
 SpawnRadius = 10.0
 
 [node name="MainCharacter" parent="." instance=ExtResource("14_67y36")]
+z_index = 1
 position = Vector2(624, 592)
 
 [node name="Chest" parent="." instance=ExtResource("18_8fhce")]
 visible = false
-z_index = 2
+z_index = 1
+y_sort_enabled = true
 position = Vector2(624, 240)
 UpgradeScenes = [ExtResource("14_8fhce"), ExtResource("15_uqlrs"), ExtResource("16_htexa"), ExtResource("17_2oprd"), ExtResource("18_p6c81"), ExtResource("19_xawdx")]
