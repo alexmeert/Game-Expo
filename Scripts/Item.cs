@@ -3,17 +3,17 @@ using System;
 
 public partial class Item : Node2D
 {
-    [Export] public string ItemName = "";
-    [Export] public string Description = "";
-    [Export] public Texture2D Icon;
+	[Export] public string ItemName = "";
+	[Export] public string Description = "";
+	[Export] public Texture2D Icon;
 
-    public virtual void Apply(Player player)
-    {
-        // Override in child classes
-    }
+	public virtual void Apply(Player player)
+	{
+		// Override in child classes
+	}
 
-    public virtual void Remove(Player player)
-    {
-        // Override in child classes if needed
-    }
+	public virtual void Remove(Player player)
+	{
+		// Override in child classes if needed
+	}
 }
