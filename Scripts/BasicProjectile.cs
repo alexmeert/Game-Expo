@@ -10,7 +10,7 @@ public partial class BasicProjectile : Area2D
 
     public override void _Ready()
     {
-        Connect("body_entered", new Callable(this, nameof(OnBodyEntered)));
+        BodyEntered += OnBodyEntered;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -19,7 +19,7 @@ public partial class BasicProjectile : Area2D
     }
 
     private void OnBodyEntered(Node body)
-    {
+    {    
         if (body is BasicEntity entity && entity != Owner)
         {
             entity.TakeDamage(DMG);

@@ -13,15 +13,9 @@ public partial class Gun : Node2D
 
     public override void _Process(double delta)
     {
-        LookAt(GetGlobalMousePosition());
-        RotationDegrees = Mathf.Wrap(RotationDegrees, 0f, 360f);
-        Scale = new Vector2(Scale.X, (RotationDegrees > 90 && RotationDegrees < 270) ? -1 : 1);
-
-        // Count down cooldown timer
         if (fireTimer > 0)
             fireTimer -= (float)delta;
 
-        // Only fire if cooldown finished
         if (Input.IsActionPressed("Shoot") && fireTimer <= 0f)
         {
             FireProjectile();
@@ -30,18 +24,58 @@ public partial class Gun : Node2D
 
     private void FireProjectile()
     {
-        if (PlayerProjectileManager == null || Muzzle == null || Owner == null)
+        if (PlayerProjectileManager == null)
+        {
             return;
+        }
+
+        if (Owner == null)
+        {
+            return;
+        }
 
         fireTimer = FireCooldown;
+
+        // Calculate direction to mouse
+        Vector2 mousePos = GetGlobalMousePosition();
+        Vector2 spawnPosition;
+        
+        // Use Muzzle position if available, otherwise use owner's position
+        if (Muzzle != null)
+        {
+            spawnPosition = Muzzle.GlobalPosition;
+        }
+        else
+        {
+            spawnPosition = Owner.GlobalPosition;
+        }
+
+        // Calculate rotation from spawn position to mouse
+        Vector2 direction = (mousePos - spawnPosition);
+        
+        // Check if direction is valid (not zero)
+        if (direction.LengthSquared() < 0.01f)
+        {
+            // Default direction if mouse is too close
+            direction = Vector2.Right;
+        }
+        else
+        {
+            direction = direction.Normalized();
+        }
+        
+        float rotation = direction.Angle();
 
         PlayerProjectileManager.Owner = Owner;
 
         PlayerProjectileManager.SpawnProjectile(
-            Muzzle.GlobalPosition,
-            GlobalRotation
+            spawnPosition,
+            rotation
         );
 
-        ShotSound?.Play();
+        if (ShotSound != null)
+        {
+            ShotSound.Play();
+        }
     }
 }

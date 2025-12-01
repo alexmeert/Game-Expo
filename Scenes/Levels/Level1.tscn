@@ -1,18 +1,23 @@
-[gd_scene load_steps=38 format=4 uid="uid://bg635lk553wrv"]
+[gd_scene load_steps=43 format=4 uid="uid://bg635lk553wrv"]
 
 [ext_resource type="Texture2D" uid="uid://dx5xusixt7bfv" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/tileset.png" id="1_36ke7"]
 [ext_resource type="Texture2D" uid="uid://bcp2cotlvml5w" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/door/door_spritesheet.png" id="2_8h4de"]
 [ext_resource type="Texture2D" uid="uid://bmcm2bssfqwou" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/tileset_top.png" id="2_xvio3"]
 [ext_resource type="Texture2D" uid="uid://cwrlsra5b1d46" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/door/door2_bis.png" id="3_jcebb"]
 [ext_resource type="Texture2D" uid="uid://y0s0p8xfsi5p" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/door/door_closed.png" id="4_xvio3"]
-[ext_resource type="PackedScene" uid="uid://cen8t8ucpecb1" path="res://Scenes/Characters/EnemySpawner.tscn" id="6_3ipdw"]
+[ext_resource type="PackedScene" uid="uid://cen8t8ucpecb1" path="res://Scenes/Characters/Enemy/EnemySpawner.tscn" id="6_3ipdw"]
 [ext_resource type="Texture2D" uid="uid://btmcefauissf4" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server.png" id="8_f3nwb"]
 [ext_resource type="Texture2D" uid="uid://tdc1q346nfrd" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server_disabled.png" id="9_f3nwb"]
 [ext_resource type="Texture2D" uid="uid://b2xqy06cpdcab" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server_down.png" id="10_57lp3"]
-[ext_resource type="Texture2D" uid="uid://4nmdwj07qiqq" path="res://Sprites/Items/CoolingFan.png" id="11_77iba"]
-[ext_resource type="Texture2D" uid="uid://c0q6mx7djlx06" path="res://Sprites/Items/GPU.png" id="12_67y36"]
-[ext_resource type="PackedScene" uid="uid://blu86gs4tjm35" path="res://Scenes/Characters/PlayerSpawnPoint.tscn" id="13_77iba"]
-[ext_resource type="Texture2D" uid="uid://b766x0pp3dh37" path="res://Sprites/Items/RAM.png" id="13_hk4vc"]
+[ext_resource type="PackedScene" uid="uid://bt7gih2h8lrlu" path="res://Scenes/Characters/Enemy/MeleeEnemy.tscn" id="12_n5ptj"]
+[ext_resource type="PackedScene" uid="uid://dyhm385qsegw2" path="res://Scenes/Items/Upgrades/Damage.tscn" id="13_67y36"]
+[ext_resource type="PackedScene" uid="uid://170k71snx6d3" path="res://Scenes/Items/Upgrades/Cooldown.tscn" id="14_3hula"]
+[ext_resource type="PackedScene" uid="uid://c1aw4q02ut5i1" path="res://Scenes/Characters/Player/MainCharacter.tscn" id="14_67y36"]
+[ext_resource type="PackedScene" uid="uid://dlumqsplwb8xv" path="res://Scenes/Items/Upgrades/FireRate.tscn" id="15_spq4p"]
+[ext_resource type="PackedScene" uid="uid://y7g0ts65vriw" path="res://Scenes/Items/Upgrades/Defense.tscn" id="16_8fhce"]
+[ext_resource type="PackedScene" uid="uid://bjoxxngko37rd" path="res://Scenes/Items/Upgrades/MagSize.tscn" id="17_uqlrs"]
+[ext_resource type="PackedScene" uid="uid://c8u16gw00jovv" path="res://Scenes/Rewards/Chest.tscn" id="18_8fhce"]
+[ext_resource type="PackedScene" uid="uid://d3aundu586d2f" path="res://Scenes/Items/Upgrades/Health.tscn" id="18_spq4p"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4d3fe"]
 texture = ExtResource("4_xvio3")
@@ -200,13 +205,13 @@ texture_region_size = Vector2i(32, 32)
 3:3/0 = 0
 4:3/0 = 0
 5:3/0 = 0
-5:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+5:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-14.2136, -13.5029, -11.98, -15.0258, -8.62967, -16, -4.87323, -16, 16, -16, 16, 0.710678, 16, 4.16255, 16, 16, -16, 16, -16, -6.80221, -16, -10.3556)
 5:3/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_3ipdw")
 6:3/0 = 0
 6:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:3/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_f3nwb")
 7:3/0 = 0
-7:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+7:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(13.1983, -12.8937, 14.3151, -10.8632, 15.1273, -8.93425, 16, -3.24882, 16, 16, -16, 16, -16, -16, 5.48238, -16, 8.83272, -16, 11.2693, -14.5182)
 7:3/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_77iba")
 8:3/0 = 0
 9:3/0 = 0
@@ -249,7 +254,7 @@ texture_region_size = Vector2i(32, 32)
 3:5/0 = 0
 4:5/0 = 0
 5:5/0 = 0
-5:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+5:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 0.710678, 16, 4.16255, 16, 16, -7.51289, 16, -10.9648, 15.0258, -13.7059, 13.7059, -16, 11.3709, -16, 6.49763)
 5:5/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_jcebb")
 10:5/0 = 0
 11:5/0 = 0
@@ -487,7 +492,7 @@ texture_region_size = Vector2i(32, 32)
 8:5/0 = 0
 9:5/0 = 0
 7:5/0 = 0
-7:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+7:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 0.710678, 16, 4.16255, 16, 7.71594, 14.8227, 9.9495, 14.0105, 11.98, 12.4266, 13.3825, 10.4571, 14.9243, 7.00988, 16, -16, 16)
 7:5/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_hk4vc")
 
 [sub_resource type="TileSet" id="TileSet_hn12h"]
@@ -680,28 +685,44 @@ tile_set = SubResource("TileSet_hbghi")
 visible = false
 navigation_polygon = SubResource("NavigationPolygon_kri6y")
 
-[node name="Spawner" parent="." instance=ExtResource("6_3ipdw")]
-position = Vector2(624, 240)
-
 [node name="Decor" type="TileMapLayer" parent="."]
 y_sort_enabled = true
 texture_filter = 1
 tile_map_data = PackedByteArray("AAAtABcAAQAAAAAAAAAtABgAAQAAAAEAAAAvABcAAwAAAAAAAAAvABgAAwAAAAEAAAAwABcAAQAAAAAAAAAwABgAAQAAAAEAAAAtABMAAwAAAAAAAAAtABQAAwAAAAEAAAAvABMAAQAAAAAAAAAvABQAAQAAAAEAAAAwABMAAwAAAAAAAAAwABQAAwAAAAEAAAAdABMAAwAAAAAAAAAdABQAAwAAAAEAAAAfABMAAQAAAAAAAAAfABQAAQAAAAEAAAAgABMAAgAAAAAAAAAgABQAAgAAAAEAAAAdABgAAgAAAAAAAAAdABkAAgAAAAEAAAAeABgAAQAAAAAAAAAeABkAAQAAAAEAAAAgABgAAQAAAAAAAAAgABkAAQAAAAEAAAAXAAsAAwAAAAAAAAAXAAwAAwAAAAEAAAAWAAsAAgAAAAAAAAAWAAwAAgAAAAEAAAAVAAsAAgAAAAAAAAAVAAwAAgAAAAEAAAAVABAAAQAAAAAAAAAVABEAAQAAAAEAAAAXABAAAwAAAAAAAAAXABEAAwAAAAEAAAAYABAAAQAAAAAAAAAYABEAAQAAAAEAAAAlABAAAQAAAAAAAAAlABEAAQAAAAEAAAAoABAAAgAAAAAAAAAoABEAAgAAAAEAAAA1AAsAAQAAAAAAAAA1AAwAAQAAAAEAAAA2AAsAAgAAAAAAAAA2AAwAAgAAAAEAAAA4AAsAAwAAAAAAAAA4AAwAAwAAAAEAAAA1ABEAAwAAAAAAAAA1ABIAAwAAAAEAAAA2ABEAAwAAAAAAAAA2ABIAAwAAAAEAAAA3ABEAAgAAAAAAAAA3ABIAAgAAAAEAAAA4ABEAAgAAAAAAAAA4ABIAAgAAAAEAAAA1ABsAAQAAAAAAAAA1ABwAAQAAAAEAAAA2ABsAAgAAAAAAAAA2ABwAAgAAAAEAAAA4ABsAAwAAAAAAAAA4ABwAAwAAAAEAAAA2ACAAAgAAAAAAAAA2ACEAAgAAAAEAAAA3ACAAAwAAAAAAAAA3ACEAAwAAAAEAAAA4ACAAAQAAAAAAAAA4ACEAAQAAAAEAAAAlACAAAQAAAAAAAAAlACEAAQAAAAEAAAAnACAAAgAAAAAAAAAnACEAAgAAAAEAAAAoACAAAQAAAAAAAAAoACEAAQAAAAEAAAAlABsAAwAAAAAAAAAlABwAAwAAAAEAAAAmABsAAQAAAAAAAAAmABwAAQAAAAEAAAAoABsAAgAAAAAAAAAoABwAAgAAAAEAAAAYABsAAQAAAAAAAAAYABwAAQAAAAEAAAAXABsAAQAAAAAAAAAXABwAAQAAAAEAAAAWABsAAwAAAAAAAAAWABwAAwAAAAEAAAAVABsAAQAAAAAAAAAVABwAAQAAAAEAAAAVACAAAgAAAAAAAAAVACEAAgAAAAEAAAAXACAAAwAAAAAAAAAXACEAAwAAAAEAAAAYACAAAQAAAAAAAAAYACEAAQAAAAEAAAAlAAsAAgAAAAAAAAAlAAwAAgAAAAEAAAAoAAwAAQAAAAEAAAAoAAsAAQAAAAAAAAAkAAsAAQAAAAAAAAAkAAwAAQAAAAEAAAApAAsAAwAAAAAAAAApAAwAAwAAAAEAAAATACAAAwAAAAAAAAATACEAAwAAAAEAAAAUAAsAAwAAAAAAAAAUAAwAAwAAAAEAAAATAAsAAwAAAAAAAAATAAwAAwAAAAEAAAARAAsAAwAAAAAAAAARAAwAAwAAAAEAAAASACAAAwAAAAAAAAASACEAAwAAAAEAAAA=")
 tile_set = SubResource("TileSet_67y36")
 
-[node name="CoolingFan" type="Sprite2D" parent="."]
-position = Vector2(928, 496)
-texture = ExtResource("11_77iba")
+[node name="Spawner" parent="." instance=ExtResource("6_3ipdw")]
+position = Vector2(944, 240)
+EnemyScene = ExtResource("12_n5ptj")
+SpawnCount = 5
+InitialDelay = 10.0
+SpawnRadius = 10.0
 
-[node name="Gpu" type="Sprite2D" parent="."]
-texture_filter = 1
-position = Vector2(984, 496)
-texture = ExtResource("12_67y36")
+[node name="Spawner2" parent="." instance=ExtResource("6_3ipdw")]
+position = Vector2(304, 240)
+EnemyScene = ExtResource("12_n5ptj")
+SpawnCount = 5
+InitialDelay = 5.0
+SpawnRadius = 10.0
 
-[node name="Ram" type="Sprite2D" parent="."]
-texture_filter = 1
-position = Vector2(952, 544)
-texture = ExtResource("13_hk4vc")
+[node name="Spawner3" parent="." instance=ExtResource("6_3ipdw")]
+position = Vector2(304, 480)
+EnemyScene = ExtResource("12_n5ptj")
+SpawnCount = 5
+InitialDelay = 20.0
+SpawnRadius = 10.0
 
-[node name="PlayerSpawnPoint" parent="." instance=ExtResource("13_77iba")]
+[node name="Spawner4" parent="." instance=ExtResource("6_3ipdw")]
+position = Vector2(944, 480)
+EnemyScene = ExtResource("12_n5ptj")
+SpawnCount = 5
+SpawnRadius = 10.0
+
+[node name="MainCharacter" parent="." instance=ExtResource("14_67y36")]
 position = Vector2(624, 592)
+
+[node name="Chest" parent="." instance=ExtResource("18_8fhce")]
+z_index = 2
+position = Vector2(624, 240)
+UpgradeScenes = [ExtResource("14_3hula"), ExtResource("13_67y36"), ExtResource("16_8fhce"), ExtResource("15_spq4p"), ExtResource("18_spq4p"), ExtResource("17_uqlrs")]
+UpgradeSpawnOffset = Vector2(15, -25)

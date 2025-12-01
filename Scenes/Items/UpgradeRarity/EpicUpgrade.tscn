@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckqi6qpgcigwt"]
+
+[ext_resource type="Texture2D" uid="uid://csn008hjwmyov" path="res://Sprites/Items/RarityBackgrounds/EpicUpgrade.png" id="1_yuhqm"]
+
+[node name="EpicUpgrade" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_yuhqm")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 3.0
+texture = ExtResource("1_yuhqm")

@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://2kaeoq8w5mjh"]
+
+[ext_resource type="Texture2D" uid="uid://cvx13haf0q0d5" path="res://Sprites/Items/RarityBackgrounds/UncommonUpgrade.png" id="1_unmm2"]
+
+[node name="UncommonUpgrade" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_unmm2")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0, 1, 0.298039, 1)
+energy = 3.0
+texture = ExtResource("1_unmm2")

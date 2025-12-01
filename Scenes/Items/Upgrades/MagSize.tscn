@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bjoxxngko37rd"]
+
+[ext_resource type="Script" uid="uid://rsa0qhq1qnbh" path="res://Scripts/Upgrade.cs" id="1_0ovaj"]
+[ext_resource type="Texture2D" uid="uid://cxwau0nbgg3qg" path="res://Sprites/Items/Upgrades/Upgrade_SSD.png" id="1_dag4w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0ovaj"]
+radius = 16.0
+
+[node name="MagSize" type="Node2D"]
+script = ExtResource("1_0ovaj")
+ItemName = "SSD"
+Description = "Increases the amount of bits you can fire before cooldown."
+
+[node name="PickupArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
+visible = false
+shape = SubResource("CircleShape2D_0ovaj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(0.92, 0.92)
+texture = ExtResource("1_dag4w")

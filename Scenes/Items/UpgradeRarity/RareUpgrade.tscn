@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8cuujiyx3mk2"]
+
+[ext_resource type="Texture2D" uid="uid://ca6012bw6r4m3" path="res://Sprites/Items/RarityBackgrounds/RareUpgrade.png" id="1_535x0"]
+
+[node name="RareUpgrade" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_535x0")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 3.0
+texture = ExtResource("1_535x0")

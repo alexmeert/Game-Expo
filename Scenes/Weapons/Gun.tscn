@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://bbbipgyewtvo5"]
+[gd_scene load_steps=4 format=3 uid="uid://bbbipgyewtvo5"]
 
 [ext_resource type="Script" uid="uid://j16oc6ye8jiy" path="res://Scripts/Gun.cs" id="1_nppxv"]
-[ext_resource type="Texture2D" uid="uid://cee88vopsyul5" path="res://Sprites/Projectiles/BitBlaster.png" id="2_5uen6"]
 [ext_resource type="Script" uid="uid://b25rro6fr758d" path="res://Scripts/PlayerProjectile.cs" id="3_wptyg"]
 [ext_resource type="AudioStream" uid="uid://slmv40gni3qc" path="res://Sounds/Weapons/BitBlaster.wav" id="4_dcdrd"]
 
@@ -10,12 +9,6 @@ script = ExtResource("1_nppxv")
 PlayerProjectileManager = NodePath("PlayerProjectileManager")
 Muzzle = NodePath("Muzzle")
 ShotSound = NodePath("AudioStreamPlayer2D")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture_filter = 1
-position = Vector2(4, -3)
-scale = Vector2(0.441165, 0.441165)
-texture = ExtResource("2_5uen6")
 
 [node name="Muzzle" type="Marker2D" parent="."]
 position = Vector2(10, -4)

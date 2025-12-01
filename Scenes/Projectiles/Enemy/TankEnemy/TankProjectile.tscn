@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://w4njthgu8fcv"]
+
+[ext_resource type="Texture2D" uid="uid://dh8foh2fup4t4" path="res://Sprites/Projectiles/Enemy/TankProjectile.png" id="1_csms8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_csms8"]
+
+[node name="TankProjectile" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+rotation = 1.5708
+texture = ExtResource("1_csms8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0)
+shape = SubResource("CircleShape2D_csms8")
