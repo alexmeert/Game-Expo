@@ -4,6 +4,7 @@ using System;
 public partial class EnemySpawner : Node2D
 {
 	[Export] public PackedScene EnemyScene;
+	[Export] public Node LevelController;
 	[Export] public int SpawnCount = 1;
 	[Export] public float InitialDelay = 0f;
 	[Export] public float SpawnRadius = 150f;
@@ -115,5 +116,21 @@ public partial class EnemySpawner : Node2D
 		{
 			enemy.QueueFree();
 		}
+
+		// Connect death tracking
+		if (enemy is MeleeEnemy melee)
+		{
+			melee.EnemyDied += OnEnemyDied;
+
+			if (LevelController is IEnemyTracker t)
+				t.OnEnemySpawned();
+		}
+	}
+
+	private void OnEnemyDied()
+	{
+		if (LevelController is IEnemyTracker t)
+			t.OnEnemyDied();
+
 	}
 }

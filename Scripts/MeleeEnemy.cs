@@ -131,11 +131,14 @@ public partial class MeleeEnemy : BasicEntity
 	protected override void OnTakeDamage(float damage)
 	{
 		base.OnTakeDamage(damage);
-		
-		// Play hit sound when enemy is hit by a projectile
+
 		if (HitSound != null)
-		{
 			HitSound.Play();
-		}
+	}
+
+	protected override void Die()
+	{
+		EmitSignal(SignalName.EnemyDied);
+		base.Die(); // Calls QueueFree() in BasicEntity
 	}
 }

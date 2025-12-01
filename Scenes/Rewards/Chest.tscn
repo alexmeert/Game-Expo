@@ -47,3 +47,6 @@ stream = ExtResource("1_2ottt")
 visible = false
 position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_07ymt")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
