@@ -3,7 +3,11 @@ using System;
 using System.Linq;
 
 public partial class MeleeEnemy : BasicEntity
-{
+{	
+	[Signal] 
+	public delegate void EnemyDiedEventHandler();
+	
+	
 	[Export] private int Hp = 50;
 	[Export] private int Dmg = 1;
 	[Export] private float AtkSpd = 1.2f;
@@ -11,6 +15,8 @@ public partial class MeleeEnemy : BasicEntity
 	[Export] private float Spd = 20;
 	[Export] private AudioStreamPlayer2D HitSound;
 	[Export] private float AttackRange = 30f;
+	
+
 
 	protected Node2D TargetPlayer { get; private set; }
 	private float _attackTimer = 0f;
