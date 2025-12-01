@@ -132,7 +132,7 @@ public partial class Player : BasicEntity
         
         GD.Print("Player died!");
         
-        // TODO: Add game over logic here (e.g., show game over screen, restart level, etc.)
+        GetTree().ChangeSceneToFile("res://Scenes/Menus/DeathMenu.tscn");
     }
 
     /// <summary>

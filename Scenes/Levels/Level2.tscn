@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=4 uid="uid://b522h1twnd0mb"]
+[gd_scene load_steps=11 format=4 uid="uid://b522h1twnd0mb"]
 
 [ext_resource type="Texture2D" uid="uid://dx5xusixt7bfv" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/tileset.png" id="1_0ryud"]
 [ext_resource type="Texture2D" uid="uid://bmcm2bssfqwou" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/tileset_top.png" id="2_m40gi"]
-[ext_resource type="PackedScene" uid="uid://blu86gs4tjm35" path="res://Scenes/Characters/PlayerSpawnPoint.tscn" id="3_svn12"]
+[ext_resource type="PackedScene" uid="uid://c1aw4q02ut5i1" path="res://Scenes/Characters/Player/MainCharacter.tscn" id="4_4rk67"]
+[ext_resource type="PackedScene" uid="uid://cen8t8ucpecb1" path="res://Scenes/Characters/Enemy/EnemySpawner.tscn" id="4_5iseo"]
+[ext_resource type="PackedScene" uid="uid://cq782euxa61ii" path="res://Scenes/Characters/Enemy/TankEnemy.tscn" id="5_4rk67"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wcc2u"]
 texture = ExtResource("1_0ryud")
@@ -240,5 +242,24 @@ position = Vector2(-128, -96)
 tile_map_data = PackedByteArray("AAAGAAUAAQAAAAEAAAAGAAYAAQAAAAEAAAAGAAcAAQAAAAEAAAAGAAgAAQAAAAEAAAAGAAkAAQAAAAEAAAAGAAoAAQAAAAEAAAAGAAsAAQAAAAEAAAAGAAwAAQAAAAEAAAAGAA0AAQAAAAEAAAAGAA4AAQAAAAEAAAAfAAQAAQABAAAAAAAeAAQAAQABAAAAAAAdAAQAAQABAAAAAAAcAAQAAQABAAAAAAAbAAQAAQABAAAAAAAaAAQAAQABAAAAAAAZAAQAAQABAAAAAAAYAAQAAQABAAAAAAAXAAQAAQABAAAAAAAWAAQAAQABAAAAAAAVAAQAAQABAAAAAAARAAQAAQABAAAAAAAQAAQAAQABAAAAAAAPAAQAAQABAAAAAAAOAAQAAQABAAAAAAANAAQAAQABAAAAAAAMAAQAAQABAAAAAAALAAQAAQABAAAAAAAKAAQAAQABAAAAAAAJAAQAAQABAAAAAAAIAAQAAQABAAAAAAAHAAQAAQABAAAAAAAGAAQAAQAAAAAAAAASAAQAAQABAAAAAAATAAQAAQABAAAAAAAUAAQAAQABAAAAAAAgAAQAAQABAAAAAAAhAAQAAQABAAAAAAAiAAQAAQABAAAAAAAjAAQAAQABAAAAAAAkAAQAAQABAAAAAAAlAAQAAQACAAAAAAAlAAUAAQACAAEAAAAlAAYAAQACAAEAAAAlAAcAAQACAAEAAAAlAAgAAQACAAEAAAAlAAkAAQACAAEAAAAlAAoAAQACAAEAAAAlAAsAAQACAAEAAAAlAAwAAQACAAEAAAAlAA0AAQACAAEAAAAlAA4AAQACAAEAAAAlAA8AAQACAAEAAAAlABAAAQACAAEAAAAlABEAAQACAAEAAAAlABIAAQACAAEAAAAlABMAAQACAAEAAAAlABQAAQACAAEAAAAlABUAAQACAAIAAAAkABUAAQABAAIAAAAjABUAAQABAAIAAAAiABUAAQABAAIAAAAhABUAAQABAAIAAAAgABUAAQABAAIAAAAfABUAAQABAAIAAAAeABUAAQABAAIAAAAdABUAAQABAAIAAAAcABUAAQABAAIAAAAbABUAAQABAAIAAAAaABUAAQABAAIAAAAZABUAAQABAAIAAAAYABUAAQABAAIAAAAXABUAAQABAAIAAAAWABUAAQABAAIAAAAVABUAAQABAAIAAAAUABUAAQABAAIAAAATABUAAQABAAIAAAASABUAAQABAAIAAAARABUAAQABAAIAAAAQABUAAQABAAIAAAAPABUAAQABAAIAAAAOABUAAQABAAIAAAANABUAAQABAAIAAAAMABUAAQABAAIAAAALABUAAQABAAIAAAAKABUAAQABAAIAAAAJABUAAQABAAIAAAAIABUAAQABAAIAAAAHABUAAQABAAIAAAAGABUAAQAAAAIAAAAGABQAAQAAAAEAAAAGABMAAQAAAAEAAAAGABIAAQAAAAEAAAAGABEAAQAAAAEAAAAGABAAAQAAAAEAAAAGAA8AAQAAAAEAAAA=")
 tile_set = SubResource("TileSet_5iseo")
 
-[node name="PlayerSpawnPoint" parent="." instance=ExtResource("3_svn12")]
-position = Vector2(576, 544)
+[node name="Spawner" parent="." instance=ExtResource("4_5iseo")]
+position = Vector2(568, 328)
+EnemyScene = ExtResource("5_4rk67")
+SpawnCount = 3
+InitialDelay = 1.0
+DelayBetweenSpawns = 1.0
+
+[node name="Spawner2" parent="." instance=ExtResource("4_5iseo")]
+position = Vector2(192, 144)
+
+[node name="Spawner3" parent="." instance=ExtResource("4_5iseo")]
+position = Vector2(960, 120)
+
+[node name="Spawner4" parent="." instance=ExtResource("4_5iseo")]
+position = Vector2(168, 512)
+
+[node name="Spawner5" parent="." instance=ExtResource("4_5iseo")]
+position = Vector2(952, 512)
+
+[node name="MainCharacter" parent="." instance=ExtResource("4_4rk67")]
+position = Vector2(576, 552)

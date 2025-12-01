@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Item : Node
+public partial class Item : Node2D
 {
     [Export] public string ItemName = "";
     [Export] public string Description = "";

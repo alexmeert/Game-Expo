@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgo07mi4rd0ng"]
+
+[ext_resource type="Texture2D" uid="uid://bn73h0ql3jd1r" path="res://Sprites/Projectiles/Enemy/FanCrabProjectile.png" id="1_gww4j"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xjie4"]
+
+[node name="Projectile" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_gww4j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xjie4")

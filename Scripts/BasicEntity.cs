@@ -28,6 +28,7 @@ public partial class BasicEntity : CharacterBody2D
             _maxHp = MathF.Max(1, value);
             if (_hp > _maxHp)
                 _hp = _maxHp;
+            OnMaxHPChanged();
         }
     }
 
@@ -57,6 +58,8 @@ public partial class BasicEntity : CharacterBody2D
 
     public bool IsAlive => HP > 0;
     public float HPPercent => MaxHP > 0 ? HP / MaxHP : 0f;
+
+    [Export] private Healthbar Healthbar;
 
     public override void _Ready()
     {
@@ -138,9 +141,32 @@ public partial class BasicEntity : CharacterBody2D
         QueueFree();
     }
 
-    protected virtual void OnEntityInitialized() { }
+    protected virtual void OnEntityInitialized()
+    {
+        // Connect healthbar if it exists
+        if (Healthbar != null)
+        {
+            Healthbar.ConnectToEntity(this);
+        }
+    }
 
-    protected virtual void OnHPChanged() { }
+    protected virtual void OnHPChanged()
+    {
+        // Update healthbar if connected
+        if (Healthbar != null && Healthbar.IsInsideTree())
+        {
+            Healthbar.UpdateFromEntity();
+        }
+    }
+
+    protected virtual void OnMaxHPChanged()
+    {
+        // Update healthbar if connected (for upgrades that increase MaxHP)
+        if (Healthbar != null && Healthbar.IsInsideTree())
+        {
+            Healthbar.UpdateFromEntity();
+        }
+    }
 
     protected virtual void OnTakeDamage(float damage) { }
 

@@ -1,9 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://c8u16gw00jovv"]
+[gd_scene load_steps=13 format=3 uid="uid://c8u16gw00jovv"]
 
 [ext_resource type="AudioStream" uid="uid://ct31v0hjrxn48" path="res://Sounds/Chest/ChestOpen.mp3" id="1_2ottt"]
 [ext_resource type="Script" uid="uid://bleu878g0spno" path="res://Scripts/Chest.cs" id="1_pkf2e"]
 [ext_resource type="Texture2D" uid="uid://bhhab0mso0kk4" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/chest/chest_open.png" id="1_wn0sm"]
+[ext_resource type="PackedScene" uid="uid://dyhm385qsegw2" path="res://Scenes/Items/Upgrades/Damage.tscn" id="2_icyql"]
 [ext_resource type="Texture2D" uid="uid://gsm3tkbhvosn" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/chest/chest0_enabled.png" id="2_wn0sm"]
+[ext_resource type="PackedScene" uid="uid://y7g0ts65vriw" path="res://Scenes/Items/Upgrades/Defense.tscn" id="3_npb5b"]
+[ext_resource type="PackedScene" uid="uid://d3aundu586d2f" path="res://Scenes/Items/Upgrades/Health.tscn" id="4_1744p"]
+[ext_resource type="PackedScene" uid="uid://bjoxxngko37rd" path="res://Scenes/Items/Upgrades/MagSize.tscn" id="5_17pol"]
+[ext_resource type="PackedScene" uid="uid://dlumqsplwb8xv" path="res://Scenes/Items/Upgrades/FireRate.tscn" id="6_6gshb"]
+[ext_resource type="PackedScene" uid="uid://170k71snx6d3" path="res://Scenes/Items/Upgrades/Cooldown.tscn" id="7_2jiim"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pkf2e"]
 size = Vector2(51, 30)
@@ -16,6 +22,7 @@ script = ExtResource("1_pkf2e")
 OpenSound = NodePath("AudioStreamPlayer2D")
 ClosedSprite = NodePath("ClosedChest")
 OpenSprite = NodePath("OpenChest")
+UpgradeScenes = [ExtResource("2_icyql"), ExtResource("3_npb5b"), ExtResource("4_1744p"), ExtResource("5_17pol"), ExtResource("6_6gshb"), ExtResource("7_2jiim")]
 
 [node name="ClosedChest" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -29,7 +36,8 @@ texture = ExtResource("1_wn0sm")
 [node name="Area2D" type="Area2D" parent="." groups=["Chest"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-visible = false
+position = Vector2(0, 4)
+scale = Vector2(1.44, 1.76)
 shape = SubResource("RectangleShape2D_pkf2e")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
