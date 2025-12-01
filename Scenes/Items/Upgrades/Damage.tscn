@@ -2,7 +2,11 @@
 
 [ext_resource type="Script" uid="uid://rsa0qhq1qnbh" path="res://Scripts/Upgrade.cs" id="1_djxu2"]
 [ext_resource type="Texture2D" uid="uid://b766x0pp3dh37" path="res://Sprites/Items/Upgrades/Upgrade_RAM.png" id="1_vxyqf"]
+<<<<<<< Updated upstream
 [ext_resource type="AudioStream" uid="uid://dpj873y8k2ohn" path="res://Sounds/Chest/CollectUpgrade.mp3" id="3_awnd5"]
+=======
+[ext_resource type="AudioStream" uid="uid://cc8lb86u4mb6j" path="res://Sounds/Chest/CollectUpgrade.wav" id="3_awnd5"]
+>>>>>>> Stashed changes
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vxyqf"]
 radius = 16.0
