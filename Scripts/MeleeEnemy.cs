@@ -3,10 +3,7 @@ using System;
 using System.Linq;
 
 public partial class MeleeEnemy : BasicEntity
-{	
-	
-	
-	
+{
 	[Export] private int Hp = 50;
 	[Export] private int Dmg = 1;
 	[Export] private float AtkSpd = 1.2f;
@@ -14,8 +11,9 @@ public partial class MeleeEnemy : BasicEntity
 	[Export] private float Spd = 20;
 	[Export] private AudioStreamPlayer2D HitSound;
 	[Export] private float AttackRange = 30f;
-	
 
+	// Folder containing perks
+	private const string PERK_PATH = "res://Scenes/Items/Perks/";
 
 	protected Node2D TargetPlayer { get; private set; }
 	private float _attackTimer = 0f;
@@ -62,11 +60,9 @@ public partial class MeleeEnemy : BasicEntity
 		}
 		else
 		{
-			// Stop moving when in attack range
 			Velocity = Vector2.Zero;
 		}
 
-		// Handle animation
 		UpdateAnimation();
 	}
 
@@ -77,25 +73,14 @@ public partial class MeleeEnemy : BasicEntity
 			return;
 
 		if (Velocity.LengthSquared() < 0.01f)
-		{
-			// Not moving - keep current animation or play idle if available
-			// For enemies without idle, we'll just keep the last direction
 			return;
-		}
 
-		// Determine animation based on velocity direction
-		Vector2 normalizedVel = Velocity.Normalized();
-		
-		if (Mathf.Abs(normalizedVel.X) > Mathf.Abs(normalizedVel.Y))
-		{
-			// Moving horizontally
-			animSprite.Play(normalizedVel.X > 0 ? "WalkRight" : "WalkLeft");
-		}
+		Vector2 dir = Velocity.Normalized();
+
+		if (Mathf.Abs(dir.X) > Mathf.Abs(dir.Y))
+			animSprite.Play(dir.X > 0 ? "WalkRight" : "WalkLeft");
 		else
-		{
-			// Moving vertically
-			animSprite.Play(normalizedVel.Y > 0 ? "WalkDown" : "WalkUp");
-		}
+			animSprite.Play(dir.Y > 0 ? "WalkDown" : "WalkUp");
 	}
 
 	private void AttackPlayer()
@@ -112,38 +97,61 @@ public partial class MeleeEnemy : BasicEntity
 		var scene = GetTree().CurrentScene;
 		if (scene != null)
 		{
-			// Try to find player by name first
-			TargetPlayer = scene.GetNodeOrNull<Node2D>("MainCharacter");
-			
-			// If not found, search for Player node by type
-			if (TargetPlayer == null)
-			{
-				TargetPlayer = scene.GetNodeOrNull<Player>("Player");
-			}
-			
-			// Last resort: search all children for Player type
-			if (TargetPlayer == null)
-			{
-				var players = scene.GetChildren().OfType<Player>();
-				if (players.Any())
-				{
-					TargetPlayer = players.First();
-				}
-			}
+			TargetPlayer = scene.GetNodeOrNull<Node2D>("MainCharacter")
+						?? scene.GetNodeOrNull<Player>("Player")
+						?? scene.GetChildren().OfType<Player>().FirstOrDefault();
 		}
 	}
 
 	protected override void OnTakeDamage(float damage)
 	{
 		base.OnTakeDamage(damage);
-
-		if (HitSound != null)
-			HitSound.Play();
+		HitSound?.Play();
 	}
 
 	protected override void Die()
 	{
 		EmitSignal(SignalName.EnemyDied);
-		base.Die(); // Calls QueueFree() in BasicEntity
+
+		TrySpawnPerk();   // <<< NEW
+
+		base.Die(); // Calls QueueFree()
 	}
+
+	
+	//      PERK DROP SYSTEM
+	
+	private void TrySpawnPerk()
+	{
+		Random random = new Random();
+		float roll = (float)random.NextDouble();
+
+		if (roll > 0.05f)  // 5% chance
+			return;
+
+		string[] perks = DirAccess.GetFilesAt(PERK_PATH);
+
+		if (perks.Length == 0)
+		{
+			GD.PushWarning("No perks found in: " + PERK_PATH);
+			return;
+		}
+
+		string perkFile = perks[random.Next(perks.Length)];
+		PackedScene scene = GD.Load<PackedScene>(PERK_PATH + perkFile);
+		if (scene == null)
+		{
+			GD.PushError("Failed to load perk: " + perkFile);
+			return;
+		}
+
+		Node2D perkInstance = scene.Instantiate<Node2D>();
+		perkInstance.GlobalPosition = GlobalPosition;
+
+		// Use deferred add to avoid "flushing queries" error
+		GetTree().CurrentScene.CallDeferred("add_child", perkInstance);
+
+		GD.Print("Spawned perk: " + perkFile);
+	}
+
 }
