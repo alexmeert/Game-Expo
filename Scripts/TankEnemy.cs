@@ -4,6 +4,9 @@ using System.Linq;
 
 public partial class TankEnemy : BasicEntity
 {
+	
+
+
 	[Export] private int Hp = 200; // High health
 	[Export] private int Dmg = 15; // High damage
 	[Export] private float AtkSpd = 0.4f; // Much slower attack speed (0.4 attacks/sec = 2.5 sec between attacks)
@@ -137,4 +140,11 @@ public partial class TankEnemy : BasicEntity
 			HitSound.Play();
 		}
 	}
+	
+	protected override void Die()
+	{
+		EmitSignal(SignalName.EnemyDied); // notify LevelController
+		base.Die(); // existing cleanup
+	}
+
 }

@@ -118,13 +118,14 @@ public partial class EnemySpawner : Node2D
 		}
 
 		// Connect death tracking
-		if (enemy is MeleeEnemy melee)
+		if (enemy is BasicEntity entity)
 		{
-			melee.EnemyDied += OnEnemyDied;
-
-			if (LevelController is IEnemyTracker t)
-				t.OnEnemySpawned();
+			entity.EnemyDied += OnEnemyDied;
+			
+			if (LevelController is IEnemyTracker tracker)
+				tracker.OnEnemySpawned();
 		}
+
 	}
 
 	private void OnEnemyDied()
