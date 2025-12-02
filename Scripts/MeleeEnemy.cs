@@ -113,7 +113,7 @@ public partial class MeleeEnemy : BasicEntity
 	{
 		EmitSignal(SignalName.EnemyDied);
 
-		TrySpawnPerk();   // <<< NEW
+		TrySpawnPerk();   
 
 		base.Die(); // Calls QueueFree()
 	}
@@ -126,7 +126,7 @@ public partial class MeleeEnemy : BasicEntity
 		Random random = new Random();
 		float roll = (float)random.NextDouble();
 
-		if (roll > 0.05f)  // 5% chance
+		if (roll > 0.05f) 
 			return;
 
 		string[] perks = DirAccess.GetFilesAt(PERK_PATH);
@@ -148,7 +148,7 @@ public partial class MeleeEnemy : BasicEntity
 		Node2D perkInstance = scene.Instantiate<Node2D>();
 		perkInstance.GlobalPosition = GlobalPosition;
 
-		// Use deferred add to avoid "flushing queries" error
+		
 		GetTree().CurrentScene.CallDeferred("add_child", perkInstance);
 
 		GD.Print("Spawned perk: " + perkFile);
