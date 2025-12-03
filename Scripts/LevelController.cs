@@ -3,7 +3,7 @@ using Godot;
 public partial class LevelController : Node, IEnemyTracker
 {
     [Export] public Node2D Chest;
-    [Export] public AudioStreamPlayer MusicPlayer;
+    [Export] public AudioStreamPlayer2D MusicPlayer;
 
     private int _aliveEnemies = 0;
     private bool _chestRevealed = false;

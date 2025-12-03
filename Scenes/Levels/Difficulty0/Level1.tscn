@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=4 uid="uid://bg635lk553wrv"]
+[gd_scene load_steps=45 format=4 uid="uid://bg635lk553wrv"]
 
 [ext_resource type="PackedScene" uid="uid://3mdpl08kn7yk" path="res://Scenes/LevelController.tscn" id="1_7djb7"]
 [ext_resource type="Texture2D" uid="uid://dx5xusixt7bfv" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/tileset.png" id="5_mpgwi"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dlumqsplwb8xv" path="res://Scenes/Items/Upgrades/FireRate.tscn" id="19_dxbej"]
 [ext_resource type="PackedScene" uid="uid://cf0qvluqoi07u" path="res://Scenes/LevelAssets/Door.tscn" id="19_qndh8"]
 [ext_resource type="PackedScene" uid="uid://d3aundu586d2f" path="res://Scenes/Items/Upgrades/Health.tscn" id="20_lltum"]
+[ext_resource type="AudioStream" uid="uid://ck2s6ef8wn5ux" path="res://Sounds/Music/Normal/NormalMusic.mp3" id="20_m2ud8"]
 [ext_resource type="PackedScene" uid="uid://bjoxxngko37rd" path="res://Scenes/Items/Upgrades/MagSize.tscn" id="21_ppa3s"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_4d3fe"]
@@ -741,8 +742,9 @@ source_geometry_group_name = &"Navigation"
 [node name="Level1" type="Node2D"]
 y_sort_enabled = true
 
-[node name="LevelController" parent="." node_paths=PackedStringArray("Chest") instance=ExtResource("1_7djb7")]
+[node name="LevelController" parent="." node_paths=PackedStringArray("Chest", "MusicPlayer") instance=ExtResource("1_7djb7")]
 Chest = NodePath("../Chest")
+MusicPlayer = NodePath("../Music")
 
 [node name="Floor" type="TileMapLayer" parent="." groups=["Navigation"]]
 texture_filter = 1
@@ -821,3 +823,7 @@ UpgradeScenes = [ExtResource("16_lxras"), ExtResource("17_i7ipo"), ExtResource("
 [node name="Door" parent="." instance=ExtResource("19_qndh8")]
 z_index = 1
 position = Vector2(624, 144)
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("20_m2ud8")
+autoplay = true
