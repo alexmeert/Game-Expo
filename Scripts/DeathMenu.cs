@@ -7,8 +7,8 @@ public partial class DeathMenu : Control
 	public override void _Ready()
 	{
 		// Hook up buttons (adjust node paths if needed)
-		GetNode<Button>("CenterContainer/VBoxContainer/MenuButton").Pressed += OnMainMenuPressed;
-		GetNode<Button>("CenterContainer/VBoxContainer/QuitButton").Pressed += OnQuitPressed;
+		GetNode<Button>("VBoxContainer/MenuButton").Pressed += OnMainMenuPressed;
+		GetNode<Button>("VBoxContainer/QuitButton").Pressed += OnQuitPressed;
 	}
 
 	private void OnMainMenuPressed()

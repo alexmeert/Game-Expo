@@ -1,8 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://baswohu74crho"]
+[gd_scene load_steps=34 format=3 uid="uid://baswohu74crho"]
 
 [ext_resource type="Script" uid="uid://bs84f3ulg6r4d" path="res://Scripts/ItemsMenu.cs" id="1_i86yw"]
 [ext_resource type="FontFile" uid="uid://bjtv1av4o6be8" path="res://Assets/Fonts/vermin-vibes-1989-font/VerminVibes1989Regular-m77m.ttf" id="1_n3lbt"]
-[ext_resource type="Texture2D" uid="uid://bg47274wmmi4h" path="res://Assets/Icons/MenuIcon.png" id="2_rrhd6"]
 [ext_resource type="PackedScene" uid="uid://lhhb3krl1jak" path="res://Scenes/Menus/CaroselContainer.tscn" id="4_471ss"]
 [ext_resource type="Texture2D" uid="uid://b3ec2wmyji7n" path="res://Sprites/Items/Perks/Perk_Firewall.png" id="5_8vakt"]
 [ext_resource type="Texture2D" uid="uid://ty7oasxfgr56" path="res://Sprites/Items/Perks/Perk_Overclock.png" id="6_vrk1j"]
@@ -12,7 +11,14 @@
 [ext_resource type="Texture2D" uid="uid://b766x0pp3dh37" path="res://Sprites/Items/Upgrades/Upgrade_RAM.png" id="10_hytxe"]
 [ext_resource type="Texture2D" uid="uid://4mxm3rjgwtto" path="res://Sprites/Items/Upgrades/Upgrade_PowerSupply.png" id="11_x87bu"]
 [ext_resource type="Texture2D" uid="uid://ins6g1aocajj" path="res://Sprites/Items/Upgrades/Upgrade_Case.png" id="12_uha33"]
+[ext_resource type="Theme" uid="uid://cae2thujxguc8" path="res://Themes/ButtonTheme.tres" id="13_5y4vf"]
+[ext_resource type="Theme" uid="uid://bi1s1k6vap2dd" path="res://Themes/NextButtonTheme.tres" id="13_cq5qe"]
 [ext_resource type="Texture2D" uid="uid://cxwau0nbgg3qg" path="res://Sprites/Items/Upgrades/Upgrade_SSD.png" id="13_uha33"]
+[ext_resource type="Texture2D" uid="uid://bfi4giv41jjki" path="res://Assets/Individual Icons/keyboard_72.png" id="14_4cic5"]
+[ext_resource type="Texture2D" uid="uid://hsfnyisxpluu" path="res://Assets/Individual Icons/keyboard_173.png" id="14_faybk"]
+[ext_resource type="Theme" uid="uid://brnlkcfe62oa4" path="res://Themes/PreviousButtonTheme.tres" id="14_weeap"]
+[ext_resource type="Texture2D" uid="uid://yxmew2j2uxnx" path="res://Assets/Individual Icons/keyboard_174.png" id="17_q5fnd"]
+[ext_resource type="Texture2D" uid="uid://jgucr3a3isrp" path="res://Assets/Individual Icons/keyboard_73.png" id="18_4uyhk"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_88ape"]
 font = ExtResource("1_n3lbt")
@@ -28,6 +34,34 @@ font_color = Color(0, 0, 0, 1)
 font = ExtResource("1_n3lbt")
 font_size = 40
 font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_16dsb"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q5fnd"]
+texture = ExtResource("14_faybk")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4cic5"]
+texture = ExtResource("14_faybk")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_faybk"]
+texture = ExtResource("14_4cic5")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v7ud6"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_16dsb"]
+texture = ExtResource("17_q5fnd")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v7ud6"]
+texture = ExtResource("17_q5fnd")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8vxsi"]
+texture = ExtResource("18_4uyhk")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q5fnd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4uyhk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8vxsi"]
 
 [node name="ItemsMenu" type="Control"]
 layout_mode = 3
@@ -84,13 +118,6 @@ text = "Perks"
 label_settings = SubResource("LabelSettings_dthsy")
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="HomeButton" type="Button" parent="."]
-layout_mode = 1
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(1.44, 1.44)
-icon = ExtResource("2_rrhd6")
 
 [node name="Background" type="ColorRect" parent="."]
 z_index = -1
@@ -203,7 +230,7 @@ z_index = -3
 layout_mode = 0
 offset_left = -37.6334
 offset_top = -38.0902
-offset_right = 2.36662
+offset_right = 2.36661
 offset_bottom = 1.90981
 scale = Vector2(0.1, 0.1)
 pivot_offset = Vector2(20, 20)
@@ -219,7 +246,7 @@ z_index = -4
 layout_mode = 0
 offset_left = -48.5314
 offset_top = -26.91
-offset_right = -8.53145
+offset_right = -8.53146
 offset_bottom = 13.09
 scale = Vector2(0.1, 0.1)
 pivot_offset = Vector2(20, 20)
@@ -327,34 +354,65 @@ texture = ExtResource("7_mc0it")
 [node name="NextUpgradeButton" type="Button" parent="."]
 texture_filter = 1
 layout_mode = 0
-offset_left = 440.0
-offset_top = 280.0
-offset_right = 458.0
-offset_bottom = 311.0
+offset_left = 416.0
+offset_top = 368.0
+offset_right = 443.0
+offset_bottom = 399.0
 scale = Vector2(2.6, 2.6)
-text = ">"
+theme = ExtResource("13_cq5qe")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_16dsb")
+theme_override_styles/hover = SubResource("StyleBoxTexture_q5fnd")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_4cic5")
+theme_override_styles/normal = SubResource("StyleBoxTexture_faybk")
 
 [node name="PreviousUpgradeButton" type="Button" parent="."]
+texture_filter = 1
 layout_mode = 0
 offset_left = 144.0
-offset_top = 280.0
-offset_right = 162.0
-offset_bottom = 311.0
+offset_top = 368.0
+offset_right = 172.0
+offset_bottom = 399.0
 scale = Vector2(2.6, 2.6)
-text = "<"
+theme = ExtResource("14_weeap")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v7ud6")
+theme_override_styles/hover = SubResource("StyleBoxTexture_16dsb")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_v7ud6")
+theme_override_styles/normal = SubResource("StyleBoxTexture_8vxsi")
 
 [node name="NextPerkButton" type="Button" parent="."]
+texture_filter = 1
 layout_mode = 0
-offset_left = 976.0
-offset_top = 536.0
-offset_right = 994.0
-offset_bottom = 567.0
-text = ">"
+offset_left = 968.0
+offset_top = 368.0
+offset_right = 995.0
+offset_bottom = 399.0
+scale = Vector2(2.6, 2.6)
+theme = ExtResource("13_cq5qe")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_q5fnd")
+theme_override_styles/hover = SubResource("StyleBoxTexture_q5fnd")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_4cic5")
+theme_override_styles/normal = SubResource("StyleBoxTexture_faybk")
 
 [node name="PreviousPerkButton" type="Button" parent="."]
+texture_filter = 1
 layout_mode = 0
-offset_left = 744.0
-offset_top = 536.0
-offset_right = 762.0
-offset_bottom = 567.0
-text = "<"
+offset_left = 696.0
+offset_top = 368.0
+offset_right = 724.0
+offset_bottom = 399.0
+scale = Vector2(2.6, 2.6)
+theme = ExtResource("14_weeap")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4uyhk")
+theme_override_styles/hover = SubResource("StyleBoxTexture_16dsb")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_v7ud6")
+theme_override_styles/normal = SubResource("StyleBoxTexture_8vxsi")
+
+[node name="HomeButton" type="Button" parent="."]
+texture_filter = 1
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 64.0
+offset_bottom = 56.0
+scale = Vector2(2.17004, 2.17004)
+theme = ExtResource("13_5y4vf")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_8vxsi")

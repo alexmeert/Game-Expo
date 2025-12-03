@@ -1,13 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://cud7igc2oi4bc"]
+[gd_scene load_steps=11 format=3 uid="uid://cud7igc2oi4bc"]
 
 [ext_resource type="Script" uid="uid://dytdsgvqbnatx" path="res://Scripts/ControlsMenu.cs" id="1_h4g5a"]
 [ext_resource type="FontFile" uid="uid://bjtv1av4o6be8" path="res://Assets/Fonts/vermin-vibes-1989-font/VerminVibes1989Regular-m77m.ttf" id="1_vofmw"]
-[ext_resource type="Texture2D" uid="uid://bg47274wmmi4h" path="res://Assets/Icons/MenuIcon.png" id="2_xbrq4"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_yi47v"]
-font = ExtResource("1_vofmw")
-font_size = 100
-font_color = Color(0, 0, 0, 1)
+[ext_resource type="Theme" uid="uid://cae2thujxguc8" path="res://Themes/ButtonTheme.tres" id="3_h4g5a"]
+[ext_resource type="Texture2D" uid="uid://drxj5cdt6bm7w" path="res://Assets/Individual Icons/keyboard_23.png" id="4_tpext"]
+[ext_resource type="Texture2D" uid="uid://wiygwf54x23q" path="res://Assets/Individual Icons/keyboard_24.png" id="5_ojvc1"]
+[ext_resource type="Texture2D" uid="uid://b3jhfj1musnmn" path="res://Assets/Individual Icons/keyboard_25.png" id="6_uemt4"]
+[ext_resource type="Texture2D" uid="uid://dkpe0hkoqd3nr" path="res://Assets/Individual Icons/keyboard_14.png" id="7_xnbqm"]
+[ext_resource type="Texture2D" uid="uid://c56qu0jo4hrf4" path="res://Assets/Individual Icons/keyboard_15.png" id="8_ojvc1"]
+[ext_resource type="Texture2D" uid="uid://cdom5i2lm1x7k" path="res://Assets/Individual Icons/keyboard_94.png" id="9_uemt4"]
+[ext_resource type="Texture2D" uid="uid://n11m1emo4d2t" path="res://Assets/Icons/Mouse.png" id="10_xnbqm"]
 
 [node name="ControlsMenu" type="Control"]
 layout_mode = 3
@@ -27,8 +29,11 @@ offset_left = -576.5
 offset_right = 576.5
 offset_bottom = 166.0
 grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_vofmw")
+theme_override_font_sizes/font_size = 100
 text = "Controls"
-label_settings = SubResource("LabelSettings_yi47v")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -44,8 +49,107 @@ mouse_filter = 2
 color = Color(0, 1, 0.858824, 1)
 
 [node name="HomeButton" type="Button" parent="."]
-layout_mode = 1
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(1.44, 1.44)
-icon = ExtResource("2_xbrq4")
+texture_filter = 1
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 64.0
+offset_bottom = 56.0
+scale = Vector2(2.17004, 2.17004)
+theme = ExtResource("3_h4g5a")
+
+[node name="Keyboard23" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(151.32, 360.32)
+scale = Vector2(2.52, 2.52)
+texture = ExtResource("4_tpext")
+metadata/_edit_group_ = true
+
+[node name="Keyboard24" type="Sprite2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+texture_filter = 1
+position = Vector2(231.32, 360.32)
+scale = Vector2(2.52, 2.52)
+texture = ExtResource("5_ojvc1")
+metadata/_edit_group_ = true
+
+[node name="Keyboard25" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(311.32, 360.32)
+scale = Vector2(2.52, 2.52)
+texture = ExtResource("6_uemt4")
+metadata/_edit_group_ = true
+
+[node name="Keyboard14" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture_filter = 1
+position = Vector2(231.32, 296.32)
+scale = Vector2(2.52, 2.52)
+texture = ExtResource("7_xnbqm")
+metadata/_edit_group_ = true
+
+[node name="Keyboard15" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(576, 304)
+scale = Vector2(2.52, 2.52)
+texture = ExtResource("8_ojvc1")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 184.0
+offset_right = 324.0
+offset_bottom = 219.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_vofmw")
+theme_override_font_sizes/font_size = 40
+text = "Movement"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 488.0
+offset_top = 184.0
+offset_right = 656.0
+offset_bottom = 219.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_vofmw")
+theme_override_font_sizes/font_size = 40
+text = "Interact"
+
+[node name="Label4" type="Label" parent="."]
+layout_mode = 0
+offset_left = 824.0
+offset_top = 184.0
+offset_right = 992.0
+offset_bottom = 219.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_vofmw")
+theme_override_font_sizes/font_size = 40
+text = "Shoot"
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 488.0
+offset_top = 400.0
+offset_right = 656.0
+offset_bottom = 435.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_vofmw")
+theme_override_font_sizes/font_size = 40
+text = "Inventory"
+
+[node name="Keyboard94" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(576, 512)
+scale = Vector2(2.52, 2.52)
+texture = ExtResource("9_uemt4")
+
+[node name="Mouse" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(864, 344)
+scale = Vector2(6.64, 6.64)
+texture = ExtResource("10_xnbqm")

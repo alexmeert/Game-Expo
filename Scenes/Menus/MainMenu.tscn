@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://byt026nu1wsbk"]
+[gd_scene load_steps=9 format=3 uid="uid://byt026nu1wsbk"]
 
 [ext_resource type="Script" uid="uid://bmxsy3nkmy1un" path="res://Scripts/MainMenu.cs" id="1_b42ut"]
 [ext_resource type="FontFile" uid="uid://bjtv1av4o6be8" path="res://Assets/Fonts/vermin-vibes-1989-font/VerminVibes1989Regular-m77m.ttf" id="1_v3fht"]
 [ext_resource type="Texture2D" uid="uid://dkbi2qmrosleb" path="res://Sprites/Characters/Player/CPUManIdle-Sheet.png" id="3_hqtmt"]
+[ext_resource type="Theme" uid="uid://xafkp44a81m5" path="res://Themes/ MainMenuButtons.tres" id="3_pbd8g"]
 [ext_resource type="Texture2D" uid="uid://djxy43ftbube0" path="res://Sprites/Characters/Enemies/PowerBrick/PowerBrickFront-Sheet.png" id="4_tfrft"]
 [ext_resource type="Texture2D" uid="uid://byfg6klnwfcv7" path="res://Sprites/Characters/Enemies/FanCrab/FanCrabDown-Sheet.png" id="5_mc63j"]
 [ext_resource type="Texture2D" uid="uid://bowgl1s81qbu2" path="res://Sprites/Characters/Enemies/USB/USBWalkDownm-Sheet.png" id="5_uv623"]
@@ -52,49 +53,57 @@ text = "Made by Alex Joe & Jimmy"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-layout_mode = 0
-offset_top = 253.0
-offset_right = 1152.0
-offset_bottom = 648.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
-theme_override_constants/separation = 10
+offset_left = 464.0
+offset_top = 320.0
+offset_right = 641.0
+offset_bottom = 599.0
+theme_override_constants/separation = 35
 
-[node name="PlayButton" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="PlayButton" type="Button" parent="VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
+theme = ExtResource("3_pbd8g")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_v3fht")
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 35
 text = "Play"
 
-[node name="ControlsButton" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="ControlsButton" type="Button" parent="VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
+theme = ExtResource("3_pbd8g")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_v3fht")
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 25
 text = "Controls"
 
-[node name="SettingsButton" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="SettingsButton" type="Button" parent="VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
+theme = ExtResource("3_pbd8g")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_v3fht")
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 25
 text = "Settings"
 
-[node name="ItemsButton" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="ItemsButton" type="Button" parent="VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
+theme = ExtResource("3_pbd8g")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_v3fht")
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 35
 text = "Items"
 
-[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
+theme = ExtResource("3_pbd8g")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_v3fht")
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 35
 text = "Quit"
 
 [node name="Background" type="ColorRect" parent="."]

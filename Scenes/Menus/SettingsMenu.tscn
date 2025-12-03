@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://bv0sfgm0hdbb3"]
+[gd_scene load_steps=10 format=3 uid="uid://bv0sfgm0hdbb3"]
 
 [ext_resource type="FontFile" uid="uid://bjtv1av4o6be8" path="res://Assets/Fonts/vermin-vibes-1989-font/VerminVibes1989Regular-m77m.ttf" id="1_enyfb"]
 [ext_resource type="Script" uid="uid://b8bo1xw7r68if" path="res://Scripts/SettingsMenu.cs" id="1_leijj"]
-[ext_resource type="Texture2D" uid="uid://bg47274wmmi4h" path="res://Assets/Icons/MenuIcon.png" id="2_gl23i"]
-[ext_resource type="Texture2D" uid="uid://bx80e4tqb26uo" path="res://Assets/Icons/MenuIconOnHover.png" id="2_nqyte"]
+[ext_resource type="Theme" uid="uid://cae2thujxguc8" path="res://Themes/ButtonTheme.tres" id="2_leijj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_gl23i"]
 font = ExtResource("1_enyfb")
@@ -41,11 +40,12 @@ script = ExtResource("1_leijj")
 [node name="HomeButton" type="Button" parent="."]
 texture_filter = 1
 layout_mode = 1
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(1.44, 1.44)
-theme_override_icons/icon = ExtResource("2_nqyte")
-icon = ExtResource("2_gl23i")
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 64.0
+offset_bottom = 56.0
+scale = Vector2(2.17004, 2.17004)
+theme = ExtResource("2_leijj")
 
 [node name="Settings" type="Label" parent="."]
 layout_mode = 1

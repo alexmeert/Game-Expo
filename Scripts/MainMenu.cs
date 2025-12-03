@@ -4,11 +4,11 @@ public partial class MainMenu : Control
 {
 	public override void _Ready()
 	{
-		GetNode<Button>("CenterContainer/VBoxContainer/PlayButton").Pressed += OnStartPressed;
-		GetNode<Button>("CenterContainer/VBoxContainer/ItemsButton").Pressed += OnItemsPressed;
-		GetNode<Button>("CenterContainer/VBoxContainer/ControlsButton").Pressed += OnControlsPressed;
-		GetNode<Button>("CenterContainer/VBoxContainer/SettingsButton").Pressed += OnSettingsPressed;
-		GetNode<Button>("CenterContainer/VBoxContainer/QuitButton").Pressed += OnQuitPressed;
+		GetNode<Button>("VBoxContainer/PlayButton").Pressed += OnStartPressed;
+		GetNode<Button>("VBoxContainer/ItemsButton").Pressed += OnItemsPressed;
+		GetNode<Button>("VBoxContainer/ControlsButton").Pressed += OnControlsPressed;
+		GetNode<Button>("VBoxContainer/SettingsButton").Pressed += OnSettingsPressed;
+		GetNode<Button>("VBoxContainer/QuitButton").Pressed += OnQuitPressed;
 	}
 
 
