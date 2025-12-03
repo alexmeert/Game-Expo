@@ -106,6 +106,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+mouse_force_pass_scroll_events = false
 color = Color(0, 1, 0.858824, 1)
 
 [node name="Player" type="Sprite2D" parent="."]

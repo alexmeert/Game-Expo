@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dytdsgvqbnatx" path="res://Scripts/ControlsMenu.cs" id="1_h4g5a"]
 [ext_resource type="FontFile" uid="uid://bjtv1av4o6be8" path="res://Assets/Fonts/vermin-vibes-1989-font/VerminVibes1989Regular-m77m.ttf" id="1_vofmw"]
-[ext_resource type="Texture2D" uid="uid://bg47274wmmi4h" path="res://Icons/MenuIcon.png" id="2_xbrq4"]
+[ext_resource type="Texture2D" uid="uid://bg47274wmmi4h" path="res://Assets/Icons/MenuIcon.png" id="2_xbrq4"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_yi47v"]
 font = ExtResource("1_vofmw")

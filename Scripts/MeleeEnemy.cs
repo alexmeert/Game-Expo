@@ -13,6 +13,7 @@ public partial class MeleeEnemy : BasicEntity
 	[Export] private float Def = 0f;
 	[Export] private float Spd = 20;
 	[Export] private AudioStreamPlayer2D HitSound;
+	[Export] private AudioStreamPlayer2D DeathSound;
 	[Export] private float AttackRange = 30f;
 	
 
@@ -46,7 +47,6 @@ public partial class MeleeEnemy : BasicEntity
 
 		float distance = GlobalPosition.DistanceTo(TargetPlayer.GlobalPosition);
 		
-		// Attack logic
 		_attackTimer -= (float)delta;
 		if (_attackTimer <= 0f && distance <= AttackRange)
 		{
@@ -54,7 +54,6 @@ public partial class MeleeEnemy : BasicEntity
 			_attackTimer = 1.0f / ATKSPD;
 		}
 		
-		// Move toward player if not in attack range
 		if (distance > AttackRange)
 		{
 			Vector2 direction = (TargetPlayer.GlobalPosition - GlobalPosition).Normalized();
@@ -62,11 +61,9 @@ public partial class MeleeEnemy : BasicEntity
 		}
 		else
 		{
-			// Stop moving when in attack range
 			Velocity = Vector2.Zero;
 		}
 
-		// Handle animation
 		UpdateAnimation();
 	}
 
@@ -78,22 +75,17 @@ public partial class MeleeEnemy : BasicEntity
 
 		if (Velocity.LengthSquared() < 0.01f)
 		{
-			// Not moving - keep current animation or play idle if available
-			// For enemies without idle, we'll just keep the last direction
 			return;
 		}
 
-		// Determine animation based on velocity direction
 		Vector2 normalizedVel = Velocity.Normalized();
 		
 		if (Mathf.Abs(normalizedVel.X) > Mathf.Abs(normalizedVel.Y))
 		{
-			// Moving horizontally
 			animSprite.Play(normalizedVel.X > 0 ? "WalkRight" : "WalkLeft");
 		}
 		else
 		{
-			// Moving vertically
 			animSprite.Play(normalizedVel.Y > 0 ? "WalkDown" : "WalkUp");
 		}
 	}
@@ -112,24 +104,7 @@ public partial class MeleeEnemy : BasicEntity
 		var scene = GetTree().CurrentScene;
 		if (scene != null)
 		{
-			// Try to find player by name first
 			TargetPlayer = scene.GetNodeOrNull<Node2D>("MainCharacter");
-			
-			// If not found, search for Player node by type
-			if (TargetPlayer == null)
-			{
-				TargetPlayer = scene.GetNodeOrNull<Player>("Player");
-			}
-			
-			// Last resort: search all children for Player type
-			if (TargetPlayer == null)
-			{
-				var players = scene.GetChildren().OfType<Player>();
-				if (players.Any())
-				{
-					TargetPlayer = players.First();
-				}
-			}
 		}
 	}
 
@@ -141,9 +116,14 @@ public partial class MeleeEnemy : BasicEntity
 			HitSound.Play();
 	}
 
-	protected override void Die()
-	{
-		EmitSignal(SignalName.EnemyDied);
-		base.Die(); // Calls QueueFree() in BasicEntity
-	}
+    protected override void Die()
+    {
+        if (DeathSound != null)
+        {
+            DeathSound.Reparent(GetTree().CurrentScene);
+            DeathSound.Play();
+        }
+        EmitSignal(SignalName.EnemyDied);
+        base.Die();
+    }
 }

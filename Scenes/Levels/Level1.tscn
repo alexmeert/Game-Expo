@@ -1,7 +1,7 @@
 [gd_scene load_steps=46 format=4 uid="uid://bg635lk553wrv"]
 
 [ext_resource type="Texture2D" uid="uid://dx5xusixt7bfv" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/tileset.png" id="1_36ke7"]
-[ext_resource type="PackedScene" path="res://Scenes/Levels/LevelController.tscn" id="1_67y36"]
+[ext_resource type="PackedScene" uid="uid://3mdpl08kn7yk" path="res://Scenes/UnfinishedLevels/LevelController.tscn" id="1_67y36"]
 [ext_resource type="Texture2D" uid="uid://bcp2cotlvml5w" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/door/door_spritesheet.png" id="2_8h4de"]
 [ext_resource type="Texture2D" uid="uid://bmcm2bssfqwou" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/tileset_top.png" id="2_xvio3"]
 [ext_resource type="Texture2D" uid="uid://cwrlsra5b1d46" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/door/door2_bis.png" id="3_jcebb"]

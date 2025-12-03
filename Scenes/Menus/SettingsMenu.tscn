@@ -2,8 +2,8 @@
 
 [ext_resource type="FontFile" uid="uid://bjtv1av4o6be8" path="res://Assets/Fonts/vermin-vibes-1989-font/VerminVibes1989Regular-m77m.ttf" id="1_enyfb"]
 [ext_resource type="Script" uid="uid://b8bo1xw7r68if" path="res://Scripts/SettingsMenu.cs" id="1_leijj"]
-[ext_resource type="Texture2D" uid="uid://bg47274wmmi4h" path="res://Icons/MenuIcon.png" id="2_gl23i"]
-[ext_resource type="Texture2D" uid="uid://bx80e4tqb26uo" path="res://Icons/MenuIconOnHover.png" id="2_nqyte"]
+[ext_resource type="Texture2D" uid="uid://bg47274wmmi4h" path="res://Assets/Icons/MenuIcon.png" id="2_gl23i"]
+[ext_resource type="Texture2D" uid="uid://bx80e4tqb26uo" path="res://Assets/Icons/MenuIconOnHover.png" id="2_nqyte"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_gl23i"]
 font = ExtResource("1_enyfb")
@@ -46,7 +46,6 @@ offset_bottom = 40.0
 scale = Vector2(1.44, 1.44)
 theme_override_icons/icon = ExtResource("2_nqyte")
 icon = ExtResource("2_gl23i")
-flat = true
 
 [node name="Settings" type="Label" parent="."]
 layout_mode = 1

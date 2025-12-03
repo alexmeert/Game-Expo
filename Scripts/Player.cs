@@ -14,6 +14,7 @@ public partial class Player : BasicEntity
 	[Export] private float Spd = 100;
 	[Export] private AudioStreamPlayer2D HitSound;
 	[Export] private AudioStreamPlayer2D DeathSound;
+	[Export] private AudioStreamPlayer2D WalkSound;
 
 	private List<Upgrade> _activeUpgrades = new List<Upgrade>();
 	private List<Perk> _activePerks = new List<Perk>();
@@ -64,11 +65,17 @@ public partial class Player : BasicEntity
 	{
 		Vector2 input = GetInput();
 
-		// Update velocity
 		if (input.Length() > 0)
+        {
+            if (!WalkSound.Playing) // prevents restarting every frame
+        		WalkSound.Play();
 			Velocity = Velocity.Lerp(input * Spd, (float)delta * ACCEL);
+        }
 		else
-			Velocity = Velocity.Lerp(Vector2.Zero, (float)delta * FRICTION);
+        {
+            Velocity = Velocity.Lerp(Vector2.Zero, (float)delta * FRICTION);
+			WalkSound.Stop();
+        }
 
 		// Move the player
 		Position += Velocity * (float)delta;
@@ -110,13 +117,7 @@ public partial class Player : BasicEntity
 	protected override void OnTakeDamage(float damage)
 	{
 		base.OnTakeDamage(damage);
-		
-		// Play hit sound when player takes damage
-		if (HitSound != null)
-		{
-			HitSound.Play();
-		}
-		
+		HitSound?.Play();
 		GD.Print($"Player took {damage} damage. HP: {HP}/{MaxHP}");
 	}
 

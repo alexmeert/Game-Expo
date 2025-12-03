@@ -4,147 +4,105 @@ using System.Linq;
 
 public partial class TankEnemy : BasicEntity
 {
-	
+    [Export] private int Hp = 200;
+    [Export] private int Dmg = 15;
+    [Export] private float AtkSpd = 0.4f;
+    [Export] private float Def = 0.1f;
+    [Export] private float Spd = 15;
+    [Export] private float AttackRange = 35f;
+    [Export] private AudioStreamPlayer2D HitSound;
+    [Export] private AudioStreamPlayer2D DeathSound;
+	[Export] private AudioStreamPlayer2D WalkSound;
 
+    protected Node2D TargetPlayer { get; private set; }
+    private float _attackTimer = 0f;
 
-	[Export] private int Hp = 200; // High health
-	[Export] private int Dmg = 15; // High damage
-	[Export] private float AtkSpd = 0.4f; // Much slower attack speed (0.4 attacks/sec = 2.5 sec between attacks)
-	[Export] private float Def = 0.1f; // 10% damage reduction
-	[Export] private float Spd = 15; // Slower than MeleeEnemy (20)
-	[Export] private AudioStreamPlayer2D HitSound;
-	[Export] private float AttackRange = 35f; // Slightly larger attack range
+    protected override void InitializeEntity()
+    {
+        base.InitializeEntity();
+        SetStats(hp: Hp, dmg: Dmg, atkspd: AtkSpd, def: Def, spd: Spd);
+        FindPlayer();
+    }
 
-	protected Node2D TargetPlayer { get; private set; }
-	private float _attackTimer = 0f;
+    protected override void HandleMovement(double delta)
+    {
+        if (TargetPlayer == null || !TargetPlayer.IsInsideTree())
+        {
+            FindPlayer();
+            if (TargetPlayer == null) return;
+        }
 
-	protected override void InitializeEntity()
-	{
-		base.InitializeEntity();
+        float distance = GlobalPosition.DistanceTo(TargetPlayer.GlobalPosition);
 
-		SetStats(
-			hp: Hp,
-			dmg: Dmg,
-			atkspd: AtkSpd,
-			def: Def,
-			spd: Spd
-		);
+        _attackTimer -= (float)delta;
+        if (_attackTimer <= 0f && distance <= AttackRange)
+        {
+            AttackPlayer();
+            _attackTimer = 1.0f / AtkSpd;
+        }
 
-		FindPlayer();
-	}
-
-	protected override void HandleMovement(double delta)
-	{
-		if (TargetPlayer == null || !TargetPlayer.IsInsideTree())
-		{
-			FindPlayer();
-			if (TargetPlayer == null)
-				return;
-		}
-
-		float distance = GlobalPosition.DistanceTo(TargetPlayer.GlobalPosition);
-		
-		// Attack logic
-		_attackTimer -= (float)delta;
-		if (_attackTimer <= 0f && distance <= AttackRange)
-		{
-			AttackPlayer();
-			_attackTimer = 1.0f / ATKSPD;
-		}
-		
-		// Move toward player if not in attack range
 		if (distance > AttackRange)
 		{
-			Vector2 direction = (TargetPlayer.GlobalPosition - GlobalPosition).Normalized();
-			Velocity = direction * SPD;
+		    Vector2 direction = (TargetPlayer.GlobalPosition - GlobalPosition).Normalized();
+		    Velocity = direction * Spd;
+
+		    if (!WalkSound.Playing)
+		        WalkSound.Play();
 		}
 		else
 		{
-			// Stop moving when in attack range
-			Velocity = Vector2.Zero;
+		    Velocity = Vector2.Zero;
+		    WalkSound.Stop();
 		}
 
-		// Handle animation
-		UpdateAnimation();
-	}
+        UpdateAnimation();
+    }
 
-	private void UpdateAnimation()
-	{
-		var animSprite = GetNodeOrNull<AnimatedSprite2D>("Sprite");
-		if (animSprite == null)
-			return;
+    private void UpdateAnimation()
+    {
+        var animSprite = GetNodeOrNull<AnimatedSprite2D>("Sprite");
+        if (animSprite == null) return;
+        if (Velocity.LengthSquared() < 0.01f) return;
 
-		if (Velocity.LengthSquared() < 0.01f)
-		{
-			// Not moving - keep current animation or play idle if available
-			return;
-		}
+        Vector2 v = Velocity.Normalized();
+        if (Mathf.Abs(v.X) > Mathf.Abs(v.Y))
+            animSprite.Play(v.X > 0 ? "WalkRight" : "WalkLeft");
+        else
+            animSprite.Play(v.Y > 0 ? "WalkDown" : "WalkUp");
+    }
 
-		// Determine animation based on velocity direction
-		Vector2 normalizedVel = Velocity.Normalized();
-		
-		if (Mathf.Abs(normalizedVel.X) > Mathf.Abs(normalizedVel.Y))
-		{
-			// Moving horizontally
-			animSprite.Play(normalizedVel.X > 0 ? "WalkRight" : "WalkLeft");
-		}
-		else
-		{
-			// Moving vertically
-			animSprite.Play(normalizedVel.Y > 0 ? "WalkDown" : "WalkUp");
-		}
-	}
+    private void AttackPlayer()
+    {
+        if (TargetPlayer is Player player && player.IsAlive)
+        {
+            player.TakeDamage(Dmg);
+        }
+    }
 
-	private void AttackPlayer()
-	{
-		if (TargetPlayer is Player player && player.IsAlive)
-		{
-			player.TakeDamage(DMG);
-			GD.Print($"TankEnemy dealt {DMG} damage to player. Player HP: {player.HP}/{player.MaxHP}");
-		}
-	}
+    protected virtual void FindPlayer()
+    {
+        var scene = GetTree().CurrentScene;
+        if (scene == null) return;
 
-	protected virtual void FindPlayer()
-	{
-		var scene = GetTree().CurrentScene;
-		if (scene != null)
-		{
-			// Try to find player by name first
-			TargetPlayer = scene.GetNodeOrNull<Node2D>("MainCharacter");
-			
-			// If not found, search for Player node by type
-			if (TargetPlayer == null)
-			{
-				TargetPlayer = scene.GetNodeOrNull<Player>("Player");
-			}
-			
-			// Last resort: search all children for Player type
-			if (TargetPlayer == null)
-			{
-				var players = scene.GetChildren().OfType<Player>();
-				if (players.Any())
-				{
-					TargetPlayer = players.First();
-				}
-			}
-		}
-	}
+        TargetPlayer = scene.GetNodeOrNull<Node2D>("MainCharacter")
+            ?? scene.GetNodeOrNull<Player>("Player")
+            ?? scene.GetChildren().OfType<Player>().FirstOrDefault();
+    }
 
-	protected override void OnTakeDamage(float damage)
-	{
-		base.OnTakeDamage(damage);
-		
-		// Play hit sound when enemy is hit by a projectile
-		if (HitSound != null)
-		{
-			HitSound.Play();
-		}
-	}
-	
-	protected override void Die()
-	{
-		EmitSignal(SignalName.EnemyDied); // notify LevelController
-		base.Die(); // existing cleanup
-	}
+    protected override void OnTakeDamage(float damage)
+    {
+        base.OnTakeDamage(damage);
+        if (HitSound != null) HitSound.Play();
+    }
 
+    protected override void Die()
+    {
+        if (DeathSound != null)
+        {
+            DeathSound.Reparent(GetTree().CurrentScene);
+            DeathSound.Play();
+        }
+        EmitSignal(SignalName.EnemyDied);
+        base.Die();
+    }
 }
