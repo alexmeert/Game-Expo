@@ -140,4 +140,27 @@ public partial class RandomSceneLoader : Node
         else
             GD.PrintErr("Loaded level root has no LevelController!");
     }
+
+    public void Reset()
+    {
+        _currentDifficulty = 0;
+        _isBossNext = false;
+    
+        // Clear decks
+        foreach (var deck in _difficultyDecks)
+            deck.Clear();
+    
+        _bossDeck.Clear();
+    
+        // Reload and reshuffle all decks
+        _difficultyDecks[0].AddRange(LoadAndShuffle(Difficulty0RoomsFolder));
+        _difficultyDecks[1].AddRange(LoadAndShuffle(Difficulty1RoomsFolder));
+        _difficultyDecks[2].AddRange(LoadAndShuffle(Difficulty2RoomsFolder));
+        _difficultyDecks[3].AddRange(LoadAndShuffle(Difficulty3RoomsFolder));
+        _difficultyDecks[4].AddRange(LoadAndShuffle(Difficulty4RoomsFolder));
+    
+        LoadSceneList(BossRoomsFolder, _bossDeck);
+        Shuffle(_bossDeck);
+    }
+
 }

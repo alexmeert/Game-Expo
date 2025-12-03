@@ -9,9 +9,7 @@ public partial class PauseMenu : Control
 		Hide();
 		ProcessMode = ProcessModeEnum.Always;
 
-		// Hook up buttons (adjust the node paths if your scene hierarchy is different)
 		GetNode<Button>("CenterContainer/VBoxContainer/ResumeButton").Pressed += OnResumePressed;
-		GetNode<Button>("CenterContainer/VBoxContainer/ControlsButton").Pressed += OnControlsPressed;
 		GetNode<Button>("CenterContainer/VBoxContainer/QuitButton").Pressed += OnQuitToMenuPressed;
 	}
 
@@ -43,13 +41,9 @@ public partial class PauseMenu : Control
 		ResumeGame();
 	}
 
-	private void OnControlsPressed()
-	{
-		GetTree().ChangeSceneToFile("res://Scenes/Menus/ControlsMenu.tscn");
-	}
-
 	private void OnQuitToMenuPressed()
 	{
+		RandomSceneLoader.Instance?.Reset();
 		GetTree().Paused = false;
 		GetTree().ChangeSceneToFile("res://Scenes/Menus/MainMenu.tscn");
 	}
