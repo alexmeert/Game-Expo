@@ -66,4 +66,5 @@ texture = ExtResource("3_rqyw7")
 layout_mode = 0
 offset_right = 1149.0
 offset_bottom = 648.0
+mouse_filter = 2
 color = Color(0.388235, 0.988235, 0.929412, 0.388235)
