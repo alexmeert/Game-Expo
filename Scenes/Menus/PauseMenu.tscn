@@ -61,3 +61,9 @@ texture_filter = 1
 position = Vector2(576, 272)
 scale = Vector2(4.92, 4.92)
 texture = ExtResource("3_rqyw7")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1149.0
+offset_bottom = 648.0
+color = Color(0.388235, 0.988235, 0.929412, 0.388235)
