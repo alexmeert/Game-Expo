@@ -114,6 +114,12 @@ public partial class MeleeEnemy : BasicEntity
 
 		TrySpawnPerk();   
 
+		if (DeathSound != null)
+		{
+			DeathSound.Reparent(GetTree().CurrentScene);
+			DeathSound.Play();
+		}
+
 		base.Die(); // Calls QueueFree()
 	}
 

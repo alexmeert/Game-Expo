@@ -20,6 +20,10 @@ RandomSceneLoader="*res://Scripts/RandomSceneLoader.cs"
 
 [display]
 
+window/size/mode=3
+window/size/window_width_override=2304
+window/size/window_height_override=1296
+window/stretch/mode="canvas_items"
 window/vsync/vsync_mode=0
 
 [dotnet]

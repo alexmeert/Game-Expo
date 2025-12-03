@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dyhm385qsegw2" path="res://Scenes/Items/Upgrades/Damage.tscn" id="15_uqlrs"]
 [ext_resource type="PackedScene" uid="uid://y7g0ts65vriw" path="res://Scenes/Items/Upgrades/Defense.tscn" id="16_htexa"]
 [ext_resource type="PackedScene" uid="uid://dlumqsplwb8xv" path="res://Scenes/Items/Upgrades/FireRate.tscn" id="17_2oprd"]
-[ext_resource type="PackedScene" uid="uid://c8u16gw00jovv" path="res://Scenes/Rewards/Chest.tscn" id="18_8fhce"]
+[ext_resource type="PackedScene" uid="uid://c8u16gw00jovv" path="res://Scenes/Chest/Chest.tscn" id="18_8fhce"]
 [ext_resource type="PackedScene" uid="uid://d3aundu586d2f" path="res://Scenes/Items/Upgrades/Health.tscn" id="18_p6c81"]
 [ext_resource type="PackedScene" uid="uid://bjoxxngko37rd" path="res://Scenes/Items/Upgrades/MagSize.tscn" id="19_xawdx"]
 

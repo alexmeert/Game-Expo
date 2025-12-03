@@ -120,20 +120,26 @@ public partial class RangedEnemy : BasicEntity
 
 	protected override void Die()
 	{
+
 		EmitSignal(SignalName.EnemyDied);
 		TrySpawnPerk();
+
+		if (DeathSound != null)
+		{
+			DeathSound.Reparent(GetTree().CurrentScene);
+			DeathSound.Play();
+		}
+
 		base.Die();
 	}
 
-	
-	//       PERK DROP SYSTEM
 	
 	private void TrySpawnPerk()
 	{
 		Random random = new Random();
 		float roll = (float)random.NextDouble();
 
-		if (roll > 0.05f)  // 5% chance
+		if (roll > 0.05f)
 			return;
 
 		string[] perks = DirAccess.GetFilesAt(PERK_PATH);
@@ -155,7 +161,6 @@ public partial class RangedEnemy : BasicEntity
 		Node2D perkInstance = scene.Instantiate<Node2D>();
 		perkInstance.GlobalPosition = GlobalPosition;
 
-		// Use deferred add to avoid "flushing queries" error
 		GetTree().CurrentScene.CallDeferred("add_child", perkInstance);
 
 		GD.Print("Ranged spawned perk: " + perkFile);

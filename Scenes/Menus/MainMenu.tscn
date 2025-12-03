@@ -23,13 +23,18 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_b42ut")
+metadata/_edit_use_anchors_ = true
 
 [node name="Title" type="Label" parent="."]
 texture_filter = 1
-layout_mode = 0
-offset_top = -40.0
-offset_right = 1150.0
-offset_bottom = 303.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -575.0
+offset_right = 575.0
+offset_bottom = 343.0
+grow_horizontal = 2
 text = "The Game"
 label_settings = SubResource("LabelSettings_bc4mk")
 horizontal_alignment = 1
@@ -38,14 +43,17 @@ justification_flags = 171
 
 [node name="Authors" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -176.0
-offset_top = 240.0
-offset_right = 179.0
-offset_bottom = 281.0
+anchor_bottom = 0.5
+offset_left = -177.5
+offset_top = -84.0
+offset_right = 177.5
+offset_bottom = -43.0
 grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_v3fht")
 theme_override_font_sizes/font_size = 30
@@ -54,12 +62,16 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 2
-offset_left = 464.0
-offset_top = 320.0
-offset_right = 641.0
-offset_bottom = 599.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.423611
+anchor_top = 0.506173
+anchor_right = 0.577257
+anchor_bottom = 0.936728
+grow_horizontal = 2
+grow_vertical = 0
 theme_override_constants/separation = 35
+metadata/_edit_use_anchors_ = true
 
 [node name="PlayButton" type="Button" parent="VBoxContainer"]
 texture_filter = 1
@@ -118,34 +130,61 @@ mouse_filter = 2
 mouse_force_pass_scroll_events = false
 color = Color(0, 1, 0.858824, 1)
 
-[node name="Player" type="Sprite2D" parent="."]
+[node name="PlayerContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 144.0
+offset_top = 36.0
+offset_right = 184.0
+offset_bottom = 76.0
+grow_vertical = 2
+scale = Vector2(3.56, 3.56)
+
+[node name="Player" type="Sprite2D" parent="PlayerContainer"]
 texture_filter = 1
-position = Vector2(224, 440)
-scale = Vector2(4.52, 4.52)
+position = Vector2(20.2247, 15.7303)
+scale = Vector2(1.26966, 1.26966)
 texture = ExtResource("3_hqtmt")
 hframes = 2
 frame = 1
 
-[node name="Plug" type="Sprite2D" parent="."]
+[node name="EnemyContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -440.0
+offset_top = -28.0
+offset_right = -400.0
+offset_bottom = 12.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(10.2633, 7.94271)
+
+[node name="Plug" type="Sprite2D" parent="EnemyContainer"]
 texture_filter = 1
-position = Vector2(824, 392)
-scale = Vector2(6.56, 6.56)
+position = Vector2(9.35371, 13.2197)
+scale = Vector2(0.639171, 0.825914)
 texture = ExtResource("4_tfrft")
 hframes = 4
 frame = 1
 
-[node name="Fan" type="Sprite2D" parent="."]
+[node name="Fan" type="Sprite2D" parent="EnemyContainer"]
 texture_filter = 1
-position = Vector2(1024, 392)
-scale = Vector2(6.56, 6.56)
+position = Vector2(28.8406, 13.2197)
+scale = Vector2(0.639171, 0.825914)
 texture = ExtResource("5_mc63j")
 hframes = 4
 frame = 1
 
-[node name="USB" type="Sprite2D" parent="."]
+[node name="USB" type="Sprite2D" parent="EnemyContainer"]
 texture_filter = 1
-position = Vector2(912, 512)
-scale = Vector2(5.52, 5.52)
+position = Vector2(17.928, 28.3279)
+scale = Vector2(0.537839, 0.694977)
 texture = ExtResource("5_uv623")
 hframes = 6
 frame = 1
