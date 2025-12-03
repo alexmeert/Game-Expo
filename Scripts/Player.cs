@@ -66,16 +66,16 @@ public partial class Player : BasicEntity
 		Vector2 input = GetInput();
 
 		if (input.Length() > 0)
-        {
-            if (!WalkSound.Playing) // prevents restarting every frame
-        		WalkSound.Play();
+		{
+			if (!WalkSound.Playing) // prevents restarting every frame
+				WalkSound.Play();
 			Velocity = Velocity.Lerp(input * Spd, (float)delta * ACCEL);
-        }
+		}
 		else
-        {
-            Velocity = Velocity.Lerp(Vector2.Zero, (float)delta * FRICTION);
+		{
+			Velocity = Velocity.Lerp(Vector2.Zero, (float)delta * FRICTION);
 			WalkSound.Stop();
-        }
+		}
 
 		// Move the player
 		Position += Velocity * (float)delta;

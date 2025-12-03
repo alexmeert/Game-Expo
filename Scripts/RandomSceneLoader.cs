@@ -3,125 +3,125 @@ using System.Collections.Generic;
 
 public partial class RandomSceneLoader : Node
 {
-    public static RandomSceneLoader Instance { get; private set; }
+	public static RandomSceneLoader Instance { get; private set; }
 
-    [Export] public string NormalRoomsFolder = "res://Scenes/Levels/";
-    [Export] public string BossRoomsFolder = "res://Scenes/BossLevels/";
-    [Export] public int RoomsPerCycle = 3;
-    [Export] public AudioStreamPlayer MusicPlayer;
+	[Export] public string NormalRoomsFolder = "res://Scenes/Levels/";
+	[Export] public string BossRoomsFolder = "res://Scenes/BossLevels/";
+	[Export] public int RoomsPerCycle = 3;
+	[Export] public AudioStreamPlayer MusicPlayer;
 
-    private List<string> _normalRooms = new();
-    private List<string> _bossRooms = new();
+	private List<string> _normalRooms = new();
+	private List<string> _bossRooms = new();
 
-    private int _roomsCleared = 0;
+	private int _roomsCleared = 0;
 
-    public override void _Ready()
-    {
-        Instance = this;
-        GD.Randomize();
+	public override void _Ready()
+	{
+		Instance = this;
+		GD.Randomize();
 
-        LoadSceneList(NormalRoomsFolder, _normalRooms);
-        LoadSceneList(BossRoomsFolder, _bossRooms);
+		LoadSceneList(NormalRoomsFolder, _normalRooms);
+		LoadSceneList(BossRoomsFolder, _bossRooms);
 
-        Shuffle(_normalRooms);
-        Shuffle(_bossRooms);
+		Shuffle(_normalRooms);
+		Shuffle(_bossRooms);
 
-        if (MusicPlayer != null)
-            MusicPlayer.ProcessMode = ProcessModeEnum.Always;
-    }
+		if (MusicPlayer != null)
+			MusicPlayer.ProcessMode = ProcessModeEnum.Always;
+	}
 
-    private void LoadSceneList(string folder, List<string> list)
-    {
-        list.Clear();
+	private void LoadSceneList(string folder, List<string> list)
+	{
+		list.Clear();
 
-        var dir = DirAccess.Open(folder);
-        if (dir == null)
-        {
-            GD.PrintErr($"Could not open folder: {folder}");
-            return;
-        }
+		var dir = DirAccess.Open(folder);
+		if (dir == null)
+		{
+			GD.PrintErr($"Could not open folder: {folder}");
+			return;
+		}
 
-        dir.ListDirBegin();
-        string fileName;
+		dir.ListDirBegin();
+		string fileName;
 
-        while ((fileName = dir.GetNext()) != "")
-        {
-            if (!dir.CurrentIsDir() && fileName.EndsWith(".tscn"))
-                list.Add(folder + fileName);
-        }
+		while ((fileName = dir.GetNext()) != "")
+		{
+			if (!dir.CurrentIsDir() && fileName.EndsWith(".tscn"))
+				list.Add(folder + fileName);
+		}
 
-        dir.ListDirEnd();
+		dir.ListDirEnd();
 
-        if (list.Count == 0)
-            GD.PrintErr($"No scenes found in folder: {folder}");
-    }
+		if (list.Count == 0)
+			GD.PrintErr($"No scenes found in folder: {folder}");
+	}
 
-    private void Shuffle(List<string> list)
-    {
-        for (int i = list.Count - 1; i > 0; i--)
-        {
-            int j = (int)GD.Randi() % (i + 1);
-            (list[i], list[j]) = (list[j], list[i]);
-        }
-    }
+	private void Shuffle(List<string> list)
+	{
+		for (int i = list.Count - 1; i > 0; i--)
+		{
+			int j = (int)GD.Randi() % (i + 1);
+			(list[i], list[j]) = (list[j], list[i]);
+		}
+	}
 
-    public void LoadNextRoom()
-    {
-        if (_roomsCleared < RoomsPerCycle)
-        {
-            LoadNextFromDeck(_normalRooms);
-            _roomsCleared++;
-        }
-        else
-        {
-            LoadNextFromDeck(_bossRooms);
-            _roomsCleared = 0;
-        }
-    }
+	public void LoadNextRoom()
+	{
+		if (_roomsCleared < RoomsPerCycle)
+		{
+			LoadNextFromDeck(_normalRooms);
+			_roomsCleared++;
+		}
+		else
+		{
+			LoadNextFromDeck(_bossRooms);
+			_roomsCleared = 0;
+		}
+	}
 
-    private void LoadNextFromDeck(List<string> deck)
-    {
-        if (deck.Count == 0)
-        {
-            GD.Print("Deck empty — reshuffling.");
-            LoadSceneList(deck == _normalRooms ? NormalRoomsFolder : BossRoomsFolder, deck);
-            Shuffle(deck);
-        }
+	private void LoadNextFromDeck(List<string> deck)
+	{
+		if (deck.Count == 0)
+		{
+			GD.Print("Deck empty — reshuffling.");
+			LoadSceneList(deck == _normalRooms ? NormalRoomsFolder : BossRoomsFolder, deck);
+			Shuffle(deck);
+		}
 
-        string path = deck[0];
-        deck.RemoveAt(0);
+		string path = deck[0];
+		deck.RemoveAt(0);
 
-        bool isBossRoom = deck != _normalRooms;
+		bool isBossRoom = deck != _normalRooms;
 
-        PlayRoomMusic(isBossRoom);
+		PlayRoomMusic(isBossRoom);
 
-        GD.Print($"Loading room: {path}");
-        GetTree().ChangeSceneToFile(path);
-    }
+		GD.Print($"Loading room: {path}");
+		GetTree().ChangeSceneToFile(path);
+	}
 
-    private void PlayRoomMusic(bool boss)
-    {
-        if (MusicPlayer == null)
-        {
-            GD.PrintErr("MusicPlayer not assigned!");
-            return;
-        }
+	private void PlayRoomMusic(bool boss)
+	{
+		if (MusicPlayer == null)
+		{
+			GD.PrintErr("MusicPlayer not assigned!");
+			return;
+		}
 
-        string newTrackPath = boss
-            ? "res://Sounds/Music/Boss/BossMusic.mp3"
-            : "res://Sounds/Music/Normal/NormalMusic.mp3";
+		string newTrackPath = boss
+			? "res://Sounds/Music/Boss/BossMusic.mp3"
+			: "res://Sounds/Music/Normal/NormalMusic.mp3";
 
-        if (MusicPlayer.Stream?.ResourcePath == newTrackPath)
-            return;
+		if (MusicPlayer.Stream?.ResourcePath == newTrackPath)
+			return;
 
-        var track = ResourceLoader.Load<AudioStream>(newTrackPath);
-        if (track == null)
-        {
-            GD.PrintErr($"Could not load music: {newTrackPath}");
-            return;
-        }
+		var track = ResourceLoader.Load<AudioStream>(newTrackPath);
+		if (track == null)
+		{
+			GD.PrintErr($"Could not load music: {newTrackPath}");
+			return;
+		}
 
-        MusicPlayer.Stream = track;
-        MusicPlayer.Play();
-    }
+		MusicPlayer.Stream = track;
+		MusicPlayer.Play();
+	}
 }

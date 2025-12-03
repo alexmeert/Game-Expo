@@ -9,25 +9,40 @@ public partial class TankEnemy : BasicEntity
 	[Export] private float AtkSpd = 0.4f;
 	[Export] private float Def = 0.1f;
 	[Export] private float Spd = 15;
-	[Export] private AudioStreamPlayer2D HitSound;
 	[Export] private float AttackRange = 35f;
+
+	[Export] private AudioStreamPlayer2D HitSound;
+	[Export] private AudioStreamPlayer2D WalkSound;
+	[Export] private AudioStreamPlayer2D DeathSound;
+
+	private float _attackTimer = 0f;
 
 	private const string PERK_PATH = "res://Scenes/Items/Perks/";
 
-    protected override void HandleMovement(double delta)
-    {
-        if (TargetPlayer == null || !TargetPlayer.IsInsideTree())
-        {
-            FindPlayer();
-            if (TargetPlayer == null) return;
-        }
+	
+	protected Node2D TargetPlayer { get; private set; }
 
-        float distance = GlobalPosition.DistanceTo(TargetPlayer.GlobalPosition);
+	
+	//        ENTITY SETUP
+	
+	protected override void InitializeEntity()
+	{
+		base.InitializeEntity();
 
-		SetStats(Hp, Dmg, AtkSpd, Def, Spd);
+		SetStats(
+			hp: Hp,
+			dmg: Dmg,
+			atkspd: AtkSpd,
+			def: Def,
+			spd: Spd
+		);
+
 		FindPlayer();
 	}
 
+	
+	//      MOVEMENT / ATTACK
+	
 	protected override void HandleMovement(double delta)
 	{
 		if (TargetPlayer == null || !TargetPlayer.IsInsideTree())
@@ -39,6 +54,7 @@ public partial class TankEnemy : BasicEntity
 
 		float distance = GlobalPosition.DistanceTo(TargetPlayer.GlobalPosition);
 
+		// Attack
 		_attackTimer -= (float)delta;
 		if (_attackTimer <= 0f && distance <= AttackRange)
 		{
@@ -46,16 +62,19 @@ public partial class TankEnemy : BasicEntity
 			_attackTimer = 1.0f / ATKSPD;
 		}
 
+		// Movement
 		if (distance > AttackRange)
 		{
-		    Vector2 direction = (TargetPlayer.GlobalPosition - GlobalPosition).Normalized();
-		    Velocity = direction * Spd;
+			Vector2 dir = (TargetPlayer.GlobalPosition - GlobalPosition).Normalized();
+			Velocity = dir * Spd;
 
-		    if (!WalkSound.Playing)
-		        WalkSound.Play();
+			if (!WalkSound.Playing)
+				WalkSound.Play();
 		}
 		else
+		{
 			Velocity = Vector2.Zero;
+		}
 
 		UpdateAnimation();
 	}
@@ -69,7 +88,8 @@ public partial class TankEnemy : BasicEntity
 		if (Velocity.LengthSquared() < 0.01f)
 			return;
 
-		var dir = Velocity.Normalized();
+		Vector2 dir = Velocity.Normalized();
+
 		if (Mathf.Abs(dir.X) > Mathf.Abs(dir.Y))
 			anim.Play(dir.X > 0 ? "WalkRight" : "WalkLeft");
 		else
@@ -87,34 +107,49 @@ public partial class TankEnemy : BasicEntity
 		var scene = GetTree().CurrentScene;
 		if (scene != null)
 		{
-			TargetPlayer = scene.GetNodeOrNull<Node2D>("MainCharacter")
-				?? scene.GetNodeOrNull<Player>("Player")
-				?? scene.GetChildren().OfType<Player>().FirstOrDefault();
+			TargetPlayer =
+				scene.GetNodeOrNull<Node2D>("MainCharacter") ??
+				scene.GetNodeOrNull<Player>("Player") ??
+				scene.GetChildren().OfType<Player>().FirstOrDefault();
 		}
 	}
 
+	
+	//              DAMAGE
+	
 	protected override void OnTakeDamage(float damage)
 	{
 		base.OnTakeDamage(damage);
 		HitSound?.Play();
 	}
 
+	
+	//             DEATH
+	
 	protected override void Die()
 	{
 		EmitSignal(SignalName.EnemyDied);
 		TrySpawnPerk();
+
+		if (DeathSound != null)
+		{
+			DeathSound.Reparent(GetTree().CurrentScene);
+			DeathSound.Play();
+		}
+
 		base.Die();
 	}
 
 	
-	//       PERK DROP SYSTEM
+	//        PERK DROP SYSTEM
 	
 	private void TrySpawnPerk()
 	{
 		Random random = new Random();
 		float roll = (float)random.NextDouble();
 
-		if (roll > 0.05f)  // 5% chance
+		// 5% chance
+		if (roll > 0.05f)
 			return;
 
 		string[] perks = DirAccess.GetFilesAt(PERK_PATH);
@@ -127,6 +162,7 @@ public partial class TankEnemy : BasicEntity
 
 		string perkFile = perks[random.Next(perks.Length)];
 		PackedScene scene = GD.Load<PackedScene>(PERK_PATH + perkFile);
+
 		if (scene == null)
 		{
 			GD.PushError("Failed to load perk: " + perkFile);
@@ -136,20 +172,8 @@ public partial class TankEnemy : BasicEntity
 		Node2D perkInstance = scene.Instantiate<Node2D>();
 		perkInstance.GlobalPosition = GlobalPosition;
 
-		// Use deferred add to avoid "flushing queries" error
 		GetTree().CurrentScene.CallDeferred("add_child", perkInstance);
 
-		GD.Print("Tank spawned perk: " + perkFile);
+		GD.Print($"Tank spawned perk: {perkFile}");
 	}
-
-    protected override void Die()
-    {
-        if (DeathSound != null)
-        {
-            DeathSound.Reparent(GetTree().CurrentScene);
-            DeathSound.Play();
-        }
-        EmitSignal(SignalName.EnemyDied);
-        base.Die();
-    }
 }
