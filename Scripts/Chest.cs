@@ -3,153 +3,153 @@ using System;
 
 public partial class Chest : Node2D
 {
-[Export] public AudioStreamPlayer2D OpenSound;
-[Export] public Sprite2D ClosedSprite;
-[Export] public Sprite2D OpenSprite;
-[Export] public PackedScene[] UpgradeScenes = new PackedScene[6]; // Array of 6 different upgrade scenes
-[Export] public Vector2 UpgradeSpawnOffset = new Vector2(0, -50); // Offset from chest position
+	[Export] public AudioStreamPlayer2D OpenSound;
+	[Export] public Sprite2D ClosedSprite;
+	[Export] public Sprite2D OpenSprite;
+	[Export] public PackedScene[] UpgradeScenes = new PackedScene[6];
+	[Export] public Vector2 UpgradeSpawnOffset = new Vector2(0, -50);
 
 
-private bool _isPlayerInRange = false;
-private bool _isOpened = false;
-private bool _isRevealed = false;
+	private bool _isPlayerInRange = false;
+	private bool _isOpened = false;
+	private bool _isRevealed = false;
 
-private Area2D _interactionArea;
-private CollisionShape2D _rootCollisionShape;
+	private Area2D _interactionArea;
+	private CollisionShape2D _rootCollisionShape;
+	private Door _door;
 
-public override void _Ready()
-{
-	base._Ready();
-
-	// Start hidden
-	Visible = false;
-
-	// Get root CollisionShape2D (under StaticBody2D)
-	_rootCollisionShape = GetNodeOrNull<CollisionShape2D>("CollisionShape2D");
-	if (_rootCollisionShape != null)
-		_rootCollisionShape.Disabled = true;
-
-	// Find Area2D node
-	_interactionArea = GetNodeOrNull<Area2D>("Area2D") ?? GetNodeOrNull<Area2D>("InteractionArea");
-	if (_interactionArea == null)
+	public override void _Ready()
 	{
-		foreach (Node child in GetChildren())
+		base._Ready();
+
+		Visible = false;
+
+		_rootCollisionShape = GetNodeOrNull<CollisionShape2D>("CollisionShape2D");
+		if (_rootCollisionShape != null)
+			_rootCollisionShape.Disabled = true;
+
+		_interactionArea = GetNodeOrNull<Area2D>("Area2D") ?? GetNodeOrNull<Area2D>("InteractionArea");
+		if (_interactionArea == null)
 		{
-			if (child is Area2D area)
+			foreach (Node child in GetChildren())
 			{
-				_interactionArea = area;
-				break;
+				if (child is Area2D area)
+				{
+					_interactionArea = area;
+					break;
+				}
 			}
+		}
+
+		if (_interactionArea != null)
+			_interactionArea.Monitoring = false;
+
+		if (_interactionArea != null)
+		{
+			_interactionArea.BodyEntered += OnBodyEntered;
+			_interactionArea.BodyExited += OnBodyExited;
+		}
+		else
+		{
+			GD.PrintErr("Chest: No Area2D found for interaction!");
+		}
+
+		GD.Print("Chest: Ready with signals connected and collisions disabled");
+
+		_door = GetTree().CurrentScene.GetNodeOrNull<Door>("Door");
+
+	}
+
+	public void Reveal()
+	{
+		_isRevealed = true;
+		Visible = true;
+
+
+		if (_interactionArea != null)
+			_interactionArea.CallDeferred("set_monitoring", true);
+
+		var shape = GetNode<CollisionShape2D>("CollisionShape2D");
+		if (shape != null)
+			shape.CallDeferred("set_disabled", false);
+
+		GD.Print("Chest revealed!");
+	}
+
+
+	public override void _Process(double delta)
+	{
+		if (_isRevealed && _isPlayerInRange && !_isOpened && Input.IsActionJustPressed("Interact"))
+		{
+			OpenChest();
 		}
 	}
 
-	if (_interactionArea != null)
-		_interactionArea.Monitoring = false; // Disable interaction until revealed
-
-	// Connect signals
-	if (_interactionArea != null)
+	private void OpenChest()
 	{
-		_interactionArea.BodyEntered += OnBodyEntered;
-		_interactionArea.BodyExited += OnBodyExited;
-	}
-	else
-	{
-		GD.PrintErr("Chest: No Area2D found for interaction!");
-	}
+	    _isOpened = true;
 
-	GD.Print("Chest: Ready with signals connected and collisions disabled");
-}
+	    if (ClosedSprite != null && OpenSprite != null)
+	    {
+	        ClosedSprite.Visible = false;
+	        OpenSprite.Visible = true;
+	    }
 
-public void Reveal()
-{
-	_isRevealed = true;
-	Visible = true;
+	    OpenSound?.Play();
 
-	// Defer enabling the interaction area
-	if (_interactionArea != null)
-		_interactionArea.CallDeferred("set_monitoring", true);
+	    _door?.PlayOpenAnimation();
 
-	// If you also toggle a CollisionShape2D:
-	var shape = GetNode<CollisionShape2D>("CollisionShape2D");
-	if (shape != null)
-		shape.CallDeferred("set_disabled", false);
-
-	GD.Print("Chest revealed!");
-}
-
-
-public override void _Process(double delta)
-{
-	if (_isRevealed && _isPlayerInRange && !_isOpened && Input.IsActionJustPressed("Interact"))
-	{
-		OpenChest();
-	}
-}
-
-private void OpenChest()
-{
-	_isOpened = true;
-
-	if (ClosedSprite != null && OpenSprite != null)
-	{
-		ClosedSprite.Visible = false;
-		OpenSprite.Visible = true;
+	    SpawnUpgrade();
 	}
 
-	OpenSound?.Play();
 
-	SpawnUpgrade();
-}
-
-private void SpawnUpgrade()
-{
-	var validUpgrades = new System.Collections.Generic.List<PackedScene>();
-	foreach (var scene in UpgradeScenes)
-		if (scene != null) validUpgrades.Add(scene);
-
-	if (validUpgrades.Count == 0) return;
-
-	int randomIndex = (int)GD.RandRange(0, validUpgrades.Count - 1);
-	PackedScene selectedUpgradeScene = validUpgrades[randomIndex];
-
-	var upgrade = selectedUpgradeScene.Instantiate<Upgrade>();
-	if (upgrade == null) return;
-
-	UpgradeRarity rarity = Upgrade.GetRandomRarity();
-	upgrade.SetRarity(rarity);
-	upgrade.GlobalPosition = GlobalPosition + UpgradeSpawnOffset;
-
-	var parent = GetParent() ?? GetTree().CurrentScene;
-	if (parent != null)
+	private void SpawnUpgrade()
 	{
-		parent.AddChild(upgrade);
-		GD.Print($"Chest spawned {rarity} upgrade '{upgrade.ItemName}' at {upgrade.GlobalPosition}");
+		var validUpgrades = new System.Collections.Generic.List<PackedScene>();
+		foreach (var scene in UpgradeScenes)
+			if (scene != null) validUpgrades.Add(scene);
+
+		if (validUpgrades.Count == 0) return;
+
+		int randomIndex = (int)GD.RandRange(0, validUpgrades.Count - 1);
+		PackedScene selectedUpgradeScene = validUpgrades[randomIndex];
+
+		var upgrade = selectedUpgradeScene.Instantiate<Upgrade>();
+		if (upgrade == null) return;
+
+		UpgradeRarity rarity = Upgrade.GetRandomRarity();
+		upgrade.SetRarity(rarity);
+		upgrade.GlobalPosition = GlobalPosition + UpgradeSpawnOffset;
+
+		var parent = GetParent() ?? GetTree().CurrentScene;
+		if (parent != null)
+		{
+			parent.AddChild(upgrade);
+			GD.Print($"Chest spawned {rarity} upgrade '{upgrade.ItemName}' at {upgrade.GlobalPosition}");
+		}
+		else
+		{
+			GD.PrintErr("Chest: Cannot spawn upgrade - no valid parent!");
+			upgrade.QueueFree();
+		}
 	}
-	else
+
+	private void OnBodyEntered(Node2D body)
 	{
-		GD.PrintErr("Chest: Cannot spawn upgrade - no valid parent!");
-		upgrade.QueueFree();
+		if (!_isRevealed) return;
+		if (body is Player)
+		{
+			_isPlayerInRange = true;
+			GD.Print("Chest: Player entered interaction area");
+		}
 	}
-}
 
-private void OnBodyEntered(Node2D body)
-{
-	if (!_isRevealed) return;
-	if (body is Player)
+	private void OnBodyExited(Node2D body)
 	{
-		_isPlayerInRange = true;
-		GD.Print("Chest: Player entered interaction area");
+		if (body is Player)
+		{
+			_isPlayerInRange = false;
+			GD.Print("Chest: Player exited interaction area");
+		}
 	}
-}
-
-private void OnBodyExited(Node2D body)
-{
-	if (body is Player)
-	{
-		_isPlayerInRange = false;
-		GD.Print("Chest: Player exited interaction area");
-	}
-}
-
-
 }

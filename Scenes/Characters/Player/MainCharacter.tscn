@@ -85,6 +85,11 @@ region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nsabs"]
 animations = [{
+"frames": [],
+"loop": true,
+"name": &"Death",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vlt3l")
@@ -185,7 +190,8 @@ Healthbar = NodePath("Healthbar")
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_nsabs")
-animation = &"Idle"
+animation = &"Death"
+frame_progress = 0.18896
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -217,6 +223,7 @@ offset_bottom = -121.0
 scale = Vector2(0.997235, 1.84859)
 
 [node name="PauseMenu" parent="." instance=ExtResource("9_v5g80")]
+visible = false
 offset_left = -248.0
 offset_top = -136.0
 offset_right = -248.0
