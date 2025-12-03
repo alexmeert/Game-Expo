@@ -1,18 +1,33 @@
-[gd_scene load_steps=5 format=3 uid="uid://baswohu74crho"]
+[gd_scene load_steps=17 format=3 uid="uid://baswohu74crho"]
 
+[ext_resource type="Script" uid="uid://bs84f3ulg6r4d" path="res://Scripts/ItemsMenu.cs" id="1_i86yw"]
 [ext_resource type="FontFile" uid="uid://bjtv1av4o6be8" path="res://Assets/Fonts/vermin-vibes-1989-font/VerminVibes1989Regular-m77m.ttf" id="1_n3lbt"]
+[ext_resource type="Texture2D" uid="uid://bg47274wmmi4h" path="res://Icons/MenuIcon.png" id="2_rrhd6"]
+[ext_resource type="PackedScene" uid="uid://lhhb3krl1jak" path="res://Scenes/Menus/CaroselContainer.tscn" id="4_471ss"]
+[ext_resource type="Texture2D" uid="uid://b3ec2wmyji7n" path="res://Sprites/Items/Perks/Perk_Firewall.png" id="5_8vakt"]
+[ext_resource type="Texture2D" uid="uid://ty7oasxfgr56" path="res://Sprites/Items/Perks/Perk_Overclock.png" id="6_vrk1j"]
+[ext_resource type="Texture2D" uid="uid://dje1fyiw701h7" path="res://Sprites/Items/Perks/Perk_PowerSurge.png" id="7_mc0it"]
+[ext_resource type="Texture2D" uid="uid://4nmdwj07qiqq" path="res://Sprites/Items/Upgrades/Upgrade_CoolingFan.png" id="8_mc0it"]
+[ext_resource type="Texture2D" uid="uid://c0q6mx7djlx06" path="res://Sprites/Items/Upgrades/Upgrade_GPU.png" id="9_ff6m6"]
+[ext_resource type="Texture2D" uid="uid://b766x0pp3dh37" path="res://Sprites/Items/Upgrades/Upgrade_RAM.png" id="10_hytxe"]
+[ext_resource type="Texture2D" uid="uid://4mxm3rjgwtto" path="res://Sprites/Items/Upgrades/Upgrade_PowerSupply.png" id="11_x87bu"]
+[ext_resource type="Texture2D" uid="uid://ins6g1aocajj" path="res://Sprites/Items/Upgrades/Upgrade_Case.png" id="12_uha33"]
+[ext_resource type="Texture2D" uid="uid://cxwau0nbgg3qg" path="res://Sprites/Items/Upgrades/Upgrade_SSD.png" id="13_uha33"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_88ape"]
 font = ExtResource("1_n3lbt")
 font_size = 100
+font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_w7kk4"]
 font = ExtResource("1_n3lbt")
 font_size = 40
+font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_dthsy"]
 font = ExtResource("1_n3lbt")
 font_size = 40
+font_color = Color(0, 0, 0, 1)
 
 [node name="ItemsMenu" type="Control"]
 layout_mode = 3
@@ -21,11 +36,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_i86yw")
 
-[node name="Title" type="Label" parent="."]
-layout_mode = 0
-offset_right = 1152.0
+[node name="Items" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -576.0
+offset_right = 576.0
 offset_bottom = 151.0
+grow_horizontal = 2
 text = "Items"
 label_settings = SubResource("LabelSettings_88ape")
 horizontal_alignment = 1
@@ -36,10 +57,10 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 256.0
-offset_top = -132.0
-offset_right = 330.0
-offset_bottom = -109.0
+offset_left = 216.0
+offset_top = -212.0
+offset_right = 396.0
+offset_bottom = -177.0
 grow_vertical = 2
 text = "Upgrades"
 label_settings = SubResource("LabelSettings_w7kk4")
@@ -53,13 +74,288 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -320.0
-offset_top = -132.0
-offset_right = -246.0
-offset_bottom = -109.0
+offset_left = -352.0
+offset_top = -212.0
+offset_right = -239.0
+offset_bottom = -177.0
 grow_horizontal = 0
 grow_vertical = 2
 text = "Perks"
 label_settings = SubResource("LabelSettings_dthsy")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="HomeButton" type="Button" parent="."]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1.44, 1.44)
+icon = ExtResource("2_rrhd6")
+
+[node name="Background" type="ColorRect" parent="."]
+z_index = -1
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 1, 0.858824, 1)
+
+[node name="PerksBackground" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 672.0
+offset_top = 176.0
+offset_right = 712.0
+offset_bottom = 216.0
+scale = Vector2(9.52, 10.36)
+color = Color(0, 0, 0, 0.627451)
+
+[node name="UpgradesBackground" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 176.0
+offset_right = 162.0
+offset_bottom = 216.0
+scale = Vector2(9.52, 10.36)
+color = Color(0, 0, 0, 0.627451)
+
+[node name="UpgradesContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 176.0
+offset_right = 162.0
+offset_bottom = 216.0
+scale = Vector2(9.52, 10.36)
+
+[node name="UpgradesCaroselContainer" parent="UpgradesContainer" node_paths=PackedStringArray("PositionOffsetNode") instance=ExtResource("4_471ss")]
+position = Vector2(20, 13)
+WarparoundEnabled = true
+WrapRadius = 30.0
+WrapHeight = 10.0
+WrapYOffset = 10.0
+ScaleStrength = 0.788
+PositionOffsetNode = NodePath("Control")
+
+[node name="Control" type="Control" parent="UpgradesContainer/UpgradesCaroselContainer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.411765, 0.411765)
+metadata/_edit_use_anchors_ = true
+
+[node name="Upgrade1" type="Panel" parent="UpgradesContainer/UpgradesCaroselContainer/Control"]
+z_index = 1
+layout_mode = 0
+offset_left = -20.0
+offset_top = -20.0001
+offset_right = 20.0
+offset_bottom = 19.9999
+pivot_offset = Vector2(20, 20)
+metadata/_edit_use_anchors_ = true
+
+[node name="CoolingFan" type="Sprite2D" parent="UpgradesContainer/UpgradesCaroselContainer/Control/Upgrade1"]
+texture_filter = 1
+position = Vector2(19.5058, 20)
+texture = ExtResource("8_mc0it")
+
+[node name="Upgrade2" type="Panel" parent="UpgradesContainer/UpgradesCaroselContainer/Control"]
+modulate = Color(1, 1, 1, 0.65)
+z_index = -1
+layout_mode = 0
+offset_left = 8.53165
+offset_top = -26.9098
+offset_right = 48.5316
+offset_bottom = 13.0902
+scale = Vector2(0.212, 0.212)
+pivot_offset = Vector2(20, 20)
+metadata/_edit_use_anchors_ = true
+
+[node name="GPU" type="Sprite2D" parent="UpgradesContainer/UpgradesCaroselContainer/Control/Upgrade2"]
+texture_filter = 1
+position = Vector2(20.4425, 15)
+scale = Vector2(0.64, 0.64)
+texture = ExtResource("9_ff6m6")
+
+[node name="Panel3" type="Panel" parent="UpgradesContainer/UpgradesCaroselContainer/Control"]
+modulate = Color(1, 1, 1, 0.3)
+z_index = -2
+layout_mode = 0
+offset_left = -2.36643
+offset_top = -38.0902
+offset_right = 37.6336
+offset_bottom = 1.90983
+scale = Vector2(0.1, 0.1)
+pivot_offset = Vector2(20, 20)
+metadata/_edit_use_anchors_ = true
+
+[node name="RAM" type="Sprite2D" parent="UpgradesContainer/UpgradesCaroselContainer/Control/Panel3"]
+texture_filter = 1
+position = Vector2(19.5058, 20)
+texture = ExtResource("10_hytxe")
+
+[node name="Panel4" type="Panel" parent="UpgradesContainer/UpgradesCaroselContainer/Control"]
+modulate = Color(1, 1, 1, 0)
+z_index = -3
+layout_mode = 0
+offset_left = -37.6334
+offset_top = -38.0902
+offset_right = 2.36664
+offset_bottom = 1.90981
+scale = Vector2(0.1, 0.1)
+pivot_offset = Vector2(20, 20)
+
+[node name="PSU" type="Sprite2D" parent="UpgradesContainer/UpgradesCaroselContainer/Control/Panel4"]
+texture_filter = 1
+position = Vector2(19.5058, 20)
+texture = ExtResource("11_x87bu")
+
+[node name="Panel5" type="Panel" parent="UpgradesContainer/UpgradesCaroselContainer/Control"]
+modulate = Color(1, 1, 1, 0)
+z_index = -4
+layout_mode = 0
+offset_left = -48.5314
+offset_top = -26.91
+offset_right = -8.53142
+offset_bottom = 13.09
+scale = Vector2(0.1, 0.1)
+pivot_offset = Vector2(20, 20)
+
+[node name="Case" type="Sprite2D" parent="UpgradesContainer/UpgradesCaroselContainer/Control/Panel5"]
+texture_filter = 1
+position = Vector2(19.5058, 20)
+texture = ExtResource("12_uha33")
+
+[node name="Panel6" type="Panel" parent="UpgradesContainer/UpgradesCaroselContainer/Control"]
+modulate = Color(1, 1, 1, 0)
+z_index = -5
+layout_mode = 0
+offset_left = -20.0
+offset_top = -20.0001
+offset_right = 20.0
+offset_bottom = 19.9999
+scale = Vector2(0.1, 0.1)
+pivot_offset = Vector2(20, 20)
+
+[node name="SSD" type="Sprite2D" parent="UpgradesContainer/UpgradesCaroselContainer/Control/Panel6"]
+texture_filter = 1
+position = Vector2(19.5058, 20)
+texture = ExtResource("13_uha33")
+
+[node name="PerksContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 672.0
+offset_top = 176.0
+offset_right = 712.0
+offset_bottom = 216.0
+scale = Vector2(9.52, 10.36)
+
+[node name="PerksCaroselContainer" parent="PerksContainer" node_paths=PackedStringArray("PositionOffsetNode") instance=ExtResource("4_471ss")]
+position = Vector2(20, 13)
+scale = Vector2(0.432773, 0.432773)
+Spacing = 5.0
+WarparoundEnabled = true
+WrapRadius = 20.0
+WrapHeight = 10.0
+WrapYOffset = 10.0
+ScaleStrength = 0.55
+PositionOffsetNode = NodePath("Control")
+
+[node name="Control" type="Control" parent="PerksContainer/PerksCaroselContainer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Perk1" type="Panel" parent="PerksContainer/PerksCaroselContainer/Control"]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -13.7742
+anchor_top = -0.199998
+anchor_right = -13.7742
+anchor_bottom = -0.199998
+offset_left = 530.968
+offset_top = -11.9999
+offset_right = 570.968
+offset_bottom = 28.0001
+pivot_offset = Vector2(20, 20)
+metadata/_edit_use_anchors_ = true
+
+[node name="Firewall" type="Sprite2D" parent="PerksContainer/PerksCaroselContainer/Control/Perk1"]
+texture_filter = 1
+position = Vector2(19.5061, 20)
+texture = ExtResource("5_8vakt")
+
+[node name="Perk2" type="Panel" parent="PerksContainer/PerksCaroselContainer/Control"]
+modulate = Color(1, 1, 1, 0.65)
+z_index = -1
+layout_mode = 0
+offset_left = -20.0
+offset_top = -39.9996
+offset_right = 20.0
+offset_bottom = 0.000366211
+scale = Vector2(0.45, 0.45)
+pivot_offset = Vector2(20, 20)
+metadata/_edit_use_anchors_ = true
+
+[node name="Overclock" type="Sprite2D" parent="PerksContainer/PerksCaroselContainer/Control/Perk2"]
+texture_filter = 1
+position = Vector2(19.5061, 20)
+texture = ExtResource("6_vrk1j")
+
+[node name="Perk3" type="Panel" parent="PerksContainer/PerksCaroselContainer/Control"]
+modulate = Color(1, 1, 1, 0.3)
+z_index = -2
+layout_mode = 0
+offset_left = -20.0
+offset_top = -20.0001
+offset_right = 20.0
+offset_bottom = 19.9999
+scale = Vector2(0.1, 0.1)
+pivot_offset = Vector2(20, 20)
+metadata/_edit_use_anchors_ = true
+
+[node name="PowerSurge" type="Sprite2D" parent="PerksContainer/PerksCaroselContainer/Control/Perk3"]
+texture_filter = 1
+position = Vector2(19.5061, 20)
+texture = ExtResource("7_mc0it")
+
+[node name="NextUpgradeButton" type="Button" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 440.0
+offset_top = 280.0
+offset_right = 458.0
+offset_bottom = 311.0
+scale = Vector2(2.6, 2.6)
+text = ">"
+
+[node name="PreviousUpgradeButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 280.0
+offset_right = 162.0
+offset_bottom = 311.0
+scale = Vector2(2.6, 2.6)
+text = "<"
+
+[node name="NextPerkButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 976.0
+offset_top = 536.0
+offset_right = 994.0
+offset_bottom = 567.0
+text = ">"
+
+[node name="PreviousPerkButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 744.0
+offset_top = 536.0
+offset_right = 762.0
+offset_bottom = 567.0
+text = "<"

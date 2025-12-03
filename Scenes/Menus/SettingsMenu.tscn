@@ -1,0 +1,130 @@
+[gd_scene load_steps=11 format=3 uid="uid://bv0sfgm0hdbb3"]
+
+[ext_resource type="FontFile" uid="uid://bjtv1av4o6be8" path="res://Assets/Fonts/vermin-vibes-1989-font/VerminVibes1989Regular-m77m.ttf" id="1_enyfb"]
+[ext_resource type="Script" uid="uid://b8bo1xw7r68if" path="res://Scripts/SettingsMenu.cs" id="1_leijj"]
+[ext_resource type="Texture2D" uid="uid://bg47274wmmi4h" path="res://Icons/MenuIcon.png" id="2_gl23i"]
+[ext_resource type="Texture2D" uid="uid://bx80e4tqb26uo" path="res://Icons/MenuIconOnHover.png" id="2_nqyte"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gl23i"]
+font = ExtResource("1_enyfb")
+font_size = 100
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_enyfb"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_enyfb"]
+font = ExtResource("1_enyfb")
+font_size = 50
+font_color = Color(0, 1, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_leijj"]
+font = ExtResource("1_enyfb")
+font_size = 35
+
+[sub_resource type="LabelSettings" id="LabelSettings_nqyte"]
+font = ExtResource("1_enyfb")
+font_size = 35
+
+[sub_resource type="LabelSettings" id="LabelSettings_5a14u"]
+font = ExtResource("1_enyfb")
+font_size = 35
+
+[node name="SettingsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_leijj")
+
+[node name="HomeButton" type="Button" parent="."]
+texture_filter = 1
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1.44, 1.44)
+theme_override_icons/icon = ExtResource("2_nqyte")
+icon = ExtResource("2_gl23i")
+flat = true
+
+[node name="Settings" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -576.0
+offset_right = 576.0
+offset_bottom = 154.0
+grow_horizontal = 2
+text = "Settings"
+label_settings = SubResource("LabelSettings_gl23i")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Background" type="ColorRect" parent="."]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 1, 0.858824, 1)
+
+[node name="AudioBackground" type="ColorRect" parent="."]
+material = SubResource("CanvasItemMaterial_enyfb")
+layout_mode = 2
+offset_left = 64.0
+offset_top = 128.0
+offset_right = 512.0
+offset_bottom = 608.0
+size_flags_vertical = 4
+color = Color(0, 0, 0, 0.521569)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 128.0
+offset_top = -170.0
+offset_right = 448.0
+offset_bottom = 244.0
+grow_vertical = 2
+
+[node name="Audio" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Audio
+"
+label_settings = SubResource("LabelSettings_enyfb")
+horizontal_alignment = 1
+
+[node name="Master" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Master Volume"
+label_settings = SubResource("LabelSettings_leijj")
+
+[node name="MasterSlider" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Music" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "
+
+Music Volume"
+label_settings = SubResource("LabelSettings_nqyte")
+
+[node name="MusicSlider" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="SFX" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "
+
+SFX Volume"
+label_settings = SubResource("LabelSettings_5a14u")
+
+[node name="SFXSlider" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2

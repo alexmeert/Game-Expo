@@ -26,20 +26,25 @@ script = ExtResource("1_b42ut")
 [node name="Title" type="Label" parent="."]
 texture_filter = 1
 layout_mode = 0
+offset_top = -40.0
 offset_right = 1150.0
-offset_bottom = 343.0
+offset_bottom = 303.0
 text = "The Game"
 label_settings = SubResource("LabelSettings_bc4mk")
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 171
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 2
-offset_left = 398.0
-offset_top = 253.0
-offset_right = 753.0
-offset_bottom = 294.0
+[node name="Authors" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -176.0
+offset_top = 240.0
+offset_right = 179.0
+offset_bottom = 281.0
+grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_v3fht")
 theme_override_font_sizes/font_size = 30
@@ -64,19 +69,26 @@ theme_override_fonts/font = ExtResource("1_v3fht")
 theme_override_font_sizes/font_size = 50
 text = "Play"
 
-[node name="ItemsButton" type="Button" parent="CenterContainer/VBoxContainer"]
-texture_filter = 1
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_v3fht")
-theme_override_font_sizes/font_size = 50
-text = "Items"
-
 [node name="ControlsButton" type="Button" parent="CenterContainer/VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_v3fht")
 theme_override_font_sizes/font_size = 50
 text = "Controls"
+
+[node name="SettingsButton" type="Button" parent="CenterContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_v3fht")
+theme_override_font_sizes/font_size = 50
+text = "Settings"
+
+[node name="ItemsButton" type="Button" parent="CenterContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_v3fht")
+theme_override_font_sizes/font_size = 50
+text = "Items"
 
 [node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer"]
 texture_filter = 1
@@ -85,7 +97,7 @@ theme_override_fonts/font = ExtResource("1_v3fht")
 theme_override_font_sizes/font_size = 50
 text = "Quit"
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="."]
 z_index = -1
 layout_mode = 1
 anchors_preset = 15
@@ -120,7 +132,7 @@ texture = ExtResource("5_mc63j")
 hframes = 4
 frame = 1
 
-[node name="USB2" type="Sprite2D" parent="."]
+[node name="USB" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(912, 512)
 scale = Vector2(5.52, 5.52)

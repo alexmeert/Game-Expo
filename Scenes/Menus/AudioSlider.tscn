@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cw82psdit3m41"]
+
+[node name="AudioSlider" type="CanvasLayer"]
+
+[node name="Slider" type="HSlider" parent="."]
+texture_filter = 1
+offset_right = 256.0
+offset_bottom = 16.0
+scale = Vector2(1.5, 1.5)
+max_value = 1.0

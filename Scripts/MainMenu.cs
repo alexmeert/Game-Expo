@@ -7,6 +7,7 @@ public partial class MainMenu : Control
 		GetNode<Button>("CenterContainer/VBoxContainer/PlayButton").Pressed += OnStartPressed;
 		GetNode<Button>("CenterContainer/VBoxContainer/ItemsButton").Pressed += OnItemsPressed;
 		GetNode<Button>("CenterContainer/VBoxContainer/ControlsButton").Pressed += OnControlsPressed;
+		GetNode<Button>("CenterContainer/VBoxContainer/SettingsButton").Pressed += OnSettingsPressed;
 		GetNode<Button>("CenterContainer/VBoxContainer/QuitButton").Pressed += OnQuitPressed;
 	}
 
@@ -24,6 +25,11 @@ public partial class MainMenu : Control
 	private void OnControlsPressed()
 	{
 		GetTree().ChangeSceneToFile("res://Scenes/Menus/ControlsMenu.tscn");
+	}
+
+	private void OnSettingsPressed()
+	{
+		GetTree().ChangeSceneToFile("res://Scenes/Menus/SettingsMenu.tscn");
 	}
 
 	private void OnQuitPressed()
