@@ -4,9 +4,6 @@ using System.Linq;
 
 public partial class RangedEnemy : BasicEntity
 {
-	
-
-
 	[Export] private int Hp = 30;
 	[Export] private int Dmg = 5;
 	[Export] private float AtkSpd = 1.5f;
@@ -21,6 +18,8 @@ public partial class RangedEnemy : BasicEntity
 	[Export] private float MaxDistance = 400f;
 	[Export] private float AttackRange = 500f;
 
+	private const string PERK_PATH = "res://Scenes/Items/Perks/";
+
 	protected Node2D TargetPlayer { get; private set; }
 	private float _attackTimer = 0f;
 
@@ -28,14 +27,7 @@ public partial class RangedEnemy : BasicEntity
 	{
 		base.InitializeEntity();
 
-		SetStats(
-			hp: Hp,
-			dmg: Dmg,
-			atkspd: AtkSpd,
-			def: Def,
-			spd: Spd
-		);
-
+		SetStats(Hp, Dmg, AtkSpd, Def, Spd);
 		FindPlayer();
 	}
 
@@ -52,13 +44,9 @@ public partial class RangedEnemy : BasicEntity
 		Vector2 direction = (TargetPlayer.GlobalPosition - GlobalPosition).Normalized();
 
 		if (distance < MinDistance)
-		{
 			Velocity = -direction * SPD;
-		}
 		else if (distance > MaxDistance)
-		{
 			Velocity = direction * SPD * 0.6f;
-		}
 		else
 		{
 			Vector2 perpendicular = new Vector2(-direction.Y, direction.X);
@@ -82,25 +70,19 @@ public partial class RangedEnemy : BasicEntity
 			return;
 
 		if (Velocity.LengthSquared() < 0.01f)
-		{
 			return;
-		}
 
-		Vector2 normalizedVel = Velocity.Normalized();
-		
-		if (Mathf.Abs(normalizedVel.X) > Mathf.Abs(normalizedVel.Y))
-		{
-			animSprite.Play(normalizedVel.X > 0 ? "WalkRight" : "WalkLeft");
-		}
+		Vector2 dir = Velocity.Normalized();
+
+		if (Mathf.Abs(dir.X) > Mathf.Abs(dir.Y))
+			animSprite.Play(dir.X > 0 ? "WalkRight" : "WalkLeft");
 		else
-		{
-			animSprite.Play(normalizedVel.Y > 0 ? "WalkDown" : "WalkUp");
-		}
+			animSprite.Play(dir.Y > 0 ? "WalkDown" : "WalkUp");
 	}
 
 	private void AttackPlayer()
 	{
-		if (TargetPlayer == null || ProjectileScene == null || FirePoint == null)
+		if (ProjectileScene == null || FirePoint == null)
 			return;
 
 		if (TargetPlayer is Player player && player.IsAlive)
@@ -115,12 +97,7 @@ public partial class RangedEnemy : BasicEntity
 
 			GetTree().CurrentScene.AddChild(projectile);
 
-			if (ShotSound != null)
-			{
-				ShotSound.Play();
-			}
-
-			GD.Print($"RangedEnemy shot at player. Projectile damage: {DMG}");
+			ShotSound?.Play();
 		}
 	}
 
@@ -129,28 +106,59 @@ public partial class RangedEnemy : BasicEntity
 		var scene = GetTree().CurrentScene;
 		if (scene != null)
 		{
-			TargetPlayer = scene.GetNodeOrNull<Node2D>("MainCharacter");
+			TargetPlayer = scene.GetNodeOrNull<Node2D>("MainCharacter")
+				?? scene.GetNodeOrNull<Player>("Player")
+				?? scene.GetChildren().OfType<Player>().FirstOrDefault();
 		}
 	}
 
 	protected override void OnTakeDamage(float damage)
 	{
 		base.OnTakeDamage(damage);
-		if (HitSound != null)
-		{
-			HitSound.Play();
-		}
+		HitSound?.Play();
 	}
+
+	protected override void Die()
+	{
+		EmitSignal(SignalName.EnemyDied);
+		TrySpawnPerk();
+		base.Die();
+	}
+
 	
-    protected override void Die()
-    {
-        if (DeathSound != null)
-        {
-            DeathSound.Reparent(GetTree().CurrentScene);
-            DeathSound.Play();
-        }
-        EmitSignal(SignalName.EnemyDied);
-        base.Die();
-    }
+	//       PERK DROP SYSTEM
+	
+	private void TrySpawnPerk()
+	{
+		Random random = new Random();
+		float roll = (float)random.NextDouble();
+
+		if (roll > 0.05f)  // 5% chance
+			return;
+
+		string[] perks = DirAccess.GetFilesAt(PERK_PATH);
+
+		if (perks.Length == 0)
+		{
+			GD.PushWarning("No perks found in: " + PERK_PATH);
+			return;
+		}
+
+		string perkFile = perks[random.Next(perks.Length)];
+		PackedScene scene = GD.Load<PackedScene>(PERK_PATH + perkFile);
+		if (scene == null)
+		{
+			GD.PushError("Failed to load perk: " + perkFile);
+			return;
+		}
+
+		Node2D perkInstance = scene.Instantiate<Node2D>();
+		perkInstance.GlobalPosition = GlobalPosition;
+
+		// Use deferred add to avoid "flushing queries" error
+		GetTree().CurrentScene.CallDeferred("add_child", perkInstance);
+
+		GD.Print("Ranged spawned perk: " + perkFile);
+	}
 
 }
