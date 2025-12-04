@@ -87,19 +87,19 @@ public partial class Chest : Node2D
 
 	private void OpenChest()
 	{
-	    _isOpened = true;
+		_isOpened = true;
 
-	    if (ClosedSprite != null && OpenSprite != null)
-	    {
-	        ClosedSprite.Visible = false;
-	        OpenSprite.Visible = true;
-	    }
+		if (ClosedSprite != null && OpenSprite != null)
+		{
+			ClosedSprite.Visible = false;
+			OpenSprite.Visible = true;
+		}
 
-	    OpenSound?.Play();
+		OpenSound?.Play();
 
-	    _door?.PlayOpenAnimation();
+		_door?.PlayOpenAnimation();
 
-	    SpawnUpgrade();
+		SpawnUpgrade();
 	}
 
 
