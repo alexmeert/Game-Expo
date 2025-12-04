@@ -8,8 +8,8 @@ radius = 16.0
 
 [node name="Overclocking" type="Node2D"]
 script = ExtResource("1_gk0mw")
-DmgBonus = 10.0
-AtkSpdBonus = 10.0
+DmgBonus = 20.0
+AtkSpdBonus = 20.0
 ItemName = "Overclock"
 Description = "Your entire system feels as if it's been injected with pure adrenaline. Briefly increases damage and attack speed."
 
