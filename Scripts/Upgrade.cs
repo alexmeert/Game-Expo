@@ -16,6 +16,7 @@ public partial class Upgrade : Item
 	[Export(PropertyHint.Range, "0,1,0.01")] public float AtkSpdPercent = 0f;
 	[Export(PropertyHint.Range, "0,1,0.01")] public float DefPercent = 0f;
 	[Export(PropertyHint.Range, "0,1,0.01")] public float SpdPercent = 0f;
+	
 
 	public UpgradeRarity Rarity { get; set; }
 
@@ -31,20 +32,22 @@ public partial class Upgrade : Item
 
 	[Export] public AudioStreamPlayer2D CollectSound;
 
+	
+	private bool collected = false;
+
 	public static UpgradeRarity GetRandomRarity()
 	{
 		float roll = (float)GD.RandRange(0f, 100f);
 		
 		if (roll < 55f)
-			return UpgradeRarity.Uncommon;    // 0-55% (55%)
+			return UpgradeRarity.Uncommon;
 		else if (roll < 85f)
-			return UpgradeRarity.Rare;       // 55-85% (30%)
+			return UpgradeRarity.Rare;
 		else if (roll < 95f)
-			return UpgradeRarity.Epic;       // 85-95% (10%)
+			return UpgradeRarity.Epic;
 		else
-			return UpgradeRarity.Legendary;  // 95-100% (5%)
+			return UpgradeRarity.Legendary;
 	}
-
 
 	public override void _Ready()
 	{
@@ -53,28 +56,22 @@ public partial class Upgrade : Item
 		area.BodyEntered += OnPickup;
 		
 		LoadAuraTextures();
-		
 		SetupAura();
 	}
 
 	private static void LoadAuraTextures()
 	{
 		if (UncommonAura == null && ResourceLoader.Exists(UncommonAuraPath))
-		{
 			UncommonAura = GD.Load<PackedScene>(UncommonAuraPath);
-		}
+
 		if (RareAura == null && ResourceLoader.Exists(RareAuraPath))
-		{
 			RareAura = GD.Load<PackedScene>(RareAuraPath);
-		}
+
 		if (EpicAura == null && ResourceLoader.Exists(EpicAuraPath))
-		{
 			EpicAura = GD.Load<PackedScene>(EpicAuraPath);
-		}
+
 		if (LegendaryAura == null && ResourceLoader.Exists(LegendaryAuraPath))
-		{
 			LegendaryAura = GD.Load<PackedScene>(LegendaryAuraPath);
-		}
 	}
 
 	public static void SetAuraScenes(PackedScene uncommon, PackedScene rare, PackedScene epic, PackedScene legendary)
@@ -117,15 +114,22 @@ public partial class Upgrade : Item
 
 	private void OnPickup(Node body)
 	{
+	   
+		if (collected) return;
+		collected = true;
+
 		if (body is Player player)
 		{
-			if (CollectSound != null)
-			{
-				CollectSound.Play();
-			}
-
+			// Apply the upgrade effects
 			player.ApplyUpgrade(this);
+
+			// Add to inventory UI once
+			InventoryUI.Instance?.AddUpgrade(this);
+
+			CollectSound?.Play();
+
 			GD.Print($"{Rarity} {ItemName} collected!");
+
 			QueueFree();
 		}
 	}
@@ -134,10 +138,10 @@ public partial class Upgrade : Item
 	{
 		return Rarity switch
 		{
-			UpgradeRarity.Uncommon => 0.05f,    // 5%
-			UpgradeRarity.Rare => 0.10f,      // 10%
-			UpgradeRarity.Epic => 0.20f,      // 20%
-			UpgradeRarity.Legendary => 0.35f, // 35%
+			UpgradeRarity.Uncommon => 0.05f,
+			UpgradeRarity.Rare => 0.10f,
+			UpgradeRarity.Epic => 0.20f,
+			UpgradeRarity.Legendary => 0.35f,
 			_ => 0.05f
 		};
 	}
@@ -155,13 +159,11 @@ public partial class Upgrade : Item
 
 		float rarityMultiplier = GetRarityMultiplier();
 
-
 		_appliedHpIncrease = HpPercent > 0 ? player.GetBaseMaxHP() * rarityMultiplier * HpPercent : 0f;
 		_appliedDmgIncrease = DmgPercent > 0 ? player.GetBaseDMG() * rarityMultiplier * DmgPercent : 0f;
 		_appliedAtkSpdIncrease = AtkSpdPercent > 0 ? player.GetBaseATKSPD() * rarityMultiplier * AtkSpdPercent : 0f;
 		_appliedDefIncrease = DefPercent > 0 ? rarityMultiplier * DefPercent : 0f;
 		_appliedSpdIncrease = SpdPercent > 0 ? player.GetBaseSPD() * rarityMultiplier * SpdPercent : 0f;
-
 
 		player.MaxHP += _appliedHpIncrease;
 		player.HP += _appliedHpIncrease;
@@ -170,22 +172,13 @@ public partial class Upgrade : Item
 		player.DEF = MathF.Min(1f, player.DEF + _appliedDefIncrease);
 		player.SPD += _appliedSpdIncrease;
 
-		string rarityName = Rarity.ToString();
-		float rarityPercent = rarityMultiplier * 100f;
-		
-		GD.Print($"Applied {rarityName} upgrade: {ItemName} ({rarityPercent:F0}% increase)");
-		if (HpPercent > 0) GD.Print($"  HP: +{_appliedHpIncrease:F1} ({rarityPercent * HpPercent:F1}% of base)");
-		if (DmgPercent > 0) GD.Print($"  DMG: +{_appliedDmgIncrease:F1} ({rarityPercent * DmgPercent:F1}% of base)");
-		if (AtkSpdPercent > 0) GD.Print($"  ATKSPD: +{_appliedAtkSpdIncrease:F2} ({rarityPercent * AtkSpdPercent:F1}% of base)");
-		if (DefPercent > 0) GD.Print($"  DEF: +{_appliedDefIncrease * 100:F1}% ({rarityPercent * DefPercent:F1}% of base)");
-		if (SpdPercent > 0) GD.Print($"  SPD: +{_appliedSpdIncrease:F1} ({rarityPercent * SpdPercent:F1}% of base)");
+		GD.Print($"Applied {Rarity} upgrade: {ItemName}");
 	}
 
 	public override void Remove(Player player)
 	{
 		if (player == null)
 			return;
-
 
 		player.MaxHP -= _appliedHpIncrease;
 		player.DMG -= _appliedDmgIncrease;

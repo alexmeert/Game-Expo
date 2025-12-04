@@ -9,7 +9,10 @@ radius = 16.0
 
 [node name="Defense" type="Node2D" node_paths=PackedStringArray("CollectSound")]
 script = ExtResource("1_qw5lg")
+DefPercent = 1.0
 CollectSound = NodePath("AudioStreamPlayer2D")
+ItemName = "PC Case"
+Icon = ExtResource("1_xdsh5")
 
 [node name="PickupArea" type="Area2D" parent="."]
 

@@ -9,7 +9,10 @@ radius = 16.0
 
 [node name="Health" type="Node2D" node_paths=PackedStringArray("CollectSound")]
 script = ExtResource("1_qw5lg")
+HpPercent = 1.0
 CollectSound = NodePath("AudioStreamPlayer2D")
+ItemName = "PSU"
+Icon = ExtResource("2_qw5lg")
 
 [node name="PickupArea" type="Area2D" parent="."]
 

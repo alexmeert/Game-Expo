@@ -50,6 +50,7 @@ color = Color(0, 1, 0.858824, 1)
 
 [node name="HomeButton" type="Button" parent="."]
 texture_filter = 1
+layout_mode = 0
 offset_left = 24.0
 offset_top = 16.0
 offset_right = 64.0

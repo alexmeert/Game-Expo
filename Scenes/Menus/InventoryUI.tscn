@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://e6h6e5hwv3eq"]
+
+[ext_resource type="Script" uid="uid://0khlutlbemge" path="res://Scripts/InventoryUI.cs" id="1_7gt65"]
+[ext_resource type="PackedScene" uid="uid://cldx0q18vhthc" path="res://Scenes/Menus/UpgradePopup.tscn" id="2_484cb"]
+[ext_resource type="Texture2D" uid="uid://go5svlhl46ab" path="res://Assets/Individual Icons/InventoryMenu.png" id="2_shwpr"]
+
+[node name="InventoryUI" type="Control" node_paths=PackedStringArray("IconListContainer")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1148.0
+offset_bottom = 650.0
+script = ExtResource("1_7gt65")
+IconListContainer = NodePath("ListContainer")
+UpgradePopupScene = ExtResource("2_484cb")
+
+[node name="InventoryMenu" type="Sprite2D" parent="."]
+z_as_relative = false
+position = Vector2(574, 324)
+texture = ExtResource("2_shwpr")
+
+[node name="Overlay" type="ColorRect" parent="."]
+z_index = -1
+layout_mode = 0
+offset_left = -1.0
+offset_top = -4.0
+offset_right = 1146.0
+offset_bottom = 638.0
+color = Color(0, 0, 0.0196078, 0.392157)
+
+[node name="ListContainer" type="HBoxContainer" parent="."]
+z_index = 100
+z_as_relative = false
+layout_mode = 0
+offset_left = 213.0
+offset_top = -17.0
+offset_right = 843.0
+offset_bottom = 408.0
+
+[node name="closeArea" type="Control" parent="."]
+z_index = 3000
+anchors_preset = 0
+offset_left = 800.0
+offset_top = 48.0
+offset_right = 840.0
+offset_bottom = 88.0
