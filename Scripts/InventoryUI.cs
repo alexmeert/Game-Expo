@@ -23,7 +23,7 @@ public partial class InventoryUI : Control
 		IconListContainer.Alignment = BoxContainer.AlignmentMode.Begin;
 
 		// Look for a Control node named "CloseArea" in the scene
-		closeArea = GetNodeOrNull<Control>("CloseArea");
+		closeArea = GetNodeOrNull<Control>("closeArea");
 		if (closeArea != null)
 		{
 			closeArea.GuiInput += (InputEvent @event) =>

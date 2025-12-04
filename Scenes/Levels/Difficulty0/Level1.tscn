@@ -82,7 +82,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)])
 agent_radius = 0.0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hbghi"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7djb7"]
 texture = ExtResource("5_mpgwi")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -452,9 +452,9 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 navigation_layer_0/layers = 1
-sources/0 = SubResource("TileSetAtlasSource_hbghi")
+sources/0 = SubResource("TileSetAtlasSource_7djb7")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wiu4c"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8tf6o"]
 texture = ExtResource("6_rv4f5")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -484,7 +484,7 @@ texture_region_size = Vector2i(32, 32)
 6:7/0 = 0
 7:7/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3hula"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0deug"]
 texture = ExtResource("5_mpgwi")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -583,10 +583,10 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 navigation_layer_0/layers = 1
-sources/1 = SubResource("TileSetAtlasSource_3hula")
-sources/0 = SubResource("TileSetAtlasSource_wiu4c")
+sources/1 = SubResource("TileSetAtlasSource_0deug")
+sources/0 = SubResource("TileSetAtlasSource_8tf6o")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qndh8"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0drga"]
 texture = ExtResource("5_mpgwi")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -675,9 +675,9 @@ texture_region_size = Vector2i(32, 32)
 
 [sub_resource type="TileSet" id="TileSet_m2ud8"]
 tile_size = Vector2i(32, 32)
-sources/0 = SubResource("TileSetAtlasSource_qndh8")
+sources/0 = SubResource("TileSetAtlasSource_0drga")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m2ud8"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mpgwi"]
 texture = ExtResource("6_rv4f5")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -707,21 +707,21 @@ texture_region_size = Vector2i(32, 32)
 
 [sub_resource type="TileSet" id="TileSet_7djb7"]
 tile_size = Vector2i(32, 32)
-sources/0 = SubResource("TileSetAtlasSource_m2ud8")
+sources/0 = SubResource("TileSetAtlasSource_mpgwi")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_77iba"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rv4f5"]
 texture = ExtResource("7_fscui")
 0:0/0 = 0
 0:1/0 = 0
 0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_67y36"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fscui"]
 texture = ExtResource("8_ha3iv")
 0:0/0 = 0
 0:1/0 = 0
 0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hk4vc"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ha3iv"]
 texture = ExtResource("9_5vvcx")
 0:0/0 = 0
 0:1/0 = 0
@@ -729,9 +729,9 @@ texture = ExtResource("9_5vvcx")
 
 [sub_resource type="TileSet" id="TileSet_67y36"]
 physics_layer_0/collision_layer = 1
-sources/1 = SubResource("TileSetAtlasSource_77iba")
-sources/2 = SubResource("TileSetAtlasSource_67y36")
-sources/3 = SubResource("TileSetAtlasSource_hk4vc")
+sources/1 = SubResource("TileSetAtlasSource_rv4f5")
+sources/2 = SubResource("TileSetAtlasSource_fscui")
+sources/3 = SubResource("TileSetAtlasSource_ha3iv")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_kri6y"]
 vertices = PackedVector2Array(810, 438, 694, 438, 426, 426, 566, 426, 810, 554, 889, 543, 935, 543, 1019.91, 604.977, 938, 310, 822, 310, 810, 298, 810, 182, 1016.09, 165, 938, 426, 935, 507, 889, 507, 822, 426, 682, 426, 682, 310, 694, 298, 554, 298, 554, 182, 694, 182, 566, 310, 694, 554, 554, 554, 554, 438, 438, 438, 310, 426, 229.023, 165, 438, 182, 310, 310, 438, 298, 426, 310, 438, 554, 229.969, 604.008)
@@ -832,3 +832,4 @@ autoplay = true
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="InventoryUI" parent="CanvasLayer" instance=ExtResource("21_7djb7")]
+metadata/_edit_use_anchors_ = true
