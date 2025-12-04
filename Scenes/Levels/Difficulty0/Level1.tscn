@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=4 uid="uid://bg635lk553wrv"]
+[gd_scene load_steps=46 format=4 uid="uid://bg635lk553wrv"]
 
 [ext_resource type="PackedScene" uid="uid://3mdpl08kn7yk" path="res://Scenes/LevelController.tscn" id="1_7djb7"]
 [ext_resource type="Texture2D" uid="uid://dx5xusixt7bfv" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/tileset.png" id="5_mpgwi"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://cf0qvluqoi07u" path="res://Scenes/LevelAssets/Door.tscn" id="19_qndh8"]
 [ext_resource type="PackedScene" uid="uid://d3aundu586d2f" path="res://Scenes/Items/Upgrades/Health.tscn" id="20_lltum"]
 [ext_resource type="AudioStream" uid="uid://ck2s6ef8wn5ux" path="res://Sounds/Music/Normal/NormalMusic.mp3" id="20_m2ud8"]
+[ext_resource type="PackedScene" uid="uid://e6h6e5hwv3eq" path="res://Scenes/Menus/InventoryUI.tscn" id="21_7djb7"]
 [ext_resource type="PackedScene" uid="uid://bjoxxngko37rd" path="res://Scenes/Items/Upgrades/MagSize.tscn" id="21_ppa3s"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_4d3fe"]
@@ -827,3 +828,7 @@ position = Vector2(624, 144)
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("20_m2ud8")
 autoplay = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="InventoryUI" parent="CanvasLayer" instance=ExtResource("21_7djb7")]
