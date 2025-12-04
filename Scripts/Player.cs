@@ -60,6 +60,15 @@ public partial class Player : BasicEntity
 		base._PhysicsProcess(delta);
 		UpdatePerks((float)delta);
 	}
+	
+	public override void _Input(InputEvent @event)
+{
+	if (@event.IsActionPressed("inventory_toggle"))
+	{
+		InventoryUI.Instance?.Toggle();
+	}
+}
+
 
 	protected override void HandleMovement(double delta)
 	{
@@ -144,9 +153,13 @@ public partial class Player : BasicEntity
 		if (upgrade == null)
 			return;
 
-		upgrade.Apply(this);
-		_activeUpgrades.Add(upgrade);
+		upgrade.Apply(this);      // change stats
+		_activeUpgrades.Add(upgrade); 
+
+		
 	}
+
+
 
 	/// <summary>
 	/// Applies a temporary perk to the player

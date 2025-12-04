@@ -9,7 +9,10 @@ radius = 16.0
 
 [node name="Damage" type="Node2D" node_paths=PackedStringArray("CollectSound")]
 script = ExtResource("1_djxu2")
+DmgPercent = 1.0
 CollectSound = NodePath("AudioStreamPlayer2D")
+ItemName = "16GB Ram Stick"
+Icon = ExtResource("1_vxyqf")
 
 [node name="PickupArea" type="Area2D" parent="."]
 

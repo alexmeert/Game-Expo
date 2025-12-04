@@ -9,7 +9,10 @@ radius = 16.0
 
 [node name="FireRate" type="Node2D" node_paths=PackedStringArray("CollectSound")]
 script = ExtResource("1_ttpcb")
+AtkSpdPercent = 1.0
 CollectSound = NodePath("AudioStreamPlayer2D")
+ItemName = "GPU"
+Icon = ExtResource("1_2tgk7")
 
 [node name="PickupArea" type="Area2D" parent="."]
 
