@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 RandomSceneLoader="*res://Scripts/RandomSceneLoader.cs"
+GlobalInventory="*res://Scenes/GlobalInventory.tscn"
 
 [display]
 

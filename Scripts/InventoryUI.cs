@@ -121,8 +121,20 @@ public partial class InventoryUI : Control
 	public void Toggle()
 	{
 		Visible = !Visible;
+
+		if (Visible)
+		{
+			// Populate inventory UI from global upgrades
+			Clear();
+			foreach (var upgrade in GlobalInventory.Instance.GetUpgrades())
+			{
+				AddUpgrade(upgrade);
+			}
+		}
+
 		Engine.TimeScale = Visible ? 0f : 1f;
 	}
+
 
 	public void Clear()
 	{

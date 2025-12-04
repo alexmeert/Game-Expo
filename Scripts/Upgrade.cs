@@ -114,7 +114,6 @@ public partial class Upgrade : Item
 
 	private void OnPickup(Node body)
 	{
-	   
 		if (collected) return;
 		collected = true;
 
@@ -123,16 +122,19 @@ public partial class Upgrade : Item
 			// Apply the upgrade effects
 			player.ApplyUpgrade(this);
 
-			// Add to inventory UI once
+			// Add to global inventory
+			GlobalInventory.Instance?.AddUpgrade(this);
+
+			// Add to inventory UI if it's open
 			InventoryUI.Instance?.AddUpgrade(this);
 
 			CollectSound?.Play();
-
 			GD.Print($"{Rarity} {ItemName} collected!");
 
 			QueueFree();
 		}
 	}
+
 
 	private float GetRarityMultiplier()
 	{

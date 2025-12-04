@@ -30,10 +30,19 @@ public partial class Player : BasicEntity
 	{
 		base._Ready();
 
+		// Assign gun owner first
 		var gun = GetNode<Gun>("Gun");
 		if (gun != null)
 			gun.Owner = this;
+
+		// Apply all previously collected upgrades from GlobalInventory
+		foreach (var upgrade in GlobalInventory.Instance.GetUpgrades())
+		{
+			ApplyUpgrade(upgrade);
+		}
 	}
+
+
 
 	protected override void InitializeEntity()
 	{
