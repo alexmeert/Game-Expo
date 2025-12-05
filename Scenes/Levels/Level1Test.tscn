@@ -1,6 +1,6 @@
 [gd_scene load_steps=43 format=4 uid="uid://bfiwsjunl2efv"]
 
-[ext_resource type="PackedScene" uid="uid://3mdpl08kn7yk" path="res://Scenes/UnfinishedLevels/LevelController.tscn" id="1_b5p6m"]
+[ext_resource type="PackedScene" uid="uid://3mdpl08kn7yk" path="res://Scenes/LevelController.tscn" id="1_b5p6m"]
 [ext_resource type="Texture2D" uid="uid://y0s0p8xfsi5p" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/door/door_closed.png" id="2_xrbrl"]
 [ext_resource type="Texture2D" uid="uid://bcp2cotlvml5w" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/door/door_spritesheet.png" id="3_3ggmh"]
 [ext_resource type="Texture2D" uid="uid://cwrlsra5b1d46" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/door/door2_bis.png" id="4_6m6mt"]
@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://tdc1q346nfrd" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server_disabled.png" id="8_d73lf"]
 [ext_resource type="Texture2D" uid="uid://b2xqy06cpdcab" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server_down.png" id="9_fb3fi"]
 [ext_resource type="PackedScene" uid="uid://c1aw4q02ut5i1" path="res://Scenes/Characters/Player/MainCharacter.tscn" id="14_jbpci"]
-[ext_resource type="PackedScene" uid="uid://c8u16gw00jovv" path="res://Scenes/Rewards/Chest.tscn" id="15_7p4nd"]
+[ext_resource type="PackedScene" uid="uid://c8u16gw00jovv" path="res://Scenes/Chest/Chest.tscn" id="15_7p4nd"]
 [ext_resource type="PackedScene" uid="uid://170k71snx6d3" path="res://Scenes/Items/Upgrades/Cooldown.tscn" id="16_lnqyr"]
 [ext_resource type="PackedScene" uid="uid://dyhm385qsegw2" path="res://Scenes/Items/Upgrades/Damage.tscn" id="17_8ralf"]
 [ext_resource type="PackedScene" uid="uid://y7g0ts65vriw" path="res://Scenes/Items/Upgrades/Defense.tscn" id="18_7ngkv"]
