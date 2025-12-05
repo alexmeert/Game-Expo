@@ -708,6 +708,7 @@ UpgradeScenes = [ExtResource("16_lnqyr"), ExtResource("17_8ralf"), ExtResource("
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="InventoryUI" parent="CanvasLayer" instance=ExtResource("22_1vwn0")]
+visible = false
 offset_top = 5.0
 offset_bottom = 655.0
 
@@ -728,3 +729,8 @@ position = Vector2(870, 562)
 
 [node name="MagSize" parent="." instance=ExtResource("21_2mqrt")]
 position = Vector2(909, 563)
+HpPercent = 0.0
+DmgPercent = 0.0
+AtkSpdPercent = 0.0
+DefPercent = 0.0
+SpdPercent = 0.0

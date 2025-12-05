@@ -44,7 +44,7 @@ public partial class InventoryUI : Control
 	
 	public override void _Notification(int what)
 	{
-		// Node has been added to the tree
+		
 		if (what == NotificationEnterTree)
 		{
 			// Check if this is MainMenu
@@ -66,14 +66,13 @@ public partial class InventoryUI : Control
 		var vbox = new VBoxContainer
 		{
 			Alignment = BoxContainer.AlignmentMode.Center,
-			CustomMinimumSize = new Vector2(96, 100), // Increased to accommodate 1.5x scale
-			MouseFilter = Control.MouseFilterEnum.Stop // Enable mouse input
+			CustomMinimumSize = new Vector2(96, 120),
+			MouseFilter = Control.MouseFilterEnum.Stop
 		};
 
-		// Create a container to center the icon
 		var iconContainer = new CenterContainer
 		{
-			CustomMinimumSize = new Vector2(96, 96) // 64 * 1.5 = 96
+			CustomMinimumSize = new Vector2(64, 64)
 		};
 
 		var icon = new TextureRect
@@ -81,9 +80,9 @@ public partial class InventoryUI : Control
 			Texture = u.Icon,
 			CustomMinimumSize = new Vector2(64, 64),
 			StretchMode = TextureRect.StretchModeEnum.Keep,
-			Scale = new Vector2(1.5f, 1.5f) // Scale up by 1.5x
+			Scale = new Vector2(1.5f, 1.5f)
 		};
-		
+
 		iconContainer.AddChild(icon);
 		vbox.AddChild(iconContainer);
 
@@ -94,9 +93,19 @@ public partial class InventoryUI : Control
 		};
 		vbox.AddChild(label);
 
+		
+		var statsLabel = new Label
+		{
+			Text = u.GetStatSummary(),
+			HorizontalAlignment = HorizontalAlignment.Center,
+			Modulate = new Color(0.8f, 0.8f, 0.8f)
+		};
+		statsLabel.AddThemeFontSizeOverride("font_size", 12); 
+		vbox.AddChild(statsLabel);
+		
+
 		IconListContainer.AddChild(vbox);
 
-		// Attach click handler to the vbox
 		vbox.GuiInput += (InputEvent ev) =>
 		{
 			if (ev is InputEventMouseButton mb &&
@@ -107,6 +116,9 @@ public partial class InventoryUI : Control
 			}
 		};
 	}
+
+
+
 
 	private void OpenPopup(Upgrade u)
 	{

@@ -111,6 +111,31 @@ public partial class Upgrade : Item
 		Rarity = rarity;
 		SetupAura();
 	}
+	
+	public string GetStatSummary()
+	{
+		float rarityMult = GetRarityMultiplier();
+
+		string summary = "";
+
+		if (HpPercent > 0)
+			summary += $"HP: {(1 + HpPercent * rarityMult) * 100f:0}%\n";
+
+		if (DmgPercent > 0)
+			summary += $"Damage: {(1 + DmgPercent * rarityMult) * 100f:0}%\n";
+
+		if (AtkSpdPercent > 0)
+			summary += $"Fire Rate: {(1 + AtkSpdPercent * rarityMult) * 100f:0}%\n";
+
+		if (DefPercent > 0)
+			summary += $"Defense: {(1 + DefPercent * rarityMult) * 100f:0}%\n";
+
+		if (SpdPercent > 0)
+			summary += $"Speed: {(1 + SpdPercent * rarityMult) * 100f:0}%\n";
+
+		return summary.TrimEnd();
+	}
+
 
 	private void OnPickup(Node body)
 	{
