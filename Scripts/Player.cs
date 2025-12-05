@@ -10,7 +10,7 @@ public partial class Player : BasicEntity
 	[Export] private int Hp = 100;
 	[Export] private int Dmg = 10;
 	[Export] private float AtkSpd = 1.0f;
-	[Export] private float Def = 0f; // Percentage (0.0 = 0%, 1.0 = 100% damage reduction)
+	[Export] private float Def = 0f;
 	[Export] private float Spd = 100;
 	[Export] private AudioStreamPlayer2D HitSound;
 	[Export] private AudioStreamPlayer2D DeathSound;
@@ -19,11 +19,12 @@ public partial class Player : BasicEntity
 	[Export] private Label AmmoLabel;
 	[Export] private ProgressBar AmmoBar;
 	[Export] private ProgressBar ReloadBar;
+	[Export] private AnimatedSprite2D OverclockAura;
+	[Export] private AnimatedSprite2D FirewallAura;
 
 	private List<Upgrade> _activeUpgrades = new List<Upgrade>();
 	private List<Perk> _activePerks = new List<Perk>();
 
-	// Base stats (before upgrades) - used for percentage calculations
 	private float _baseMaxHP;
 	private float _baseDMG;
 	private float _baseATKSPD;
@@ -52,6 +53,16 @@ public partial class Player : BasicEntity
 		if (AmmoBar != null)
 		{
 			AmmoBar.Visible = true;
+		}
+
+		// Hide auras initially
+		if (OverclockAura != null)
+		{
+			OverclockAura.Visible = false;
+		}
+		if (FirewallAura != null)
+		{
+			FirewallAura.Visible = false;
 		}
 
 		// Apply all previously collected upgrades from GlobalInventory
@@ -243,49 +254,55 @@ public partial class Player : BasicEntity
 		GetTree().ChangeSceneToFile("res://Scenes/Menus/DeathMenu.tscn");
 	}
 
-	/// <summary>
-	/// Applies a permanent upgrade to the player
-	/// </summary>
 	public void ApplyUpgrade(Upgrade upgrade)
 	{
 		if (upgrade == null)
 			return;
 
-		upgrade.Apply(this);      // change stats
+		upgrade.Apply(this);
 		_activeUpgrades.Add(upgrade); 
 
 		
 	}
 
-
-
-	/// <summary>
-	/// Applies a temporary perk to the player
-	/// </summary>
 	public void ApplyPerk(Perk perk)
 	{
 		if (perk == null)
 			return;
 
-		// If perk is not in the list, add it
 		if (!_activePerks.Contains(perk))
 		{
 			_activePerks.Add(perk);
 		}
 
-		// Apply or refresh the perk
 		perk.Apply(this);
 	}
 
-	/// <summary>
-	/// Updates all active perks and removes expired ones
-	/// </summary>
 	private void UpdatePerks(float delta)
 	{
+		bool hasOverclock = false;
+		bool hasFirewall = false;
+
 		for (int i = _activePerks.Count - 1; i >= 0; i--)
 		{
 			Perk perk = _activePerks[i];
 			perk.Update(delta);
+
+			// Check if perk is active and matches aura names
+			if (perk.IsActive)
+			{
+				string perkName = perk.ItemName?.ToLower() ?? "";
+				if (perkName.Contains("overclock"))
+				{
+					hasOverclock = true;
+					GD.Print($"Found active Overclock perk: {perk.ItemName}");
+				}
+				if (perkName.Contains("firewall"))
+				{
+					hasFirewall = true;
+					GD.Print($"Found active Firewall perk: {perk.ItemName}");
+				}
+			}
 
 			if (!perk.IsActive)
 			{
@@ -293,25 +310,61 @@ public partial class Player : BasicEntity
 				_activePerks.RemoveAt(i);
 			}
 		}
+
+		// Update aura visibility and animation
+		UpdateAuras(hasOverclock, hasFirewall);
 	}
 
-	/// <summary>
-	/// Gets all active upgrades
-	/// </summary>
+	private void UpdateAuras(bool hasOverclock, bool hasFirewall)
+	{
+    	HandleAura(OverclockAura, hasOverclock);
+    	HandleAura(FirewallAura, hasFirewall);
+	}
+
+	private void HandleAura(AnimatedSprite2D aura, bool isActive)
+	{
+	    if (aura == null) return;
+
+	    if (isActive)
+	    {
+	        // Activate if not already visible
+	        if (!aura.Visible)
+	        {
+	            aura.Visible = true;
+	            aura.Play("Active");
+	        }
+	    }
+	    else
+	    {
+	        // Only trigger expire if it was active before
+	        if (aura.Visible)
+	        {
+	            aura.Play("Expire");
+
+	            // Wait for expire animation to finish
+				aura.AnimationFinished += () =>
+				{
+				    if (aura.Animation == "Expire")
+				    {
+				        aura.Visible = false;
+				    }
+				};
+
+	        }
+	    }
+	}
+
+
 	public List<Upgrade> GetActiveUpgrades()
 	{
 		return new List<Upgrade>(_activeUpgrades);
 	}
 
-	/// <summary>
-	/// Gets all active perks
-	/// </summary>
 	public List<Perk> GetActivePerks()
 	{
 		return new List<Perk>(_activePerks);
 	}
 
-	// Base stat getters for upgrade percentage calculations
 	public float GetBaseMaxHP() => _baseMaxHP;
 	public float GetBaseDMG() => _baseDMG;
 	public float GetBaseATKSPD() => _baseATKSPD;

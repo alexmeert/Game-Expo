@@ -167,7 +167,8 @@ sprite_frames = SubResource("SpriteFrames_hv0av")
 animation = &"WalkUp"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 8)
+visible = false
+position = Vector2(0, 12)
 shape = SubResource("CircleShape2D_kcgap")
 
 [node name="Hitbox" type="Area2D" parent="." groups=["Enemy"]]
@@ -179,6 +180,8 @@ scale = Vector2(2.64, 1)
 shape = SubResource("RectangleShape2D_myivn")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 3.0
+target_desired_distance = 3.0
 path_postprocessing = 1
 debug_enabled = true
 

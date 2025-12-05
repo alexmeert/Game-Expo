@@ -1,7 +1,44 @@
-[gd_scene load_steps=5 format=3 uid="uid://cvo5ub1k3b6hm"]
+[gd_scene load_steps=11 format=3 uid="uid://cvo5ub1k3b6hm"]
 
-[ext_resource type="Texture2D" uid="uid://dam1osig8qlw8" path="res://Sprites/Characters/Bosses/BSOD/Speaker.png" id="1_71j08"]
 [ext_resource type="Script" uid="uid://dswmpiguy2y65" path="res://Scripts/Speaker.cs" id="2_dvqik"]
+[ext_resource type="Texture2D" uid="uid://b7u0grmjdq8nl" path="res://Sprites/Characters/Bosses/BSOD/SpeakerAnimation.png" id="3_5gfxi"]
+[ext_resource type="PackedScene" uid="uid://csi66qabvkfxa" path="res://Scenes/Weapons/SpeakerGun.tscn" id="3_a73cs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1k8fh"]
+atlas = ExtResource("3_5gfxi")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yjh1i"]
+atlas = ExtResource("3_5gfxi")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iy3ix"]
+atlas = ExtResource("3_5gfxi")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m0jue"]
+atlas = ExtResource("3_5gfxi")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dvqik"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1k8fh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yjh1i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iy3ix")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m0jue")
+}],
+"loop": true,
+"name": &"Default",
+"speed": 8.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dvqik"]
 size = Vector2(21, 32)
@@ -9,12 +46,19 @@ size = Vector2(21, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_71j08"]
 size = Vector2(27, 38)
 
-[node name="LeftSpeaker" type="CharacterBody2D"]
+[node name="LeftSpeaker" type="CharacterBody2D" node_paths=PackedStringArray("SpeakerGun", "Sprite")]
 texture_filter = 1
 script = ExtResource("2_dvqik")
+SpeakerGun = NodePath("SpeakerGun")
+Sprite = NodePath("Sprite")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_71j08")
+[node name="SpeakerGun" parent="." instance=ExtResource("3_a73cs")]
+AttackCooldown = 0.5
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_dvqik")
+animation = &"Default"
+frame_progress = 0.162073
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

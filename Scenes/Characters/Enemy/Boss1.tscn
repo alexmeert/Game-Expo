@@ -1,8 +1,13 @@
-[gd_scene load_steps=36 format=3 uid="uid://peg2ksupnly8"]
+[gd_scene load_steps=37 format=3 uid="uid://peg2ksupnly8"]
 
 [ext_resource type="Texture2D" uid="uid://famfbwy147yl" path="res://Sprites/Characters/Bosses/BSOD/Boss_BSOD.png" id="1_6y34w"]
 [ext_resource type="Texture2D" uid="uid://dvesg53fa80l" path="res://Sprites/Characters/Bosses/BSOD/BSOD_Attack-Sheet.png" id="1_74cfw"]
 [ext_resource type="Script" uid="uid://hpe3pnpngjme" path="res://Scripts/Boss.cs" id="1_p584a"]
+[ext_resource type="PackedScene" uid="uid://bcckbwq66r0vi" path="res://Scenes/Weapons/BossGun.tscn" id="2_yibby"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hmrpc"]
+atlas = ExtResource("1_6y34w")
+region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p584a"]
 atlas = ExtResource("1_74cfw")
@@ -116,12 +121,16 @@ region = Rect2(832, 0, 32, 32)
 atlas = ExtResource("1_74cfw")
 region = Rect2(864, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hmrpc"]
-atlas = ExtResource("1_6y34w")
-region = Rect2(0, 0, 32, 32)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_p584a"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hmrpc")
+}],
+"loop": true,
+"name": &"Default",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_p584a")
@@ -208,16 +217,8 @@ animations = [{
 "texture": SubResource("AtlasTexture_6e42x")
 }],
 "loop": true,
-"name": &"Attack",
+"name": &"Phase1",
 "speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hmrpc")
-}],
-"loop": true,
-"name": &"Default",
-"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yibby"]
@@ -226,14 +227,18 @@ size = Vector2(28, 22)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_74cfw"]
 size = Vector2(36, 31)
 
-[node name="Boss" type="CharacterBody2D"]
+[node name="Boss" type="CharacterBody2D" node_paths=PackedStringArray("Sprite", "BossGun")]
 script = ExtResource("1_p584a")
+Sprite = NodePath("AnimatedSprite2D")
+BossGun = NodePath("BossGun")
+
+[node name="BossGun" parent="." instance=ExtResource("2_yibby")]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_p584a")
-animation = &"Attack"
-frame_progress = 0.190574
+animation = &"Phase1"
+frame_progress = 0.645603
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_yibby")

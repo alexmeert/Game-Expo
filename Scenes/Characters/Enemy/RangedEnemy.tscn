@@ -1,8 +1,9 @@
-[gd_scene load_steps=28 format=4 uid="uid://dmfv1i20k17vl"]
+[gd_scene load_steps=29 format=4 uid="uid://dmfv1i20k17vl"]
 
 [ext_resource type="Script" uid="uid://mvuhxikulvrq" path="res://Scripts/RangedEnemy.cs" id="1_8rkq5"]
 [ext_resource type="Texture2D" uid="uid://byfg6klnwfcv7" path="res://Sprites/Characters/Enemies/FanCrab/FanCrabDown-Sheet.png" id="1_rpf11"]
 [ext_resource type="Texture2D" uid="uid://dvv5sxplnaovu" path="res://Sprites/Characters/Enemies/FanCrab/FanCrabLeft-Sheet.png" id="2_8rkq5"]
+[ext_resource type="PackedScene" uid="uid://cgo07mi4rd0ng" path="res://Scenes/Projectiles/Enemy/RangedEnemy/RangedProjectile.tscn" id="2_t7cc0"]
 [ext_resource type="Texture2D" uid="uid://cxjtj3827u70k" path="res://Sprites/Characters/Enemies/FanCrab/FanCrabRight-Sheet.png" id="3_romis"]
 [ext_resource type="Texture2D" uid="uid://j033vq41wau8" path="res://Sprites/Characters/Enemies/FanCrab/FanCrabBack-Sheet.png" id="4_t7cc0"]
 [ext_resource type="PackedScene" uid="uid://dwn4vukan1paf" path="res://Scenes/Characters/UI/Healthbar.tscn" id="7_romis"]
@@ -156,6 +157,7 @@ data = PackedByteArray("//vUZAAABmw3SRVzAAJlgujRrBgAX3FHKlntgAG3o6QHNRAAAAhDcjSN
 script = ExtResource("1_8rkq5")
 HitSound = NodePath("TakeDamage")
 DeathSound = NodePath("DeathSound")
+ProjectileScene = ExtResource("2_t7cc0")
 FirePoint = NodePath("FirePoint")
 Healthbar = NodePath("Healthbar")
 
@@ -180,6 +182,8 @@ scale = Vector2(1.2, 1)
 shape = SubResource("RectangleShape2D_3wsu0")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 3.0
+target_desired_distance = 3.0
 path_postprocessing = 1
 debug_enabled = true
 

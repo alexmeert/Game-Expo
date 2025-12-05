@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://csi66qabvkfxa"]
+
+[ext_resource type="Script" uid="uid://dvnarsrurmcy0" path="res://Scripts/SpeakerGun.cs" id="1_e1h1u"]
+[ext_resource type="Script" uid="uid://d1numd7j3u1bn" path="res://Scripts/SpeakerProjectileManager.cs" id="2_e1h1u"]
+
+[node name="SpeakerGun" type="Node2D" node_paths=PackedStringArray("Muzzle", "SpeakerProjectileManager")]
+script = ExtResource("1_e1h1u")
+Muzzle = NodePath("Muzzle")
+SpeakerProjectileManager = NodePath("SpeakerProjectileManager")
+
+[node name="Muzzle" type="Marker2D" parent="."]
+
+[node name="SpeakerProjectileManager" type="Node" parent="."]
+script = ExtResource("2_e1h1u")
+
+[node name="ShotSound" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"

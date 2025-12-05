@@ -216,7 +216,7 @@ animation = &"WalkRight"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2(0, 8)
+position = Vector2(0, 12)
 scale = Vector2(1, 0.995352)
 shape = SubResource("CircleShape2D_rtru1")
 
@@ -229,6 +229,8 @@ position = Vector2(-2, 2.5)
 shape = SubResource("RectangleShape2D_mhmch")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 3.0
+target_desired_distance = 3.0
 path_postprocessing = 1
 debug_enabled = true
 

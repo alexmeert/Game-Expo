@@ -30,7 +30,8 @@ private void OnBodyEntered(Node body)
 {
 	if (body is Player player)
 	{
-		Apply(player);
+		// Use player's ApplyPerk method to ensure it's added to the active perks list
+		player.ApplyPerk(this);
 
 		//Remove perk from scene after pickup
 		QueueFree();

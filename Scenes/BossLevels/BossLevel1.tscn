@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=4 uid="uid://bjujlm6jrmxmb"]
+[gd_scene load_steps=40 format=4 uid="uid://bjujlm6jrmxmb"]
 
 [ext_resource type="PackedScene" uid="uid://3mdpl08kn7yk" path="res://Scenes/LevelController.tscn" id="1_poxnn"]
 [ext_resource type="Texture2D" uid="uid://dx5xusixt7bfv" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/tileset.png" id="2_5ygav"]
@@ -8,15 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://b2xqy06cpdcab" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server_down.png" id="6_j4rbo"]
 [ext_resource type="FontFile" uid="uid://bkbyvaj1rkqvw" path="res://Assets/Fonts/8-bit-font/8Bit-44Pl.ttf" id="10_poxnn"]
 [ext_resource type="PackedScene" uid="uid://c1aw4q02ut5i1" path="res://Scenes/Characters/Player/MainCharacter.tscn" id="11_nho2g"]
-[ext_resource type="PackedScene" uid="uid://c8u16gw00jovv" path="res://Scenes/Chest/Chest.tscn" id="12_2evu7"]
 [ext_resource type="PackedScene" uid="uid://dwn4vukan1paf" path="res://Scenes/Characters/UI/Healthbar.tscn" id="12_xo5nl"]
 [ext_resource type="FontFile" uid="uid://bjtv1av4o6be8" path="res://Assets/Fonts/vermin-vibes-1989-font/VerminVibes1989Regular-m77m.ttf" id="13_214sx"]
-[ext_resource type="PackedScene" uid="uid://170k71snx6d3" path="res://Scenes/Items/Upgrades/Cooldown.tscn" id="13_uo6fq"]
-[ext_resource type="PackedScene" uid="uid://dyhm385qsegw2" path="res://Scenes/Items/Upgrades/Damage.tscn" id="14_uvtk6"]
-[ext_resource type="PackedScene" uid="uid://y7g0ts65vriw" path="res://Scenes/Items/Upgrades/Defense.tscn" id="15_phb75"]
-[ext_resource type="PackedScene" uid="uid://dlumqsplwb8xv" path="res://Scenes/Items/Upgrades/FireRate.tscn" id="16_yxlvc"]
-[ext_resource type="PackedScene" uid="uid://d3aundu586d2f" path="res://Scenes/Items/Upgrades/Health.tscn" id="17_46h44"]
-[ext_resource type="PackedScene" uid="uid://bjoxxngko37rd" path="res://Scenes/Items/Upgrades/MagSize.tscn" id="18_iiuc2"]
 [ext_resource type="AudioStream" uid="uid://b1tn3d1kutgl3" path="res://Sounds/Music/Boss/BossMusic.mp3" id="19_5ygav"]
 [ext_resource type="PackedScene" uid="uid://e6h6e5hwv3eq" path="res://Scenes/Menus/InventoryUI.tscn" id="21_05qfh"]
 [ext_resource type="PackedScene" uid="uid://cvo5ub1k3b6hm" path="res://Scenes/Characters/Enemy/LeftSpeaker.tscn" id="21_poxnn"]
@@ -853,13 +846,6 @@ label_settings = SubResource("LabelSettings_5ygav")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Chest" parent="." instance=ExtResource("12_2evu7")]
-visible = false
-z_index = 1
-y_sort_enabled = true
-position = Vector2(624, 240)
-UpgradeScenes = [ExtResource("13_uo6fq"), ExtResource("14_uvtk6"), ExtResource("15_phb75"), ExtResource("16_yxlvc"), ExtResource("17_46h44"), ExtResource("18_iiuc2")]
-
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("19_5ygav")
 autoplay = true
@@ -869,11 +855,13 @@ autoplay = true
 [node name="InventoryUI" parent="CanvasLayer" instance=ExtResource("21_05qfh")]
 metadata/_edit_use_anchors_ = true
 
-[node name="Boss" parent="." node_paths=PackedStringArray("HPValueLabel", "Healthbar") instance=ExtResource("22_5ygav")]
+[node name="Boss" parent="." node_paths=PackedStringArray("HPValueLabel", "LeftSpeaker", "RightSpeaker", "Healthbar") instance=ExtResource("22_5ygav")]
 z_index = 2
 position = Vector2(624, 208)
 scale = Vector2(2.49833, 2.49833)
 HPValueLabel = NodePath("../MainCharacter/BossHPValue")
+LeftSpeaker = NodePath("../LeftSpeaker")
+RightSpeaker = NodePath("../RightSpeaker")
 Healthbar = NodePath("../MainCharacter/BossHealthBar")
 
 [node name="LeftSpeaker" parent="." node_paths=PackedStringArray("HPValueLabel", "Healthbar") instance=ExtResource("21_poxnn")]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=120 format=4 uid="uid://c1aw4q02ut5i1"]
+[gd_scene load_steps=121 format=4 uid="uid://c1aw4q02ut5i1"]
 
 [ext_resource type="Script" uid="uid://bh5qd48qpm15n" path="res://Scripts/Player.cs" id="1_4flse"]
 [ext_resource type="Texture2D" uid="uid://dkbi2qmrosleb" path="res://Sprites/Characters/Player/CPUManIdle-Sheet.png" id="2_1go25"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bwc0uiltfbgob" path="res://Sprites/Characters/Player/CPUManWalkRight-Sheet.png" id="4_1go25"]
 [ext_resource type="Texture2D" uid="uid://4f0fssfw6egl" path="res://Sprites/Characters/Player/PlayerBack.png" id="5_3utfi"]
 [ext_resource type="PackedScene" uid="uid://dwn4vukan1paf" path="res://Scenes/Characters/UI/Healthbar.tscn" id="8_1go25"]
+[ext_resource type="AudioStream" uid="uid://bosg7cptxi67n" path="res://Sounds/Player/PlayerHit.wav" id="8_4vx1o"]
 [ext_resource type="PackedScene" uid="uid://cpfkkd3hwrg6v" path="res://Scenes/Menus/PauseMenu.tscn" id="9_v5g80"]
 [ext_resource type="AudioStream" uid="uid://dbifmd6w86h4i" path="res://Sounds/Player/PlayerWalk.mp3" id="10_chds8"]
 [ext_resource type="Texture2D" uid="uid://cjeslh3hfcvin" path="res://Sprites/Items/Perks/Aura/OverclockAuraBreak-Sheet.png" id="11_p81lu"]
@@ -736,7 +737,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_svvpg"]
-radius = 10.1023
+radius = 9.09201
 
 [sub_resource type="LabelSettings" id="LabelSettings_4vx1o"]
 font = ExtResource("15_6h7n7")
@@ -756,15 +757,20 @@ expand_margin_bottom = 1.0
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4vx1o"]
 bg_color = Color(0.415686, 0, 0, 1)
 
-[node name="MainCharacter" type="CharacterBody2D" node_paths=PackedStringArray("WalkSound", "HPValueLabel", "AmmoLabel", "AmmoBar", "ReloadBar", "Healthbar")]
+[node name="MainCharacter" type="CharacterBody2D" node_paths=PackedStringArray("HitSound", "DeathSound", "WalkSound", "HPValueLabel", "AmmoLabel", "AmmoBar", "ReloadBar", "OverclockAura", "FirewallAura", "Healthbar")]
 script = ExtResource("1_4flse")
 Hp = 50
+AtkSpd = 0.1
 Spd = 70.0
+HitSound = NodePath("PlayerHit")
+DeathSound = NodePath("PlayerDeath")
 WalkSound = NodePath("WalkSound")
 HPValueLabel = NodePath("PlayerHPValue")
 AmmoLabel = NodePath("MagazineUI/AmmoLabel")
 AmmoBar = NodePath("MagazineUI/AmmoBar")
 ReloadBar = NodePath("MagazineUI/ReloadBar")
+OverclockAura = NodePath("OverclockAura")
+FirewallAura = NodePath("FirewallAura")
 Healthbar = NodePath("Healthbar")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
@@ -793,6 +799,10 @@ shape = SubResource("RectangleShape2D_j5d3a")
 
 [node name="PlayerDeath" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamMP3_dux0q")
+bus = &"SFX"
+
+[node name="PlayerHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_4vx1o")
 bus = &"SFX"
 
 [node name="Healthbar" parent="." instance=ExtResource("8_1go25")]
@@ -831,13 +841,14 @@ bus = &"SFX"
 visible = false
 show_behind_parent = true
 texture_filter = 1
-position = Vector2(-1, 1)
+position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_ybscf")
-animation = &"Expire"
+animation = &"Active"
 
 [node name="FirewallAura" type="AnimatedSprite2D" parent="."]
 visible = false
 texture_filter = 1
+position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_3ppan")
 animation = &"Expire"
 frame_progress = 0.758549
@@ -846,7 +857,7 @@ frame_progress = 0.758549
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="FirewallAura/Hitbox"]
 visible = false
-position = Vector2(1.19209e-07, 1)
+position = Vector2(-2.13163e-14, -1.19209e-07)
 scale = Vector2(1.97976, 1.97976)
 shape = SubResource("CircleShape2D_svvpg")
 

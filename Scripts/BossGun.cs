@@ -28,15 +28,27 @@ public partial class BossGun : Node2D
 
         if (attackTimer <= 0f)
         {
-            attackTimer = phase switch
-            {
-                1 => 1.2f,
-                2 => 0.7f,
-                3 => 0.30f,
-                _ => 1f
-            };
+            Vector2 spawnPosition = Muzzle != null ? Muzzle.GlobalPosition : BossProjectileManager.Owner.GlobalPosition;
 
-            BossProjectileManager.SpawnProjectile(phase);
+            switch (phase)
+            {
+                case 1:
+                    // Phase 1: Single targeted projectile (like left speaker)
+                    attackTimer = 1.2f;
+                    BossProjectileManager.SpawnPhase1Projectile(spawnPosition);
+                    break;
+                case 2:
+                    // Phase 2: 5 projectiles in arc (like right speaker)
+                    attackTimer = 0.7f;
+                    BossProjectileManager.SpawnPhase2Projectiles(spawnPosition, 45f);
+                    break;
+                case 3:
+                    // Phase 3: Both attacks combined
+                    attackTimer = 0.5f;
+                    BossProjectileManager.SpawnPhase3Projectiles(spawnPosition, 45f);
+                    break;
+            }
+
             ShotSound?.Play();
         }
     }
