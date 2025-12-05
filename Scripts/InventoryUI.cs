@@ -6,12 +6,15 @@ public partial class InventoryUI : Control
 	[Export] public HBoxContainer IconListContainer;
 	[Export] public PackedScene UpgradePopupScene;
 
-	private UpgradePopup currentPopup; // Reusable popup
-	private Control closeArea;         // Assigned from scene
+	private UpgradePopup currentPopup;
+	private Control closeArea;
 
 	public static InventoryUI Instance;
 
-	public override void _EnterTree() => Instance = this;
+	public override void _EnterTree()
+	{
+		Instance = this;
+	}
 
 	public override void _Ready()
 	{
@@ -22,19 +25,37 @@ public partial class InventoryUI : Control
 
 		IconListContainer.Alignment = BoxContainer.AlignmentMode.Begin;
 
-		// Look for a Control node named "CloseArea" in the scene
 		closeArea = GetNodeOrNull<Control>("CloseArea");
 		if (closeArea != null)
 		{
-			closeArea.GuiInput += (InputEvent @event) =>
+			closeArea.GuiInput += (InputEvent ev) =>
 			{
-				if (@event is InputEventMouseButton mb &&
+				if (ev is InputEventMouseButton mb &&
 					mb.Pressed &&
 					mb.ButtonIndex == MouseButton.Left)
 				{
-					Toggle(); // hide inventory
+					Toggle();
 				}
 			};
+		}
+	}
+
+	
+	public override void _Notification(int what)
+	{
+		// Node has been added to the tree
+		if (what == NotificationEnterTree)
+		{
+			// Check if this is MainMenu
+			string scene = GetTree().CurrentScene?.SceneFilePath;
+
+			if (scene == "res://Scenes/Menus/MainMenu.tscn")
+			{
+				GD.Print("InventoryUI: Entered MainMenu → clearing inventory");
+
+				GlobalInventory.Instance.ClearUpgrades();
+				Clear();
+			}
 		}
 	}
 
@@ -43,7 +64,6 @@ public partial class InventoryUI : Control
 		if (IconListContainer == null || u.Icon == null)
 			return;
 
-		// Create icon + name container
 		var vbox = new VBoxContainer
 		{
 			Alignment = BoxContainer.AlignmentMode.Center,
@@ -67,12 +87,11 @@ public partial class InventoryUI : Control
 
 		IconListContainer.AddChild(vbox);
 
-		// CLICK TO OPEN POPUP
-		vbox.GuiInput += (InputEvent @event) =>
+		vbox.GuiInput += (InputEvent ev) =>
 		{
-			if (@event is InputEventMouseButton mouseEvent &&
-				mouseEvent.Pressed &&
-				mouseEvent.ButtonIndex == MouseButton.Left)
+			if (ev is InputEventMouseButton mb &&
+				mb.Pressed &&
+				mb.ButtonIndex == MouseButton.Left)
 			{
 				OpenPopup(u);
 			}
@@ -81,20 +100,15 @@ public partial class InventoryUI : Control
 
 	private void OpenPopup(Upgrade u)
 	{
-		// Create popup once
 		if (currentPopup == null)
 		{
 			currentPopup = UpgradePopupScene.Instantiate<UpgradePopup>();
 			AddChild(currentPopup);
 		}
 
-		// Update content
 		currentPopup.SetUpgrade(u);
-
-		// Show it
 		currentPopup.Show();
 
-		// Position it
 		UpdatePopupPosition();
 	}
 
@@ -112,10 +126,7 @@ public partial class InventoryUI : Control
 		if (mousePos.Y + popupSize.Y > screenSize.Y)
 			mousePos.Y = screenSize.Y - popupSize.Y;
 
-		currentPopup.Position = new Vector2I(
-			(int)mousePos.X,
-			(int)mousePos.Y
-		);
+		currentPopup.Position = new Vector2I((int)mousePos.X, (int)mousePos.Y);
 	}
 
 	public void Toggle()
@@ -124,17 +135,14 @@ public partial class InventoryUI : Control
 
 		if (Visible)
 		{
-			// Populate inventory UI from global upgrades
 			Clear();
+
 			foreach (var upgrade in GlobalInventory.Instance.GetUpgrades())
-			{
 				AddUpgrade(upgrade);
-			}
 		}
 
 		Engine.TimeScale = Visible ? 0f : 1f;
 	}
-
 
 	public void Clear()
 	{

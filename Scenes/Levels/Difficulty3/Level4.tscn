@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://dyd6lixymwy7h"]
+[gd_scene load_steps=47 format=4 uid="uid://dyd6lixymwy7h"]
 
 [ext_resource type="PackedScene" uid="uid://3mdpl08kn7yk" path="res://Scenes/LevelController.tscn" id="1_gu6kl"]
 [ext_resource type="Texture2D" uid="uid://y0s0p8xfsi5p" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/door/door_closed.png" id="2_15m5g"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://dlumqsplwb8xv" path="res://Scenes/Items/Upgrades/FireRate.tscn" id="19_g1pvb"]
 [ext_resource type="PackedScene" uid="uid://d3aundu586d2f" path="res://Scenes/Items/Upgrades/Health.tscn" id="20_e34o5"]
 [ext_resource type="PackedScene" uid="uid://bjoxxngko37rd" path="res://Scenes/Items/Upgrades/MagSize.tscn" id="21_ftap5"]
+[ext_resource type="PackedScene" uid="uid://e6h6e5hwv3eq" path="res://Scenes/Menus/InventoryUI.tscn" id="22_15m5g"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4d3fe"]
 texture = ExtResource("2_15m5g")
@@ -735,3 +736,7 @@ z_index = 1
 y_sort_enabled = true
 position = Vector2(624, 240)
 UpgradeScenes = [ExtResource("16_0dsye"), ExtResource("17_sdont"), ExtResource("18_7os51"), ExtResource("19_g1pvb"), ExtResource("20_e34o5"), ExtResource("21_ftap5")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="InventoryUI" parent="CanvasLayer" instance=ExtResource("22_15m5g")]
