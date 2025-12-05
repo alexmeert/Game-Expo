@@ -782,7 +782,7 @@ visible = false
 [node name="InventoryUI" parent="CanvasLayer" instance=ExtResource("21_05qfh")]
 metadata/_edit_use_anchors_ = true
 
-[node name="Boss1" parent="." instance=ExtResource("22_5ygav")]
+[node name="Boss" parent="." instance=ExtResource("22_5ygav")]
 z_index = 2
 position = Vector2(626, 208)
 scale = Vector2(2.49833, 2.49833)

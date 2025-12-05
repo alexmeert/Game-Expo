@@ -163,7 +163,7 @@ WarparoundEnabled = true
 WrapRadius = 30.0
 WrapHeight = 10.0
 WrapYOffset = 10.0
-ScaleStrength = 0.788
+ScaleStrength = 0.8
 PositionOffsetNode = NodePath("Control")
 
 [node name="Control" type="Control" parent="UpgradesContainer/UpgradesCaroselContainer"]
@@ -197,7 +197,7 @@ offset_left = 8.53166
 offset_top = -26.9098
 offset_right = 48.5316
 offset_bottom = 13.0902
-scale = Vector2(0.212, 0.212)
+scale = Vector2(0.2, 0.2)
 pivot_offset = Vector2(20, 20)
 metadata/_edit_use_anchors_ = true
 
@@ -283,12 +283,11 @@ scale = Vector2(9.52, 10.36)
 [node name="PerksCaroselContainer" parent="PerksContainer" node_paths=PackedStringArray("PositionOffsetNode") instance=ExtResource("4_471ss")]
 position = Vector2(20, 13)
 scale = Vector2(0.432773, 0.432773)
-Spacing = 5.0
 WarparoundEnabled = true
 WrapRadius = 30.0
 WrapHeight = 10.0
 WrapYOffset = 10.0
-ScaleStrength = 0.55
+ScaleStrength = 0.8
 PositionOffsetNode = NodePath("Control")
 
 [node name="Control" type="Control" parent="PerksContainer/PerksCaroselContainer"]
@@ -326,7 +325,7 @@ offset_left = 5.9807
 offset_top = -34.9998
 offset_right = 45.9807
 offset_bottom = 4.9998
-scale = Vector2(0.45, 0.45)
+scale = Vector2(0.2, 0.2)
 pivot_offset = Vector2(20, 19.9998)
 metadata/_edit_use_anchors_ = true
 
