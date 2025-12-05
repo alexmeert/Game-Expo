@@ -12,6 +12,7 @@ script = ExtResource("1_qw5lg")
 DefPercent = 1.0
 CollectSound = NodePath("AudioStreamPlayer2D")
 ItemName = "PC Case"
+Effect = "Defense"
 Description = "The PC case protects you from a percentage of an enemy's attack. Just make sure they don't unscrew the side panel..."
 Icon = ExtResource("1_xdsh5")
 

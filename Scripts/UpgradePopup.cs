@@ -5,7 +5,7 @@ public partial class UpgradePopup : Control
 {
 	[Export] public TextureRect IconRect;
 	[Export] public Label NameLabel;
-	[Export] public Label RarityLabel;
+	[Export] public Label EffectLabel;
 	[Export] public Label DescriptionLabel;
 
 	private Control _closeArea;
@@ -25,6 +25,13 @@ public partial class UpgradePopup : Control
 			}
 		};
 
+		// Configure icon to prevent stretching, scale, and center
+		if (IconRect != null)
+		{
+			IconRect.StretchMode = TextureRect.StretchModeEnum.Keep;
+			IconRect.Scale = new Vector2(1.5f, 1.5f); // Scale up by 1.5x
+		}
+
 		// Start hidden
 		Hide();
 	}
@@ -33,7 +40,7 @@ public partial class UpgradePopup : Control
 	{
 		IconRect.Texture = u.Icon;
 		NameLabel.Text = u.ItemName;
-		RarityLabel.Text = u.Rarity.ToString();
+		EffectLabel.Text = u.Effect;
 		DescriptionLabel.Text = u.Description;
 	}
 }

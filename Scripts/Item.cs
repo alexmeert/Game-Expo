@@ -4,6 +4,7 @@ using System;
 public partial class Item : Node2D
 {
 	[Export] public string ItemName = "";
+	[Export] public string Effect = "";
 	[Export] public string Description = "";
 	[Export] public Texture2D Icon;
 

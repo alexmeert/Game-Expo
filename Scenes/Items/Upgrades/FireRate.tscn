@@ -13,6 +13,7 @@ script = ExtResource("1_ttpcb")
 AtkSpdPercent = 1.0
 CollectSound = NodePath("AudioStreamPlayer2D")
 ItemName = "GPU"
+Effect = "Fire Rate"
 Description = "This new GPU boosts your framerate allowing you to fire more bits per second. Thank you Hensen Juang."
 Icon = ExtResource("1_2tgk7")
 

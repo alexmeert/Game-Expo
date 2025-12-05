@@ -12,6 +12,7 @@ script = ExtResource("1_qw5lg")
 HpPercent = 1.0
 CollectSound = NodePath("AudioStreamPlayer2D")
 ItemName = "PSU"
+Effect = "Max Health"
 Description = "This new PSU increases your system wattage and really gets your metaphorical blood flowing. Increases your overall HP."
 Icon = ExtResource("2_qw5lg")
 

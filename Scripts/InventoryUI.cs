@@ -52,8 +52,6 @@ public partial class InventoryUI : Control
 
 			if (scene == "res://Scenes/Menus/MainMenu.tscn")
 			{
-				GD.Print("InventoryUI: Entered MainMenu → clearing inventory");
-
 				GlobalInventory.Instance.ClearUpgrades();
 				Clear();
 			}
@@ -68,16 +66,26 @@ public partial class InventoryUI : Control
 		var vbox = new VBoxContainer
 		{
 			Alignment = BoxContainer.AlignmentMode.Center,
-			CustomMinimumSize = new Vector2(64, 80)
+			CustomMinimumSize = new Vector2(96, 100), // Increased to accommodate 1.5x scale
+			MouseFilter = Control.MouseFilterEnum.Stop // Enable mouse input
+		};
+
+		// Create a container to center the icon
+		var iconContainer = new CenterContainer
+		{
+			CustomMinimumSize = new Vector2(96, 96) // 64 * 1.5 = 96
 		};
 
 		var icon = new TextureRect
 		{
 			Texture = u.Icon,
 			CustomMinimumSize = new Vector2(64, 64),
-			StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered
+			StretchMode = TextureRect.StretchModeEnum.Keep,
+			Scale = new Vector2(1.5f, 1.5f) // Scale up by 1.5x
 		};
-		vbox.AddChild(icon);
+		
+		iconContainer.AddChild(icon);
+		vbox.AddChild(iconContainer);
 
 		var label = new Label
 		{
@@ -88,6 +96,7 @@ public partial class InventoryUI : Control
 
 		IconListContainer.AddChild(vbox);
 
+		// Attach click handler to the vbox
 		vbox.GuiInput += (InputEvent ev) =>
 		{
 			if (ev is InputEventMouseButton mb &&

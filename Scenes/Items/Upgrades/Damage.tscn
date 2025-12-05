@@ -12,6 +12,7 @@ script = ExtResource("1_djxu2")
 DmgPercent = 1.0
 CollectSound = NodePath("AudioStreamPlayer2D")
 ItemName = "RAM Stick"
+Effect = "Damage"
 Description = "This extra RAM lets you store much more damage data. Lucky find in this economy!"
 Icon = ExtResource("1_vxyqf")
 

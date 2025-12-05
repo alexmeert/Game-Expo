@@ -17,7 +17,8 @@ DefPercent = 1.0
 SpdPercent = 1.0
 CollectSound = NodePath("AudioStreamPlayer2D")
 ItemName = "SSD"
-Description = "This SThis SSD increases the number of bits you can fire before cooldown."
+Effect = "Magazine Size"
+Description = "This SSD increases the number of bits you can fire before cooldown."
 Icon = ExtResource("1_dag4w")
 
 [node name="PickupArea" type="Area2D" parent="."]

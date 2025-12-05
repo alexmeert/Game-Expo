@@ -12,6 +12,8 @@ script = ExtResource("1_a6k70")
 SpdPercent = 1.0
 CollectSound = NodePath("AudioStreamPlayer2D")
 ItemName = "CPU Fan"
+Effect = "Cooldown"
+Description = "This CPU fan rapidly cools your core and lets you fire again much more quickly. Big fan of this one..."
 Icon = ExtResource("1_tmug4")
 
 [node name="PickupArea" type="Area2D" parent="."]
