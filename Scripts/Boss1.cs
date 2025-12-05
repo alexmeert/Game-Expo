@@ -18,7 +18,7 @@ public partial class Boss : BasicEntity
     public override void _Ready()
     {
         base._Ready();
-        Sprite?.Play("Phase1");
+        Sprite.Play("Phase1");
     }
 
     public override void _PhysicsProcess(double delta)

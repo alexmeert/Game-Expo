@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvo5ub1k3b6hm"]
+
+[ext_resource type="Texture2D" uid="uid://dam1osig8qlw8" path="res://Sprites/Characters/Bosses/BSOD/Speaker.png" id="1_71j08"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_71j08"]
+size = Vector2(27, 38)
+
+[node name="LeftSpeaker" type="Sprite2D"]
+texture_filter = 1
+texture = ExtResource("1_71j08")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+visible = false
+position = Vector2(1.5, 0)
+shape = SubResource("RectangleShape2D_71j08")

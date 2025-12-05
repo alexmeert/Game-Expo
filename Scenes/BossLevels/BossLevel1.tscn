@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=4 uid="uid://bjujlm6jrmxmb"]
+[gd_scene load_steps=47 format=4 uid="uid://bjujlm6jrmxmb"]
 
 [ext_resource type="PackedScene" uid="uid://3mdpl08kn7yk" path="res://Scenes/LevelController.tscn" id="1_poxnn"]
 [ext_resource type="Texture2D" uid="uid://dx5xusixt7bfv" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/tileset.png" id="2_5ygav"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://btmcefauissf4" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server.png" id="4_214sx"]
 [ext_resource type="Texture2D" uid="uid://tdc1q346nfrd" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server_disabled.png" id="5_gq2yr"]
 [ext_resource type="Texture2D" uid="uid://b2xqy06cpdcab" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server_down.png" id="6_j4rbo"]
+[ext_resource type="FontFile" uid="uid://bkbyvaj1rkqvw" path="res://Assets/Fonts/8-bit-font/8Bit-44Pl.ttf" id="10_poxnn"]
 [ext_resource type="PackedScene" uid="uid://c1aw4q02ut5i1" path="res://Scenes/Characters/Player/MainCharacter.tscn" id="11_nho2g"]
 [ext_resource type="PackedScene" uid="uid://c8u16gw00jovv" path="res://Scenes/Chest/Chest.tscn" id="12_2evu7"]
 [ext_resource type="PackedScene" uid="uid://dwn4vukan1paf" path="res://Scenes/Characters/UI/Healthbar.tscn" id="12_xo5nl"]
@@ -18,8 +19,9 @@
 [ext_resource type="PackedScene" uid="uid://bjoxxngko37rd" path="res://Scenes/Items/Upgrades/MagSize.tscn" id="18_iiuc2"]
 [ext_resource type="AudioStream" uid="uid://b1tn3d1kutgl3" path="res://Sounds/Music/Boss/BossMusic.mp3" id="19_5ygav"]
 [ext_resource type="PackedScene" uid="uid://e6h6e5hwv3eq" path="res://Scenes/Menus/InventoryUI.tscn" id="21_05qfh"]
+[ext_resource type="PackedScene" uid="uid://cvo5ub1k3b6hm" path="res://Scenes/Characters/Enemy/LeftSpeaker.tscn" id="21_poxnn"]
 [ext_resource type="PackedScene" uid="uid://peg2ksupnly8" path="res://Scenes/Characters/Enemy/Boss1.tscn" id="22_5ygav"]
-[ext_resource type="Texture2D" uid="uid://dam1osig8qlw8" path="res://Sprites/Characters/Bosses/BSOD/Speaker.png" id="23_xo5nl"]
+[ext_resource type="PackedScene" uid="uid://lvkchxi3oamh" path="res://Scenes/Characters/Enemy/RightSpeaker.tscn" id="22_xo5nl"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_4d3fe"]
 vertices = PackedVector2Array(16, 16, -16, 16, -16, -16, 16, -16)
@@ -713,6 +715,11 @@ source_geometry_group_name = &"Navigation"
 
 [sub_resource type="LabelSettings" id="LabelSettings_gq2yr"]
 font = ExtResource("13_214sx")
+font_size = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_5ygav"]
+font = ExtResource("10_poxnn")
+font_size = 30
 
 [node name="BossLevel1" type="Node2D"]
 
@@ -748,22 +755,103 @@ navigation_polygon = SubResource("NavigationPolygon_giqrc")
 z_index = 1
 position = Vector2(624, 592)
 
-[node name="BossHealthBar2" parent="MainCharacter" instance=ExtResource("12_xo5nl")]
-offset_left = -104.0
-offset_top = -104.0
-offset_right = 136.0
-offset_bottom = -100.0
+[node name="BossHealthBar" parent="MainCharacter" instance=ExtResource("12_xo5nl")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -120.0
+offset_top = -118.0
+offset_right = 120.0
+offset_bottom = -110.0
+grow_horizontal = 2
 scale = Vector2(0.997235, 1.32859)
 
-[node name="BossHealthBar" type="Label" parent="MainCharacter"]
+[node name="LSpeakerHealthBar" parent="MainCharacter" instance=ExtResource("12_xo5nl")]
+offset_left = -229.0
+offset_top = -108.0
+offset_right = 99.0
+offset_bottom = -99.0
+scale = Vector2(0.317235, 0.80859)
+
+[node name="RSpeakerHealthBar" parent="MainCharacter" instance=ExtResource("12_xo5nl")]
+offset_left = 127.0
+offset_top = -108.0
+offset_right = 449.0
+offset_bottom = -99.0
+scale = Vector2(0.317235, 0.80859)
+
+[node name="BSODName" type="Label" parent="MainCharacter"]
 z_index = 5
 texture_filter = 1
-offset_left = -80.0
-offset_top = -120.0
-offset_right = 116.0
-offset_bottom = -97.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -62.0
+offset_top = -128.0
+offset_right = 62.0
+offset_bottom = -118.0
+grow_horizontal = 2
 text = "The Blue Screen of Death"
 label_settings = SubResource("LabelSettings_gq2yr")
+
+[node name="LeftSpeaker" type="Label" parent="MainCharacter"]
+z_index = 5
+texture_filter = 1
+offset_left = -212.0
+offset_top = -118.0
+offset_right = -147.0
+offset_bottom = -108.0
+text = "Left Speaker"
+label_settings = SubResource("LabelSettings_gq2yr")
+
+[node name="RightSpeaker" type="Label" parent="MainCharacter"]
+z_index = 5
+texture_filter = 1
+offset_left = 143.0
+offset_top = -118.0
+offset_right = 209.0
+offset_bottom = -108.0
+text = "Right Speaker"
+label_settings = SubResource("LabelSettings_gq2yr")
+
+[node name="BossHPValue" type="Label" parent="MainCharacter"]
+z_index = 5
+texture_filter = 1
+offset_left = -120.0
+offset_top = -118.0
+offset_right = 905.0
+offset_bottom = -71.0
+scale = Vector2(0.234217, 0.234217)
+text = "10 / 100"
+label_settings = SubResource("LabelSettings_5ygav")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LSpeakerHPValue" type="Label" parent="MainCharacter"]
+z_index = 5
+texture_filter = 1
+offset_left = -229.0
+offset_top = -109.0
+offset_right = 215.0
+offset_bottom = -70.0
+scale = Vector2(0.234217, 0.234217)
+text = "10 / 100"
+label_settings = SubResource("LabelSettings_5ygav")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="MainCharacter"]
+z_index = 5
+texture_filter = 1
+offset_left = 127.0
+offset_top = -109.0
+offset_right = 562.0
+offset_bottom = -70.0
+scale = Vector2(0.234217, 0.234217)
+text = "10 / 100"
+label_settings = SubResource("LabelSettings_5ygav")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Chest" parent="." instance=ExtResource("12_2evu7")]
 visible = false
@@ -777,40 +865,24 @@ stream = ExtResource("19_5ygav")
 autoplay = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="InventoryUI" parent="CanvasLayer" instance=ExtResource("21_05qfh")]
 metadata/_edit_use_anchors_ = true
 
-[node name="Boss" parent="." instance=ExtResource("22_5ygav")]
+[node name="Boss" parent="." node_paths=PackedStringArray("Healthbar") instance=ExtResource("22_5ygav")]
 z_index = 2
-position = Vector2(626, 208)
+position = Vector2(624, 208)
 scale = Vector2(2.49833, 2.49833)
+Phase2Threshold = null
+Phase3Threshold = null
+Healthbar = NodePath("../MainCharacter/BossHealthBar")
 
-[node name="Speaker" type="Sprite2D" parent="."]
-z_index = 2
-texture_filter = 1
-position = Vector2(688, 232)
-scale = Vector2(1.15468, 1.15468)
-texture = ExtResource("23_xo5nl")
-
-[node name="Speaker2" type="Sprite2D" parent="."]
+[node name="LeftSpeaker" parent="." instance=ExtResource("21_poxnn")]
 z_index = 1
-texture_filter = 1
-position = Vector2(672, 216)
-texture = ExtResource("23_xo5nl")
+position = Vector2(564, 224)
+scale = Vector2(1.5, 1.5)
 
-[node name="Speaker3" type="Sprite2D" parent="."]
-z_index = 2
-texture_filter = 1
-position = Vector2(561, 232)
-scale = Vector2(1.15468, 1.15468)
-texture = ExtResource("23_xo5nl")
-flip_h = true
-
-[node name="Speaker4" type="Sprite2D" parent="."]
+[node name="RightSpeaker" parent="." instance=ExtResource("22_xo5nl")]
 z_index = 1
-texture_filter = 1
-position = Vector2(579, 216)
-texture = ExtResource("23_xo5nl")
-flip_h = true
+position = Vector2(686, 224)
+scale = Vector2(1.5, 1.5)
