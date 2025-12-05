@@ -1,4 +1,4 @@
-[gd_scene load_steps=117 format=4 uid="uid://c1aw4q02ut5i1"]
+[gd_scene load_steps=120 format=4 uid="uid://c1aw4q02ut5i1"]
 
 [ext_resource type="Script" uid="uid://bh5qd48qpm15n" path="res://Scripts/Player.cs" id="1_4flse"]
 [ext_resource type="Texture2D" uid="uid://dkbi2qmrosleb" path="res://Sprites/Characters/Player/CPUManIdle-Sheet.png" id="2_1go25"]
@@ -742,12 +742,29 @@ radius = 10.1023
 font = ExtResource("15_6h7n7")
 font_size = 30
 
-[node name="MainCharacter" type="CharacterBody2D" node_paths=PackedStringArray("WalkSound", "HPValueLabel", "Healthbar")]
+[sub_resource type="LabelSettings" id="LabelSettings_6h7n7"]
+font = ExtResource("15_6h7n7")
+font_size = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6h7n7"]
+bg_color = Color(0.152941, 0.152941, 0.152941, 1)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4vx1o"]
+bg_color = Color(0.415686, 0, 0, 1)
+
+[node name="MainCharacter" type="CharacterBody2D" node_paths=PackedStringArray("WalkSound", "HPValueLabel", "AmmoLabel", "AmmoBar", "ReloadBar", "Healthbar")]
 script = ExtResource("1_4flse")
 Hp = 50
 Spd = 70.0
 WalkSound = NodePath("WalkSound")
 HPValueLabel = NodePath("PlayerHPValue")
+AmmoLabel = NodePath("MagazineUI/AmmoLabel")
+AmmoBar = NodePath("MagazineUI/AmmoBar")
+ReloadBar = NodePath("MagazineUI/ReloadBar")
 Healthbar = NodePath("Healthbar")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
@@ -844,3 +861,48 @@ scale = Vector2(0.234217, 0.234217)
 label_settings = SubResource("LabelSettings_4vx1o")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="MagazineUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -225.0
+offset_top = 75.0
+offset_right = -99.0
+offset_bottom = 108.0
+
+[node name="AmmoLabel" type="Label" parent="MagazineUI"]
+z_index = 5
+texture_filter = 1
+layout_mode = 0
+offset_left = 1.0
+offset_top = 16.0
+offset_right = 257.0
+offset_bottom = 41.0
+scale = Vector2(0.445578, 0.445578)
+label_settings = SubResource("LabelSettings_6h7n7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ReloadBar" type="ProgressBar" parent="MagazineUI"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 16.0
+offset_right = 115.0
+offset_bottom = 27.0
+theme_override_styles/background = SubResource("StyleBoxFlat_6h7n7")
+theme_override_styles/fill = SubResource("StyleBoxFlat_4vx1o")
+max_value = 1.0
+value = 0.5
+show_percentage = false
+
+[node name="AmmoBar" type="ProgressBar" parent="MagazineUI"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 16.0
+offset_right = 115.0
+offset_bottom = 27.0
+theme_override_styles/background = SubResource("StyleBoxFlat_6h7n7")
+theme_override_styles/fill = SubResource("StyleBoxFlat_4vx1o")
+max_value = 1.0
+value = 0.5
+show_percentage = false

@@ -16,6 +16,9 @@ public partial class Player : BasicEntity
 	[Export] private AudioStreamPlayer2D DeathSound;
 	[Export] private AudioStreamPlayer2D WalkSound;
 	[Export] private Label HPValueLabel;
+	[Export] private Label AmmoLabel;
+	[Export] private ProgressBar AmmoBar;
+	[Export] private ProgressBar ReloadBar;
 
 	private List<Upgrade> _activeUpgrades = new List<Upgrade>();
 	private List<Perk> _activePerks = new List<Perk>();
@@ -27,14 +30,29 @@ public partial class Player : BasicEntity
 	private float _baseDEF;
 	private float _baseSPD;
 
+	private Gun _gun;
+
 	public override void _Ready()
 	{
 		base._Ready();
 
 		// Assign gun owner first
-		var gun = GetNode<Gun>("Gun");
-		if (gun != null)
-			gun.Owner = this;
+		_gun = GetNode<Gun>("Gun");
+		if (_gun != null)
+		{
+			_gun.Owner = this;
+			UpdateAmmoUI();
+		}
+
+		// Hide reload bar initially, show ammo bar
+		if (ReloadBar != null)
+		{
+			ReloadBar.Visible = false;
+		}
+		if (AmmoBar != null)
+		{
+			AmmoBar.Visible = true;
+		}
 
 		// Apply all previously collected upgrades from GlobalInventory
 		foreach (var upgrade in GlobalInventory.Instance.GetUpgrades())
@@ -69,6 +87,7 @@ public partial class Player : BasicEntity
 	{
 		base._PhysicsProcess(delta);
 		UpdatePerks((float)delta);
+		UpdateAmmoUI();
 	}
 	
 	public override void _Input(InputEvent @event)
@@ -156,6 +175,58 @@ public partial class Player : BasicEntity
 	{
 		if (HPValueLabel != null)
 			HPValueLabel.Text = $"{Mathf.CeilToInt(HP)} / {Mathf.CeilToInt(MaxHP)}";
+	}
+
+	private void UpdateAmmoUI()
+	{
+		if (_gun == null)
+			return;
+
+		// Update ammo label
+		if (AmmoLabel != null)
+		{
+			if (_gun.IsReloading)
+			{
+				AmmoLabel.Text = "reloading";
+			}
+			else
+			{
+				AmmoLabel.Text = $"{_gun.CurrentAmmo} / {_gun.MaxAmmoValue}";
+			}
+		}
+
+		// Update ammo bar (depletes as you shoot)
+		if (AmmoBar != null)
+		{
+			if (_gun.IsReloading)
+			{
+				// Hide ammo bar when reloading
+				AmmoBar.Visible = false;
+			}
+			else
+			{
+				// Show ammo bar and update value based on remaining ammo
+				AmmoBar.Visible = true;
+				float ammoPercent = (float)_gun.CurrentAmmo / (float)_gun.MaxAmmoValue;
+				AmmoBar.Value = ammoPercent; // ProgressBar uses 0-1
+			}
+		}
+
+		// Update reload bar (fills when reloading)
+		if (ReloadBar != null)
+		{
+			if (_gun.IsReloading)
+			{
+				ReloadBar.Visible = true;
+				// ReloadProgress goes from 0 to 1 as reload progresses
+				ReloadBar.Value = _gun.ReloadProgress; // ProgressBar uses 0-1
+			}
+			else
+			{
+				ReloadBar.Visible = false;
+				ReloadBar.Value = 0f; // Reset when not reloading
+			}
+		}
 	}
 
 	protected override void Die()

@@ -7,19 +7,69 @@ public partial class Gun : Node2D
 	[Export] public AudioStreamPlayer2D ShotSound;
 
 	[Export] public float FireCooldown = 0.20f;
+	[Export] public int MaxAmmo = 10;
+	[Export] public float ReloadTime = 2.0f;
+
 	private float fireTimer = 0f;
+	private int currentAmmo;
+	private float reloadTimer = 0f;
+	private bool isReloading = false;
 
 	public BasicEntity Owner { get; set; }
 
+	public int CurrentAmmo => currentAmmo;
+	public int MaxAmmoValue => MaxAmmo;
+	public bool IsReloading => isReloading;
+	public float ReloadProgress => isReloading ? (ReloadTime - reloadTimer) / ReloadTime : 0f;
+
+	public override void _Ready()
+	{
+		currentAmmo = MaxAmmo;
+	}
+
 	public override void _Process(double delta)
 	{
-		if (fireTimer > 0)
-			fireTimer -= (float)delta;
+		float deltaFloat = (float)delta;
 
-		if (Input.IsActionPressed("Shoot") && fireTimer <= 0f)
+		// Update fire cooldown
+		if (fireTimer > 0)
+			fireTimer -= deltaFloat;
+
+		// Handle reloading
+		if (isReloading)
+		{
+			reloadTimer -= deltaFloat;
+			if (reloadTimer <= 0f)
+			{
+				FinishReload();
+			}
+		}
+		// Auto-reload when out of ammo
+		else if (currentAmmo <= 0)
+		{
+			StartReload();
+		}
+		// Handle shooting
+		else if (Input.IsActionPressed("Shoot") && fireTimer <= 0f)
 		{
 			FireProjectile();
 		}
+	}
+
+	private void StartReload()
+	{
+		if (isReloading || currentAmmo >= MaxAmmo)
+			return;
+
+		isReloading = true;
+		reloadTimer = ReloadTime;
+	}
+
+	private void FinishReload()
+	{
+		isReloading = false;
+		currentAmmo = MaxAmmo;
+		reloadTimer = 0f;
 	}
 
 	private void FireProjectile()
@@ -34,6 +84,14 @@ public partial class Gun : Node2D
 			return;
 		}
 
+		// Check if we have ammo
+		if (currentAmmo <= 0)
+		{
+			return;
+		}
+
+		// Consume ammo
+		currentAmmo--;
 		fireTimer = FireCooldown;
 
 		// Calculate direction to mouse
