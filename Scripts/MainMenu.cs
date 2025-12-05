@@ -4,13 +4,15 @@ public partial class MainMenu : Control
 {
 	public override void _Ready()
 	{
+		// Reset inventory automatically when MainMenu loads
+		GlobalInventory.Instance.ClearUpgrades();
+
 		GetNode<Button>("VBoxContainer/PlayButton").Pressed += OnStartPressed;
 		GetNode<Button>("VBoxContainer/ItemsButton").Pressed += OnItemsPressed;
 		GetNode<Button>("VBoxContainer/ControlsButton").Pressed += OnControlsPressed;
 		GetNode<Button>("VBoxContainer/SettingsButton").Pressed += OnSettingsPressed;
 		GetNode<Button>("VBoxContainer/QuitButton").Pressed += OnQuitPressed;
 	}
-
 
 	private void OnStartPressed()
 	{
