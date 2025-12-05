@@ -1,18 +1,19 @@
-[gd_scene load_steps=9 format=3 uid="uid://byt026nu1wsbk"]
+[gd_scene load_steps=7 format=3 uid="uid://byt026nu1wsbk"]
 
 [ext_resource type="Script" uid="uid://bmxsy3nkmy1un" path="res://Scripts/MainMenu.cs" id="1_b42ut"]
 [ext_resource type="FontFile" uid="uid://bjtv1av4o6be8" path="res://Assets/Fonts/vermin-vibes-1989-font/VerminVibes1989Regular-m77m.ttf" id="1_v3fht"]
-[ext_resource type="Texture2D" uid="uid://dkbi2qmrosleb" path="res://Sprites/Characters/Player/CPUManIdle-Sheet.png" id="3_hqtmt"]
+[ext_resource type="Texture2D" uid="uid://da6xfqfd3gg2t" path="res://Assets/MainMenuPic.png" id="2_tfrft"]
 [ext_resource type="Theme" uid="uid://xafkp44a81m5" path="res://Themes/ MainMenuButtons.tres" id="3_pbd8g"]
-[ext_resource type="Texture2D" uid="uid://djxy43ftbube0" path="res://Sprites/Characters/Enemies/PowerBrick/PowerBrickFront-Sheet.png" id="4_tfrft"]
-[ext_resource type="Texture2D" uid="uid://byfg6klnwfcv7" path="res://Sprites/Characters/Enemies/FanCrab/FanCrabDown-Sheet.png" id="5_mc63j"]
-[ext_resource type="Texture2D" uid="uid://bowgl1s81qbu2" path="res://Sprites/Characters/Enemies/USB/USBWalkDownm-Sheet.png" id="5_uv623"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_bc4mk"]
 font = ExtResource("1_v3fht")
-font_size = 200
-font_color = Color(0, 0, 0, 1)
+font_size = 160
+font_color = Color(0.955963, 0.955963, 0.955963, 1)
 shadow_size = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_uv623"]
+font = ExtResource("1_v3fht")
+font_size = 26
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -25,15 +26,20 @@ mouse_filter = 1
 script = ExtResource("1_b42ut")
 metadata/_edit_use_anchors_ = true
 
+[node name="MainMenuPic" type="Sprite2D" parent="."]
+position = Vector2(577, 324)
+texture = ExtResource("2_tfrft")
+
 [node name="Title" type="Label" parent="."]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -575.0
-offset_right = 575.0
-offset_bottom = 216.0
+offset_left = -718.0
+offset_top = -10.0
+offset_right = 432.0
+offset_bottom = 206.0
 grow_horizontal = 2
 text = "Corebound"
 label_settings = SubResource("LabelSettings_bc4mk")
@@ -48,16 +54,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -177.5
-offset_top = -132.0
-offset_right = 177.5
-offset_bottom = -91.0
+offset_left = -565.0
+offset_top = -155.0
+offset_right = -210.0
+offset_bottom = -114.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("1_v3fht")
-theme_override_font_sizes/font_size = 30
 text = "Made by Alex Joe & Jimmy"
+label_settings = SubResource("LabelSettings_uv623")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -117,74 +121,3 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_v3fht")
 theme_override_font_sizes/font_size = 35
 text = "Quit"
-
-[node name="Background" type="ColorRect" parent="."]
-z_index = -1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-mouse_force_pass_scroll_events = false
-color = Color(0, 1, 0.858824, 1)
-
-[node name="PlayerContainer" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 144.0
-offset_top = 36.0
-offset_right = 184.0
-offset_bottom = 76.0
-grow_vertical = 2
-scale = Vector2(3.56, 3.56)
-
-[node name="Player" type="Sprite2D" parent="PlayerContainer"]
-texture_filter = 1
-position = Vector2(26.9663, 15.7303)
-scale = Vector2(1.78652, 1.78652)
-texture = ExtResource("3_hqtmt")
-hframes = 2
-frame = 1
-
-[node name="EnemyContainer" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -440.0
-offset_top = -28.0
-offset_right = -400.0
-offset_bottom = 12.0
-grow_horizontal = 0
-grow_vertical = 2
-scale = Vector2(10.2633, 7.94271)
-
-[node name="Plug" type="Sprite2D" parent="EnemyContainer"]
-texture_filter = 1
-position = Vector2(9.35371, 13.2197)
-scale = Vector2(0.639171, 0.825914)
-texture = ExtResource("4_tfrft")
-hframes = 4
-frame = 1
-
-[node name="Fan" type="Sprite2D" parent="EnemyContainer"]
-texture_filter = 1
-position = Vector2(28.8406, 13.2197)
-scale = Vector2(0.639171, 0.825914)
-texture = ExtResource("5_mc63j")
-hframes = 4
-frame = 1
-
-[node name="USB" type="Sprite2D" parent="EnemyContainer"]
-texture_filter = 1
-position = Vector2(17.928, 28.3279)
-scale = Vector2(0.537839, 0.694977)
-texture = ExtResource("5_uv623")
-hframes = 6
-frame = 1
