@@ -191,10 +191,12 @@ scale = Vector2(0.157235, 0.60859)
 
 [node name="TakeDamage" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamMP3_nge51")
+bus = &"SFX"
 
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_iemih")
 volume_db = -10.0
+bus = &"SFX"
 
 [node name="WalkSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_iemih")

@@ -119,16 +119,13 @@ public partial class Upgrade : Item
 
 		if (body is Player player)
 		{
-			// Apply the upgrade effects
 			player.ApplyUpgrade(this);
 
-			// Add to global inventory
 			GlobalInventory.Instance?.AddUpgrade(this);
 
-			// Add to inventory UI if it's open
 			InventoryUI.Instance?.AddUpgrade(this);
 
-			CollectSound?.Play();
+			CollectSound.Play();
 			GD.Print($"{Rarity} {ItemName} collected!");
 
 			QueueFree();

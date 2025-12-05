@@ -8,6 +8,7 @@
 radius = 16.0
 
 [node name="MagSize" type="Node2D" node_paths=PackedStringArray("CollectSound")]
+scale = Vector2(0.985463, 1)
 script = ExtResource("1_0ovaj")
 HpPercent = 1.0
 DmgPercent = 1.0
@@ -16,7 +17,7 @@ DefPercent = 1.0
 SpdPercent = 1.0
 CollectSound = NodePath("AudioStreamPlayer2D")
 ItemName = "SSD"
-Description = "Increases the amount of bits you can fire before cooldown."
+Description = "This SThis SSD increases the number of bits you can fire before cooldown."
 Icon = ExtResource("1_dag4w")
 
 [node name="PickupArea" type="Area2D" parent="."]
@@ -32,3 +33,4 @@ texture = ExtResource("1_dag4w")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_ouol4")
+bus = &"SFX"

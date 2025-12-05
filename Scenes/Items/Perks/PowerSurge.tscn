@@ -9,10 +9,13 @@ radius = 16.0
 [node name="PowerSurge" type="Node2D"]
 script = ExtResource("1_7frtj")
 HpBonus = 100.0
+ItemName = "Power Surge"
+Description = "Electricty flows through your cores and heals you!"
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
 shape = SubResource("CircleShape2D_7frtj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

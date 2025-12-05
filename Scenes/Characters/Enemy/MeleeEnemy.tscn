@@ -235,6 +235,7 @@ debug_enabled = true
 [node name="TakeDamage" type="AudioStreamPlayer2D" parent="."]
 scale = Vector2(1, 0.995352)
 stream = SubResource("AudioStreamMP3_nge51")
+bus = &"SFX"
 
 [node name="Healthbar" parent="." instance=ExtResource("6_rt67c")]
 offset_left = -14.0
@@ -246,3 +247,4 @@ scale = Vector2(0.117235, 0.56859)
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_wisjf")
 volume_db = -10.0
+bus = &"SFX"

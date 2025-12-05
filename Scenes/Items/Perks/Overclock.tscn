@@ -16,6 +16,7 @@ Description = "Your entire system feels as if it's been injected with pure adren
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
 scale = Vector2(1, 0.993394)
 shape = SubResource("CircleShape2D_yg1l2")
 

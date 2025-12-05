@@ -767,12 +767,13 @@ shape = SubResource("RectangleShape2D_j5d3a")
 
 [node name="PlayerDeath" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamMP3_dux0q")
+bus = &"SFX"
 
 [node name="Healthbar" parent="." instance=ExtResource("8_1go25")]
-offset_left = -112.0
-offset_top = -125.0
-offset_right = 128.0
-offset_bottom = -121.0
+offset_left = -212.0
+offset_top = 94.0
+offset_right = 28.0
+offset_bottom = 98.0
 scale = Vector2(0.997235, 1.84859)
 
 [node name="PauseMenu" parent="." instance=ExtResource("9_v5g80")]
@@ -798,6 +799,7 @@ color = Color(0, 1, 0.941176, 0.470588)
 stream = ExtResource("10_chds8")
 volume_db = -10.0
 attenuation = 2.99297
+bus = &"SFX"
 
 [node name="OverclockAura" type="AnimatedSprite2D" parent="."]
 visible = false

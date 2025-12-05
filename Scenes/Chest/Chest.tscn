@@ -42,6 +42,7 @@ shape = SubResource("RectangleShape2D_pkf2e")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("1_2ottt")
+bus = &"SFX"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
