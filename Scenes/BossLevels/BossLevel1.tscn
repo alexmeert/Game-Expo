@@ -840,7 +840,7 @@ label_settings = SubResource("LabelSettings_5ygav")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label3" type="Label" parent="MainCharacter"]
+[node name="RSpeakerHPValue" type="Label" parent="MainCharacter"]
 z_index = 5
 texture_filter = 1
 offset_left = 127.0
@@ -869,20 +869,23 @@ autoplay = true
 [node name="InventoryUI" parent="CanvasLayer" instance=ExtResource("21_05qfh")]
 metadata/_edit_use_anchors_ = true
 
-[node name="Boss" parent="." node_paths=PackedStringArray("Healthbar") instance=ExtResource("22_5ygav")]
+[node name="Boss" parent="." node_paths=PackedStringArray("HPValueLabel", "Healthbar") instance=ExtResource("22_5ygav")]
 z_index = 2
 position = Vector2(624, 208)
 scale = Vector2(2.49833, 2.49833)
-Phase2Threshold = null
-Phase3Threshold = null
+HPValueLabel = NodePath("../MainCharacter/BossHPValue")
 Healthbar = NodePath("../MainCharacter/BossHealthBar")
 
-[node name="LeftSpeaker" parent="." instance=ExtResource("21_poxnn")]
+[node name="LeftSpeaker" parent="." node_paths=PackedStringArray("HPValueLabel", "Healthbar") instance=ExtResource("21_poxnn")]
 z_index = 1
 position = Vector2(564, 224)
 scale = Vector2(1.5, 1.5)
+HPValueLabel = NodePath("../MainCharacter/LSpeakerHPValue")
+Healthbar = NodePath("../MainCharacter/LSpeakerHealthBar")
 
-[node name="RightSpeaker" parent="." instance=ExtResource("22_xo5nl")]
+[node name="RightSpeaker" parent="." node_paths=PackedStringArray("HPValueLabel", "Healthbar") instance=ExtResource("22_xo5nl")]
 z_index = 1
 position = Vector2(686, 224)
 scale = Vector2(1.5, 1.5)
+HPValueLabel = NodePath("../MainCharacter/RSpeakerHPValue")
+Healthbar = NodePath("../MainCharacter/RSpeakerHealthBar")

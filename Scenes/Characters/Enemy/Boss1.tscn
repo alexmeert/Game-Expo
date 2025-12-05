@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://famfbwy147yl" path="res://Sprites/Characters/Bosses/BSOD/Boss_BSOD.png" id="1_6y34w"]
 [ext_resource type="Texture2D" uid="uid://dvesg53fa80l" path="res://Sprites/Characters/Bosses/BSOD/BSOD_Attack-Sheet.png" id="1_74cfw"]
-[ext_resource type="Script" uid="uid://hpe3pnpngjme" path="res://Scripts/Boss1.cs" id="1_p584a"]
+[ext_resource type="Script" uid="uid://hpe3pnpngjme" path="res://Scripts/Boss.cs" id="1_p584a"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p584a"]
 atlas = ExtResource("1_74cfw")
@@ -226,7 +226,7 @@ size = Vector2(28, 22)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_74cfw"]
 size = Vector2(36, 31)
 
-[node name="Boss1" type="CharacterBody2D"]
+[node name="Boss" type="CharacterBody2D"]
 script = ExtResource("1_p584a")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -240,7 +240,6 @@ shape = SubResource("RectangleShape2D_yibby")
 disabled = true
 
 [node name="Hitbox" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, 0.5)

@@ -8,6 +8,7 @@ public partial class Boss : BasicEntity
     [Export] private AnimatedSprite2D Sprite;
     [Export] private double Phase2Threshold = 0.6;
     [Export] private double Phase3Threshold = 0.2;
+    [Export] private Label HPValueLabel;
 
     protected override void InitializeEntity()
     {
@@ -19,6 +20,7 @@ public partial class Boss : BasicEntity
     {
         base._Ready();
         Sprite.Play("Phase1");
+        UpdateHPLabel();
     }
 
     public override void _PhysicsProcess(double delta)
@@ -40,6 +42,24 @@ public partial class Boss : BasicEntity
             case 2: Sprite?.Play("Phase2"); break;
             case 3: Sprite?.Play("Phase3"); break;
         }
+    }
+
+    protected override void OnHPChanged()
+    {
+        base.OnHPChanged();
+        UpdateHPLabel();
+    }
+
+    protected override void OnMaxHPChanged()
+    {
+        base.OnMaxHPChanged();
+        UpdateHPLabel();
+    }
+
+    private void UpdateHPLabel()
+    {
+        if (HPValueLabel != null)
+            HPValueLabel.Text = $"{Mathf.CeilToInt(HP)} / {Mathf.CeilToInt(MaxHP)}";
     }
 
     protected override void OnDeath()

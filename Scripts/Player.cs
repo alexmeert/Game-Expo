@@ -15,6 +15,7 @@ public partial class Player : BasicEntity
 	[Export] private AudioStreamPlayer2D HitSound;
 	[Export] private AudioStreamPlayer2D DeathSound;
 	[Export] private AudioStreamPlayer2D WalkSound;
+	[Export] private Label HPValueLabel;
 
 	private List<Upgrade> _activeUpgrades = new List<Upgrade>();
 	private List<Perk> _activePerks = new List<Perk>();
@@ -136,14 +137,31 @@ public partial class Player : BasicEntity
 	{
 		base.OnTakeDamage(damage);
 		HitSound?.Play();
-		GD.Print($"Player took {damage} damage. HP: {HP}/{MaxHP}");
+		UpdateHPLabel();
+	}
+
+	protected override void OnHPChanged()
+	{
+		base.OnHPChanged();
+		UpdateHPLabel();
+	}
+
+	protected override void OnMaxHPChanged()
+	{
+		base.OnMaxHPChanged();
+		UpdateHPLabel();
+	}
+
+	private void UpdateHPLabel()
+	{
+		if (HPValueLabel != null)
+			HPValueLabel.Text = $"{Mathf.CeilToInt(HP)} / {Mathf.CeilToInt(MaxHP)}";
 	}
 
 	protected override void Die()
 	{
 		base.Die();
 		
-		// Play death sound
 		if (DeathSound != null)
 		{
 			DeathSound.Play();

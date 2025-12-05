@@ -1,13 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://cvo5ub1k3b6hm"]
+[gd_scene load_steps=5 format=3 uid="uid://cvo5ub1k3b6hm"]
 
 [ext_resource type="Texture2D" uid="uid://dam1osig8qlw8" path="res://Sprites/Characters/Bosses/BSOD/Speaker.png" id="1_71j08"]
+[ext_resource type="Script" uid="uid://dswmpiguy2y65" path="res://Scripts/Speaker.cs" id="2_dvqik"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dvqik"]
+size = Vector2(21, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_71j08"]
 size = Vector2(27, 38)
 
-[node name="LeftSpeaker" type="Sprite2D"]
+[node name="LeftSpeaker" type="CharacterBody2D"]
 texture_filter = 1
+script = ExtResource("2_dvqik")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_71j08")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(1.5, 0)
+shape = SubResource("RectangleShape2D_dvqik")
 
 [node name="Hitbox" type="Area2D" parent="."]
 
