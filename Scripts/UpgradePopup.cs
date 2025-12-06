@@ -28,8 +28,8 @@ public partial class UpgradePopup : Control
 		// Proper icon sizing – no scaling!
 		if (IconRect != null)
 		{
-			IconRect.StretchMode = TextureRect.StretchModeEnum.KeepCentered;
-			IconRect.CustomMinimumSize = new Vector2(128, 128); // Bigger inside popup
+			IconRect.StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered;
+			IconRect.CustomMinimumSize = new Vector2(96, 96); // Bigger inside popup
 		}
 
 		Hide();
