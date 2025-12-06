@@ -14,10 +14,10 @@ public partial class UpgradePopup : Control
 	{
 		_closeArea = GetNode<Control>("CloseArea");
 
-		// Invisible square closes popup
-		_closeArea.GuiInput += (InputEvent @event) =>
+		// Close popup when clicking invisible area
+		_closeArea.GuiInput += (InputEvent ev) =>
 		{
-			if (@event is InputEventMouseButton mb &&
+			if (ev is InputEventMouseButton mb &&
 				mb.Pressed &&
 				mb.ButtonIndex == MouseButton.Left)
 			{
@@ -25,14 +25,13 @@ public partial class UpgradePopup : Control
 			}
 		};
 
-		// Configure icon to prevent stretching, scale, and center
+		// Proper icon sizing – no scaling!
 		if (IconRect != null)
 		{
-			IconRect.StretchMode = TextureRect.StretchModeEnum.Keep;
-			IconRect.Scale = new Vector2(1.5f, 1.5f); // Scale up by 1.5x
+			IconRect.StretchMode = TextureRect.StretchModeEnum.KeepCentered;
+			IconRect.CustomMinimumSize = new Vector2(128, 128); // Bigger inside popup
 		}
 
-		// Start hidden
 		Hide();
 	}
 

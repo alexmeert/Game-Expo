@@ -20,12 +20,8 @@ public partial class InventoryUI : Control
 	{
 		Visible = false;
 
-		if (IconListContainer == null)
-			GD.PrintErr("InventoryUI.IconListContainer is NOT SET!");
-
 		IconListContainer.Alignment = BoxContainer.AlignmentMode.Begin;
 
-		// Look for a Control node named "CloseArea" in the scene
 		closeArea = GetNodeOrNull<Control>("closeArea");
 		if (closeArea != null)
 		{
@@ -41,13 +37,10 @@ public partial class InventoryUI : Control
 		}
 	}
 
-	
 	public override void _Notification(int what)
 	{
-		
 		if (what == NotificationEnterTree)
 		{
-			// Check if this is MainMenu
 			string scene = GetTree().CurrentScene?.SceneFilePath;
 
 			if (scene == "res://Scenes/Menus/MainMenu.tscn")
@@ -63,6 +56,7 @@ public partial class InventoryUI : Control
 		if (IconListContainer == null || u.Icon == null)
 			return;
 
+		// Container for each upgrade entry
 		var vbox = new VBoxContainer
 		{
 			Alignment = BoxContainer.AlignmentMode.Center,
@@ -70,22 +64,24 @@ public partial class InventoryUI : Control
 			MouseFilter = Control.MouseFilterEnum.Stop
 		};
 
+		// Centered icon container
 		var iconContainer = new CenterContainer
 		{
 			CustomMinimumSize = new Vector2(64, 64)
 		};
 
+		// Correct icon sizing – no scaling!
 		var icon = new TextureRect
 		{
 			Texture = u.Icon,
-			CustomMinimumSize = new Vector2(64, 64),
-			StretchMode = TextureRect.StretchModeEnum.Keep,
-			Scale = new Vector2(1.5f, 1.5f)
+			StretchMode = TextureRect.StretchModeEnum.KeepCentered,
+			CustomMinimumSize = new Vector2(64, 64)
 		};
 
 		iconContainer.AddChild(icon);
 		vbox.AddChild(iconContainer);
 
+		// Name
 		var label = new Label
 		{
 			Text = u.ItemName,
@@ -93,16 +89,15 @@ public partial class InventoryUI : Control
 		};
 		vbox.AddChild(label);
 
-		
+		// Stats
 		var statsLabel = new Label
 		{
 			Text = u.GetStatSummary(),
 			HorizontalAlignment = HorizontalAlignment.Center,
 			Modulate = new Color(0.8f, 0.8f, 0.8f)
 		};
-		statsLabel.AddThemeFontSizeOverride("font_size", 12); 
+		statsLabel.AddThemeFontSizeOverride("font_size", 12);
 		vbox.AddChild(statsLabel);
-		
 
 		IconListContainer.AddChild(vbox);
 
@@ -116,9 +111,6 @@ public partial class InventoryUI : Control
 			}
 		};
 	}
-
-
-
 
 	private void OpenPopup(Upgrade u)
 	{
@@ -148,7 +140,7 @@ public partial class InventoryUI : Control
 		if (mousePos.Y + popupSize.Y > screenSize.Y)
 			mousePos.Y = screenSize.Y - popupSize.Y;
 
-		currentPopup.Position = new Vector2I((int)mousePos.X, (int)mousePos.Y);
+		currentPopup.Position = mousePos;
 	}
 
 	public void Toggle()
@@ -158,7 +150,6 @@ public partial class InventoryUI : Control
 		if (Visible)
 		{
 			Clear();
-
 			foreach (var upgrade in GlobalInventory.Instance.GetUpgrades())
 				AddUpgrade(upgrade);
 		}
@@ -168,8 +159,6 @@ public partial class InventoryUI : Control
 
 	public void Clear()
 	{
-		if (IconListContainer == null) return;
-
 		foreach (Node child in IconListContainer.GetChildren())
 			child.QueueFree();
 	}

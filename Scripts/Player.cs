@@ -41,6 +41,7 @@ public partial class Player : BasicEntity
 
 	private Gun _gun;
 
+	public Gun Gun => _gun;
 	public override void _Ready()
 	{
 		base._Ready();
@@ -226,7 +227,7 @@ public partial class Player : BasicEntity
 			}
 		}
 
-		// Update ammo bar (depletes as you shoot)
+		// Update ammo bar 
 		if (AmmoBar != null)
 		{
 			if (_gun.IsReloading)
@@ -239,18 +240,18 @@ public partial class Player : BasicEntity
 				// Show ammo bar and update value based on remaining ammo
 				AmmoBar.Visible = true;
 				float ammoPercent = (float)_gun.CurrentAmmo / (float)_gun.MaxAmmoValue;
-				AmmoBar.Value = ammoPercent; // ProgressBar uses 0-1
+				AmmoBar.Value = ammoPercent; 
 			}
 		}
 
-		// Update reload bar (fills when reloading)
+		// Update reload bar
 		if (ReloadBar != null)
 		{
 			if (_gun.IsReloading)
 			{
 				ReloadBar.Visible = true;
-				// ReloadProgress goes from 0 to 1 as reload progresses
-				ReloadBar.Value = _gun.ReloadProgress; // ProgressBar uses 0-1
+				
+				ReloadBar.Value = _gun.ReloadProgress; 
 			}
 			else
 			{
@@ -344,41 +345,41 @@ public partial class Player : BasicEntity
 
 	private void UpdateAuras(bool hasOverclock, bool hasFirewall)
 	{
-    	HandleAura(OverclockAura, hasOverclock);
-    	HandleAura(FirewallAura, hasFirewall);
+		HandleAura(OverclockAura, hasOverclock);
+		HandleAura(FirewallAura, hasFirewall);
 	}
 
 	private void HandleAura(AnimatedSprite2D aura, bool isActive)
 	{
-	    if (aura == null) return;
+		if (aura == null) return;
 
-	    if (isActive)
-	    {
-	        // Activate if not already visible
-	        if (!aura.Visible)
-	        {
-	            aura.Visible = true;
-	            aura.Play("Active");
-	        }
-	    }
-	    else
-	    {
-	        // Only trigger expire if it was active before
-	        if (aura.Visible)
-	        {
-	            aura.Play("Expire");
+		if (isActive)
+		{
+			// Activate if not already visible
+			if (!aura.Visible)
+			{
+				aura.Visible = true;
+				aura.Play("Active");
+			}
+		}
+		else
+		{
+			// Only trigger expire if it was active before
+			if (aura.Visible)
+			{
+				aura.Play("Expire");
 
-	            // Wait for expire animation to finish
+				// Wait for expire animation to finish
 				aura.AnimationFinished += () =>
 				{
-				    if (aura.Animation == "Expire")
-				    {
-				        aura.Visible = false;
-				    }
+					if (aura.Animation == "Expire")
+					{
+						aura.Visible = false;
+					}
 				};
 
-	        }
-	    }
+			}
+		}
 	}
 
 

@@ -729,8 +729,6 @@ position = Vector2(870, 562)
 
 [node name="MagSize" parent="." instance=ExtResource("21_2mqrt")]
 position = Vector2(909, 563)
-HpPercent = 0.0
-DmgPercent = 0.0
-AtkSpdPercent = 0.0
-DefPercent = 0.0
-SpdPercent = 0.0
+
+[node name="MagSize2" parent="." instance=ExtResource("21_2mqrt")]
+position = Vector2(939, 564)

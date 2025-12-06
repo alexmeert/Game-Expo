@@ -29,9 +29,11 @@ public partial class Gun : Node2D
 	}
 
 	public int CurrentAmmo => currentAmmo;
-	public int MaxAmmoValue => MaxAmmo;
 	public bool IsReloading => isReloading;
-	public float ReloadProgress => isReloading ? (ReloadTime - reloadTimer) / ReloadTime : 0f;
+
+	// Expose MaxAmmo as read-only property for UI
+	public int MaxAmmoValue => MaxAmmo;
+	public float ReloadProgress => isReloading ? 1f - (reloadTimer / ReloadTime) : 0f;
 
 	public override void _Ready()
 	{
@@ -40,32 +42,54 @@ public partial class Gun : Node2D
 
 	public override void _Process(double delta)
 	{
-		float deltaFloat = (float)delta;
+		float dt = (float)delta;
 
-		// Update fire cooldown
 		if (fireTimer > 0)
-			fireTimer -= deltaFloat;
+			fireTimer -= dt;
 
-		// Handle reloading
 		if (isReloading)
 		{
-			reloadTimer -= deltaFloat;
-			if (reloadTimer <= 0f)
-			{
+			reloadTimer -= dt;
+			if (reloadTimer <= 0)
 				FinishReload();
-			}
 		}
-		// Auto-reload when out of ammo
 		else if (currentAmmo <= 0)
 		{
 			StartReload();
 		}
-		// Handle shooting
 		else if (Input.IsActionPressed("Shoot") && fireTimer <= 0f)
 		{
 			FireProjectile();
 		}
 	}
+
+	// ------- SAFE MAGAZINE API -------
+	// Adds (or removes if negative) magazine capacity and keeps current ammo in a sane state.
+	public void AddMagazineSize(int amount)
+	{
+		if (amount == 0) return;
+
+		// If increasing capacity
+		if (amount > 0)
+		{
+			MaxAmmo += amount;
+			// Optionally refill to new capacity
+			currentAmmo = MaxAmmo;
+		}
+		else // amount < 0 -> decrease capacity
+		{
+			MaxAmmo = Mathf.Max(0, MaxAmmo + amount); // amount negative decreases
+			// Ensure current ammo doesn't exceed new capacity
+			currentAmmo = Mathf.Min(currentAmmo, MaxAmmo);
+		}
+	}
+
+	// Adds ammo to current ammo (clamped)
+	public void AddAmmo(int amount)
+	{
+		currentAmmo = Mathf.Clamp(currentAmmo + amount, 0, MaxAmmo);
+	}
+	// --------------------------------------
 
 	private void StartReload()
 	{
@@ -80,71 +104,38 @@ public partial class Gun : Node2D
 	{
 		isReloading = false;
 		currentAmmo = MaxAmmo;
-		reloadTimer = 0f;
 	}
 
 	private void FireProjectile()
 	{
-		if (PlayerProjectileManager == null)
-		{
+		if (PlayerProjectileManager == null || Owner == null)
 			return;
-		}
 
-		if (Owner == null)
-		{
-			return;
-		}
-
-		// Check if we have ammo
 		if (currentAmmo <= 0)
-		{
 			return;
-		}
 
-		// Consume ammo
 		currentAmmo--;
 		fireTimer = GetFireCooldown();
 
-		// Calculate direction to mouse
-		Vector2 mousePos = GetGlobalMousePosition();
-		Vector2 spawnPosition;
-		
-		// Use Muzzle position if available, otherwise use owner's position
-		if (Muzzle != null)
-		{
-			spawnPosition = Muzzle.GlobalPosition;
-		}
-		else
-		{
-			spawnPosition = Owner.GlobalPosition;
-		}
+		Vector2 spawnPos = Muzzle != null ? Muzzle.GlobalPosition : Owner.GlobalPosition;
 
-		// Calculate rotation from spawn position to mouse
-		Vector2 direction = (mousePos - spawnPosition);
-		
-		// Check if direction is valid (not zero)
-		if (direction.LengthSquared() < 0.01f)
-		{
-			// Default direction if mouse is too close
-			direction = Vector2.Right;
-		}
+		Vector2 mousePos = GetGlobalMousePosition();
+		Vector2 dir = mousePos - spawnPos;
+
+		if (dir.LengthSquared() < 0.01f)
+			dir = Vector2.Right;
 		else
-		{
-			direction = direction.Normalized();
-		}
-		
-		float rotation = direction.Angle();
+			dir = dir.Normalized();
+
+		float rot = dir.Angle();
 
 		PlayerProjectileManager.Owner = Owner;
 
 		PlayerProjectileManager.SpawnProjectile(
-			spawnPosition,
-			rotation
+			spawnPos,
+			rot
 		);
 
-		if (ShotSound != null)
-		{
-			ShotSound.Play();
-		}
+		ShotSound?.Play();
 	}
 }
