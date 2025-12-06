@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://byt026nu1wsbk"]
+[gd_scene load_steps=8 format=3 uid="uid://byt026nu1wsbk"]
 
 [ext_resource type="Script" uid="uid://bmxsy3nkmy1un" path="res://Scripts/MainMenu.cs" id="1_b42ut"]
 [ext_resource type="FontFile" uid="uid://bjtv1av4o6be8" path="res://Assets/Fonts/vermin-vibes-1989-font/VerminVibes1989Regular-m77m.ttf" id="1_v3fht"]
 [ext_resource type="Texture2D" uid="uid://da6xfqfd3gg2t" path="res://Assets/MainMenuPic.png" id="2_tfrft"]
+[ext_resource type="PackedScene" path="res://Scenes/Menus/FadeLayer.tscn" id="2_uv623"]
 [ext_resource type="Theme" uid="uid://xafkp44a81m5" path="res://Themes/ MainMenuButtons.tres" id="3_pbd8g"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_bc4mk"]
@@ -25,6 +26,9 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_b42ut")
 metadata/_edit_use_anchors_ = true
+
+[node name="FadeLayer" parent="." instance=ExtResource("2_uv623")]
+visible = false
 
 [node name="MainMenuPic" type="Sprite2D" parent="."]
 position = Vector2(577, 324)

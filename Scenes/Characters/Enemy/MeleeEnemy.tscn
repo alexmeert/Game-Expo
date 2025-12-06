@@ -325,7 +325,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rtru1"]
-radius = 4.0
+radius = 5.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mhmch"]
 size = Vector2(26.4969, 25.813)
@@ -349,7 +349,8 @@ sprite_frames = SubResource("SpriteFrames_clyi6")
 animation = &"WalkDown"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 11)
+visible = false
+position = Vector2(0, 12)
 scale = Vector2(1, 0.995352)
 shape = SubResource("CircleShape2D_rtru1")
 

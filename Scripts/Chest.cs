@@ -49,7 +49,12 @@ public partial class Chest : Node2D
 			_interactionArea.BodyEntered += OnBodyEntered;
 			_interactionArea.BodyExited += OnBodyExited;
 		}
+		else
+		{
+			GD.PrintErr("Chest: No Area2D found for interaction!");
+		}
 
+		GD.Print("Chest: Ready with signals connected and collisions disabled");
 
 		_door = GetTree().CurrentScene.GetNodeOrNull<Door>("Door");
 
@@ -120,9 +125,11 @@ public partial class Chest : Node2D
 		if (parent != null)
 		{
 			parent.AddChild(upgrade);
+			GD.Print($"Chest spawned {rarity} upgrade '{upgrade.ItemName}' at {upgrade.GlobalPosition}");
 		}
 		else
 		{
+			GD.PrintErr("Chest: Cannot spawn upgrade - no valid parent!");
 			upgrade.QueueFree();
 		}
 	}
@@ -133,6 +140,7 @@ public partial class Chest : Node2D
 		if (body is Player)
 		{
 			_isPlayerInRange = true;
+			GD.Print("Chest: Player entered interaction area");
 		}
 	}
 
@@ -141,6 +149,7 @@ public partial class Chest : Node2D
 		if (body is Player)
 		{
 			_isPlayerInRange = false;
+			GD.Print("Chest: Player exited interaction area");
 		}
 	}
 }
