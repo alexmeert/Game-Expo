@@ -6,6 +6,8 @@ public partial class MainMenu : Control
 	{
 		// Reset inventory automatically when MainMenu loads
 		GlobalInventory.Instance.ClearUpgrades();
+		
+		RandomSceneLoader.Instance?.Reset();
 
 		GetNode<Button>("VBoxContainer/PlayButton").Pressed += OnStartPressed;
 		GetNode<Button>("VBoxContainer/ItemsButton").Pressed += OnItemsPressed;
