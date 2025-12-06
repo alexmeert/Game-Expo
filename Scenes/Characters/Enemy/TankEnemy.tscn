@@ -155,6 +155,7 @@ data = PackedByteArray("//vUZAAABmw3SRVzAAJlgujRrBgAX3FHKlntgAG3o6QHNRAAAAhDcjSN
 
 [node name="TankEnemy" type="CharacterBody2D" node_paths=PackedStringArray("HitSound", "WalkSound", "DeathSound", "Healthbar")]
 z_index = 1
+motion_mode = 1
 script = ExtResource("1_cfk0x")
 HitSound = NodePath("TakeDamage")
 WalkSound = NodePath("WalkSound")

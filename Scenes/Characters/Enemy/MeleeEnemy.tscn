@@ -203,6 +203,7 @@ data = PackedByteArray("//vUZAAABmw3SRVzAAJlgujRrBgAX3FHKlntgAG3o6QHNRAAAAhDcjSN
 
 [node name="MeleeEnemy" type="CharacterBody2D" node_paths=PackedStringArray("HitSound", "DeathSound", "Healthbar")]
 z_index = 1
+motion_mode = 1
 script = ExtResource("1_ltwrp")
 Spd = 30.0
 HitSound = NodePath("TakeDamage")
