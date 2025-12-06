@@ -82,35 +82,37 @@ public partial class RangedEnemy : BasicEntity
 
 	private void AttackPlayer()
 	{
-		if (ProjectileScene == null || FirePoint == null)
-			return;
+	    if (ProjectileScene == null || FirePoint == null)
+	        return;
 
-		if (TargetPlayer is Player player && player.IsAlive)
-		{
-			Vector2 direction = (player.GlobalPosition - FirePoint.GlobalPosition).Normalized();
+	    if (TargetPlayer is not Player player || !player.IsAlive)
+	        return;
 
-			var projectile = ProjectileScene.Instantiate<BasicProjectile>();
-			projectile.GlobalPosition = FirePoint.GlobalPosition;
-			projectile.SetDirection(direction);
-			projectile.Owner = this;
-			projectile.SetDamage(DMG);
+	    Vector2 direction = (player.GlobalPosition - FirePoint.GlobalPosition).Normalized();
 
-			GetTree().CurrentScene.AddChild(projectile);
+	    var projectile = ProjectileScene.Instantiate<BasicProjectile>();
+	    projectile.GlobalPosition = FirePoint.GlobalPosition;
+	    projectile.SetDirection(direction);
+	    projectile.Owner = this;
+	    projectile.SetDamage(DMG);
 
-			ShotSound?.Play();
-		}
+	    GetTree().CurrentScene.AddChild(projectile);
+
+	    ShotSound?.Play();
 	}
 
-	protected virtual void FindPlayer()
+
+	protected void FindPlayer()
 	{
-		var scene = GetTree().CurrentScene;
-		if (scene != null)
-		{
-			TargetPlayer = scene.GetNodeOrNull<Node2D>("MainCharacter")
-				?? scene.GetNodeOrNull<Player>("Player")
-				?? scene.GetChildren().OfType<Player>().FirstOrDefault();
-		}
+	    var scene = GetTree().CurrentScene;
+	    if (scene == null)
+	        return;
+
+	    TargetPlayer = scene.GetChildren()
+	        .OfType<Player>()
+	        .FirstOrDefault(p => p.IsAlive);
 	}
+
 
 	protected override void OnTakeDamage(float damage)
 	{

@@ -833,6 +833,3 @@ autoplay = true
 
 [node name="InventoryUI" parent="CanvasLayer" instance=ExtResource("21_7djb7")]
 metadata/_edit_use_anchors_ = true
-
-[node name="Chest2" parent="." instance=ExtResource("15_n52ff")]
-position = Vector2(960, 552)

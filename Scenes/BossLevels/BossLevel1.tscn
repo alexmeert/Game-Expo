@@ -13,7 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://b1tn3d1kutgl3" path="res://Sounds/Music/Boss/BossMusic.mp3" id="19_5ygav"]
 [ext_resource type="PackedScene" uid="uid://e6h6e5hwv3eq" path="res://Scenes/Menus/InventoryUI.tscn" id="21_05qfh"]
 [ext_resource type="PackedScene" uid="uid://cvo5ub1k3b6hm" path="res://Scenes/Characters/Enemy/LeftSpeaker.tscn" id="21_poxnn"]
-[ext_resource type="PackedScene" uid="uid://peg2ksupnly8" path="res://Scenes/Characters/Enemy/Boss1.tscn" id="22_5ygav"]
+[ext_resource type="PackedScene" uid="uid://peg2ksupnly8" path="res://Scenes/Characters/Enemy/Boss.tscn" id="22_5ygav"]
 [ext_resource type="PackedScene" uid="uid://lvkchxi3oamh" path="res://Scenes/Characters/Enemy/RightSpeaker.tscn" id="22_xo5nl"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_4d3fe"]

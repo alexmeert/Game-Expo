@@ -174,7 +174,6 @@ shape = SubResource("CircleShape2D_kcgap")
 [node name="Hitbox" type="Area2D" parent="." groups=["Enemy"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-visible = false
 position = Vector2(0, 2)
 scale = Vector2(2.64, 1)
 shape = SubResource("RectangleShape2D_myivn")
