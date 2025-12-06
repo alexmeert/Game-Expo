@@ -42,14 +42,11 @@ public partial class Player : BasicEntity
 	private Gun _gun;
 
 	public Gun Gun => _gun;
+
 	public override void _Ready()
 	{
 		base._Ready();
 
-		// InitializeEntity is called in base._Ready(), so base stats are set
-		// Now apply upgrades after base stats are established
-		
-		// Assign gun owner first
 		_gun = GetNode<Gun>("Gun");
 		if (_gun != null)
 		{
@@ -57,55 +54,26 @@ public partial class Player : BasicEntity
 			UpdateAmmoUI();
 		}
 
-		// Hide reload bar initially, show ammo bar
-		if (ReloadBar != null)
-		{
-			ReloadBar.Visible = false;
-		}
-		if (AmmoBar != null)
-		{
-			AmmoBar.Visible = true;
-		}
+		if (ReloadBar != null) ReloadBar.Visible = false;
+		if (AmmoBar != null) AmmoBar.Visible = true;
+		if (OverclockAura != null) OverclockAura.Visible = false;
+		if (FirewallAura != null) FirewallAura.Visible = false;
 
-		// Hide auras initially
-		if (OverclockAura != null)
-		{
-			OverclockAura.Visible = false;
-		}
-		if (FirewallAura != null)
-		{
-			FirewallAura.Visible = false;
-		}
-
-		// Apply all previously collected upgrades from GlobalInventory
-		// This happens after InitializeEntity, so base stats are already set
 		if (GlobalInventory.Instance != null)
 		{
 			foreach (var upgrade in GlobalInventory.Instance.GetUpgrades())
-			{
 				ApplyUpgrade(upgrade);
-			}
 		}
-		
-		// Initialize stat labels
+
 		UpdateStatsLabels();
 	}
-
-
 
 	protected override void InitializeEntity()
 	{
 		base.InitializeEntity();
 
-		SetStats(
-			hp: Hp,
-			dmg: Dmg,
-			atkspd: AtkSpd,
-			def: Def,
-			spd: Spd
-		);
+		SetStats(Hp, Dmg, AtkSpd, Def, Spd);
 
-		// Store base stats for percentage calculations
 		_baseMaxHP = MaxHP;
 		_baseDMG = DMG;
 		_baseATKSPD = ATKSPD;
@@ -119,15 +87,12 @@ public partial class Player : BasicEntity
 		UpdatePerks((float)delta);
 		UpdateAmmoUI();
 	}
-	
-	public override void _Input(InputEvent @event)
-{
-	if (@event.IsActionPressed("inventory_toggle"))
-	{
-		InventoryUI.Instance?.Toggle();
-	}
-}
 
+	public override void _Input(InputEvent @event)
+	{
+		if (@event.IsActionPressed("inventory_toggle"))
+			InventoryUI.Instance?.Toggle();
+	}
 
 	protected override void HandleMovement(double delta)
 	{
@@ -135,8 +100,7 @@ public partial class Player : BasicEntity
 
 		if (input.Length() > 0)
 		{
-			if (!WalkSound.Playing) // prevents restarting every frame
-				WalkSound.Play();
+			if (!WalkSound.Playing) WalkSound.Play();
 			Velocity = Velocity.Lerp(input * Spd, (float)delta * ACCEL);
 		}
 		else
@@ -145,40 +109,24 @@ public partial class Player : BasicEntity
 			WalkSound.Stop();
 		}
 
-		// Move the player
 		Position += Velocity * (float)delta;
 
-		// Handle animation
 		var animSprite = GetNodeOrNull<AnimatedSprite2D>("Sprite");
 		if (animSprite != null)
 		{
-			if (input.Length() == 0)
-			{
-				animSprite.Play("Idle");
-			}
+			if (input.Length() == 0) animSprite.Play("Idle");
+			else if (Mathf.Abs(input.X) > Mathf.Abs(input.Y))
+				animSprite.Play(input.X > 0 ? "MoveRight" : "MoveLeft");
 			else
-			{
-				if (Mathf.Abs(input.X) > Mathf.Abs(input.Y))
-				{
-					animSprite.Play(input.X > 0 ? "MoveRight" : "MoveLeft");
-				}
-				else
-				{
-					animSprite.Play(input.Y > 0 ? "MoveDown" : "MoveUp");
-				}
-			}
+				animSprite.Play(input.Y > 0 ? "MoveDown" : "MoveUp");
 		}
 	}
-
-
 
 	private Vector2 GetInput()
 	{
 		float inputX = Input.GetActionStrength("D") - Input.GetActionStrength("A");
 		float inputY = Input.GetActionStrength("S") - Input.GetActionStrength("W");
-
 		Vector2 vec = new Vector2(inputX, inputY);
-
 		return vec.Length() > 0 ? vec.Normalized() : Vector2.Zero;
 	}
 
@@ -211,103 +159,74 @@ public partial class Player : BasicEntity
 
 	private void UpdateAmmoUI()
 	{
-		if (_gun == null)
-			return;
+		if (_gun == null) return;
 
-		// Update ammo label
 		if (AmmoLabel != null)
-		{
-			if (_gun.IsReloading)
-			{
-				AmmoLabel.Text = "reloading";
-			}
-			else
-			{
-				AmmoLabel.Text = $"{_gun.CurrentAmmo} / {_gun.MaxAmmoValue}";
-			}
-		}
+			AmmoLabel.Text = _gun.IsReloading ? "reloading" : $"{_gun.CurrentAmmo} / {_gun.MaxAmmoValue}";
 
-		// Update ammo bar 
 		if (AmmoBar != null)
 		{
-			if (_gun.IsReloading)
-			{
-				// Hide ammo bar when reloading
-				AmmoBar.Visible = false;
-			}
-			else
-			{
-				// Show ammo bar and update value based on remaining ammo
-				AmmoBar.Visible = true;
-				float ammoPercent = (float)_gun.CurrentAmmo / (float)_gun.MaxAmmoValue;
-				AmmoBar.Value = ammoPercent; 
-			}
+			AmmoBar.Visible = !_gun.IsReloading;
+			if (!_gun.IsReloading)
+				AmmoBar.Value = (float)_gun.CurrentAmmo / _gun.MaxAmmoValue;
 		}
 
-		// Update reload bar
 		if (ReloadBar != null)
 		{
-			if (_gun.IsReloading)
-			{
-				ReloadBar.Visible = true;
-				
-				ReloadBar.Value = _gun.ReloadProgress; 
-			}
-			else
-			{
-				ReloadBar.Visible = false;
-				ReloadBar.Value = 0f; // Reset when not reloading
-			}
+			ReloadBar.Visible = _gun.IsReloading;
+			ReloadBar.Value = _gun.IsReloading ? _gun.ReloadProgress : 0f;
 		}
 	}
 
 	protected override void Die()
 	{
-		// Call OnDeath() to emit signals, but don't QueueFree yet
-		OnDeath();
-		
+		DeathSound?.Play();
+		GD.Print("Player died!");
+
+		SetProcess(false);
+		SetPhysicsProcess(false);
+
 		var animSprite = GetNodeOrNull<AnimatedSprite2D>("Sprite");
-		if (animSprite != null)
+
+		async void StartDeathSequence()
 		{
-			// Play death animation
-			animSprite.Play("Death");
-			
-			// Wait for animation to finish before changing scene
-			if (!animSprite.IsConnected(AnimatedSprite2D.SignalName.AnimationFinished, new Callable(this, nameof(OnDeathAnimationFinished))))
+			var animSprite = GetNodeOrNull<AnimatedSprite2D>("Sprite");
+
+			if (animSprite != null)
 			{
-				animSprite.AnimationFinished += OnDeathAnimationFinished;
+				var tcs = new System.Threading.Tasks.TaskCompletionSource<bool>();
+
+				Action handler = null;
+				handler = () =>
+				{
+					if (animSprite.Animation == "Death")
+					{
+						tcs.TrySetResult(true);
+						animSprite.AnimationFinished -= handler;
+					}
+				};
+
+				animSprite.AnimationFinished += handler;
+				animSprite.Play("Death");
+
+				await tcs.Task;
 			}
-		}
-		else
-		{
-			// No sprite, go directly to death menu
-			OnDeathAnimationFinished();
-		}
-		
-		if (DeathSound != null)
-		{
-			DeathSound.Play();
-		}
-	}
-	
-	private void OnDeathAnimationFinished()
-	{
-		var animSprite = GetNodeOrNull<AnimatedSprite2D>("Sprite");
-		// Only proceed if the death animation finished (or if there's no sprite)
-		if (animSprite == null || animSprite.Animation == "Death")
-		{
-			// Animation finished, now change scene
+
+			if (ScreenFader.Instance != null)
+				await ScreenFader.Instance.FadeOut();
+
 			GetTree().ChangeSceneToFile("res://Scenes/Menus/DeathMenu.tscn");
-			// QueueFree will happen automatically when scene changes
 			QueueFree();
 		}
+
+
+
+		StartDeathSequence();
 	}
 
 	public void ApplyUpgrade(Upgrade upgrade)
 	{
-		if (upgrade == null)
-			return;
-
+		if (upgrade == null) return;
 		upgrade.Apply(this);
 		_activeUpgrades.Add(upgrade);
 		UpdateStatsLabels();
@@ -315,19 +234,15 @@ public partial class Player : BasicEntity
 
 	public void ApplyPerk(Perk perk)
 	{
-		if (perk == null)
-			return;
+		if (perk == null) return;
 
-		// Check if we already have this exact perk instance
 		if (_activePerks.Contains(perk))
 		{
-			// If it's already in the list, just refresh it
 			perk.Apply(this);
 			UpdateStatsLabels();
 			return;
 		}
 
-		// Add to list and apply
 		_activePerks.Add(perk);
 		perk.Apply(this);
 		UpdateStatsLabels();
@@ -343,31 +258,21 @@ public partial class Player : BasicEntity
 			Perk perk = _activePerks[i];
 			perk.Update(delta);
 
-			// Check if perk is active and matches aura names
 			if (perk.IsActive)
 			{
 				string perkName = perk.ItemName?.ToLower() ?? "";
-				if (perkName.Contains("overclock"))
-				{
-					hasOverclock = true;
-					GD.Print($"Found active Overclock perk: {perk.ItemName}");
-				}
-				if (perkName.Contains("firewall"))
-				{
-					hasFirewall = true;
-					GD.Print($"Found active Firewall perk: {perk.ItemName}");
-				}
+				if (perkName.Contains("overclock")) hasOverclock = true;
+				if (perkName.Contains("firewall")) hasFirewall = true;
 			}
 
 			if (!perk.IsActive)
 			{
 				perk.Remove(this);
 				_activePerks.RemoveAt(i);
-				UpdateStatsLabels(); // Update stats when perk is removed
+				UpdateStatsLabels();
 			}
 		}
 
-		// Update aura visibility and animation
 		UpdateAuras(hasOverclock, hasFirewall);
 	}
 
@@ -383,7 +288,6 @@ public partial class Player : BasicEntity
 
 		if (isActive)
 		{
-			// Activate if not already visible
 			if (!aura.Visible)
 			{
 				aura.Visible = true;
@@ -392,78 +296,43 @@ public partial class Player : BasicEntity
 		}
 		else
 		{
-			// Only trigger expire if it was active before
 			if (aura.Visible)
 			{
 				aura.Play("Expire");
 
-				// Wait for expire animation to finish
-				aura.AnimationFinished += () =>
+				Action handler = null;
+				handler = () =>
 				{
 					if (aura.Animation == "Expire")
 					{
 						aura.Visible = false;
+						aura.AnimationFinished -= handler;
 					}
 				};
 
+				aura.AnimationFinished += handler;
 			}
 		}
 	}
 
 
-	public List<Upgrade> GetActiveUpgrades()
-	{
-		return new List<Upgrade>(_activeUpgrades);
-	}
 
-	public List<Perk> GetActivePerks()
-	{
-		return new List<Perk>(_activePerks);
-	}
+	public List<Upgrade> GetActiveUpgrades() => new List<Upgrade>(_activeUpgrades);
+	public List<Perk> GetActivePerks() => new List<Perk>(_activePerks);
 
 	public float GetBaseMaxHP() => _baseMaxHP;
 	public float GetBaseDMG() => _baseDMG;
 	public float GetBaseATKSPD() => _baseATKSPD;
 	public float GetBaseDEF() => _baseDEF;
 	public float GetBaseSPD() => _baseSPD;
-	
+
 	private void UpdateStatsLabels()
 	{
-		// Update Damage label
-		if (DamageLabel != null)
-		{
-			DamageLabel.Text = $"Damage: {Mathf.RoundToInt(DMG)}";
-		}
-		
-		// Update Defense label (show as percentage)
-		if (DefenseLabel != null)
-		{
-			DefenseLabel.Text = $"Defense: {(DEF * 100f):F1}%";
-		}
-		
-		// Update Fire Rate label (show as attacks per second)
-		if (FireRateLabel != null)
-		{
-			FireRateLabel.Text = $"Fire Rate: {ATKSPD:F2}/s";
-		}
-		
-		// Update Cooldown label (show actual fire cooldown in seconds)
-		if (CooldownLabel != null && _gun != null)
-		{
-			float cooldown = _gun.GetFireCooldown();
-			CooldownLabel.Text = $"Cooldown: {cooldown:F3}s";
-		}
-		
-		// Update Magazine Size label
-		if (MagSizeLabel != null && _gun != null)
-		{
-			MagSizeLabel.Text = $"Mag Size: {_gun.MaxAmmoValue}";
-		}
-		
-		// Update Health label (show current/max)
-		if (HealthLabel != null)
-		{
-			HealthLabel.Text = $"Health: {Mathf.CeilToInt(HP)} / {Mathf.CeilToInt(MaxHP)}";
-		}
+		if (DamageLabel != null) DamageLabel.Text = $"Damage: {Mathf.RoundToInt(DMG)}";
+		if (DefenseLabel != null) DefenseLabel.Text = $"Defense: {(DEF * 100f):F1}%";
+		if (FireRateLabel != null) FireRateLabel.Text = $"Fire Rate: {ATKSPD:F2}/s";
+		if (CooldownLabel != null && _gun != null) CooldownLabel.Text = $"Cooldown: {_gun.GetFireCooldown():F3}s";
+		if (MagSizeLabel != null && _gun != null) MagSizeLabel.Text = $"Mag Size: {_gun.MaxAmmoValue}";
+		if (HealthLabel != null) HealthLabel.Text = $"Health: {Mathf.CeilToInt(HP)} / {Mathf.CeilToInt(MaxHP)}";
 	}
 }

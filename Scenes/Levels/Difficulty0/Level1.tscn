@@ -742,7 +742,7 @@ source_geometry_mode = 1
 source_geometry_group_name = &"Navigation"
 agent_radius = 15.0
 
-[node name="Level2" type="Node2D"]
+[node name="Level3" type="Node2D"]
 y_sort_enabled = true
 
 [node name="FadeLayer" parent="." instance=ExtResource("22_8tf6o")]
@@ -817,7 +817,6 @@ SpawnRadius = 10.0
 [node name="MainCharacter" parent="." instance=ExtResource("14_3wxq5")]
 z_index = 1
 position = Vector2(624, 592)
-Dmg = 50
 
 [node name="Chest" parent="." instance=ExtResource("15_n52ff")]
 visible = false
