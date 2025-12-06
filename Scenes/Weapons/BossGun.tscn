@@ -3,15 +3,16 @@
 [ext_resource type="Script" uid="uid://cbig55qoy02wh" path="res://Scripts/BossGun.cs" id="1_wlvtw"]
 [ext_resource type="Script" uid="uid://buwmjvcngnot0" path="res://Scripts/BossProjectileManager.cs" id="2_lc8wu"]
 
-[node name="BossGun" type="Node2D" node_paths=PackedStringArray("Muzzle", "BossProjectileManager")]
+[node name="BossGun" type="Node2D" node_paths=PackedStringArray("Muzzle", "BossProjectileManager", "ShotSound")]
 script = ExtResource("1_wlvtw")
 Muzzle = NodePath("Muzzle")
 BossProjectileManager = NodePath("BossProjectileManager")
+ShotSound = NodePath("ShotSound")
 
 [node name="Muzzle" type="Marker2D" parent="."]
 
 [node name="BossProjectileManager" type="Node" parent="."]
 script = ExtResource("2_lc8wu")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="ShotSound" type="AudioStreamPlayer2D" parent="."]
 bus = &"SFX"
