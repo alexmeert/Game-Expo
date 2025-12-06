@@ -741,7 +741,7 @@ source_geometry_mode = 1
 source_geometry_group_name = &"Navigation"
 agent_radius = 15.0
 
-[node name="Level1" type="Node2D"]
+[node name="Level2" type="Node2D"]
 y_sort_enabled = true
 
 [node name="LevelController" parent="." node_paths=PackedStringArray("Chest", "MusicPlayer") instance=ExtResource("1_7djb7")]

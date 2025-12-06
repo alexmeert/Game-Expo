@@ -757,7 +757,7 @@ expand_margin_bottom = 1.0
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4vx1o"]
 bg_color = Color(0.415686, 0, 0, 1)
 
-[node name="MainCharacter" type="CharacterBody2D" node_paths=PackedStringArray("HitSound", "DeathSound", "WalkSound", "HPValueLabel", "AmmoLabel", "AmmoBar", "ReloadBar", "OverclockAura", "FirewallAura", "DamageLabel", "DefenseLabel", "FireRateLabel", "CooldownLabel", "MagSizeLabel", "HealthLabel", "Healthbar")]
+[node name="MainCharacter" type="CharacterBody2D" node_paths=PackedStringArray("HitSound", "DeathSound", "WalkSound", "HPValueLabel", "AmmoLabel", "AmmoBar", "ReloadBar", "Healthbar")]
 script = ExtResource("1_4flse")
 Hp = 50
 AtkSpd = 0.5

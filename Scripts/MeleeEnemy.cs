@@ -39,64 +39,64 @@ public partial class MeleeEnemy : BasicEntity
 
 	protected override void HandleMovement(double delta)
 	{
-	    if (TargetPlayer == null || !TargetPlayer.IsInsideTree())
-	    {
-	        FindPlayer();
-	        if (TargetPlayer == null)
-	            return;
-	    }
+		if (TargetPlayer == null || !TargetPlayer.IsInsideTree())
+		{
+			FindPlayer();
+			if (TargetPlayer == null)
+				return;
+		}
 	
-	    float distance = GlobalPosition.DistanceTo(TargetPlayer.GlobalPosition);
+		float distance = GlobalPosition.DistanceTo(TargetPlayer.GlobalPosition);
 	
-	    // Attack
-	    _attackTimer -= (float)delta;
-	    if (_attackTimer <= 0f && distance <= AttackRange)
-	    {
-	        AttackPlayer();
-	        _attackTimer = 1.0f / ATKSPD;
-	    }
+		// Attack
+		_attackTimer -= (float)delta;
+		if (_attackTimer <= 0f && distance <= AttackRange)
+		{
+			AttackPlayer();
+			_attackTimer = 1.0f / ATKSPD;
+		}
 	
-	    // Movement
-	    if (distance > AttackRange)
-	    {
-	        Vector2 desiredTarget = TargetPlayer.GlobalPosition;
+		// Movement
+		if (distance > AttackRange)
+		{
+			Vector2 desiredTarget = TargetPlayer.GlobalPosition;
 	
-	        // Update path only if:
-	        // 1. Cooldown has passed
-	        // 2. Target has moved significantly
-	        _pathUpdateCooldown -= (float)delta;
-	        if (_pathUpdateCooldown <= 0f)
-	        {
-	            float targetDistance = desiredTarget.DistanceTo(agent.TargetPosition);
-	            if (targetDistance > TARGET_UPDATE_THRESHOLD)
-	            {
-	                agent.TargetPosition = desiredTarget;
-	                _pathUpdateCooldown = PATH_UPDATE_INTERVAL;
-	            }
-	        }
+			// Update path only if:
+			// 1. Cooldown has passed
+			// 2. Target has moved significantly
+			_pathUpdateCooldown -= (float)delta;
+			if (_pathUpdateCooldown <= 0f)
+			{
+				float targetDistance = desiredTarget.DistanceTo(agent.TargetPosition);
+				if (targetDistance > TARGET_UPDATE_THRESHOLD)
+				{
+					agent.TargetPosition = desiredTarget;
+					_pathUpdateCooldown = PATH_UPDATE_INTERVAL;
+				}
+			}
 	
-	        if (agent.IsNavigationFinished())
-	        {
-	            Velocity = Vector2.Zero;
-	        }
-	        else
-	        {
-	            Vector2 next = agent.GetNextPathPosition();
-	            Vector2 newVelocity = (next - GlobalPosition).Normalized() * Spd;
+			if (agent.IsNavigationFinished())
+			{
+				Velocity = Vector2.Zero;
+			}
+			else
+			{
+				Vector2 next = agent.GetNextPathPosition();
+				Vector2 newVelocity = (next - GlobalPosition).Normalized() * Spd;
 	
-	            if (agent.AvoidanceEnabled)
-	                agent.SetVelocity(newVelocity);
-	            else
-	                Velocity = newVelocity;
-	        }
-	    }
-	    else
-	    {
-	        Velocity = Vector2.Zero;
-	    }
+				if (agent.AvoidanceEnabled)
+					agent.SetVelocity(newVelocity);
+				else
+					Velocity = newVelocity;
+			}
+		}
+		else
+		{
+			Velocity = Vector2.Zero;
+		}
 	
-	    MoveAndSlide();
-	    UpdateAnimation();
+		MoveAndSlide();
+		UpdateAnimation();
 	}
 
 
