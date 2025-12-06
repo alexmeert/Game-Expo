@@ -60,28 +60,20 @@ public partial class InventoryUI : Control
 		var vbox = new VBoxContainer
 		{
 			Alignment = BoxContainer.AlignmentMode.Center,
-			CustomMinimumSize = new Vector2(96, 120),
 			MouseFilter = Control.MouseFilterEnum.Stop
 		};
 
-		// Centered icon container
-		var iconContainer = new CenterContainer
-		{
-			CustomMinimumSize = new Vector2(64, 64)
-		};
-
-		// Correct icon sizing – no scaling!
+		// TextureRect directly, pixel-perfect like popup
 		var icon = new TextureRect
 		{
 			Texture = u.Icon,
-			StretchMode = TextureRect.StretchModeEnum.KeepCentered,
-			CustomMinimumSize = new Vector2(64, 64)
+			StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered,
+			CustomMinimumSize = new Vector2(64, 64) // size you want for inventory
 		};
 
-		iconContainer.AddChild(icon);
-		vbox.AddChild(iconContainer);
+		vbox.AddChild(icon);
 
-		// Name
+		// Name label
 		var label = new Label
 		{
 			Text = u.ItemName,
@@ -89,7 +81,7 @@ public partial class InventoryUI : Control
 		};
 		vbox.AddChild(label);
 
-		// Stats
+		// Stats label
 		var statsLabel = new Label
 		{
 			Text = u.GetStatSummary(),
@@ -101,6 +93,7 @@ public partial class InventoryUI : Control
 
 		IconListContainer.AddChild(vbox);
 
+		// Click handler to open popup
 		vbox.GuiInput += (InputEvent ev) =>
 		{
 			if (ev is InputEventMouseButton mb &&

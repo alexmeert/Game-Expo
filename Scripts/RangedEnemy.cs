@@ -49,85 +49,85 @@ public partial class RangedEnemy : BasicEntity
 
 	protected override void HandleMovement(double delta)
 	{
-	    if (TargetPlayer == null || !TargetPlayer.IsInsideTree())
-	    {
-	        FindPlayer();
-	        if (TargetPlayer == null)
-	            return;
-	    }
+		if (TargetPlayer == null || !TargetPlayer.IsInsideTree())
+		{
+			FindPlayer();
+			if (TargetPlayer == null)
+				return;
+		}
 	
-	    float distance = GlobalPosition.DistanceTo(TargetPlayer.GlobalPosition);
-	    Vector2 playerDir = (TargetPlayer.GlobalPosition - GlobalPosition).Normalized();
+		float distance = GlobalPosition.DistanceTo(TargetPlayer.GlobalPosition);
+		Vector2 playerDir = (TargetPlayer.GlobalPosition - GlobalPosition).Normalized();
 	
-	    Vector2 desiredTarget;
-	    if (distance < MinDistance)
-	    {
-	        // Flee - cache the target to avoid constant recalculation
-	        if (!_hasCachedFleeTarget || _cachedFleeTarget.DistanceTo(GlobalPosition) < 50f)
-	        {
-	            _cachedFleeTarget = GlobalPosition - playerDir * 200f;
-	            _hasCachedFleeTarget = true;
-	        }
-	        desiredTarget = _cachedFleeTarget;
-	    }
-	    else if (distance > MaxDistance)
-	    {
-	        // Approach
-	        desiredTarget = TargetPlayer.GlobalPosition;
-	        _hasCachedFleeTarget = false; // Reset flee cache when not fleeing
-	    }
-	    else
-	    {
-	        // Strafing
-	        Vector2 tangent = new Vector2(-playerDir.Y, playerDir.X);
-	        Velocity = tangent * (Spd * 0.4f);
-	        UpdateAnimation();
-	        _hasCachedFleeTarget = false; // Reset flee cache when strafing
-	        return; // Skip agent movement
-	    }
+		Vector2 desiredTarget;
+		if (distance < MinDistance)
+		{
+			// Flee - cache the target to avoid constant recalculation
+			if (!_hasCachedFleeTarget || _cachedFleeTarget.DistanceTo(GlobalPosition) < 50f)
+			{
+				_cachedFleeTarget = GlobalPosition - playerDir * 200f;
+				_hasCachedFleeTarget = true;
+			}
+			desiredTarget = _cachedFleeTarget;
+		}
+		else if (distance > MaxDistance)
+		{
+			// Approach
+			desiredTarget = TargetPlayer.GlobalPosition;
+			_hasCachedFleeTarget = false; // Reset flee cache when not fleeing
+		}
+		else
+		{
+			// Strafing
+			Vector2 tangent = new Vector2(-playerDir.Y, playerDir.X);
+			Velocity = tangent * (Spd * 0.4f);
+			UpdateAnimation();
+			_hasCachedFleeTarget = false; // Reset flee cache when strafing
+			return; // Skip agent movement
+		}
 	
-	    // Update path only if:
-	    // 1. Cooldown has passed
-	    // 2. Target has moved significantly
-	    _pathUpdateCooldown -= (float)delta;
-	    if (_pathUpdateCooldown <= 0f)
-	    {
-	        float targetDistance = desiredTarget.DistanceTo(agent.TargetPosition);
-	        if (targetDistance > TARGET_UPDATE_THRESHOLD)
-	        {
-	            agent.TargetPosition = desiredTarget;
-	            _pathUpdateCooldown = PATH_UPDATE_INTERVAL;
-	        }
-	    }
+		// Update path only if:
+		// 1. Cooldown has passed
+		// 2. Target has moved significantly
+		_pathUpdateCooldown -= (float)delta;
+		if (_pathUpdateCooldown <= 0f)
+		{
+			float targetDistance = desiredTarget.DistanceTo(agent.TargetPosition);
+			if (targetDistance > TARGET_UPDATE_THRESHOLD)
+			{
+				agent.TargetPosition = desiredTarget;
+				_pathUpdateCooldown = PATH_UPDATE_INTERVAL;
+			}
+		}
 	
-	    // Skip if path finished or invalid
-	    if (agent.IsNavigationFinished())
-	    {
-	        Velocity = Vector2.Zero;
-	    }
-	    else
-	    {
-	        Vector2 nextPosition = agent.GetNextPathPosition();
-	        Vector2 newVelocity = (nextPosition - GlobalPosition).Normalized() * Spd;
+		// Skip if path finished or invalid
+		if (agent.IsNavigationFinished())
+		{
+			Velocity = Vector2.Zero;
+		}
+		else
+		{
+			Vector2 nextPosition = agent.GetNextPathPosition();
+			Vector2 newVelocity = (nextPosition - GlobalPosition).Normalized() * Spd;
 	
-	        if (agent.AvoidanceEnabled)
-	            agent.SetVelocity(newVelocity);
-	        else
-	            Velocity = newVelocity;
-	    }
+			if (agent.AvoidanceEnabled)
+				agent.SetVelocity(newVelocity);
+			else
+				Velocity = newVelocity;
+		}
 	
-	    // Apply movement
-	    MoveAndSlide();
+		// Apply movement
+		MoveAndSlide();
 	
-	    // Attack timer
-	    _attackTimer -= (float)delta;
-	    if (_attackTimer <= 0f && distance <= AttackRange)
-	    {
-	        AttackPlayer();
-	        _attackTimer = 1f / ATKSPD;
-	    }
+		// Attack timer
+		_attackTimer -= (float)delta;
+		if (_attackTimer <= 0f && distance <= AttackRange)
+		{
+			AttackPlayer();
+			_attackTimer = 1f / ATKSPD;
+		}
 	
-	    UpdateAnimation();
+		UpdateAnimation();
 	}
 
 
