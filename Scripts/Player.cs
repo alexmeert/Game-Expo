@@ -21,6 +21,14 @@ public partial class Player : BasicEntity
 	[Export] private ProgressBar ReloadBar;
 	[Export] private AnimatedSprite2D OverclockAura;
 	[Export] private AnimatedSprite2D FirewallAura;
+	
+	// Stat display labels
+	[Export] private Label DamageLabel;
+	[Export] private Label DefenseLabel;
+	[Export] private Label FireRateLabel;
+	[Export] private Label CooldownLabel;
+	[Export] private Label MagSizeLabel;
+	[Export] private Label HealthLabel;
 
 	private List<Upgrade> _activeUpgrades = new List<Upgrade>();
 	private List<Perk> _activePerks = new List<Perk>();
@@ -38,6 +46,9 @@ public partial class Player : BasicEntity
 	{
 		base._Ready();
 
+		// InitializeEntity is called in base._Ready(), so base stats are set
+		// Now apply upgrades after base stats are established
+		
 		// Assign gun owner first
 		_gun = GetNode<Gun>("Gun");
 		if (_gun != null)
@@ -67,10 +78,17 @@ public partial class Player : BasicEntity
 		}
 
 		// Apply all previously collected upgrades from GlobalInventory
-		foreach (var upgrade in GlobalInventory.Instance.GetUpgrades())
+		// This happens after InitializeEntity, so base stats are already set
+		if (GlobalInventory.Instance != null)
 		{
-			ApplyUpgrade(upgrade);
+			foreach (var upgrade in GlobalInventory.Instance.GetUpgrades())
+			{
+				ApplyUpgrade(upgrade);
+			}
 		}
+		
+		// Initialize stat labels
+		UpdateStatsLabels();
 	}
 
 
@@ -175,12 +193,14 @@ public partial class Player : BasicEntity
 	{
 		base.OnHPChanged();
 		UpdateHPLabel();
+		UpdateStatsLabels();
 	}
 
 	protected override void OnMaxHPChanged()
 	{
 		base.OnMaxHPChanged();
 		UpdateHPLabel();
+		UpdateStatsLabels();
 	}
 
 	private void UpdateHPLabel()
@@ -261,9 +281,8 @@ public partial class Player : BasicEntity
 			return;
 
 		upgrade.Apply(this);
-		_activeUpgrades.Add(upgrade); 
-
-		
+		_activeUpgrades.Add(upgrade);
+		UpdateStatsLabels();
 	}
 
 	public void ApplyPerk(Perk perk)
@@ -271,12 +290,19 @@ public partial class Player : BasicEntity
 		if (perk == null)
 			return;
 
-		if (!_activePerks.Contains(perk))
+		// Check if we already have this exact perk instance
+		if (_activePerks.Contains(perk))
 		{
-			_activePerks.Add(perk);
+			// If it's already in the list, just refresh it
+			perk.Apply(this);
+			UpdateStatsLabels();
+			return;
 		}
 
+		// Add to list and apply
+		_activePerks.Add(perk);
 		perk.Apply(this);
+		UpdateStatsLabels();
 	}
 
 	private void UpdatePerks(float delta)
@@ -309,6 +335,7 @@ public partial class Player : BasicEntity
 			{
 				perk.Remove(this);
 				_activePerks.RemoveAt(i);
+				UpdateStatsLabels(); // Update stats when perk is removed
 			}
 		}
 
@@ -371,4 +398,44 @@ public partial class Player : BasicEntity
 	public float GetBaseATKSPD() => _baseATKSPD;
 	public float GetBaseDEF() => _baseDEF;
 	public float GetBaseSPD() => _baseSPD;
+	
+	private void UpdateStatsLabels()
+	{
+		// Update Damage label
+		if (DamageLabel != null)
+		{
+			DamageLabel.Text = $"Damage: {Mathf.RoundToInt(DMG)}";
+		}
+		
+		// Update Defense label (show as percentage)
+		if (DefenseLabel != null)
+		{
+			DefenseLabel.Text = $"Defense: {(DEF * 100f):F1}%";
+		}
+		
+		// Update Fire Rate label (show as attacks per second)
+		if (FireRateLabel != null)
+		{
+			FireRateLabel.Text = $"Fire Rate: {ATKSPD:F2}/s";
+		}
+		
+		// Update Cooldown label (show actual fire cooldown in seconds)
+		if (CooldownLabel != null && _gun != null)
+		{
+			float cooldown = _gun.GetFireCooldown();
+			CooldownLabel.Text = $"Cooldown: {cooldown:F3}s";
+		}
+		
+		// Update Magazine Size label
+		if (MagSizeLabel != null && _gun != null)
+		{
+			MagSizeLabel.Text = $"Mag Size: {_gun.MaxAmmoValue}";
+		}
+		
+		// Update Health label (show current/max)
+		if (HealthLabel != null)
+		{
+			HealthLabel.Text = $"Health: {Mathf.CeilToInt(HP)} / {Mathf.CeilToInt(MaxHP)}";
+		}
+	}
 }

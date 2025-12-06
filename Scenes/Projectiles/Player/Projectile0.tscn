@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://bt71rob88i34v" path="res://Scripts/BasicProjectile.cs" id="1_ofugv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7dms8"]
-radius = 4.0
-height = 10.0
+radius = 6.0
+height = 16.0
 
 [node name="Projectile0" type="Area2D"]
 z_index = 3

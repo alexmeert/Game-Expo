@@ -13,6 +13,7 @@ public partial class Perk : Item
 
 private float _remainingTime = 0f;
 private bool _isActive = false;
+private bool _statsApplied = false; // Track if stats have been applied to prevent duplicates
 
 public float RemainingTime => _remainingTime;
 public bool IsActive => _isActive;
@@ -43,38 +44,57 @@ public override void Apply(Player player)
 	if (player == null)
 		return;
 
-	if (_isActive)
+	// If already active, just refresh the timer
+	if (_isActive && _statsApplied)
 	{
 		_remainingTime = Duration;
 		GD.Print($"Refreshed perk: {ItemName} (Duration: {Duration}s)");
 		return;
 	}
 
-	player.MaxHP += HpBonus;
-	player.HP += HpBonus; 
-	player.DMG += DmgBonus;
-	player.ATKSPD += AtkSpdBonus;
-	player.DEF = MathF.Min(1f, player.DEF + DefBonus);
-	player.SPD += SpdBonus;
+	// Apply stats only if not already applied
+	if (!_statsApplied)
+	{
+		player.MaxHP += HpBonus;
+		// Add HP bonus, but ensure it doesn't exceed MaxHP
+		float newHP = player.HP + HpBonus;
+		player.HP = MathF.Min(newHP, player.MaxHP);
+		
+		player.DMG += DmgBonus;
+		player.ATKSPD += AtkSpdBonus;
+		player.DEF = MathF.Min(1f, player.DEF + DefBonus);
+		player.SPD += SpdBonus;
+		
+		_statsApplied = true;
+		GD.Print($"Applied perk: {ItemName} (Duration: {Duration}s)");
+	}
 
 	_remainingTime = Duration;
 	_isActive = true;
-
-	GD.Print($"Applied perk: {ItemName} (Duration: {Duration}s)");
 }
 
 public override void Remove(Player player)
 {
-	if (player == null || !_isActive)
+	if (player == null || !_isActive || !_statsApplied)
 		return;
 
+	// Remove stats
 	player.MaxHP -= HpBonus;
 	player.DMG -= DmgBonus;
 	player.ATKSPD -= AtkSpdBonus;
 	player.DEF = MathF.Max(0f, player.DEF - DefBonus);
 	player.SPD -= SpdBonus;
+	
+	// Ensure HP doesn't exceed MaxHP after removal
+	if (player.HP > player.MaxHP)
+		player.HP = player.MaxHP;
+	
+	// Ensure HP doesn't go below 0
+	if (player.HP < 0)
+		player.HP = 0;
 
 	_isActive = false;
+	_statsApplied = false;
 	_remainingTime = 0f;
 
 	GD.Print($"Removed perk: {ItemName}");
@@ -91,6 +111,7 @@ public void Update(float delta)
 	{
 		_remainingTime = 0f;
 		_isActive = false;
+		// Note: Remove() will be called by Player.UpdatePerks() when IsActive becomes false
 	}
 }
 

@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://dw5ix7pkr11ck" path="res://Sprites/Projectiles/Player/Projectile1.png" id="1_uestm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uestm"]
-radius = 3.0
-height = 10.0
+radius = 3.6
+height = 7.2
 
 [node name="Projectile1" type="Area2D"]
 z_index = 10
@@ -16,4 +16,5 @@ texture_filter = 1
 texture = ExtResource("1_uestm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.38889, 2)
 shape = SubResource("CapsuleShape2D_uestm")
