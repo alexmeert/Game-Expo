@@ -24,12 +24,18 @@ public partial class Door : StaticBody2D
 			_collisionShape.Disabled = true;
 	}
 
-	private void OnBodyEntered(Node2D body)
+	private async void OnBodyEntered(Node2D body)
 	{
 		if (body is Player)
 		{
 			GD.Print("Player entered door area → loading next room");
+
+			if (ScreenFader.Instance != null)
+				await ScreenFader.Instance.FadeOut(); // fade to black
+
 			RandomSceneLoader.Instance?.LoadNextRoom();
 		}
 	}
+
+
 }

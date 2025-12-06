@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfqgfd2sggx0"]
+
+[ext_resource type="Script" uid="uid://db11liglx0i0b" path="res://Scripts/ScreenFader.cs" id="1_0atv1"]
+
+[node name="FadeLayer" type="CanvasLayer"]
+
+[node name="ScreenFader" type="ColorRect" parent="."]
+offset_right = 1167.0
+offset_bottom = 681.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("1_0atv1")

@@ -4,6 +4,8 @@ public partial class LevelController : Node, IEnemyTracker
 {
 	[Export] public Node2D Chest;
 	[Export] public AudioStreamPlayer2D MusicPlayer;
+	
+
 
 	private int _aliveEnemies = 0;
 	private bool _chestRevealed = false;
@@ -15,7 +17,15 @@ public partial class LevelController : Node, IEnemyTracker
 			Chest.Visible = false;
 
 		PlayMusic(_isBossLevel);
+
+		// Fade in at level start
+		if (ScreenFader.Instance != null)
+		{
+			ScreenFader.Instance.Modulate = new Color(0,0,0,1); // start black
+			ScreenFader.Instance.FadeIn();
+		}
 	}
+
 
 	public void SetBoss(bool boss)
 	{
