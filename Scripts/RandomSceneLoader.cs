@@ -7,7 +7,7 @@ public partial class RandomSceneLoader : Node
 	public static RandomSceneLoader Instance { get; private set; }
 
 	[Export] public string LevelsFolder = "res://Scenes/Levels";
-	[Export] public string BossLevelPath = "res://Scenes/BossLevels/";
+	[Export] public string BossLevelPath = "res://Scenes/BossLevels";
 	[Export] public AudioStreamPlayer MusicPlayer;
 
 	private List<string> _randomLevelOrder = new List<string>();
@@ -81,30 +81,9 @@ public partial class RandomSceneLoader : Node
 
 	private string LoadBossLevel()
 	{
-		var dir = DirAccess.Open(BossLevelPath);
-
-		if (dir == null)
-		{
-			GD.PrintErr($"Could not open boss folder: {BossLevelPath}");
-			return $"{LevelsFolder}/Level5.tscn";
-		}
-
-		dir.ListDirBegin();
-		string file;
-
-		while ((file = dir.GetNext()) != "")
-		{
-			if (!dir.CurrentIsDir() && file.EndsWith(".tscn"))
-			{
-				dir.ListDirEnd();
-				return BossLevelPath + file;
-			}
-		}
-
-		dir.ListDirEnd();
-		GD.PrintErr($"No boss level found in: {BossLevelPath}");
-		return $"{LevelsFolder}/Level5.tscn";
+		return $"{BossLevelPath}/BossLevel1.tscn";
 	}
+
 
 	public void Reset()
 	{

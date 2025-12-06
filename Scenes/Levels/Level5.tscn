@@ -711,7 +711,6 @@ Chest = NodePath("../Chest")
 MusicPlayer = NodePath("../Music")
 
 [node name="FadeLayer" parent="." instance=ExtResource("2_3o4m1")]
-visible = false
 
 [node name="Floor" type="TileMapLayer" parent="." groups=["Navigation"]]
 texture_filter = 1
