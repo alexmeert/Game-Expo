@@ -16,7 +16,9 @@ public partial class Upgrade : Item
 	[Export(PropertyHint.Range, "0,1,0.01")] public float AtkSpdPercent = 0f;
 	[Export(PropertyHint.Range, "0,1,0.01")] public float DefPercent = 0f;
 	[Export(PropertyHint.Range, "0,1,0.01")] public float SpdPercent = 0f;
+
 	
+	[Export] public int MagSizeFlat = 0;
 
 	public UpgradeRarity Rarity { get; set; }
 
@@ -32,13 +34,12 @@ public partial class Upgrade : Item
 
 	[Export] public AudioStreamPlayer2D CollectSound;
 
-	
 	private bool collected = false;
 
 	public static UpgradeRarity GetRandomRarity()
 	{
 		float roll = (float)GD.RandRange(0f, 100f);
-		
+
 		if (roll < 55f)
 			return UpgradeRarity.Uncommon;
 		else if (roll < 85f)
@@ -52,9 +53,9 @@ public partial class Upgrade : Item
 	public override void _Ready()
 	{
 		base._Ready();
-		var area = GetNode<Area2D>("PickupArea");
-		area.BodyEntered += OnPickup;
-		
+
+		GetNode<Area2D>("PickupArea").BodyEntered += OnPickup;
+
 		LoadAuraTextures();
 		SetupAura();
 	}
@@ -74,14 +75,6 @@ public partial class Upgrade : Item
 			LegendaryAura = GD.Load<PackedScene>(LegendaryAuraPath);
 	}
 
-	public static void SetAuraScenes(PackedScene uncommon, PackedScene rare, PackedScene epic, PackedScene legendary)
-	{
-		UncommonAura = uncommon;
-		RareAura = rare;
-		EpicAura = epic;
-		LegendaryAura = legendary;
-	}
-
 	private void SetupAura()
 	{
 		PackedScene auraScene = Rarity switch
@@ -95,14 +88,11 @@ public partial class Upgrade : Item
 
 		if (auraScene != null)
 		{
-			var auraInstance = auraScene.Instantiate<Node2D>();
-			if (auraInstance != null)
-			{
-				auraInstance.Name = "Aura";
-				AddChild(auraInstance);
-				MoveChild(auraInstance, 0);
-				auraInstance.ZIndex = -1;
-			}
+			Node2D auraNode = auraScene.Instantiate<Node2D>();
+			auraNode.Name = "Aura";
+			AddChild(auraNode);
+			MoveChild(auraNode, 0);
+			auraNode.ZIndex = -1;
 		}
 	}
 
@@ -111,11 +101,10 @@ public partial class Upgrade : Item
 		Rarity = rarity;
 		SetupAura();
 	}
-	
+
 	public string GetStatSummary()
 	{
 		float rarityMult = GetRarityMultiplier();
-
 		string summary = "";
 
 		if (HpPercent > 0)
@@ -133,9 +122,23 @@ public partial class Upgrade : Item
 		if (SpdPercent > 0)
 			summary += $"Speed: {(1 + SpdPercent * rarityMult) * 100f:0}%\n";
 
+		
+		if (MagSizeFlat > 0)
+		{
+			float mult = GetRarityMultiplier();
+
+			
+			int effectiveMag = Mathf.FloorToInt(MagSizeFlat * (1f + mult));
+
+			if (effectiveMag < MagSizeFlat + 1)
+				effectiveMag = MagSizeFlat + 1;
+
+			summary += $"Mag Size: +{effectiveMag}\n";
+		}
+
+
 		return summary.TrimEnd();
 	}
-
 
 	private void OnPickup(Node body)
 	{
@@ -145,18 +148,15 @@ public partial class Upgrade : Item
 		if (body is Player player)
 		{
 			player.ApplyUpgrade(this);
-
 			GlobalInventory.Instance?.AddUpgrade(this);
-
 			InventoryUI.Instance?.AddUpgrade(this);
 
-			CollectSound.Play();
+			CollectSound?.Play();
 			GD.Print($"{Rarity} {ItemName} collected!");
 
 			QueueFree();
 		}
 	}
-
 
 	private float GetRarityMultiplier()
 	{
@@ -175,19 +175,19 @@ public partial class Upgrade : Item
 	private float _appliedAtkSpdIncrease = 0f;
 	private float _appliedDefIncrease = 0f;
 	private float _appliedSpdIncrease = 0f;
+	private int _appliedMagSizeIncrease = 0;
 
 	public override void Apply(Player player)
 	{
-		if (player == null)
-			return;
+		if (player == null) return;
 
-		float rarityMultiplier = GetRarityMultiplier();
+		float mult = GetRarityMultiplier();
 
-		_appliedHpIncrease = HpPercent > 0 ? player.GetBaseMaxHP() * rarityMultiplier * HpPercent : 0f;
-		_appliedDmgIncrease = DmgPercent > 0 ? player.GetBaseDMG() * rarityMultiplier * DmgPercent : 0f;
-		_appliedAtkSpdIncrease = AtkSpdPercent > 0 ? player.GetBaseATKSPD() * rarityMultiplier * AtkSpdPercent : 0f;
-		_appliedDefIncrease = DefPercent > 0 ? rarityMultiplier * DefPercent : 0f;
-		_appliedSpdIncrease = SpdPercent > 0 ? player.GetBaseSPD() * rarityMultiplier * SpdPercent : 0f;
+		_appliedHpIncrease = HpPercent * mult * player.GetBaseMaxHP();
+		_appliedDmgIncrease = DmgPercent * mult * player.GetBaseDMG();
+		_appliedAtkSpdIncrease = AtkSpdPercent * mult * player.GetBaseATKSPD();
+		_appliedDefIncrease = DefPercent * mult;
+		_appliedSpdIncrease = SpdPercent * mult * player.GetBaseSPD();
 
 		player.MaxHP += _appliedHpIncrease;
 		player.HP += _appliedHpIncrease;
@@ -196,19 +196,37 @@ public partial class Upgrade : Item
 		player.DEF = MathF.Min(1f, player.DEF + _appliedDefIncrease);
 		player.SPD += _appliedSpdIncrease;
 
-		GD.Print($"Applied {Rarity} upgrade: {ItemName}");
+		
+		if (player.Gun != null && MagSizeFlat > 0)
+		{
+			int effectiveMag = Mathf.FloorToInt(MagSizeFlat * (1f + mult));
+			if (effectiveMag < MagSizeFlat + 1)
+				effectiveMag = MagSizeFlat + 1;
+
+
+			_appliedMagSizeIncrease = effectiveMag;
+			player.Gun.AddMagazineSize(_appliedMagSizeIncrease);
+		}
+
+		GD.Print($"Applied {Rarity} upgrade: {ItemName} (mag:+{_appliedMagSizeIncrease})");
 	}
 
 	public override void Remove(Player player)
 	{
-		if (player == null)
-			return;
+		if (player == null) return;
 
 		player.MaxHP -= _appliedHpIncrease;
 		player.DMG -= _appliedDmgIncrease;
 		player.ATKSPD -= _appliedAtkSpdIncrease;
 		player.DEF = MathF.Max(0f, player.DEF - _appliedDefIncrease);
 		player.SPD -= _appliedSpdIncrease;
+
+		
+		if (player.Gun != null && _appliedMagSizeIncrease > 0)
+		{
+			player.Gun.AddMagazineSize(-_appliedMagSizeIncrease);
+			_appliedMagSizeIncrease = 0;
+		}
 
 		if (player.HP < 0)
 			player.HP = 0;

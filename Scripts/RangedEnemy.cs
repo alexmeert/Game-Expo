@@ -109,34 +109,34 @@ public partial class RangedEnemy : BasicEntity
 
 	private void AttackPlayer()
 	{
-	    if (ProjectileScene == null || FirePoint == null)
-	        return;
+		if (ProjectileScene == null || FirePoint == null)
+			return;
 
-	    if (TargetPlayer is not Player player || !player.IsAlive)
-	        return;
+		if (TargetPlayer is not Player player || !player.IsAlive)
+			return;
 
-	    Vector2 direction = (player.GlobalPosition - FirePoint.GlobalPosition).Normalized();
+		Vector2 direction = (player.GlobalPosition - FirePoint.GlobalPosition).Normalized();
 
-	    var projectile = ProjectileScene.Instantiate<BasicProjectile>();
-	    projectile.GlobalPosition = FirePoint.GlobalPosition;
-	    projectile.SetDirection(direction);
-	    projectile.Owner = this;
-	    projectile.SetDamage(DMG);
+		var projectile = ProjectileScene.Instantiate<BasicProjectile>();
+		projectile.GlobalPosition = FirePoint.GlobalPosition;
+		projectile.SetDirection(direction);
+		projectile.Owner = this;
+		projectile.SetDamage(DMG);
 
-	    GetTree().CurrentScene.AddChild(projectile);
+		GetTree().CurrentScene.AddChild(projectile);
 
-	    ShotSound?.Play();
+		ShotSound?.Play();
 	}
 
 	protected void FindPlayer()
 	{
-	    var scene = GetTree().CurrentScene;
-	    if (scene == null)
-	        return;
+		var scene = GetTree().CurrentScene;
+		if (scene == null)
+			return;
 
-	    TargetPlayer = scene.GetChildren()
-	        .OfType<Player>()
-	        .FirstOrDefault(p => p.IsAlive);
+		TargetPlayer = scene.GetChildren()
+			.OfType<Player>()
+			.FirstOrDefault(p => p.IsAlive);
 	}
 
 	protected override void OnTakeDamage(float damage)

@@ -855,13 +855,11 @@ autoplay = true
 [node name="InventoryUI" parent="CanvasLayer" instance=ExtResource("21_05qfh")]
 metadata/_edit_use_anchors_ = true
 
-[node name="Boss" parent="." node_paths=PackedStringArray("HPValueLabel", "LeftSpeaker", "RightSpeaker", "Healthbar") instance=ExtResource("22_5ygav")]
+[node name="Boss" parent="." node_paths=PackedStringArray("HPValueLabel", "Healthbar") instance=ExtResource("22_5ygav")]
 z_index = 2
 position = Vector2(624, 208)
 scale = Vector2(2.49833, 2.49833)
 HPValueLabel = NodePath("../MainCharacter/BossHPValue")
-LeftSpeaker = NodePath("../LeftSpeaker")
-RightSpeaker = NodePath("../RightSpeaker")
 Healthbar = NodePath("../MainCharacter/BossHealthBar")
 
 [node name="LeftSpeaker" parent="." node_paths=PackedStringArray("HPValueLabel", "Healthbar") instance=ExtResource("21_poxnn")]
