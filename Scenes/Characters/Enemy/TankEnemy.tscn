@@ -183,7 +183,6 @@ shape = SubResource("RectangleShape2D_myivn")
 path_desired_distance = 3.0
 target_desired_distance = 3.0
 path_postprocessing = 1
-debug_enabled = true
 
 [node name="Healthbar" parent="." instance=ExtResource("7_hv0av")]
 offset_left = -20.0
