@@ -1,9 +1,10 @@
-[gd_scene load_steps=29 format=3 uid="uid://lvkchxi3oamh"]
+[gd_scene load_steps=30 format=3 uid="uid://lvkchxi3oamh"]
 
 [ext_resource type="Script" uid="uid://dswmpiguy2y65" path="res://Scripts/Speaker.cs" id="2_8fqpm"]
 [ext_resource type="Texture2D" uid="uid://b7u0grmjdq8nl" path="res://Sprites/Characters/Bosses/BSOD/SpeakerAnimation.png" id="2_wt6e8"]
 [ext_resource type="Texture2D" uid="uid://i3mb7ur14vgm" path="res://Sprites/Characters/Bosses/BSOD/Speaker-Sheet.png" id="3_70lp6"]
 [ext_resource type="PackedScene" uid="uid://csi66qabvkfxa" path="res://Scenes/Weapons/SpeakerGun.tscn" id="3_wt6e8"]
+[ext_resource type="AudioStream" uid="uid://dupgx1y0w8khs" path="res://Sounds/Enemy/EnemyDeath.mp3" id="5_1vosn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d60bt"]
 atlas = ExtResource("3_70lp6")
@@ -171,11 +172,12 @@ size = Vector2(22, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6c3x5"]
 size = Vector2(28, 38)
 
-[node name="RightSpeaker" type="CharacterBody2D" node_paths=PackedStringArray("SpeakerGun", "Sprite")]
+[node name="RightSpeaker" type="CharacterBody2D" node_paths=PackedStringArray("SpeakerGun", "Sprite", "DeathSound")]
 texture_filter = 1
 script = ExtResource("2_8fqpm")
 SpeakerGun = NodePath("SpeakerGun")
 Sprite = NodePath("Sprite")
+DeathSound = NodePath("DeathSound")
 
 [node name="SpeakerGun" parent="." instance=ExtResource("3_wt6e8")]
 IsArcAttacker = true
@@ -196,3 +198,6 @@ shape = SubResource("RectangleShape2D_8fqpm")
 visible = false
 position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_6c3x5")
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_1vosn")

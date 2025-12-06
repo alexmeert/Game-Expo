@@ -25,17 +25,14 @@
 [sub_resource type="LabelSettings" id="LabelSettings_88ape"]
 font = ExtResource("1_n3lbt")
 font_size = 100
-font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_w7kk4"]
 font = ExtResource("1_n3lbt")
 font_size = 40
-font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_dthsy"]
 font = ExtResource("1_n3lbt")
 font_size = 40
-font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_16dsb"]
 font = ExtResource("5_4uyhk")
@@ -150,7 +147,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0, 1, 0.858824, 1)
+color = Color(0.0196078, 0.0196078, 1, 1)
 
 [node name="PerksBackground" type="ColorRect" parent="."]
 layout_mode = 0
@@ -336,7 +333,7 @@ layout_mode = 0
 offset_left = -37.6337
 offset_top = -38.09
 offset_right = 2.36625
-offset_bottom = 1.91001
+offset_bottom = 1.91
 scale = Vector2(0.1, 0.1)
 pivot_offset = Vector2(20, 20)
 
@@ -379,7 +376,7 @@ z_index = -4
 layout_mode = 0
 offset_left = -48.5314
 offset_top = -26.9098
-offset_right = -8.53149
+offset_right = -8.5315
 offset_bottom = 13.0902
 scale = Vector2(0.1, 0.1)
 pivot_offset = Vector2(20, 20)
@@ -498,7 +495,7 @@ anchor_right = -13.7742
 anchor_bottom = -0.199998
 offset_left = 504.988
 offset_top = -27.0001
-offset_right = 544.988
+offset_right = 544.987
 offset_bottom = 12.9999
 scale = Vector2(0.2, 0.2)
 pivot_offset = Vector2(20, 20)
@@ -630,7 +627,7 @@ z_index = -2
 layout_mode = 0
 offset_left = -45.9803
 offset_top = -35.0
-offset_right = -5.98029
+offset_right = -5.9803
 offset_bottom = 5.0
 scale = Vector2(0.1, 0.1)
 pivot_offset = Vector2(20, 20)

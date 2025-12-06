@@ -197,7 +197,41 @@ public partial class RangedEnemy : BasicEntity
 			DeathSound.Play();
 		}
 
-		base.Die();
+		// Play death animation
+		var animSprite = GetNodeOrNull<AnimatedSprite2D>("Sprite");
+		if (animSprite != null)
+		{
+			// Stop movement and disable navigation
+			Velocity = Vector2.Zero;
+			if (agent != null)
+			{
+				agent.SetTargetPosition(GlobalPosition);
+			}
+			
+			// Play death animation
+			animSprite.Play("Death");
+			
+			// Wait for animation to finish before removing entity
+			if (!animSprite.IsConnected(AnimatedSprite2D.SignalName.AnimationFinished, new Callable(this, nameof(OnDeathAnimationFinished))))
+			{
+				animSprite.AnimationFinished += OnDeathAnimationFinished;
+			}
+		}
+		else
+		{
+			// No sprite, remove immediately
+			base.Die();
+		}
+	}
+
+	private void OnDeathAnimationFinished()
+	{
+		var animSprite = GetNodeOrNull<AnimatedSprite2D>("Sprite");
+		if (animSprite != null && animSprite.Animation == "Death")
+		{
+			// Animation finished, now remove the entity
+			base.Die();
+		}
 	}
 
 	private void TrySpawnPerk()

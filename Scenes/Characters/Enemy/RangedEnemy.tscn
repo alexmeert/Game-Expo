@@ -1,13 +1,54 @@
-[gd_scene load_steps=29 format=4 uid="uid://dmfv1i20k17vl"]
+[gd_scene load_steps=40 format=4 uid="uid://dmfv1i20k17vl"]
 
 [ext_resource type="Script" uid="uid://mvuhxikulvrq" path="res://Scripts/RangedEnemy.cs" id="1_8rkq5"]
 [ext_resource type="Texture2D" uid="uid://byfg6klnwfcv7" path="res://Sprites/Characters/Enemies/FanCrab/FanCrabDown-Sheet.png" id="1_rpf11"]
 [ext_resource type="Texture2D" uid="uid://dvv5sxplnaovu" path="res://Sprites/Characters/Enemies/FanCrab/FanCrabLeft-Sheet.png" id="2_8rkq5"]
 [ext_resource type="PackedScene" uid="uid://cgo07mi4rd0ng" path="res://Scenes/Projectiles/Enemy/RangedEnemy/RangedProjectile.tscn" id="2_t7cc0"]
+[ext_resource type="Texture2D" uid="uid://crrtifh4p3f0h" path="res://Sprites/Characters/Enemies/FanCrab/RangedEnemyDeath-Sheet.png" id="3_3ctmn"]
 [ext_resource type="Texture2D" uid="uid://cxjtj3827u70k" path="res://Sprites/Characters/Enemies/FanCrab/FanCrabRight-Sheet.png" id="3_romis"]
 [ext_resource type="Texture2D" uid="uid://j033vq41wau8" path="res://Sprites/Characters/Enemies/FanCrab/FanCrabBack-Sheet.png" id="4_t7cc0"]
 [ext_resource type="PackedScene" uid="uid://dwn4vukan1paf" path="res://Scenes/Characters/UI/Healthbar.tscn" id="7_romis"]
 [ext_resource type="AudioStream" uid="uid://dupgx1y0w8khs" path="res://Sounds/Enemy/EnemyDeath.mp3" id="8_t7cc0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3aax0"]
+atlas = ExtResource("3_3ctmn")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gumi7"]
+atlas = ExtResource("3_3ctmn")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2xtrn"]
+atlas = ExtResource("3_3ctmn")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlycs"]
+atlas = ExtResource("3_3ctmn")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dn2nt"]
+atlas = ExtResource("3_3ctmn")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vym8c"]
+atlas = ExtResource("3_3ctmn")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c0tby"]
+atlas = ExtResource("3_3ctmn")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pjt4p"]
+atlas = ExtResource("3_3ctmn")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5kwo"]
+atlas = ExtResource("3_3ctmn")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p8nub"]
+atlas = ExtResource("3_3ctmn")
+region = Rect2(288, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3ctmn"]
 atlas = ExtResource("1_rpf11")
@@ -75,6 +116,41 @@ region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0is14"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3aax0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gumi7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xtrn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qlycs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dn2nt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vym8c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c0tby")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pjt4p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v5kwo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p8nub")
+}],
+"loop": false,
+"name": &"Death",
+"speed": 14.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3ctmn")
@@ -166,7 +242,9 @@ Healthbar = NodePath("Healthbar")
 z_index = 1
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_0is14")
-animation = &"WalkDown"
+animation = &"Death"
+frame = 9
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

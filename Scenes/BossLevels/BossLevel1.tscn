@@ -704,9 +704,9 @@ sources/2 = SubResource("TileSetAtlasSource_buxn1")
 sources/3 = SubResource("TileSetAtlasSource_1i78u")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_giqrc"]
-vertices = PackedVector2Array(502, 266, 512.656, 266, 512.656, 287.344, 554, 287.344, 554, 282.641, 694, 282.641, 694, 287.344, 735.344, 287.344, 735.344, 266, 746, 266, 1014, 598, 746, 165, 1014, 165, 234, 598, 234, 165, 502, 165, 694, 246, 554, 246, 554, 165, 694, 165)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 4, 5, 6), PackedInt32Array(7, 8, 9, 10), PackedInt32Array(9, 11, 12, 10), PackedInt32Array(7, 10, 13, 6), PackedInt32Array(3, 6, 13), PackedInt32Array(2, 3, 13), PackedInt32Array(2, 13, 14, 0), PackedInt32Array(15, 0, 14), PackedInt32Array(16, 17, 18, 19)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(219, 155, 1026, 155, 1030, 615, 220, 614)])
+vertices = PackedVector2Array(762, 306, 762, 186, 1006, 186, 1006, 590, 242, 590, 486, 306, 242, 178, 486, 178)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(0, 3, 4, 5), PackedInt32Array(5, 4, 6, 7)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(232, 168, 496, 168, 496, 296, 752, 296, 752, 176, 1016, 176, 1016, 600, 232, 600)])
 source_geometry_mode = 1
 source_geometry_group_name = &"Navigation"
 
@@ -721,6 +721,7 @@ font_size = 30
 [node name="BossLevel1" type="Node2D"]
 
 [node name="FadeLayer" parent="." instance=ExtResource("1_tee1q")]
+visible = false
 
 [node name="LevelController" parent="." instance=ExtResource("1_poxnn")]
 
@@ -747,7 +748,6 @@ texture_filter = 1
 tile_set = SubResource("TileSet_4ilcc")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-visible = false
 navigation_polygon = SubResource("NavigationPolygon_giqrc")
 
 [node name="MainCharacter" parent="." instance=ExtResource("11_nho2g")]
@@ -857,6 +857,7 @@ stream = ExtResource("19_5ygav")
 autoplay = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="InventoryUI" parent="CanvasLayer" instance=ExtResource("21_05qfh")]
 metadata/_edit_use_anchors_ = true

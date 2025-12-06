@@ -7,7 +7,6 @@
 [sub_resource type="LabelSettings" id="LabelSettings_gl23i"]
 font = ExtResource("1_enyfb")
 font_size = 100
-font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_enyfb"]
 
@@ -75,14 +74,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0, 1, 0.858824, 1)
+color = Color(0.054902, 0.054902, 1, 1)
 
 [node name="AudioBackground" type="ColorRect" parent="."]
 material = SubResource("CanvasItemMaterial_enyfb")
 layout_mode = 2
-offset_left = 64.0
+offset_left = 344.0
 offset_top = 128.0
-offset_right = 512.0
+offset_right = 792.0
 offset_bottom = 608.0
 size_flags_vertical = 4
 theme = SubResource("Theme_leijj")
@@ -90,9 +89,9 @@ color = Color(0, 0, 0, 0.521569)
 
 [node name="Audio" type="Label" parent="."]
 layout_mode = 2
-offset_left = 128.0
+offset_left = 408.0
 offset_top = 154.0
-offset_right = 448.0
+offset_right = 728.0
 offset_bottom = 247.0
 text = "Audio
 "
@@ -101,27 +100,27 @@ horizontal_alignment = 1
 
 [node name="Master" type="Label" parent="."]
 layout_mode = 2
-offset_left = 128.0
+offset_left = 408.0
 offset_top = 251.0
-offset_right = 448.0
+offset_right = 728.0
 offset_bottom = 282.0
 text = "Master Volume"
 label_settings = SubResource("LabelSettings_leijj")
 
 [node name="MasterSlider" type="HSlider" parent="."]
 layout_mode = 2
-offset_left = 128.0
+offset_left = 408.0
 offset_top = 286.0
-offset_right = 448.0
+offset_right = 728.0
 offset_bottom = 302.0
 min_value = -40.0
 max_value = 0.0
 
 [node name="Music" type="Label" parent="."]
 layout_mode = 2
-offset_left = 128.0
+offset_left = 408.0
 offset_top = 306.0
-offset_right = 448.0
+offset_right = 728.0
 offset_bottom = 405.0
 text = "
 
@@ -130,18 +129,18 @@ label_settings = SubResource("LabelSettings_nqyte")
 
 [node name="MusicSlider" type="HSlider" parent="."]
 layout_mode = 2
-offset_left = 128.0
+offset_left = 408.0
 offset_top = 409.0
-offset_right = 448.0
+offset_right = 728.0
 offset_bottom = 425.0
 min_value = -80.0
 max_value = 0.0
 
 [node name="SFX" type="Label" parent="."]
 layout_mode = 2
-offset_left = 128.0
+offset_left = 408.0
 offset_top = 429.0
-offset_right = 448.0
+offset_right = 728.0
 offset_bottom = 528.0
 text = "
 
@@ -150,9 +149,9 @@ label_settings = SubResource("LabelSettings_5a14u")
 
 [node name="SFXSlider" type="HSlider" parent="."]
 layout_mode = 2
-offset_left = 128.0
+offset_left = 408.0
 offset_top = 532.0
-offset_right = 448.0
+offset_right = 728.0
 offset_bottom = 548.0
 min_value = -80.0
 max_value = 1.0

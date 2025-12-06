@@ -6,6 +6,7 @@ public partial class Speaker : BasicEntity
     [Export] private Label HPValueLabel;
     [Export] private SpeakerGun SpeakerGun;
     [Export] private AnimatedSprite2D Sprite;
+    [Export] public AudioStreamPlayer2D DeathSound;
 
     protected override void InitializeEntity()
     {
@@ -80,6 +81,13 @@ public partial class Speaker : BasicEntity
     protected override void Die()
     {
         EmitSignal(SignalName.EnemyDied);
+
+        // Play death sound (reparent to scene so it continues after entity is removed)
+        if (DeathSound != null)
+        {
+            DeathSound.Reparent(GetTree().CurrentScene);
+            DeathSound.Play();
+        }
 
         // Play death animation
         if (Sprite != null)

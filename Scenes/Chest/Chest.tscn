@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c8u16gw00jovv"]
+[gd_scene load_steps=14 format=3 uid="uid://c8u16gw00jovv"]
 
 [ext_resource type="AudioStream" uid="uid://ct31v0hjrxn48" path="res://Sounds/Chest/ChestOpen.mp3" id="1_2ottt"]
 [ext_resource type="Script" uid="uid://bleu878g0spno" path="res://Scripts/Chest.cs" id="1_pkf2e"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bjoxxngko37rd" path="res://Scenes/Items/Upgrades/MagSize.tscn" id="5_17pol"]
 [ext_resource type="PackedScene" uid="uid://dlumqsplwb8xv" path="res://Scenes/Items/Upgrades/FireRate.tscn" id="6_6gshb"]
 [ext_resource type="PackedScene" uid="uid://170k71snx6d3" path="res://Scenes/Items/Upgrades/Cooldown.tscn" id="7_2jiim"]
+[ext_resource type="Texture2D" uid="uid://2x3v68o8aafp" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/fx/light_blue.png" id="11_76h11"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pkf2e"]
 size = Vector2(51, 30)
@@ -48,6 +49,12 @@ bus = &"SFX"
 visible = false
 position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_07ymt")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, 4)
+scale = Vector2(0.586784, 0.586784)
+color = Color(0.47451, 1, 1, 1)
+texture = ExtResource("11_76h11")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
