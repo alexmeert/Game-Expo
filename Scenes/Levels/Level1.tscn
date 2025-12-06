@@ -1,10 +1,14 @@
-[gd_scene load_steps=30 format=4 uid="uid://bg635lk553wrv"]
+[gd_scene load_steps=34 format=4 uid="uid://dyf388qsi4fcq"]
 
 [ext_resource type="PackedScene" uid="uid://3mdpl08kn7yk" path="res://Scenes/LevelController.tscn" id="1_7djb7"]
 [ext_resource type="Texture2D" uid="uid://dx5xusixt7bfv" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/tileset.png" id="2_uqlrs"]
 [ext_resource type="PackedScene" uid="uid://cf0qvluqoi07u" path="res://Scenes/LevelAssets/Door.tscn" id="5_4d3fe"]
 [ext_resource type="PackedScene" uid="uid://cen8t8ucpecb1" path="res://Scenes/Chest/EnemySpawner.tscn" id="6_3ipdw"]
 [ext_resource type="PackedScene" uid="uid://c8u16gw00jovv" path="res://Scenes/Chest/Chest.tscn" id="7_3ipdw"]
+[ext_resource type="PackedScene" uid="uid://cq782euxa61ii" path="res://Scenes/Characters/Enemy/TankEnemy.tscn" id="7_57lp3"]
+[ext_resource type="PackedScene" uid="uid://bt7gih2h8lrlu" path="res://Scenes/Characters/Enemy/MeleeEnemy.tscn" id="8_n5ptj"]
+[ext_resource type="PackedScene" uid="uid://dmfv1i20k17vl" path="res://Scenes/Characters/Enemy/RangedEnemy.tscn" id="9_77iba"]
+[ext_resource type="PackedScene" uid="uid://c1aw4q02ut5i1" path="res://Scenes/Characters/Player/MainCharacter.tscn" id="11_67y36"]
 [ext_resource type="PackedScene" uid="uid://e6h6e5hwv3eq" path="res://Scenes/Menus/InventoryUI.tscn" id="21_7djb7"]
 [ext_resource type="PackedScene" uid="uid://cfqgfd2sggx0" path="res://Scenes/Menus/FadeLayer.tscn" id="22_8tf6o"]
 
@@ -717,9 +721,9 @@ agent_radius = 15.0
 y_sort_enabled = true
 
 [node name="FadeLayer" parent="." instance=ExtResource("22_8tf6o")]
-visible = false
 
-[node name="LevelController" parent="." node_paths=PackedStringArray("MusicPlayer") instance=ExtResource("1_7djb7")]
+[node name="LevelController" parent="." node_paths=PackedStringArray("Chest", "MusicPlayer") instance=ExtResource("1_7djb7")]
+Chest = NodePath("../Chest")
 MusicPlayer = NodePath("../Music")
 
 [node name="Floor" type="TileMapLayer" parent="." groups=["Navigation"]]
@@ -754,7 +758,6 @@ tile_map_data = PackedByteArray("AAAtABcAAQAAAAAAAAAtABgAAQAAAAEAAAAvABcAAwAAAAA
 tile_set = SubResource("TileSet_67y36")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-visible = false
 navigation_polygon = SubResource("NavigationPolygon_kri6y")
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
@@ -764,21 +767,35 @@ bus = &"Music"
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="InventoryUI" parent="CanvasLayer" instance=ExtResource("21_7djb7")]
-visible = false
 metadata/_edit_use_anchors_ = true
 
 [node name="Door" parent="." instance=ExtResource("5_4d3fe")]
-z_index = 1
-position = Vector2(623, 147)
+z_index = 2
+position = Vector2(623, 152)
 
-[node name="Spawner" parent="." instance=ExtResource("6_3ipdw")]
+[node name="Spawner" parent="." node_paths=PackedStringArray("LevelController") instance=ExtResource("6_3ipdw")]
 position = Vector2(368, 296)
+EnemyScene = ExtResource("7_57lp3")
+LevelController = NodePath("../LevelController")
+InitialDelay = 5.0
+SpawnRadius = 10.0
 
-[node name="Spawner2" parent="." instance=ExtResource("6_3ipdw")]
+[node name="Spawner2" parent="." node_paths=PackedStringArray("LevelController") instance=ExtResource("6_3ipdw")]
 position = Vector2(360, 488)
+EnemyScene = ExtResource("8_n5ptj")
+LevelController = NodePath("../LevelController")
+InitialDelay = 5.0
+SpawnRadius = 10.0
 
-[node name="Spawner3" parent="." instance=ExtResource("6_3ipdw")]
+[node name="Spawner3" parent="." node_paths=PackedStringArray("LevelController") instance=ExtResource("6_3ipdw")]
 position = Vector2(800, 416)
+EnemyScene = ExtResource("9_77iba")
+LevelController = NodePath("../LevelController")
+InitialDelay = 5.0
+SpawnRadius = 10.0
 
 [node name="Chest" parent="." instance=ExtResource("7_3ipdw")]
 position = Vector2(624, 224)
+
+[node name="Player" parent="." instance=ExtResource("11_67y36")]
+position = Vector2(618, 561)

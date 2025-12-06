@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=4 uid="uid://dw4xme8p267g8"]
+[gd_scene load_steps=43 format=4 uid="uid://bgo5ilr65w7gl"]
 
 [ext_resource type="PackedScene" uid="uid://3mdpl08kn7yk" path="res://Scenes/LevelController.tscn" id="1_b5p6m"]
 [ext_resource type="Texture2D" uid="uid://y0s0p8xfsi5p" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/door/door_closed.png" id="2_xrbrl"]

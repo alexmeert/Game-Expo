@@ -1,13 +1,13 @@
-<<<<<<< HEAD:Scenes/Levels/Level2.tscn
-[gd_scene load_steps=48 format=4 uid="uid://db0rno6a0pkjs"]
+[gd_scene load_steps=49 format=4 uid="uid://b3hy1pnqk71uc"]
 
 [ext_resource type="PackedScene" uid="uid://3mdpl08kn7yk" path="res://Scenes/LevelController.tscn" id="1_ok1eh"]
 [ext_resource type="Texture2D" uid="uid://dx5xusixt7bfv" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/tileset.png" id="2_rl2o4"]
+[ext_resource type="PackedScene" uid="uid://cfqgfd2sggx0" path="res://Scenes/Menus/FadeLayer.tscn" id="2_rsd5h"]
 [ext_resource type="Texture2D" uid="uid://bmcm2bssfqwou" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/tileset_top.png" id="3_rsd5h"]
 [ext_resource type="Texture2D" uid="uid://btmcefauissf4" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server.png" id="4_tbesk"]
 [ext_resource type="Texture2D" uid="uid://tdc1q346nfrd" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server_disabled.png" id="5_gyiht"]
 [ext_resource type="Texture2D" uid="uid://b2xqy06cpdcab" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server_down.png" id="6_4ljym"]
-[ext_resource type="PackedScene" uid="uid://cen8t8ucpecb1" path="res://Scenes/Characters/Enemy/EnemySpawner.tscn" id="7_nwpaj"]
+[ext_resource type="PackedScene" uid="uid://cen8t8ucpecb1" path="res://Scenes/Chest/EnemySpawner.tscn" id="7_nwpaj"]
 [ext_resource type="PackedScene" uid="uid://bt7gih2h8lrlu" path="res://Scenes/Characters/Enemy/MeleeEnemy.tscn" id="8_yanqf"]
 [ext_resource type="PackedScene" uid="uid://c1aw4q02ut5i1" path="res://Scenes/Characters/Player/MainCharacter.tscn" id="9_m2631"]
 [ext_resource type="PackedScene" uid="uid://c8u16gw00jovv" path="res://Scenes/Chest/Chest.tscn" id="10_uk4s3"]
@@ -20,32 +20,6 @@
 [ext_resource type="PackedScene" uid="uid://cf0qvluqoi07u" path="res://Scenes/LevelAssets/Door.tscn" id="17_pc3ex"]
 [ext_resource type="AudioStream" uid="uid://ck2s6ef8wn5ux" path="res://Sounds/Music/Normal/NormalMusic.mp3" id="18_wl62r"]
 [ext_resource type="PackedScene" uid="uid://e6h6e5hwv3eq" path="res://Scenes/Menus/InventoryUI.tscn" id="19_laorw"]
-=======
-[gd_scene load_steps=47 format=4 uid="uid://b7q17lp638piq"]
-
-[ext_resource type="PackedScene" uid="uid://cfqgfd2sggx0" path="res://Scenes/Menus/FadeLayer.tscn" id="1_0t5if"]
-[ext_resource type="PackedScene" uid="uid://3mdpl08kn7yk" path="res://Scenes/LevelController.tscn" id="1_7dgo0"]
-[ext_resource type="Texture2D" uid="uid://y0s0p8xfsi5p" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/door/door_closed.png" id="2_0t5if"]
-[ext_resource type="Texture2D" uid="uid://bcp2cotlvml5w" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/door/door_spritesheet.png" id="3_gjwl1"]
-[ext_resource type="Texture2D" uid="uid://cwrlsra5b1d46" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/door/door2_bis.png" id="4_3kmbg"]
-[ext_resource type="Texture2D" uid="uid://dx5xusixt7bfv" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/tileset.png" id="5_fj6lf"]
-[ext_resource type="Texture2D" uid="uid://bmcm2bssfqwou" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/tileset_top.png" id="6_xji40"]
-[ext_resource type="Texture2D" uid="uid://btmcefauissf4" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server.png" id="7_yujch"]
-[ext_resource type="Texture2D" uid="uid://tdc1q346nfrd" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server_disabled.png" id="8_ftdes"]
-[ext_resource type="Texture2D" uid="uid://b2xqy06cpdcab" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server_down.png" id="9_m8iew"]
-[ext_resource type="PackedScene" uid="uid://cen8t8ucpecb1" path="res://Scenes/Characters/Enemy/EnemySpawner.tscn" id="10_a3y3l"]
-[ext_resource type="PackedScene" uid="uid://bt7gih2h8lrlu" path="res://Scenes/Characters/Enemy/MeleeEnemy.tscn" id="11_heh7l"]
-[ext_resource type="PackedScene" uid="uid://dmfv1i20k17vl" path="res://Scenes/Characters/Enemy/RangedEnemy.tscn" id="12_1pkyx"]
-[ext_resource type="PackedScene" uid="uid://cq782euxa61ii" path="res://Scenes/Characters/Enemy/TankEnemy.tscn" id="13_ydcdf"]
-[ext_resource type="PackedScene" uid="uid://c1aw4q02ut5i1" path="res://Scenes/Characters/Player/MainCharacter.tscn" id="14_fqu4a"]
-[ext_resource type="PackedScene" uid="uid://c8u16gw00jovv" path="res://Scenes/Chest/Chest.tscn" id="15_q4s5n"]
-[ext_resource type="PackedScene" uid="uid://170k71snx6d3" path="res://Scenes/Items/Upgrades/Cooldown.tscn" id="16_0taue"]
-[ext_resource type="PackedScene" uid="uid://dyhm385qsegw2" path="res://Scenes/Items/Upgrades/Damage.tscn" id="17_vhn1q"]
-[ext_resource type="PackedScene" uid="uid://y7g0ts65vriw" path="res://Scenes/Items/Upgrades/Defense.tscn" id="18_1vpnt"]
-[ext_resource type="PackedScene" uid="uid://dlumqsplwb8xv" path="res://Scenes/Items/Upgrades/FireRate.tscn" id="19_wg4pw"]
-[ext_resource type="PackedScene" uid="uid://d3aundu586d2f" path="res://Scenes/Items/Upgrades/Health.tscn" id="20_4n0jr"]
-[ext_resource type="PackedScene" uid="uid://bjoxxngko37rd" path="res://Scenes/Items/Upgrades/MagSize.tscn" id="21_psqng"]
->>>>>>> eef313a8de9b8dc1beb8d04ae33fb7cf61e71eab:Scenes/Levels/Difficulty4/Level5.tscn
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_siim3"]
 
@@ -778,38 +752,11 @@ agent_radius = 5.0
 
 [node name="Level2" type="Node2D"]
 
-<<<<<<< HEAD:Scenes/Levels/Level2.tscn
 [node name="LevelController" parent="." node_paths=PackedStringArray("Chest", "MusicPlayer") instance=ExtResource("1_ok1eh")]
-=======
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_67y36"]
-texture = ExtResource("8_ftdes")
-0:0/0 = 0
-0:1/0 = 0
-0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hk4vc"]
-texture = ExtResource("9_m8iew")
-0:0/0 = 0
-0:1/0 = 0
-0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-
-[sub_resource type="TileSet" id="TileSet_67y36"]
-physics_layer_0/collision_layer = 1
-sources/1 = SubResource("TileSetAtlasSource_77iba")
-sources/2 = SubResource("TileSetAtlasSource_67y36")
-sources/3 = SubResource("TileSetAtlasSource_hk4vc")
-
-[node name="Level1" type="Node2D"]
-y_sort_enabled = true
-
-[node name="LevelController2" parent="." instance=ExtResource("1_7dgo0")]
-
-[node name="FadeLayer" parent="." instance=ExtResource("1_0t5if")]
-
-[node name="LevelController" parent="." node_paths=PackedStringArray("Chest") instance=ExtResource("1_7dgo0")]
->>>>>>> eef313a8de9b8dc1beb8d04ae33fb7cf61e71eab:Scenes/Levels/Difficulty4/Level5.tscn
 Chest = NodePath("../Chest")
 MusicPlayer = NodePath("../Music")
+
+[node name="FadeLayer" parent="." instance=ExtResource("2_rsd5h")]
 
 [node name="Floor" type="TileMapLayer" parent="." groups=["Navigation"]]
 texture_filter = 1
@@ -843,7 +790,6 @@ tile_map_data = PackedByteArray("AAAtABcAAQAAAAAAAAAtABgAAQAAAAEAAAAvABcAAwAAAAA
 tile_set = SubResource("TileSet_g50vq")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-visible = false
 navigation_polygon = SubResource("NavigationPolygon_ewbdm")
 
 [node name="Spawner" parent="." node_paths=PackedStringArray("LevelController") instance=ExtResource("7_nwpaj")]
