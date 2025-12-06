@@ -263,16 +263,44 @@ public partial class Player : BasicEntity
 
 	protected override void Die()
 	{
-		base.Die();
+		// Call OnDeath() to emit signals, but don't QueueFree yet
+		OnDeath();
+		
+		var animSprite = GetNodeOrNull<AnimatedSprite2D>("Sprite");
+		if (animSprite != null)
+		{
+			// Play death animation
+			animSprite.Play("Death");
+			
+			// Wait for animation to finish before changing scene
+			if (!animSprite.IsConnected(AnimatedSprite2D.SignalName.AnimationFinished, new Callable(this, nameof(OnDeathAnimationFinished))))
+			{
+				animSprite.AnimationFinished += OnDeathAnimationFinished;
+			}
+		}
+		else
+		{
+			// No sprite, go directly to death menu
+			OnDeathAnimationFinished();
+		}
 		
 		if (DeathSound != null)
 		{
 			DeathSound.Play();
 		}
-		
-		GD.Print("Player died!");
-		
-		GetTree().ChangeSceneToFile("res://Scenes/Menus/DeathMenu.tscn");
+	}
+	
+	private void OnDeathAnimationFinished()
+	{
+		var animSprite = GetNodeOrNull<AnimatedSprite2D>("Sprite");
+		// Only proceed if the death animation finished (or if there's no sprite)
+		if (animSprite == null || animSprite.Animation == "Death")
+		{
+			// Animation finished, now change scene
+			GetTree().ChangeSceneToFile("res://Scenes/Menus/DeathMenu.tscn");
+			// QueueFree will happen automatically when scene changes
+			QueueFree();
+		}
 	}
 
 	public void ApplyUpgrade(Upgrade upgrade)

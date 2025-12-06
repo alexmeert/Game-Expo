@@ -52,6 +52,9 @@ script = ExtResource("2_8fqpm")
 SpeakerGun = NodePath("SpeakerGun")
 Sprite = NodePath("Sprite")
 
+[node name="SpeakerGun" parent="." instance=ExtResource("3_wt6e8")]
+IsArcAttacker = true
+
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_d60bt")
 animation = &"Default"
@@ -69,6 +72,3 @@ shape = SubResource("RectangleShape2D_8fqpm")
 visible = false
 position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_6c3x5")
-
-[node name="SpeakerGun" parent="." instance=ExtResource("3_wt6e8")]
-IsArcAttacker = true

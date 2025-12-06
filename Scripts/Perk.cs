@@ -9,6 +9,7 @@ public partial class Perk : Item
 [Export] public float AtkSpdBonus = 0f;
 [Export] public float SpdBonus = 0f;
 [Export] public float Duration = 10f; // Duration in seconds
+[Export] public AudioStreamPlayer2D CollectSound;
 
 
 private float _remainingTime = 0f;
@@ -34,6 +35,23 @@ private void OnBodyEntered(Node body)
 		// Use player's ApplyPerk method to ensure it's added to the active perks list
 		player.ApplyPerk(this);
 
+		// Reparent sound to scene so it can play after this node is destroyed
+		if (CollectSound != null)
+		{
+			var scene = GetTree().CurrentScene;
+			if (scene != null)
+			{
+				CollectSound.Reparent(scene);
+				CollectSound.Play();
+				// Clean up sound after it finishes playing
+				CollectSound.Finished += () => CollectSound.QueueFree();
+			}
+			else
+			{
+				CollectSound.Play();
+			}
+		}
+
 		//Remove perk from scene after pickup
 		QueueFree();
 	}
@@ -55,10 +73,21 @@ public override void Apply(Player player)
 	// Apply stats only if not already applied
 	if (!_statsApplied)
 	{
-		player.MaxHP += HpBonus;
-		// Add HP bonus, but ensure it doesn't exceed MaxHP
-		float newHP = player.HP + HpBonus;
-		player.HP = MathF.Min(newHP, player.MaxHP);
+		string perkName = ItemName?.ToLower() ?? "";
+		
+		// PowerSurge only increases MaxHP, not current HP
+		if (perkName.Contains("powersurge"))
+		{
+			player.MaxHP += HpBonus;
+			// Don't increase current HP for PowerSurge
+		}
+		else
+		{
+			player.MaxHP += HpBonus;
+			// Add HP bonus, but ensure it doesn't exceed MaxHP
+			float newHP = player.HP + HpBonus;
+			player.HP = MathF.Min(newHP, player.MaxHP);
+		}
 		
 		player.DMG += DmgBonus;
 		player.ATKSPD += AtkSpdBonus;
@@ -75,19 +104,34 @@ public override void Apply(Player player)
 
 public override void Remove(Player player)
 {
-	if (player == null || !_isActive || !_statsApplied)
+	if (player == null)
 		return;
+	
+	// Only remove stats if they were actually applied
+	if (!_statsApplied)
+	{
+		_isActive = false;
+		_remainingTime = 0f;
+		return;
+	}
 
+	string perkName = ItemName?.ToLower() ?? "";
+	
 	// Remove stats
 	player.MaxHP -= HpBonus;
+	
+	// PowerSurge only affected MaxHP, so don't adjust current HP
+	if (!perkName.Contains("powersurge"))
+	{
+		// For other perks, ensure HP doesn't exceed MaxHP after removal
+		if (player.HP > player.MaxHP)
+			player.HP = player.MaxHP;
+	}
+	
 	player.DMG -= DmgBonus;
 	player.ATKSPD -= AtkSpdBonus;
 	player.DEF = MathF.Max(0f, player.DEF - DefBonus);
 	player.SPD -= SpdBonus;
-	
-	// Ensure HP doesn't exceed MaxHP after removal
-	if (player.HP > player.MaxHP)
-		player.HP = player.MaxHP;
 	
 	// Ensure HP doesn't go below 0
 	if (player.HP < 0)
@@ -97,7 +141,7 @@ public override void Remove(Player player)
 	_statsApplied = false;
 	_remainingTime = 0f;
 
-	GD.Print($"Removed perk: {ItemName}");
+	GD.Print($"Removed perk: {ItemName} (HP: {HpBonus}, DMG: {DmgBonus}, ATKSPD: {AtkSpdBonus}, DEF: {DefBonus}, SPD: {SpdBonus})");
 }
 
 public void Update(float delta)

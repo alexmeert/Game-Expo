@@ -6,7 +6,7 @@ public partial class Gun : Node2D
 	[Export] public Marker2D Muzzle;
 	[Export] public AudioStreamPlayer2D ShotSound;
 
-	[Export] public float BaseFireCooldown = 0.20f; // Base fire cooldown when ATKSPD is 1.0
+	[Export] public float BaseFireCooldown = 0.20f;
 	[Export] public int MaxAmmo = 10;
 	[Export] public float ReloadTime = 2.0f;
 
@@ -17,21 +17,36 @@ public partial class Gun : Node2D
 
 	public BasicEntity Owner { get; set; }
 	
-	// Calculate actual fire cooldown based on owner's attack speed
 	public float GetFireCooldown()
 	{
-		if (Owner == null || Owner.ATKSPD <= 0f)
+		if (Owner == null)
 			return BaseFireCooldown;
 		
-		// Higher ATKSPD = faster fire rate = lower cooldown
-		// Formula: cooldown = baseCooldown / ATKSPD
+		// Check if Overclock perk is active (0 cooldown)
+		if (Owner is Player player)
+		{
+			foreach (var perk in player.GetActivePerks())
+			{
+				if (perk.IsActive)
+				{
+					string perkName = perk.ItemName?.ToLower() ?? "";
+					if (perkName.Contains("overclock"))
+					{
+						return 0f; // Overclock gives 0 cooldown
+					}
+				}
+			}
+		}
+		
+		if (Owner.ATKSPD <= 0f)
+			return BaseFireCooldown;
+		
 		return BaseFireCooldown / Owner.ATKSPD;
 	}
 
 	public int CurrentAmmo => currentAmmo;
 	public bool IsReloading => isReloading;
 
-	// Expose MaxAmmo as read-only property for UI
 	public int MaxAmmoValue => MaxAmmo;
 	public float ReloadProgress => isReloading ? 1f - (reloadTimer / ReloadTime) : 0f;
 
@@ -63,33 +78,26 @@ public partial class Gun : Node2D
 		}
 	}
 
-	// ------- SAFE MAGAZINE API -------
-	// Adds (or removes if negative) magazine capacity and keeps current ammo in a sane state.
 	public void AddMagazineSize(int amount)
 	{
 		if (amount == 0) return;
 
-		// If increasing capacity
 		if (amount > 0)
 		{
 			MaxAmmo += amount;
-			// Optionally refill to new capacity
 			currentAmmo = MaxAmmo;
 		}
-		else // amount < 0 -> decrease capacity
+		else
 		{
-			MaxAmmo = Mathf.Max(0, MaxAmmo + amount); // amount negative decreases
-			// Ensure current ammo doesn't exceed new capacity
+			MaxAmmo = Mathf.Max(0, MaxAmmo + amount);
 			currentAmmo = Mathf.Min(currentAmmo, MaxAmmo);
 		}
 	}
 
-	// Adds ammo to current ammo (clamped)
 	public void AddAmmo(int amount)
 	{
 		currentAmmo = Mathf.Clamp(currentAmmo + amount, 0, MaxAmmo);
 	}
-	// --------------------------------------
 
 	private void StartReload()
 	{

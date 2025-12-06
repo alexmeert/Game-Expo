@@ -121,7 +121,6 @@ public partial class Boss : BasicEntity
         if (leftDead && rightDead)
         {
             canTakeDamage = true;
-            GD.Print("Both speakers defeated! Boss can now take damage.");
         }
     }
 

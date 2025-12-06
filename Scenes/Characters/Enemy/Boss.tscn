@@ -244,7 +244,7 @@ frame_progress = 0.645603
 shape = SubResource("RectangleShape2D_yibby")
 disabled = true
 
-[node name="Hitbox" type="Area2D" parent="." groups=["Enemy"]]
+[node name="Hitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, 0.5)

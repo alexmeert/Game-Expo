@@ -151,7 +151,23 @@ public partial class Upgrade : Item
 			GlobalInventory.Instance?.AddUpgrade(this);
 			InventoryUI.Instance?.AddUpgrade(this);
 
-			CollectSound?.Play();
+			// Reparent sound to scene so it can play after this node is destroyed
+			if (CollectSound != null)
+			{
+				var scene = GetTree().CurrentScene;
+				if (scene != null)
+				{
+					CollectSound.Reparent(scene);
+					CollectSound.Play();
+					// Clean up sound after it finishes playing
+					CollectSound.Finished += () => CollectSound.QueueFree();
+				}
+				else
+				{
+					CollectSound.Play();
+				}
+			}
+
 			GD.Print($"{Rarity} {ItemName} collected!");
 
 			QueueFree();

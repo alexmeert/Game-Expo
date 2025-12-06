@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://by4vsvhxbtir6"
-path="res://.godot/imported/CPU_Death.png-43da2a6339152451c810efd84913993b.ctex"
+uid="uid://cv5bcm7ypj1y8"
+path="res://.godot/imported/CPUDeath-Sheet.png-f71e6f1e086545e2da49f93ca04dfa74.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Characters/Player/CPU_Death.png"
-dest_files=["res://.godot/imported/CPU_Death.png-43da2a6339152451c810efd84913993b.ctex"]
+source_file="res://Sprites/Characters/Player/CPUDeath-Sheet.png"
+dest_files=["res://.godot/imported/CPUDeath-Sheet.png-f71e6f1e086545e2da49f93ca04dfa74.ctex"]
 
 [params]
 

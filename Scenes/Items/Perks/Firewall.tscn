@@ -1,16 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://bp13wnub3iscx"]
+[gd_scene load_steps=5 format=3 uid="uid://bp13wnub3iscx"]
 
 [ext_resource type="Script" uid="uid://c7bbfkpiiu25p" path="res://Scripts/Perk.cs" id="1_3jh7m"]
 [ext_resource type="Texture2D" uid="uid://b3ec2wmyji7n" path="res://Sprites/Items/Perks/Perk_Firewall.png" id="1_p85f1"]
+[ext_resource type="AudioStream" uid="uid://dpj873y8k2ohn" path="res://Sounds/Chest/CollectUpgrade.mp3" id="3_5pqke"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p85f1"]
 radius = 13.3468
 
-[node name="Firewall" type="Node2D"]
+[node name="Firewall" type="Node2D" node_paths=PackedStringArray("CollectSound")]
 scale = Vector2(1.00352, 1)
 script = ExtResource("1_3jh7m")
 DefBonus = 100.0
 Duration = 15.0
+CollectSound = NodePath("AudioStreamPlayer2D")
 ItemName = "Firewall"
 Description = "IT firewall just saved you big time. Briefly makes you invulnerable to all enemy grunt attacks."
 
@@ -25,3 +27,7 @@ shape = SubResource("CircleShape2D_p85f1")
 texture_filter = 1
 scale = Vector2(0.722656, 0.720002)
 texture = ExtResource("1_p85f1")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_5pqke")
+bus = &"SFX"
