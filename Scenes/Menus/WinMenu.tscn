@@ -23,6 +23,7 @@ QuitButton = NodePath("QuitButton")
 [node name="QuitButton" type="Button" parent="."]
 z_index = 1
 texture_filter = 1
+layout_mode = 0
 offset_left = 872.0
 offset_top = 265.0
 offset_right = 1048.0
@@ -36,6 +37,7 @@ text = "Quit"
 [node name="MainButton" type="Button" parent="."]
 z_index = 1
 texture_filter = 1
+layout_mode = 0
 offset_left = 872.0
 offset_top = 165.0
 offset_right = 1048.0

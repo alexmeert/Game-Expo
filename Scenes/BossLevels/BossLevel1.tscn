@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://c1aw4q02ut5i1" path="res://Scenes/Characters/Player/MainCharacter.tscn" id="11_nho2g"]
 [ext_resource type="PackedScene" uid="uid://dwn4vukan1paf" path="res://Scenes/Characters/UI/Healthbar.tscn" id="12_xo5nl"]
 [ext_resource type="FontFile" uid="uid://bjtv1av4o6be8" path="res://Assets/Fonts/vermin-vibes-1989-font/VerminVibes1989Regular-m77m.ttf" id="13_214sx"]
-[ext_resource type="PackedScene" uid="uid://cen8t8ucpecb1" path="res://Scenes/Characters/Enemy/EnemySpawner.tscn" id="16_mbc2f"]
+[ext_resource type="PackedScene" uid="uid://cen8t8ucpecb1" path="res://Scenes/Chest/EnemySpawner.tscn" id="16_mbc2f"]
 [ext_resource type="PackedScene" uid="uid://bt7gih2h8lrlu" path="res://Scenes/Characters/Enemy/MeleeEnemy.tscn" id="17_tu6bq"]
 [ext_resource type="PackedScene" uid="uid://cq782euxa61ii" path="res://Scenes/Characters/Enemy/TankEnemy.tscn" id="18_g3lwm"]
 [ext_resource type="AudioStream" uid="uid://b1tn3d1kutgl3" path="res://Sounds/Music/Boss/BossMusic.mp3" id="19_5ygav"]
