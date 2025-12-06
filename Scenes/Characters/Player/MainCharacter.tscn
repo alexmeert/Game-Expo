@@ -961,7 +961,7 @@ font = ExtResource("15_6h7n7")
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("HitSound", "DeathSound", "WalkSound", "HPValueLabel", "AmmoLabel", "AmmoBar", "ReloadBar", "OverclockAura", "FirewallAura", "DamageLabel", "DefenseLabel", "FireRateLabel", "CooldownLabel", "MagSizeLabel", "HealthLabel", "Healthbar")]
 script = ExtResource("1_4flse")
 Hp = 50
-Dmg = 5
+Dmg = 15
 Spd = 70.0
 HitSound = NodePath("PlayerHit")
 DeathSound = NodePath("PlayerDeath")
@@ -1054,6 +1054,7 @@ sprite_frames = SubResource("SpriteFrames_ybscf")
 animation = &"Expire"
 
 [node name="FirewallAura" type="AnimatedSprite2D" parent="."]
+visible = false
 texture_filter = 1
 position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_3ppan")

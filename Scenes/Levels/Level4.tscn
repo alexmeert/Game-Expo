@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://btmcefauissf4" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server.png" id="7_vuhml"]
 [ext_resource type="Texture2D" uid="uid://tdc1q346nfrd" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server_disabled.png" id="8_gje0y"]
 [ext_resource type="Texture2D" uid="uid://b2xqy06cpdcab" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server_down.png" id="9_cvir8"]
-[ext_resource type="PackedScene" uid="uid://cen8t8ucpecb1" path="res://Scenes/Chest/EnemySpawner.tscn" id="10_5yf6v"]
+[ext_resource type="PackedScene" uid="uid://33ana158wlp0" path="res://Scenes/Chest/EnemySpawner.tscn" id="10_5yf6v"]
 [ext_resource type="PackedScene" uid="uid://bt7gih2h8lrlu" path="res://Scenes/Characters/Enemy/MeleeEnemy.tscn" id="11_6hvxs"]
 [ext_resource type="PackedScene" uid="uid://dmfv1i20k17vl" path="res://Scenes/Characters/Enemy/RangedEnemy.tscn" id="12_hsmnh"]
 [ext_resource type="PackedScene" uid="uid://cq782euxa61ii" path="res://Scenes/Characters/Enemy/TankEnemy.tscn" id="13_cov5i"]

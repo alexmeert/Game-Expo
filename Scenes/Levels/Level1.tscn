@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bmcm2bssfqwou" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/tileset_top.png" id="4_hk4vc"]
 [ext_resource type="PackedScene" uid="uid://cf0qvluqoi07u" path="res://Scenes/LevelAssets/Door.tscn" id="5_4d3fe"]
 [ext_resource type="Texture2D" uid="uid://tdc1q346nfrd" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server_disabled.png" id="5_hk4vc"]
-[ext_resource type="PackedScene" uid="uid://cen8t8ucpecb1" path="res://Scenes/Chest/EnemySpawner.tscn" id="6_3ipdw"]
+[ext_resource type="PackedScene" uid="uid://33ana158wlp0" path="res://Scenes/Chest/EnemySpawner.tscn" id="6_3ipdw"]
 [ext_resource type="Texture2D" uid="uid://btmcefauissf4" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server.png" id="6_wiu4c"]
 [ext_resource type="PackedScene" uid="uid://c8u16gw00jovv" path="res://Scenes/Chest/Chest.tscn" id="7_3ipdw"]
 [ext_resource type="PackedScene" uid="uid://bt7gih2h8lrlu" path="res://Scenes/Characters/Enemy/MeleeEnemy.tscn" id="8_n5ptj"]
