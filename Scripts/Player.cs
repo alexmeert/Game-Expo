@@ -263,34 +263,45 @@ public partial class Player : BasicEntity
 
 	protected override void Die()
 	{
-		DeathSound?.Play();
-		GD.Print("Player died!");
-
-		// Disable player input & movement so nothing else happens during fade
-		SetProcess(false);
-		SetPhysicsProcess(false);
-
-		// Fade out first, then remove player and change scene
-		if (ScreenFader.Instance != null)
+		// Call OnDeath() to emit signals, but don't QueueFree yet
+		OnDeath();
+		
+		var animSprite = GetNodeOrNull<AnimatedSprite2D>("Sprite");
+		if (animSprite != null)
 		{
-			ScreenFader.Instance.FadeOut(() =>
+			// Play death animation
+			animSprite.Play("Death");
+			
+			// Wait for animation to finish before changing scene
+			if (!animSprite.IsConnected(AnimatedSprite2D.SignalName.AnimationFinished, new Callable(this, nameof(OnDeathAnimationFinished))))
 			{
-				// Free the player AFTER fade completes
-				QueueFree();
-
-				// Change scene safely
-				GetTree().ChangeSceneToFile("res://Scenes/Menus/DeathMenu.tscn");
-			});
+				animSprite.AnimationFinished += OnDeathAnimationFinished;
+			}
 		}
 		else
 		{
-			// Fallback
-			QueueFree();
-			GetTree().ChangeSceneToFile("res://Scenes/Menus/DeathMenu.tscn");
+			// No sprite, go directly to death menu
+			OnDeathAnimationFinished();
+		}
+		
+		if (DeathSound != null)
+		{
+			DeathSound.Play();
 		}
 	}
-
-
+	
+	private void OnDeathAnimationFinished()
+	{
+		var animSprite = GetNodeOrNull<AnimatedSprite2D>("Sprite");
+		// Only proceed if the death animation finished (or if there's no sprite)
+		if (animSprite == null || animSprite.Animation == "Death")
+		{
+			// Animation finished, now change scene
+			GetTree().ChangeSceneToFile("res://Scenes/Menus/DeathMenu.tscn");
+			// QueueFree will happen automatically when scene changes
+			QueueFree();
+		}
+	}
 
 	public void ApplyUpgrade(Upgrade upgrade)
 	{
