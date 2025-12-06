@@ -14,10 +14,18 @@ public partial class MainMenu : Control
 		GetNode<Button>("VBoxContainer/QuitButton").Pressed += OnQuitPressed;
 	}
 
-	private void OnStartPressed()
+	private async void OnStartPressed()
 	{
+		if (ScreenFader.Instance != null)
+		{
+			await ScreenFader.Instance.FadeOut(); // fade to black
+		}
+
+		// Load next scene AFTER fade
 		RandomSceneLoader.Instance.LoadNextRoom();
 	}
+
+
 
 	private void OnItemsPressed()
 	{

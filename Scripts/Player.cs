@@ -263,17 +263,34 @@ public partial class Player : BasicEntity
 
 	protected override void Die()
 	{
-		base.Die();
-		
-		if (DeathSound != null)
-		{
-			DeathSound.Play();
-		}
-		
+		DeathSound?.Play();
 		GD.Print("Player died!");
-		
-		GetTree().ChangeSceneToFile("res://Scenes/Menus/DeathMenu.tscn");
+
+		// Disable player input & movement so nothing else happens during fade
+		SetProcess(false);
+		SetPhysicsProcess(false);
+
+		// Fade out first, then remove player and change scene
+		if (ScreenFader.Instance != null)
+		{
+			ScreenFader.Instance.FadeOut(() =>
+			{
+				// Free the player AFTER fade completes
+				QueueFree();
+
+				// Change scene safely
+				GetTree().ChangeSceneToFile("res://Scenes/Menus/DeathMenu.tscn");
+			});
+		}
+		else
+		{
+			// Fallback
+			QueueFree();
+			GetTree().ChangeSceneToFile("res://Scenes/Menus/DeathMenu.tscn");
+		}
 	}
+
+
 
 	public void ApplyUpgrade(Upgrade upgrade)
 	{
