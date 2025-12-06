@@ -77,9 +77,47 @@ public partial class Speaker : BasicEntity
             HPValueLabel.Text = $"{Mathf.CeilToInt(HP)} / {Mathf.CeilToInt(MaxHP)}";
     }
 
+    protected override void Die()
+    {
+        EmitSignal(SignalName.EnemyDied);
+
+        // Play death animation
+        if (Sprite != null)
+        {
+            // Stop all speaker activities
+            SetPhysicsProcess(false);
+            if (SpeakerGun != null)
+            {
+                SpeakerGun.SetProcess(false);
+            }
+            
+            // Play death animation
+            Sprite.Play("Death");
+            
+            // Wait for animation to finish before removing entity
+            if (!Sprite.IsConnected(AnimatedSprite2D.SignalName.AnimationFinished, new Callable(this, nameof(OnDeathAnimationFinished))))
+            {
+                Sprite.AnimationFinished += OnDeathAnimationFinished;
+            }
+        }
+        else
+        {
+            // No sprite, remove immediately
+            base.Die();
+        }
+    }
+
+    private void OnDeathAnimationFinished()
+    {
+        if (Sprite != null && Sprite.Animation == "Death")
+        {
+            // Animation finished, now remove the entity
+            base.Die();
+        }
+    }
+
     protected override void OnDeath()
     {
-        base.OnDeath();
-        EmitSignal(SignalName.EnemyDied);
+        // This is called by base.Die(), but we override Die() to handle animation
     }
 }

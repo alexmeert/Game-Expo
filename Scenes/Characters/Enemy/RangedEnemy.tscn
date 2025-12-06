@@ -186,7 +186,6 @@ shape = SubResource("RectangleShape2D_3wsu0")
 path_desired_distance = 3.0
 target_desired_distance = 3.0
 path_postprocessing = 1
-debug_enabled = true
 
 [node name="TakeDamage" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamMP3_nge51")
