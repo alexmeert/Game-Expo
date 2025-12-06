@@ -210,6 +210,11 @@ public partial class Upgrade : Item
 		player.DEF = MathF.Max(0f, player.DEF - _appliedDefIncrease);
 		player.SPD -= _appliedSpdIncrease;
 
+		// Ensure HP doesn't exceed MaxHP after removal
+		if (player.HP > player.MaxHP)
+			player.HP = player.MaxHP;
+		
+		// Ensure HP doesn't go below 0
 		if (player.HP < 0)
 			player.HP = 0;
 

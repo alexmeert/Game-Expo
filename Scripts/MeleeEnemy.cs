@@ -17,6 +17,9 @@ public partial class MeleeEnemy : BasicEntity
 
 	private const string PERK_PATH = "res://Scenes/Items/Perks/";
 	private float _attackTimer = 0f;
+	private float _pathUpdateCooldown = 0f;
+	private const float PATH_UPDATE_INTERVAL = 0.3f; // Update path every 0.3 seconds max
+	private const float TARGET_UPDATE_THRESHOLD = 50f; // Only update if target moved 50+ units
 
 	protected Node2D TargetPlayer { get; private set; }
 
@@ -36,40 +39,66 @@ public partial class MeleeEnemy : BasicEntity
 
 	protected override void HandleMovement(double delta)
 	{
-		if (TargetPlayer == null || !TargetPlayer.IsInsideTree())
-		{
-			FindPlayer();
-			if (TargetPlayer == null)
-				return;
-		}
-
-		float distance = GlobalPosition.DistanceTo(TargetPlayer.GlobalPosition);
-
-		// Attack
-		_attackTimer -= (float)delta;
-		if (_attackTimer <= 0f && distance <= AttackRange)
-		{
-			AttackPlayer();
-			_attackTimer = 1.0f / ATKSPD;
-		}
-
-		// Movement with intelligent pathfinding
-		if (distance > AttackRange)
-		{
-			agent.TargetPosition = TargetPlayer.GlobalPosition;
-
-			Vector2 next = agent.GetNextPathPosition();
-			Vector2 dir = (next - GlobalPosition).Normalized();
-
-			Velocity = dir * Spd;
-		}
-		else
-		{
-			Velocity = Vector2.Zero;
-		}
-
-		UpdateAnimation();
+	    if (TargetPlayer == null || !TargetPlayer.IsInsideTree())
+	    {
+	        FindPlayer();
+	        if (TargetPlayer == null)
+	            return;
+	    }
+	
+	    float distance = GlobalPosition.DistanceTo(TargetPlayer.GlobalPosition);
+	
+	    // Attack
+	    _attackTimer -= (float)delta;
+	    if (_attackTimer <= 0f && distance <= AttackRange)
+	    {
+	        AttackPlayer();
+	        _attackTimer = 1.0f / ATKSPD;
+	    }
+	
+	    // Movement
+	    if (distance > AttackRange)
+	    {
+	        Vector2 desiredTarget = TargetPlayer.GlobalPosition;
+	
+	        // Update path only if:
+	        // 1. Cooldown has passed
+	        // 2. Target has moved significantly
+	        _pathUpdateCooldown -= (float)delta;
+	        if (_pathUpdateCooldown <= 0f)
+	        {
+	            float targetDistance = desiredTarget.DistanceTo(agent.TargetPosition);
+	            if (targetDistance > TARGET_UPDATE_THRESHOLD)
+	            {
+	                agent.TargetPosition = desiredTarget;
+	                _pathUpdateCooldown = PATH_UPDATE_INTERVAL;
+	            }
+	        }
+	
+	        if (agent.IsNavigationFinished())
+	        {
+	            Velocity = Vector2.Zero;
+	        }
+	        else
+	        {
+	            Vector2 next = agent.GetNextPathPosition();
+	            Vector2 newVelocity = (next - GlobalPosition).Normalized() * Spd;
+	
+	            if (agent.AvoidanceEnabled)
+	                agent.SetVelocity(newVelocity);
+	            else
+	                Velocity = newVelocity;
+	        }
+	    }
+	    else
+	    {
+	        Velocity = Vector2.Zero;
+	    }
+	
+	    MoveAndSlide();
+	    UpdateAnimation();
 	}
+
 
 	private void UpdateAnimation()
 	{

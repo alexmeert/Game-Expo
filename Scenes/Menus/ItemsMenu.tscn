@@ -1,8 +1,9 @@
-[gd_scene load_steps=34 format=3 uid="uid://baswohu74crho"]
+[gd_scene load_steps=41 format=3 uid="uid://baswohu74crho"]
 
 [ext_resource type="Script" uid="uid://bs84f3ulg6r4d" path="res://Scripts/ItemsMenu.cs" id="1_i86yw"]
 [ext_resource type="FontFile" uid="uid://bjtv1av4o6be8" path="res://Assets/Fonts/vermin-vibes-1989-font/VerminVibes1989Regular-m77m.ttf" id="1_n3lbt"]
 [ext_resource type="PackedScene" uid="uid://lhhb3krl1jak" path="res://Scenes/Menus/CaroselContainer.tscn" id="4_471ss"]
+[ext_resource type="FontFile" uid="uid://bkbyvaj1rkqvw" path="res://Assets/Fonts/8-bit-font/8Bit-44Pl.ttf" id="5_4uyhk"]
 [ext_resource type="Texture2D" uid="uid://b3ec2wmyji7n" path="res://Sprites/Items/Perks/Perk_Firewall.png" id="5_8vakt"]
 [ext_resource type="Texture2D" uid="uid://ty7oasxfgr56" path="res://Sprites/Items/Perks/Perk_Overclock.png" id="6_vrk1j"]
 [ext_resource type="Texture2D" uid="uid://dje1fyiw701h7" path="res://Sprites/Items/Perks/Perk_PowerSurge.png" id="7_mc0it"]
@@ -13,8 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://ins6g1aocajj" path="res://Sprites/Items/Upgrades/Upgrade_Case.png" id="12_uha33"]
 [ext_resource type="Theme" uid="uid://cae2thujxguc8" path="res://Themes/ButtonTheme.tres" id="13_5y4vf"]
 [ext_resource type="Theme" uid="uid://bi1s1k6vap2dd" path="res://Themes/NextButtonTheme.tres" id="13_cq5qe"]
-[ext_resource type="Texture2D" uid="uid://cxwau0nbgg3qg" path="res://Sprites/Items/Upgrades/Upgrade_SSD.png" id="13_uha33"]
+[ext_resource type="Texture2D" uid="uid://bmdp3ug1r1b3h" path="res://Sprites/Items/Upgrades/Upgrade_SSD.png" id="13_uha33"]
 [ext_resource type="Texture2D" uid="uid://bfi4giv41jjki" path="res://Assets/Individual Icons/keyboard_72.png" id="14_4cic5"]
+[ext_resource type="Texture2D" uid="uid://ce3t5nmyewgkd" path="res://Sprites/Items/Perks/EasterEgg.png" id="14_16dsb"]
 [ext_resource type="Texture2D" uid="uid://hsfnyisxpluu" path="res://Assets/Individual Icons/keyboard_173.png" id="14_faybk"]
 [ext_resource type="Theme" uid="uid://brnlkcfe62oa4" path="res://Themes/PreviousButtonTheme.tres" id="14_weeap"]
 [ext_resource type="Texture2D" uid="uid://yxmew2j2uxnx" path="res://Assets/Individual Icons/keyboard_174.png" id="17_q5fnd"]
@@ -34,6 +36,24 @@ font_color = Color(0, 0, 0, 1)
 font = ExtResource("1_n3lbt")
 font_size = 40
 font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_16dsb"]
+font = ExtResource("5_4uyhk")
+
+[sub_resource type="LabelSettings" id="LabelSettings_52062"]
+font = ExtResource("5_4uyhk")
+font_size = 13
+
+[sub_resource type="LabelSettings" id="LabelSettings_r5voo"]
+font = ExtResource("5_4uyhk")
+font_size = 13
+
+[sub_resource type="LabelSettings" id="LabelSettings_k3rnd"]
+font = ExtResource("5_4uyhk")
+font_size = 13
+
+[sub_resource type="LabelSettings" id="LabelSettings_ptk3d"]
+font = ExtResource("5_4uyhk")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_16dsb"]
 
@@ -175,12 +195,14 @@ scale = Vector2(0.411765, 0.411765)
 metadata/_edit_use_anchors_ = true
 
 [node name="Upgrade1" type="Panel" parent="UpgradesContainer/UpgradesCaroselContainer/Control"]
+modulate = Color(1, 1, 1, 0.983459)
 z_index = 1
 layout_mode = 0
-offset_left = -20.0
-offset_top = -20.0001
-offset_right = 20.0
-offset_bottom = 19.9999
+offset_left = -19.9999
+offset_top = -20.0
+offset_right = 20.0001
+offset_bottom = 20.0
+scale = Vector2(0.985113, 0.985113)
 pivot_offset = Vector2(20, 20)
 metadata/_edit_use_anchors_ = true
 
@@ -189,15 +211,43 @@ texture_filter = 1
 position = Vector2(19.5058, 20)
 texture = ExtResource("8_mc0it")
 
+[node name="Name" type="Label" parent="UpgradesContainer/UpgradesCaroselContainer/Control/Upgrade1"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 3.57143
+offset_top = 42.8137
+offset_right = 93.5714
+offset_bottom = 65.8137
+scale = Vector2(0.389975, 0.389975)
+text = "Cooling Fan"
+label_settings = SubResource("LabelSettings_16dsb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="UpgradesContainer/UpgradesCaroselContainer/Control/Upgrade1"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -16.8367
+offset_top = 59.6917
+offset_right = 178.163
+offset_bottom = 110.692
+scale = Vector2(0.389975, 0.389975)
+text = "This CPU fan rapidly cools your core
+and lets you fire again much more
+quickly. Big fan of this one..."
+label_settings = SubResource("LabelSettings_52062")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Upgrade2" type="Panel" parent="UpgradesContainer/UpgradesCaroselContainer/Control"]
-modulate = Color(1, 1, 1, 0.65)
+modulate = Color(1, 1, 1, 0.639248)
 z_index = -1
 layout_mode = 0
-offset_left = 8.53166
-offset_top = -26.9098
+offset_left = 8.53167
+offset_top = -26.9099
 offset_right = 48.5316
-offset_bottom = 13.0902
-scale = Vector2(0.2, 0.2)
+offset_bottom = 13.0901
+scale = Vector2(0.198346, 0.198346)
 pivot_offset = Vector2(20, 20)
 metadata/_edit_use_anchors_ = true
 
@@ -207,14 +257,40 @@ position = Vector2(20.4425, 15)
 scale = Vector2(0.64, 0.64)
 texture = ExtResource("9_ff6m6")
 
+[node name="Name" type="Label" parent="UpgradesContainer/UpgradesCaroselContainer/Control/Upgrade2"]
+texture_filter = 1
+offset_left = 3.57143
+offset_top = 42.8137
+offset_right = 93.5714
+offset_bottom = 65.8137
+scale = Vector2(0.389975, 0.389975)
+text = "GPU"
+label_settings = SubResource("LabelSettings_16dsb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="UpgradesContainer/UpgradesCaroselContainer/Control/Upgrade2"]
+texture_filter = 1
+offset_left = -22.9561
+offset_top = 57.8171
+offset_right = 194.044
+offset_bottom = 108.817
+scale = Vector2(0.389975, 0.389975)
+text = "This new GPU boosts your framerate
+allowing you to fire more bits per second.
+Thank you Hensen Juang."
+label_settings = SubResource("LabelSettings_52062")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Panel3" type="Panel" parent="UpgradesContainer/UpgradesCaroselContainer/Control"]
-modulate = Color(1, 1, 1, 0.3)
+modulate = Color(1, 1, 1, 0.295038)
 z_index = -2
 layout_mode = 0
-offset_left = -2.36643
+offset_left = -2.36646
 offset_top = -38.0902
 offset_right = 37.6336
-offset_bottom = 1.90983
+offset_bottom = 1.90985
 scale = Vector2(0.1, 0.1)
 pivot_offset = Vector2(20, 20)
 metadata/_edit_use_anchors_ = true
@@ -224,14 +300,40 @@ texture_filter = 1
 position = Vector2(19.5058, 20)
 texture = ExtResource("10_hytxe")
 
+[node name="Name" type="Label" parent="UpgradesContainer/UpgradesCaroselContainer/Control/Panel3"]
+texture_filter = 1
+offset_left = 3.57143
+offset_top = 42.8137
+offset_right = 93.5714
+offset_bottom = 65.8137
+scale = Vector2(0.389975, 0.389975)
+text = "RAM"
+label_settings = SubResource("LabelSettings_16dsb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="UpgradesContainer/UpgradesCaroselContainer/Control/Panel3"]
+texture_filter = 1
+offset_left = -18.883
+offset_top = 57.8177
+offset_right = 176.117
+offset_bottom = 108.818
+scale = Vector2(0.389975, 0.389975)
+text = "This extra RAM lets you store
+much more damage data.
+Lucky find in this economy!"
+label_settings = SubResource("LabelSettings_52062")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Panel4" type="Panel" parent="UpgradesContainer/UpgradesCaroselContainer/Control"]
-modulate = Color(1, 1, 1, 0)
+modulate = Color(1, 1, 1, 0.00496236)
 z_index = -3
 layout_mode = 0
-offset_left = -37.6334
-offset_top = -38.0902
-offset_right = 2.36659
-offset_bottom = 1.90981
+offset_left = -37.6337
+offset_top = -38.09
+offset_right = 2.36625
+offset_bottom = 1.91002
 scale = Vector2(0.1, 0.1)
 pivot_offset = Vector2(20, 20)
 
@@ -240,15 +342,41 @@ texture_filter = 1
 position = Vector2(19.5058, 20)
 texture = ExtResource("11_x87bu")
 
+[node name="Name" type="Label" parent="UpgradesContainer/UpgradesCaroselContainer/Control/Panel4"]
+texture_filter = 1
+offset_left = 3.57143
+offset_top = 42.8137
+offset_right = 93.5714
+offset_bottom = 65.8137
+scale = Vector2(0.389975, 0.389975)
+text = "Power Supply"
+label_settings = SubResource("LabelSettings_16dsb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="UpgradesContainer/UpgradesCaroselContainer/Control/Panel4"]
+texture_filter = 1
+offset_left = -22.9626
+offset_top = 57.8172
+offset_right = 194.037
+offset_bottom = 108.817
+scale = Vector2(0.389975, 0.389975)
+text = "This new PSU increases your system
+wattage and really gets your metaphorical
+blood flowing. Increases your overall HP."
+label_settings = SubResource("LabelSettings_52062")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Panel5" type="Panel" parent="UpgradesContainer/UpgradesCaroselContainer/Control"]
-modulate = Color(1, 1, 1, 0)
+modulate = Color(1, 1, 1, 0.0107518)
 z_index = -4
 layout_mode = 0
 offset_left = -48.5314
-offset_top = -26.91
-offset_right = -8.53149
-offset_bottom = 13.09
-scale = Vector2(0.1, 0.1)
+offset_top = -26.9098
+offset_right = -8.53148
+offset_bottom = 13.0902
+scale = Vector2(0.101654, 0.101654)
 pivot_offset = Vector2(20, 20)
 
 [node name="Case" type="Sprite2D" parent="UpgradesContainer/UpgradesCaroselContainer/Control/Panel5"]
@@ -256,21 +384,73 @@ texture_filter = 1
 position = Vector2(19.5058, 20)
 texture = ExtResource("12_uha33")
 
+[node name="Name" type="Label" parent="UpgradesContainer/UpgradesCaroselContainer/Control/Panel5"]
+texture_filter = 1
+offset_left = 3.57143
+offset_top = 42.8137
+offset_right = 93.5714
+offset_bottom = 65.8137
+scale = Vector2(0.389975, 0.389975)
+text = "Case"
+label_settings = SubResource("LabelSettings_16dsb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="UpgradesContainer/UpgradesCaroselContainer/Control/Panel5"]
+texture_filter = 1
+offset_left = -25.0007
+offset_top = 59.6918
+offset_right = 208.999
+offset_bottom = 110.692
+scale = Vector2(0.389975, 0.389975)
+text = "The PC case protects you from a percentage
+of an enemy's attack. Just make sure they
+don't unscrew the side panel..."
+label_settings = SubResource("LabelSettings_52062")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Panel6" type="Panel" parent="UpgradesContainer/UpgradesCaroselContainer/Control"]
-modulate = Color(1, 1, 1, 0)
+modulate = Color(1, 1, 1, 0.0165412)
 z_index = -5
 layout_mode = 0
-offset_left = -20.0
-offset_top = -20.0001
-offset_right = 20.0
-offset_bottom = 19.9999
-scale = Vector2(0.1, 0.1)
+offset_left = -19.9999
+offset_top = -20.0
+offset_right = 20.0001
+offset_bottom = 20.0
+scale = Vector2(0.114887, 0.114887)
 pivot_offset = Vector2(20, 20)
 
 [node name="SSD" type="Sprite2D" parent="UpgradesContainer/UpgradesCaroselContainer/Control/Panel6"]
 texture_filter = 1
 position = Vector2(19.5058, 20)
 texture = ExtResource("13_uha33")
+
+[node name="Name" type="Label" parent="UpgradesContainer/UpgradesCaroselContainer/Control/Panel6"]
+texture_filter = 1
+offset_left = 3.57143
+offset_top = 42.8137
+offset_right = 93.5714
+offset_bottom = 65.8137
+scale = Vector2(0.389975, 0.389975)
+text = "SSD"
+label_settings = SubResource("LabelSettings_16dsb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="UpgradesContainer/UpgradesCaroselContainer/Control/Panel6"]
+texture_filter = 1
+offset_left = -18.8828
+offset_top = 57.8176
+offset_right = 187.117
+offset_bottom = 108.818
+scale = Vector2(0.389975, 0.389975)
+text = "This SSD increases the number of bits
+you can fire before cooldown.
+They're called magazines, not clips."
+label_settings = SubResource("LabelSettings_52062")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="PerksContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
@@ -298,6 +478,7 @@ offset_bottom = 40.0
 metadata/_edit_use_anchors_ = true
 
 [node name="Perk1" type="Panel" parent="PerksContainer/PerksCaroselContainer/Control"]
+modulate = Color(1, 1, 1, 1)
 z_index = 1
 layout_mode = 1
 anchors_preset = -1
@@ -306,9 +487,10 @@ anchor_top = -0.199998
 anchor_right = -13.7742
 anchor_bottom = -0.199998
 offset_left = 530.968
-offset_top = -12.0003
+offset_top = -12.0002
 offset_right = 570.968
-offset_bottom = 27.9997
+offset_bottom = 27.9998
+scale = Vector2(1, 1)
 pivot_offset = Vector2(20, 20)
 metadata/_edit_use_anchors_ = true
 
@@ -317,14 +499,40 @@ texture_filter = 1
 position = Vector2(19.5061, 20)
 texture = ExtResource("5_8vakt")
 
+[node name="Name" type="Label" parent="PerksContainer/PerksCaroselContainer/Control/Perk1"]
+texture_filter = 1
+offset_left = 3.57143
+offset_top = 42.8137
+offset_right = 93.5714
+offset_bottom = 65.8137
+scale = Vector2(0.389975, 0.389975)
+text = "Firewall"
+label_settings = SubResource("LabelSettings_16dsb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="PerksContainer/PerksCaroselContainer/Control/Perk1"]
+texture_filter = 1
+offset_left = -24.2719
+offset_top = 54.1965
+offset_right = 200.728
+offset_bottom = 117.197
+scale = Vector2(0.389975, 0.389975)
+text = "IT firewall just saved you big time.
+Briefly makes you invulnerable to
+all enemy grunt attacks."
+label_settings = SubResource("LabelSettings_r5voo")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Perk2" type="Panel" parent="PerksContainer/PerksCaroselContainer/Control"]
-modulate = Color(1, 1, 1, 0.65)
+modulate = Color(1, 1, 1, 0.649999)
 z_index = -1
 layout_mode = 0
-offset_left = 5.9807
+offset_left = 5.98074
 offset_top = -34.9998
 offset_right = 45.9807
-offset_bottom = 4.9998
+offset_bottom = 4.99981
 scale = Vector2(0.2, 0.2)
 pivot_offset = Vector2(20, 19.9998)
 metadata/_edit_use_anchors_ = true
@@ -334,14 +542,40 @@ texture_filter = 1
 position = Vector2(19.5061, 20)
 texture = ExtResource("6_vrk1j")
 
+[node name="Name" type="Label" parent="PerksContainer/PerksCaroselContainer/Control/Perk2"]
+texture_filter = 1
+offset_left = 3.57143
+offset_top = 42.8137
+offset_right = 93.5714
+offset_bottom = 65.8137
+scale = Vector2(0.389975, 0.389975)
+text = "Overclock"
+label_settings = SubResource("LabelSettings_16dsb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="PerksContainer/PerksCaroselContainer/Control/Perk2"]
+texture_filter = 1
+offset_left = -22.3315
+offset_top = 54.1969
+offset_right = 196.668
+offset_bottom = 117.197
+scale = Vector2(0.389975, 0.389975)
+text = "Your entire system feels as if it's been
+injected with pure adrenaline. Briefly
+increases damage and attack speed."
+label_settings = SubResource("LabelSettings_k3rnd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Perk3" type="Panel" parent="PerksContainer/PerksCaroselContainer/Control"]
 modulate = Color(1, 1, 1, 0.3)
 z_index = -2
 layout_mode = 0
-offset_left = -45.9803
-offset_top = -35.0
-offset_right = -5.98032
-offset_bottom = 5.0
+offset_left = -45.9806
+offset_top = -34.9999
+offset_right = -5.98059
+offset_bottom = 5.00007
 scale = Vector2(0.1, 0.1)
 pivot_offset = Vector2(20, 20)
 metadata/_edit_use_anchors_ = true
@@ -351,22 +585,72 @@ texture_filter = 1
 position = Vector2(19.5061, 20)
 texture = ExtResource("7_mc0it")
 
+[node name="Name" type="Label" parent="PerksContainer/PerksCaroselContainer/Control/Perk3"]
+texture_filter = 1
+offset_left = 3.57143
+offset_top = 42.8137
+offset_right = 93.5714
+offset_bottom = 65.8137
+scale = Vector2(0.389975, 0.389975)
+text = "Power Surge"
+label_settings = SubResource("LabelSettings_16dsb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="PerksContainer/PerksCaroselContainer/Control/Perk3"]
+texture_filter = 1
+offset_left = -24.2723
+offset_top = 54.1965
+offset_right = 203.728
+offset_bottom = 117.197
+scale = Vector2(0.389975, 0.389975)
+text = "Electricty flows through your cores
+and heals you. What a shocking discovery!"
+label_settings = SubResource("LabelSettings_ptk3d")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Perk4" type="Panel" parent="PerksContainer/PerksCaroselContainer/Control"]
-modulate = Color(1, 1, 1, 0)
+modulate = Color(1, 1, 1, 4.25331e-15)
 z_index = -3
 layout_mode = 0
-offset_left = -20.0
-offset_top = -20.0002
-offset_right = 20.0
-offset_bottom = 19.9998
+offset_left = -19.9999
+offset_top = -20.0001
+offset_right = 20.0001
+offset_bottom = 19.9999
 scale = Vector2(0.1, 0.1)
 pivot_offset = Vector2(20, 20)
 metadata/_edit_use_anchors_ = true
 
-[node name="PowerSurge" type="Sprite2D" parent="PerksContainer/PerksCaroselContainer/Control/Perk4"]
+[node name="EasterEgg" type="Sprite2D" parent="PerksContainer/PerksCaroselContainer/Control/Perk4"]
 texture_filter = 1
-position = Vector2(19.5061, 20)
-texture = ExtResource("7_mc0it")
+position = Vector2(19.9016, 19.4035)
+scale = Vector2(1.13592, 1.13592)
+texture = ExtResource("14_16dsb")
+
+[node name="Name" type="Label" parent="PerksContainer/PerksCaroselContainer/Control/Perk4"]
+texture_filter = 1
+offset_left = 3.57143
+offset_top = 42.8137
+offset_right = 93.5714
+offset_bottom = 65.8137
+scale = Vector2(0.389975, 0.389975)
+text = "Easter Egg"
+label_settings = SubResource("LabelSettings_16dsb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="PerksContainer/PerksCaroselContainer/Control/Perk4"]
+texture_filter = 1
+offset_left = -24.2723
+offset_top = 54.1965
+offset_right = 203.728
+offset_bottom = 117.197
+scale = Vector2(0.389975, 0.389975)
+text = "???"
+label_settings = SubResource("LabelSettings_ptk3d")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="NextUpgradeButton" type="Button" parent="."]
 texture_filter = 1

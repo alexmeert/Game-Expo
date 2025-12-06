@@ -6,7 +6,7 @@ public partial class Gun : Node2D
 	[Export] public Marker2D Muzzle;
 	[Export] public AudioStreamPlayer2D ShotSound;
 
-	[Export] public float FireCooldown = 0.20f;
+	[Export] public float BaseFireCooldown = 0.20f; // Base fire cooldown when ATKSPD is 1.0
 	[Export] public int MaxAmmo = 10;
 	[Export] public float ReloadTime = 2.0f;
 
@@ -16,6 +16,17 @@ public partial class Gun : Node2D
 	private bool isReloading = false;
 
 	public BasicEntity Owner { get; set; }
+	
+	// Calculate actual fire cooldown based on owner's attack speed
+	public float GetFireCooldown()
+	{
+		if (Owner == null || Owner.ATKSPD <= 0f)
+			return BaseFireCooldown;
+		
+		// Higher ATKSPD = faster fire rate = lower cooldown
+		// Formula: cooldown = baseCooldown / ATKSPD
+		return BaseFireCooldown / Owner.ATKSPD;
+	}
 
 	public int CurrentAmmo => currentAmmo;
 	public int MaxAmmoValue => MaxAmmo;
@@ -92,7 +103,7 @@ public partial class Gun : Node2D
 
 		// Consume ammo
 		currentAmmo--;
-		fireTimer = FireCooldown;
+		fireTimer = GetFireCooldown();
 
 		// Calculate direction to mouse
 		Vector2 mousePos = GetGlobalMousePosition();

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bmdp3ug1r1b3h"
-path="res://.godot/imported/Upgrade_SSD.png-b6f0f34eebf97bb50711a14a45f6120d.ctex"
+uid="uid://ce3t5nmyewgkd"
+path="res://.godot/imported/EasterEgg.png-c8f13cf07798bc935202d7604c82e77a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Items/Upgrades/Upgrade_SSD.png"
-dest_files=["res://.godot/imported/Upgrade_SSD.png-b6f0f34eebf97bb50711a14a45f6120d.ctex"]
+source_file="res://Sprites/Items/Perks/EasterEgg.png"
+dest_files=["res://.godot/imported/EasterEgg.png-c8f13cf07798bc935202d7604c82e77a.ctex"]
 
 [params]
 
