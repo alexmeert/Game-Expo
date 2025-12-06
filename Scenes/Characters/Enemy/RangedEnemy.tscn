@@ -162,6 +162,7 @@ FirePoint = NodePath("FirePoint")
 Healthbar = NodePath("Healthbar")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
+z_index = 1
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_0is14")
 animation = &"WalkDown"

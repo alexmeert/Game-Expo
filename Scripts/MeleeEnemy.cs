@@ -13,24 +13,24 @@ public partial class MeleeEnemy : BasicEntity
 	[Export] private AudioStreamPlayer2D DeathSound;
 	[Export] private float AttackRange = 30f;
 
-	// Folder containing perks
+	private NavigationAgent2D agent;
+
 	private const string PERK_PATH = "res://Scenes/Items/Perks/";
+	private float _attackTimer = 0f;
 
 	protected Node2D TargetPlayer { get; private set; }
-	private float _attackTimer = 0f;
+
+	public override void _Ready()
+	{
+		base._Ready();
+		agent = GetNode<NavigationAgent2D>("NavigationAgent2D");
+	}
 
 	protected override void InitializeEntity()
 	{
 		base.InitializeEntity();
 
-		SetStats(
-			hp: Hp,
-			dmg: Dmg,
-			atkspd: AtkSpd,
-			def: Def,
-			spd: Spd
-		);
-
+		SetStats(Hp, Dmg, AtkSpd, Def, Spd);
 		FindPlayer();
 	}
 
@@ -44,18 +44,24 @@ public partial class MeleeEnemy : BasicEntity
 		}
 
 		float distance = GlobalPosition.DistanceTo(TargetPlayer.GlobalPosition);
-		
+
+		// Attack
 		_attackTimer -= (float)delta;
 		if (_attackTimer <= 0f && distance <= AttackRange)
 		{
 			AttackPlayer();
 			_attackTimer = 1.0f / ATKSPD;
 		}
-		
+
+		// Movement with intelligent pathfinding
 		if (distance > AttackRange)
 		{
-			Vector2 direction = (TargetPlayer.GlobalPosition - GlobalPosition).Normalized();
-			Velocity = direction * SPD;
+			agent.TargetPosition = TargetPlayer.GlobalPosition;
+
+			Vector2 next = agent.GetNextPathPosition();
+			Vector2 dir = (next - GlobalPosition).Normalized();
+
+			Velocity = dir * Spd;
 		}
 		else
 		{
@@ -85,10 +91,7 @@ public partial class MeleeEnemy : BasicEntity
 	private void AttackPlayer()
 	{
 		if (TargetPlayer is Player player && player.IsAlive)
-		{
 			player.TakeDamage(DMG);
-			GD.Print($"MeleeEnemy dealt {DMG} damage to player. Player HP: {player.HP}/{player.MaxHP}");
-		}
 	}
 
 	protected virtual void FindPlayer()
@@ -96,9 +99,10 @@ public partial class MeleeEnemy : BasicEntity
 		var scene = GetTree().CurrentScene;
 		if (scene != null)
 		{
-			TargetPlayer = scene.GetNodeOrNull<Node2D>("MainCharacter")
-						?? scene.GetNodeOrNull<Player>("Player")
-						?? scene.GetChildren().OfType<Player>().FirstOrDefault();
+			TargetPlayer =
+				scene.GetNodeOrNull<Node2D>("MainCharacter") ??
+				scene.GetNodeOrNull<Player>("Player") ??
+				scene.GetChildren().OfType<Player>().FirstOrDefault();
 		}
 	}
 
@@ -112,7 +116,7 @@ public partial class MeleeEnemy : BasicEntity
 	{
 		EmitSignal(SignalName.EnemyDied);
 
-		TrySpawnPerk();   
+		TrySpawnPerk();
 
 		if (DeathSound != null)
 		{
@@ -120,18 +124,15 @@ public partial class MeleeEnemy : BasicEntity
 			DeathSound.Play();
 		}
 
-		base.Die(); // Calls QueueFree()
+		base.Die();
 	}
 
-	
-	//      PERK DROP SYSTEM
-	
 	private void TrySpawnPerk()
 	{
 		Random random = new Random();
 		float roll = (float)random.NextDouble();
 
-		if (roll > 0.05f) 
+		if (roll > 0.05f)
 			return;
 
 		string[] perks = DirAccess.GetFilesAt(PERK_PATH);
@@ -144,6 +145,7 @@ public partial class MeleeEnemy : BasicEntity
 
 		string perkFile = perks[random.Next(perks.Length)];
 		PackedScene scene = GD.Load<PackedScene>(PERK_PATH + perkFile);
+
 		if (scene == null)
 		{
 			GD.PushError("Failed to load perk: " + perkFile);
@@ -153,10 +155,8 @@ public partial class MeleeEnemy : BasicEntity
 		Node2D perkInstance = scene.Instantiate<Node2D>();
 		perkInstance.GlobalPosition = GlobalPosition;
 
-		
 		GetTree().CurrentScene.CallDeferred("add_child", perkInstance);
 
 		GD.Print("Spawned perk: " + perkFile);
 	}
-
 }

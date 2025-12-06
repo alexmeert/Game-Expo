@@ -15,34 +15,27 @@ public partial class TankEnemy : BasicEntity
 	[Export] private AudioStreamPlayer2D WalkSound;
 	[Export] private AudioStreamPlayer2D DeathSound;
 
-	private float _attackTimer = 0f;
+	private NavigationAgent2D agent;
 
+	private float _attackTimer = 0f;
 	private const string PERK_PATH = "res://Scenes/Items/Perks/";
 
-	
 	protected Node2D TargetPlayer { get; private set; }
 
-	
-	//        ENTITY SETUP
-	
+	public override void _Ready()
+	{
+		base._Ready();
+		agent = GetNode<NavigationAgent2D>("NavigationAgent2D");
+	}
+
 	protected override void InitializeEntity()
 	{
 		base.InitializeEntity();
 
-		SetStats(
-			hp: Hp,
-			dmg: Dmg,
-			atkspd: AtkSpd,
-			def: Def,
-			spd: Spd
-		);
-
+		SetStats(Hp, Dmg, AtkSpd, Def, Spd);
 		FindPlayer();
 	}
 
-	
-	//      MOVEMENT / ATTACK
-	
 	protected override void HandleMovement(double delta)
 	{
 		if (TargetPlayer == null || !TargetPlayer.IsInsideTree())
@@ -62,10 +55,14 @@ public partial class TankEnemy : BasicEntity
 			_attackTimer = 1.0f / ATKSPD;
 		}
 
-		// Movement
+		// Intelligent movement
 		if (distance > AttackRange)
 		{
-			Vector2 dir = (TargetPlayer.GlobalPosition - GlobalPosition).Normalized();
+			agent.TargetPosition = TargetPlayer.GlobalPosition;
+
+			Vector2 nextPos = agent.GetNextPathPosition();
+			Vector2 dir = (nextPos - GlobalPosition).Normalized();
+
 			Velocity = dir * Spd;
 
 			if (!WalkSound.Playing)
@@ -114,18 +111,12 @@ public partial class TankEnemy : BasicEntity
 		}
 	}
 
-	
-	//              DAMAGE
-	
 	protected override void OnTakeDamage(float damage)
 	{
 		base.OnTakeDamage(damage);
 		HitSound?.Play();
 	}
 
-	
-	//             DEATH
-	
 	protected override void Die()
 	{
 		EmitSignal(SignalName.EnemyDied);
@@ -140,15 +131,11 @@ public partial class TankEnemy : BasicEntity
 		base.Die();
 	}
 
-	
-	//        PERK DROP SYSTEM
-	
 	private void TrySpawnPerk()
 	{
 		Random random = new Random();
 		float roll = (float)random.NextDouble();
 
-		// 5% chance
 		if (roll > 0.05f)
 			return;
 

@@ -164,7 +164,7 @@ Healthbar = NodePath("Healthbar")
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_hv0av")
-animation = &"WalkUp"
+animation = &"WalkDown"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -174,6 +174,7 @@ shape = SubResource("CircleShape2D_kcgap")
 [node name="Hitbox" type="Area2D" parent="." groups=["Enemy"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+visible = false
 position = Vector2(0, 2)
 scale = Vector2(2.64, 1)
 shape = SubResource("RectangleShape2D_myivn")

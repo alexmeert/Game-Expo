@@ -9,19 +9,30 @@ public partial class RangedEnemy : BasicEntity
 	[Export] private float AtkSpd = 1.5f;
 	[Export] private float Def = 0f;
 	[Export] private float Spd = 50;
+
 	[Export] private AudioStreamPlayer2D HitSound;
 	[Export] private AudioStreamPlayer2D ShotSound;
 	[Export] private AudioStreamPlayer2D DeathSound;
+
 	[Export] private PackedScene ProjectileScene;
 	[Export] private Marker2D FirePoint;
+
 	[Export] private float MinDistance = 150f;
 	[Export] private float MaxDistance = 400f;
 	[Export] private float AttackRange = 500f;
 
 	private const string PERK_PATH = "res://Scenes/Items/Perks/";
 
+	private NavigationAgent2D agent;
+
 	protected Node2D TargetPlayer { get; private set; }
 	private float _attackTimer = 0f;
+
+	public override void _Ready()
+	{
+		base._Ready();
+		agent = GetNode<NavigationAgent2D>("NavigationAgent2D");
+	}
 
 	protected override void InitializeEntity()
 	{
@@ -41,23 +52,39 @@ public partial class RangedEnemy : BasicEntity
 		}
 
 		float distance = GlobalPosition.DistanceTo(TargetPlayer.GlobalPosition);
-		Vector2 direction = (TargetPlayer.GlobalPosition - GlobalPosition).Normalized();
+		Vector2 playerDir = (TargetPlayer.GlobalPosition - GlobalPosition).Normalized();
 
+		// Intelligent movement
 		if (distance < MinDistance)
-			Velocity = -direction * SPD;
+		{
+			// Flee away using pathfinding
+			Vector2 fleeTarget = GlobalPosition - playerDir * 200f;
+			agent.TargetPosition = fleeTarget;
+
+			Vector2 next = agent.GetNextPathPosition();
+			Velocity = (next - GlobalPosition).Normalized() * Spd;
+		}
 		else if (distance > MaxDistance)
-			Velocity = direction * SPD * 0.6f;
+		{
+			// Approach using pathfinding
+			agent.TargetPosition = TargetPlayer.GlobalPosition;
+
+			Vector2 next = agent.GetNextPathPosition();
+			Velocity = (next - GlobalPosition).Normalized() * (Spd * 0.6f);
+		}
 		else
 		{
-			Vector2 perpendicular = new Vector2(-direction.Y, direction.X);
-			Velocity = perpendicular * SPD * 0.4f;
+			// Stay in range but strafe intelligently
+			Vector2 tangent = new Vector2(-playerDir.Y, playerDir.X);
+			Velocity = tangent * (Spd * 0.4f);
 		}
 
+		// Attacking
 		_attackTimer -= (float)delta;
 		if (_attackTimer <= 0f && distance <= AttackRange)
 		{
 			AttackPlayer();
-			_attackTimer = 1.0f / ATKSPD;
+			_attackTimer = 1f / ATKSPD;
 		}
 
 		UpdateAnimation();
@@ -101,7 +128,6 @@ public partial class RangedEnemy : BasicEntity
 	    ShotSound?.Play();
 	}
 
-
 	protected void FindPlayer()
 	{
 	    var scene = GetTree().CurrentScene;
@@ -113,7 +139,6 @@ public partial class RangedEnemy : BasicEntity
 	        .FirstOrDefault(p => p.IsAlive);
 	}
 
-
 	protected override void OnTakeDamage(float damage)
 	{
 		base.OnTakeDamage(damage);
@@ -122,7 +147,6 @@ public partial class RangedEnemy : BasicEntity
 
 	protected override void Die()
 	{
-
 		EmitSignal(SignalName.EnemyDied);
 		TrySpawnPerk();
 
@@ -135,7 +159,6 @@ public partial class RangedEnemy : BasicEntity
 		base.Die();
 	}
 
-	
 	private void TrySpawnPerk()
 	{
 		Random random = new Random();
@@ -167,5 +190,4 @@ public partial class RangedEnemy : BasicEntity
 
 		GD.Print("Ranged spawned perk: " + perkFile);
 	}
-
 }
