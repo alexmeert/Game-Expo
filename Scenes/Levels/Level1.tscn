@@ -1,26 +1,30 @@
-[gd_scene load_steps=46 format=4 uid="uid://bg635lk553wrv"]
+[gd_scene load_steps=47 format=4 uid="uid://bg635lk553wrv"]
 
-[ext_resource type="PackedScene" uid="uid://3mdpl08kn7yk" path="res://Scenes/LevelController.tscn" id="1_7djb7"]
-[ext_resource type="Texture2D" uid="uid://dx5xusixt7bfv" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/tileset.png" id="5_mpgwi"]
-[ext_resource type="Texture2D" uid="uid://bmcm2bssfqwou" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/tileset_top.png" id="6_rv4f5"]
-[ext_resource type="Texture2D" uid="uid://btmcefauissf4" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server.png" id="7_fscui"]
-[ext_resource type="Texture2D" uid="uid://tdc1q346nfrd" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server_disabled.png" id="8_ha3iv"]
-[ext_resource type="Texture2D" uid="uid://b2xqy06cpdcab" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server_down.png" id="9_5vvcx"]
-[ext_resource type="PackedScene" uid="uid://cen8t8ucpecb1" path="res://Scenes/Characters/Enemy/EnemySpawner.tscn" id="10_474fb"]
-[ext_resource type="PackedScene" uid="uid://bt7gih2h8lrlu" path="res://Scenes/Characters/Enemy/MeleeEnemy.tscn" id="11_xadiw"]
-[ext_resource type="PackedScene" uid="uid://dmfv1i20k17vl" path="res://Scenes/Characters/Enemy/RangedEnemy.tscn" id="12_0md84"]
-[ext_resource type="PackedScene" uid="uid://cq782euxa61ii" path="res://Scenes/Characters/Enemy/TankEnemy.tscn" id="13_vxgnn"]
-[ext_resource type="PackedScene" uid="uid://c1aw4q02ut5i1" path="res://Scenes/Characters/Player/MainCharacter.tscn" id="14_3wxq5"]
-[ext_resource type="PackedScene" uid="uid://c8u16gw00jovv" path="res://Scenes/Chest/Chest.tscn" id="15_n52ff"]
-[ext_resource type="PackedScene" uid="uid://170k71snx6d3" path="res://Scenes/Items/Upgrades/Cooldown.tscn" id="16_lxras"]
-[ext_resource type="PackedScene" uid="uid://dyhm385qsegw2" path="res://Scenes/Items/Upgrades/Damage.tscn" id="17_i7ipo"]
-[ext_resource type="PackedScene" uid="uid://y7g0ts65vriw" path="res://Scenes/Items/Upgrades/Defense.tscn" id="18_wqtc8"]
-[ext_resource type="PackedScene" uid="uid://dlumqsplwb8xv" path="res://Scenes/Items/Upgrades/FireRate.tscn" id="19_dxbej"]
-[ext_resource type="PackedScene" uid="uid://cf0qvluqoi07u" path="res://Scenes/LevelAssets/Door.tscn" id="19_qndh8"]
-[ext_resource type="PackedScene" uid="uid://d3aundu586d2f" path="res://Scenes/Items/Upgrades/Health.tscn" id="20_lltum"]
-[ext_resource type="AudioStream" uid="uid://ck2s6ef8wn5ux" path="res://Sounds/Music/Normal/NormalMusic.mp3" id="20_m2ud8"]
-[ext_resource type="PackedScene" uid="uid://e6h6e5hwv3eq" path="res://Scenes/Menus/InventoryUI.tscn" id="21_7djb7"]
-[ext_resource type="PackedScene" uid="uid://bjoxxngko37rd" path="res://Scenes/Items/Upgrades/MagSize.tscn" id="21_ppa3s"]
+[ext_resource type="PackedScene" uid="uid://3mdpl08kn7yk" path="res://Scenes/LevelController.tscn" id="1_8fhce"]
+[ext_resource type="Texture2D" uid="uid://dx5xusixt7bfv" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/tileset.png" id="2_uqlrs"]
+[ext_resource type="Texture2D" uid="uid://bmcm2bssfqwou" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/tileset_top.png" id="3_htexa"]
+[ext_resource type="Texture2D" uid="uid://btmcefauissf4" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server.png" id="4_2oprd"]
+[ext_resource type="Texture2D" uid="uid://tdc1q346nfrd" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server_disabled.png" id="5_p6c81"]
+[ext_resource type="Texture2D" uid="uid://b2xqy06cpdcab" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server_down.png" id="6_xawdx"]
+[ext_resource type="PackedScene" uid="uid://cen8t8ucpecb1" path="res://Scenes/Characters/Enemy/EnemySpawner.tscn" id="7_lty4u"]
+[ext_resource type="PackedScene" uid="uid://bt7gih2h8lrlu" path="res://Scenes/Characters/Enemy/MeleeEnemy.tscn" id="8_efsfe"]
+[ext_resource type="PackedScene" uid="uid://c1aw4q02ut5i1" path="res://Scenes/Characters/Player/MainCharacter.tscn" id="9_et44u"]
+[ext_resource type="PackedScene" uid="uid://c8u16gw00jovv" path="res://Scenes/Chest/Chest.tscn" id="10_rd2vd"]
+[ext_resource type="PackedScene" uid="uid://170k71snx6d3" path="res://Scenes/Items/Upgrades/Cooldown.tscn" id="11_snvte"]
+[ext_resource type="PackedScene" uid="uid://dyhm385qsegw2" path="res://Scenes/Items/Upgrades/Damage.tscn" id="12_wspup"]
+[ext_resource type="PackedScene" uid="uid://y7g0ts65vriw" path="res://Scenes/Items/Upgrades/Defense.tscn" id="13_0a0w2"]
+[ext_resource type="PackedScene" uid="uid://dlumqsplwb8xv" path="res://Scenes/Items/Upgrades/FireRate.tscn" id="14_lpgos"]
+[ext_resource type="PackedScene" uid="uid://d3aundu586d2f" path="res://Scenes/Items/Upgrades/Health.tscn" id="15_e1ibw"]
+[ext_resource type="PackedScene" uid="uid://bjoxxngko37rd" path="res://Scenes/Items/Upgrades/MagSize.tscn" id="16_pwqrq"]
+[ext_resource type="PackedScene" uid="uid://cf0qvluqoi07u" path="res://Scenes/LevelAssets/Door.tscn" id="17_2d51m"]
+[ext_resource type="AudioStream" uid="uid://ck2s6ef8wn5ux" path="res://Sounds/Music/Normal/NormalMusic.mp3" id="18_u5p01"]
+[ext_resource type="PackedScene" uid="uid://e6h6e5hwv3eq" path="res://Scenes/Menus/InventoryUI.tscn" id="19_g7m6b"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_qndh8"]
+vertices = PackedVector2Array(16, 5.33594, -16, 5.33594, -16, -16, 16, -16)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-16, -16, 16, -16, 16, 5.33333, -16, 5.33333)])
+agent_radius = 0.0
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_4d3fe"]
 vertices = PackedVector2Array(16, 16, -16, 16, -16, -16, 16, -16)
@@ -82,8 +86,20 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)])
 agent_radius = 0.0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7djb7"]
-texture = ExtResource("5_mpgwi")
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_m2ud8"]
+vertices = PackedVector2Array(16, 5.33594, -16, 5.33594, -16, -16, 16, -16)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-16, -16, 16, -16, 16, 5.33333, -16, 5.33333)])
+agent_radius = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_7djb7"]
+vertices = PackedVector2Array(16, 5.33594, -16, 5.33594, -16, -16, 16, -16)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-16, -16, 16, -16, 16, 5.33333, -16, 5.33333)])
+agent_radius = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qndh8"]
+texture = ExtResource("2_uqlrs")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -139,8 +155,11 @@ texture_region_size = Vector2i(32, 32)
 6:2/0 = 0
 7:2/0 = 0
 8:2/0 = 0
+8:2/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_m2ud8")
 9:2/0 = 0
+9:2/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_7djb7")
 10:2/0 = 0
+10:2/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_qndh8")
 11:2/0 = 0
 12:2/0 = 0
 13:2/0 = 0
@@ -452,10 +471,10 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 navigation_layer_0/layers = 1
-sources/0 = SubResource("TileSetAtlasSource_7djb7")
+sources/0 = SubResource("TileSetAtlasSource_qndh8")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8tf6o"]
-texture = ExtResource("6_rv4f5")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m2ud8"]
+texture = ExtResource("3_htexa")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 2.54905, -16, 2.86768)
@@ -484,8 +503,8 @@ texture_region_size = Vector2i(32, 32)
 6:7/0 = 0
 7:7/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0deug"]
-texture = ExtResource("5_mpgwi")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7djb7"]
+texture = ExtResource("2_uqlrs")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
@@ -583,11 +602,11 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 navigation_layer_0/layers = 1
-sources/1 = SubResource("TileSetAtlasSource_0deug")
-sources/0 = SubResource("TileSetAtlasSource_8tf6o")
+sources/1 = SubResource("TileSetAtlasSource_7djb7")
+sources/0 = SubResource("TileSetAtlasSource_m2ud8")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0drga"]
-texture = ExtResource("5_mpgwi")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8tf6o"]
+texture = ExtResource("2_uqlrs")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -675,10 +694,10 @@ texture_region_size = Vector2i(32, 32)
 
 [sub_resource type="TileSet" id="TileSet_m2ud8"]
 tile_size = Vector2i(32, 32)
-sources/0 = SubResource("TileSetAtlasSource_0drga")
+sources/0 = SubResource("TileSetAtlasSource_8tf6o")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mpgwi"]
-texture = ExtResource("6_rv4f5")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0deug"]
+texture = ExtResource("3_htexa")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -707,31 +726,31 @@ texture_region_size = Vector2i(32, 32)
 
 [sub_resource type="TileSet" id="TileSet_7djb7"]
 tile_size = Vector2i(32, 32)
-sources/0 = SubResource("TileSetAtlasSource_mpgwi")
+sources/0 = SubResource("TileSetAtlasSource_0deug")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0drga"]
+texture = ExtResource("4_2oprd")
+0:0/0 = 0
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mpgwi"]
+texture = ExtResource("5_p6c81")
+0:0/0 = 0
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rv4f5"]
-texture = ExtResource("7_fscui")
-0:0/0 = 0
-0:1/0 = 0
-0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fscui"]
-texture = ExtResource("8_ha3iv")
-0:0/0 = 0
-0:1/0 = 0
-0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ha3iv"]
-texture = ExtResource("9_5vvcx")
+texture = ExtResource("6_xawdx")
 0:0/0 = 0
 0:1/0 = 0
 0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSet" id="TileSet_67y36"]
 physics_layer_0/collision_layer = 1
-sources/1 = SubResource("TileSetAtlasSource_rv4f5")
-sources/2 = SubResource("TileSetAtlasSource_fscui")
-sources/3 = SubResource("TileSetAtlasSource_ha3iv")
+sources/1 = SubResource("TileSetAtlasSource_0drga")
+sources/2 = SubResource("TileSetAtlasSource_mpgwi")
+sources/3 = SubResource("TileSetAtlasSource_rv4f5")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_kri6y"]
 vertices = PackedVector2Array(799, 305, 705, 305, 415, 303, 454.391, 303, 927, 433, 833, 433, 543, 431, 582.391, 431, 687, 223, 687, 177, 689, 193.656, 689, 289.531, 927, 479, 943, 411.438, 1011.13, 170, 1014.86, 599.977, 927, 513, 940.43, 416.289, 938.617, 420.852, 934.031, 424.906, 929.547, 428.422, 703.688, 301.094, 710.391, 303, 671, 303, 943, 331.609, 927, 559, 234.961, 599.008, 849, 559, 697.453, 298.094, 697.453, 554.094, 703.688, 557.094, 671, 559, 415, 559, 441.453, 554.094, 447.688, 557.094, 799, 351, 817, 321.656, 817, 417.531, 543, 351, 543, 305, 561, 321.656, 561, 417.531, 671, 479, 671, 433, 689, 449.656, 689, 545.531, 415, 479, 415, 433, 433, 449.656, 433, 545.531, 941.672, 322.922, 927, 223, 927, 177, 939.82, 318.578, 937.023, 313.461, 671, 257, 625, 257, 623, 223, 625, 223, 694.477, 184.063, 556.43, 288.289, 559, 283.438, 577, 257, 577, 303, 554.617, 292.852, 428.43, 416.289, 431, 411.438, 449, 385, 449, 431, 426.617, 420.852, 431, 331.609, 556.43, 544.289, 559, 539.438, 577, 513, 577, 559, 554.617, 548.852, 559, 459.609, 577, 479, 932.063, 309.273, 927, 273, 921.297, 431, 399, 223, 399, 177, 433, 193.656, 433, 289.531, 415, 257, 671, 513, 415, 513, 234.031, 170, 833, 177, 815, 283.438, 815, 203.609, 833, 273, 833, 306.227, 812.43, 544.289, 815, 539.438, 849, 513, 810.617, 548.852, 815, 459.609, 833, 479, 812.43, 288.289, 829.531, 307.25, 810.617, 292.852, 822.477, 312.063, 806.031, 296.906, 801.547, 300.422, 793.297, 303, 566.477, 312.063, 694.477, 440.063, 438.477, 440.063, 705, 369, 705, 415, 687, 411.438, 687, 331.609, 625, 177, 623, 177, 577, 433, 557.672, 450.922, 555.82, 446.578, 553.023, 441.461, 321, 479, 273, 513, 561, 223, 623, 257, 438.477, 184.063, 799, 415, 799, 369, 705, 351, 685.672, 322.922, 683.82, 318.578, 681.023, 313.461, 701.531, 179.25, 684.43, 416.289, 682.617, 420.852, 550.031, 296.906, 422.031, 424.906, 550.031, 552.906, 813.672, 450.922, 811.82, 446.578, 809.023, 441.461, 676.063, 309.273, 804.063, 437.273, 548.063, 437.273, 927, 306.18, 833, 223, 813.672, 194.922, 811.82, 190.578, 809.023, 185.461, 804.063, 181.273, 806.031, 552.906, 319.688, 429.094, 321, 433, 313.453, 426.094, 573.531, 307.25, 701.531, 435.25, 445.531, 435.25, 409.297, 431, 417.547, 428.422, 545.547, 300.422, 545.547, 556.422, 801.547, 556.422, 445.531, 179.25, 797.047, 177, 709.219, 177, 669.047, 305, 581.219, 305, 797.047, 433, 709.219, 433, 541.047, 433, 678.031, 424.906, 825.453, 426.094, 673.547, 428.422, 561, 177, 831.688, 429.094, 665.297, 431, 537.297, 303, 537.297, 559, 449, 305, 321, 303, 453.219, 433, 326.391, 431, 305, 417.531, 793.297, 559, 710.391, 559, 454.391, 559, 273, 559, 257, 223, 838.391, 431, 453.219, 177, 429.672, 322.922, 449, 351, 625, 303, 623, 303, 559, 203.609, 557.672, 194.922, 555.82, 190.578, 553.023, 185.461, 548.063, 181.273, 541.047, 177, 257, 177, 305, 321.656, 310.477, 312.063, 317.531, 307.25, 321, 257, 447.688, 301.094, 441.453, 298.094, 325.219, 305, 413.047, 305, 420.063, 309.273, 425.023, 313.461, 427.82, 318.578, 543, 385, 569.453, 426.094, 575.688, 429.094)
@@ -741,10 +760,10 @@ source_geometry_mode = 1
 source_geometry_group_name = &"Navigation"
 agent_radius = 15.0
 
-[node name="Level2" type="Node2D"]
+[node name="Level1" type="Node2D"]
 y_sort_enabled = true
 
-[node name="LevelController" parent="." node_paths=PackedStringArray("Chest", "MusicPlayer") instance=ExtResource("1_7djb7")]
+[node name="LevelController" parent="." node_paths=PackedStringArray("Chest", "MusicPlayer") instance=ExtResource("1_8fhce")]
 Chest = NodePath("../Chest")
 MusicPlayer = NodePath("../Music")
 
@@ -780,58 +799,61 @@ tile_map_data = PackedByteArray("AAAtABcAAQAAAAAAAAAtABgAAQAAAAEAAAAvABcAAwAAAAA
 tile_set = SubResource("TileSet_67y36")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-visible = false
 navigation_polygon = SubResource("NavigationPolygon_kri6y")
 
-[node name="Spawner" parent="." node_paths=PackedStringArray("LevelController") instance=ExtResource("10_474fb")]
+[node name="Spawner" parent="." node_paths=PackedStringArray("LevelController") instance=ExtResource("7_lty4u")]
 position = Vector2(944, 240)
-EnemyScene = ExtResource("11_xadiw")
+EnemyScene = ExtResource("8_efsfe")
 LevelController = NodePath("../LevelController")
-InitialDelay = 5.0
-SpawnRadius = 10.0
+SpawnCount = 10
+InitialDelay = 25.0
+SpawnRadius = 15.0
 
-[node name="Spawner2" parent="." node_paths=PackedStringArray("LevelController") instance=ExtResource("10_474fb")]
+[node name="Spawner2" parent="." node_paths=PackedStringArray("LevelController") instance=ExtResource("7_lty4u")]
 position = Vector2(304, 240)
-EnemyScene = ExtResource("11_xadiw")
+EnemyScene = ExtResource("8_efsfe")
 LevelController = NodePath("../LevelController")
-InitialDelay = 5.0
-SpawnRadius = 10.0
+SpawnCount = 10
+InitialDelay = 40.0
+SpawnRadius = 15.0
 
-[node name="Spawner3" parent="." node_paths=PackedStringArray("LevelController") instance=ExtResource("10_474fb")]
-position = Vector2(304, 240)
-EnemyScene = ExtResource("12_0md84")
-LevelController = NodePath("../LevelController")
-InitialDelay = 5.0
-SpawnRadius = 10.0
-
-[node name="Spawner4" parent="." node_paths=PackedStringArray("LevelController") instance=ExtResource("10_474fb")]
+[node name="Spawner4" parent="." node_paths=PackedStringArray("LevelController") instance=ExtResource("7_lty4u")]
 position = Vector2(944, 480)
-EnemyScene = ExtResource("13_vxgnn")
+EnemyScene = ExtResource("8_efsfe")
 LevelController = NodePath("../LevelController")
-InitialDelay = 5.0
-SpawnRadius = 10.0
+SpawnCount = 5
+InitialDelay = 15.0
+SpawnRadius = 15.0
 
-[node name="MainCharacter" parent="." instance=ExtResource("14_3wxq5")]
+[node name="Spawner5" parent="." node_paths=PackedStringArray("LevelController") instance=ExtResource("7_lty4u")]
+position = Vector2(304, 480)
+EnemyScene = ExtResource("8_efsfe")
+LevelController = NodePath("../LevelController")
+SpawnCount = 5
+InitialDelay = 5.0
+SpawnRadius = 15.0
+
+[node name="MainCharacter" parent="." instance=ExtResource("9_et44u")]
 z_index = 1
 position = Vector2(624, 592)
 
-[node name="Chest" parent="." instance=ExtResource("15_n52ff")]
+[node name="Chest" parent="." instance=ExtResource("10_rd2vd")]
 visible = false
 z_index = 1
 y_sort_enabled = true
 position = Vector2(624, 240)
-UpgradeScenes = [ExtResource("16_lxras"), ExtResource("17_i7ipo"), ExtResource("18_wqtc8"), ExtResource("19_dxbej"), ExtResource("20_lltum"), ExtResource("21_ppa3s")]
+UpgradeScenes = [ExtResource("11_snvte"), ExtResource("12_wspup"), ExtResource("13_0a0w2"), ExtResource("14_lpgos"), ExtResource("15_e1ibw"), ExtResource("16_pwqrq")]
 
-[node name="Door" parent="." instance=ExtResource("19_qndh8")]
+[node name="Door" parent="." instance=ExtResource("17_2d51m")]
 z_index = 1
 position = Vector2(624, 144)
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("20_m2ud8")
+stream = ExtResource("18_u5p01")
 autoplay = true
 bus = &"Music"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="InventoryUI" parent="CanvasLayer" instance=ExtResource("21_7djb7")]
+[node name="InventoryUI" parent="CanvasLayer" instance=ExtResource("19_g7m6b")]
 metadata/_edit_use_anchors_ = true
