@@ -28,6 +28,7 @@ script = ExtResource("1_b42ut")
 metadata/_edit_use_anchors_ = true
 
 [node name="FadeLayer" parent="." instance=ExtResource("2_uv623")]
+visible = false
 
 [node name="MainMenuPic" type="Sprite2D" parent="."]
 position = Vector2(577, 324)

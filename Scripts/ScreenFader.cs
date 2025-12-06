@@ -21,8 +21,8 @@ public partial class ScreenFader : ColorRect
 		float alpha = 1f;
 		while (alpha > 0f)
 		{
-			alpha -= (float)GetProcessDeltaTime() / FadeTime; // cast delta time to float
-			alpha = Math.Clamp(alpha, 0f, 1f); // use System.Math.Clamp in .NET 7+, otherwise use custom clamp
+			alpha -= (float)GetProcessDeltaTime() / FadeTime; 
+			alpha = Math.Clamp(alpha, 0f, 1f); 
 			Modulate = new Color(0, 0, 0, alpha);
 			await Task.Delay(1);
 		}
@@ -34,7 +34,7 @@ public partial class ScreenFader : ColorRect
 		float alpha = Modulate.A;
 		while (alpha < 1f)
 		{
-			alpha += (float)GetProcessDeltaTime() / FadeTime; // cast delta time to float
+			alpha += (float)GetProcessDeltaTime() / FadeTime; 
 			alpha = Math.Clamp(alpha, 0f, 1f);
 			Modulate = new Color(0, 0, 0, alpha);
 			await Task.Delay(1);

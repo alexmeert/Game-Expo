@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://dbil3iscsbasw"]
+
+[ext_resource type="Script" uid="uid://b8x0wp7q2ldpj" path="res://Scripts/WinMenu.cs" id="1_c0id2"]
+[ext_resource type="Texture2D" uid="uid://80wtwsu4eekq" path="res://Sprites/WinPng.png" id="1_wtfv3"]
+[ext_resource type="Theme" uid="uid://xafkp44a81m5" path="res://Themes/ MainMenuButtons.tres" id="2_c0id2"]
+[ext_resource type="PackedScene" uid="uid://cfqgfd2sggx0" path="res://Scenes/Menus/FadeLayer.tscn" id="2_mcvcw"]
+[ext_resource type="FontFile" uid="uid://bjtv1av4o6be8" path="res://Assets/Fonts/vermin-vibes-1989-font/VerminVibes1989Regular-m77m.ttf" id="3_vo2q2"]
+[ext_resource type="AudioStream" uid="uid://cy8vxgmloc4yi" path="res://Sounds/Music/Normal/EndGame.mp3" id="5_vo2q2"]
+
+[node name="WinMenu" type="Control" node_paths=PackedStringArray("MainButton", "QuitButton")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_c0id2")
+MainButton = NodePath("MainButton")
+QuitButton = NodePath("QuitButton")
+
+[node name="FadeLayer" parent="." instance=ExtResource("2_mcvcw")]
+
+[node name="QuitButton" type="Button" parent="."]
+z_index = 1
+texture_filter = 1
+offset_left = 872.0
+offset_top = 265.0
+offset_right = 1048.0
+offset_bottom = 323.0
+theme = ExtResource("2_c0id2")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_vo2q2")
+theme_override_font_sizes/font_size = 35
+text = "Quit"
+
+[node name="MainButton" type="Button" parent="."]
+z_index = 1
+texture_filter = 1
+offset_left = 872.0
+offset_top = 165.0
+offset_right = 1048.0
+offset_bottom = 223.0
+theme = ExtResource("2_c0id2")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_vo2q2")
+theme_override_font_sizes/font_size = 35
+text = "Main Menu"
+
+[node name="WinPng" type="Sprite2D" parent="."]
+position = Vector2(574, 323)
+texture = ExtResource("1_wtfv3")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_vo2q2")
+autoplay = true

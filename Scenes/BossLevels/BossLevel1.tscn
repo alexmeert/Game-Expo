@@ -1,6 +1,7 @@
-[gd_scene load_steps=43 format=4 uid="uid://bjujlm6jrmxmb"]
+[gd_scene load_steps=44 format=4 uid="uid://bjujlm6jrmxmb"]
 
 [ext_resource type="PackedScene" uid="uid://3mdpl08kn7yk" path="res://Scenes/LevelController.tscn" id="1_poxnn"]
+[ext_resource type="PackedScene" uid="uid://cfqgfd2sggx0" path="res://Scenes/Menus/FadeLayer.tscn" id="1_tee1q"]
 [ext_resource type="Texture2D" uid="uid://dx5xusixt7bfv" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/tileset.png" id="2_5ygav"]
 [ext_resource type="Texture2D" uid="uid://bmcm2bssfqwou" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/tileset_top.png" id="3_xo5nl"]
 [ext_resource type="Texture2D" uid="uid://btmcefauissf4" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/objects/server.png" id="4_214sx"]
@@ -718,6 +719,8 @@ font = ExtResource("10_poxnn")
 font_size = 30
 
 [node name="BossLevel1" type="Node2D"]
+
+[node name="FadeLayer" parent="." instance=ExtResource("1_tee1q")]
 
 [node name="LevelController" parent="." instance=ExtResource("1_poxnn")]
 
