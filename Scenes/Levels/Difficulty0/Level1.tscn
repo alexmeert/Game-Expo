@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://bg635lk553wrv"]
+[gd_scene load_steps=47 format=4 uid="uid://bg635lk553wrv"]
 
 [ext_resource type="PackedScene" uid="uid://3mdpl08kn7yk" path="res://Scenes/LevelController.tscn" id="1_7djb7"]
 [ext_resource type="Texture2D" uid="uid://dx5xusixt7bfv" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/tileset.png" id="5_mpgwi"]
@@ -21,6 +21,7 @@
 [ext_resource type="AudioStream" uid="uid://ck2s6ef8wn5ux" path="res://Sounds/Music/Normal/NormalMusic.mp3" id="20_m2ud8"]
 [ext_resource type="PackedScene" uid="uid://e6h6e5hwv3eq" path="res://Scenes/Menus/InventoryUI.tscn" id="21_7djb7"]
 [ext_resource type="PackedScene" uid="uid://bjoxxngko37rd" path="res://Scenes/Items/Upgrades/MagSize.tscn" id="21_ppa3s"]
+[ext_resource type="PackedScene" uid="uid://cfqgfd2sggx0" path="res://Scenes/Menus/FadeLayer.tscn" id="22_8tf6o"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_4d3fe"]
 vertices = PackedVector2Array(16, 16, -16, 16, -16, -16, 16, -16)
@@ -744,6 +745,8 @@ agent_radius = 15.0
 [node name="Level2" type="Node2D"]
 y_sort_enabled = true
 
+[node name="FadeLayer" parent="." instance=ExtResource("22_8tf6o")]
+
 [node name="LevelController" parent="." node_paths=PackedStringArray("Chest", "MusicPlayer") instance=ExtResource("1_7djb7")]
 Chest = NodePath("../Chest")
 MusicPlayer = NodePath("../Music")
@@ -814,6 +817,7 @@ SpawnRadius = 10.0
 [node name="MainCharacter" parent="." instance=ExtResource("14_3wxq5")]
 z_index = 1
 position = Vector2(624, 592)
+Dmg = 50
 
 [node name="Chest" parent="." instance=ExtResource("15_n52ff")]
 visible = false
@@ -834,4 +838,5 @@ bus = &"Music"
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="InventoryUI" parent="CanvasLayer" instance=ExtResource("21_7djb7")]
+visible = false
 metadata/_edit_use_anchors_ = true

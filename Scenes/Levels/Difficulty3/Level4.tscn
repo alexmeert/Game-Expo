@@ -1,6 +1,7 @@
-[gd_scene load_steps=47 format=4 uid="uid://dyd6lixymwy7h"]
+[gd_scene load_steps=48 format=4 uid="uid://dyd6lixymwy7h"]
 
 [ext_resource type="PackedScene" uid="uid://3mdpl08kn7yk" path="res://Scenes/LevelController.tscn" id="1_gu6kl"]
+[ext_resource type="PackedScene" uid="uid://cfqgfd2sggx0" path="res://Scenes/Menus/FadeLayer.tscn" id="1_poe8a"]
 [ext_resource type="Texture2D" uid="uid://y0s0p8xfsi5p" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/door/door_closed.png" id="2_15m5g"]
 [ext_resource type="Texture2D" uid="uid://bcp2cotlvml5w" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/door/door_spritesheet.png" id="3_poe8a"]
 [ext_resource type="Texture2D" uid="uid://cwrlsra5b1d46" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/map/door/door2_bis.png" id="4_iqovu"]
@@ -668,6 +669,10 @@ sources/3 = SubResource("TileSetAtlasSource_hk4vc")
 
 [node name="Level1" type="Node2D"]
 y_sort_enabled = true
+
+[node name="LevelController2" parent="." instance=ExtResource("1_gu6kl")]
+
+[node name="FadeLayer" parent="." instance=ExtResource("1_poe8a")]
 
 [node name="LevelController" parent="." node_paths=PackedStringArray("Chest") instance=ExtResource("1_gu6kl")]
 Chest = NodePath("../Chest")
