@@ -48,6 +48,8 @@ public partial class LevelController : Node, IEnemyTracker
 
 		if (Chest is Chest chestNode)
 			chestNode.Reveal();
+		else
+			GD.PrintErr("Chest reference not assigned or not a Chest node!");
 	}
 
 	private void PlayMusic(bool boss)

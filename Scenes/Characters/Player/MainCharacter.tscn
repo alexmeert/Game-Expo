@@ -960,8 +960,9 @@ font = ExtResource("15_6h7n7")
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("HitSound", "DeathSound", "WalkSound", "HPValueLabel", "AmmoLabel", "AmmoBar", "ReloadBar", "OverclockAura", "FirewallAura", "DamageLabel", "DefenseLabel", "FireRateLabel", "CooldownLabel", "MagSizeLabel", "HealthLabel", "Healthbar")]
 script = ExtResource("1_4flse")
-Hp = 50
-Spd = 55.0
+Hp = 150
+Dmg = 50
+Spd = 70.0
 HitSound = NodePath("PlayerHit")
 DeathSound = NodePath("PlayerDeath")
 WalkSound = NodePath("WalkSound")

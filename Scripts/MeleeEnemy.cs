@@ -20,13 +20,6 @@ public partial class MeleeEnemy : BasicEntity
 	private float _pathUpdateCooldown = 0f;
 	private const float PATH_UPDATE_INTERVAL = 0.3f; // Update path every 0.3 seconds max
 	private const float TARGET_UPDATE_THRESHOLD = 50f; // Only update if target moved 50+ units
-	
-	// Stuck detection
-	private Vector2 _lastPosition = Vector2.Zero;
-	private float _stuckTimer = 0f;
-	private const float STUCK_CHECK_INTERVAL = 0.5f; // Check if stuck every 0.5 seconds
-	private const float STUCK_THRESHOLD = 5f; // If moved less than 5 units, consider stuck
-	private bool _useDirectPath = false;
 
 	protected Node2D TargetPlayer { get; private set; }
 
@@ -34,15 +27,6 @@ public partial class MeleeEnemy : BasicEntity
 	{
 		base._Ready();
 		agent = GetNode<NavigationAgent2D>("NavigationAgent2D");
-		_lastPosition = GlobalPosition;
-		
-		// Wait for navigation to be ready
-		if (agent != null)
-		{
-			agent.TargetDesiredDistance = 5f;
-			agent.PathDesiredDistance = 5f;
-			agent.PathMaxDistance = 3.5f;
-		}
 	}
 
 	protected override void InitializeEntity()
@@ -76,80 +60,35 @@ public partial class MeleeEnemy : BasicEntity
 		if (distance > AttackRange)
 		{
 			Vector2 desiredTarget = TargetPlayer.GlobalPosition;
-			
-			// Check if stuck
-			_stuckTimer -= (float)delta;
-			if (_stuckTimer <= 0f)
-			{
-				float movedDistance = GlobalPosition.DistanceTo(_lastPosition);
-				if (movedDistance < STUCK_THRESHOLD && Velocity.LengthSquared() > 0.01f)
-				{
-					// We're stuck, use direct path
-					_useDirectPath = true;
-				}
-				else if (movedDistance > STUCK_THRESHOLD * 2f)
-				{
-					// We're moving well, try navigation again
-					_useDirectPath = false;
-				}
-				_lastPosition = GlobalPosition;
-				_stuckTimer = STUCK_CHECK_INTERVAL;
-			}
-			
-			Vector2 newVelocity = Vector2.Zero;
-			
-			// Try navigation first if not stuck
-			if (!_useDirectPath && agent != null)
-			{
-				// Update path only if:
-				// 1. Cooldown has passed
-				// 2. Target has moved significantly
-				_pathUpdateCooldown -= (float)delta;
-				if (_pathUpdateCooldown <= 0f)
-				{
-					float targetDistance = desiredTarget.DistanceTo(agent.TargetPosition);
-					if (targetDistance > TARGET_UPDATE_THRESHOLD)
-					{
-						agent.TargetPosition = desiredTarget;
-						_pathUpdateCooldown = PATH_UPDATE_INTERVAL;
-					}
-				}
 	
-				if (agent.IsNavigationFinished())
-				{
-					newVelocity = Vector2.Zero;
-				}
-				else
-				{
-					Vector2 next = agent.GetNextPathPosition();
-					newVelocity = (next - GlobalPosition).Normalized() * Spd;
-				}
-			}
-			
-			// Fallback to direct path if navigation failed or we're stuck
-			if (_useDirectPath || newVelocity.LengthSquared() < 0.01f)
+			// Update path only if:
+			// 1. Cooldown has passed
+			// 2. Target has moved significantly
+			_pathUpdateCooldown -= (float)delta;
+			if (_pathUpdateCooldown <= 0f)
 			{
-				Vector2 directDir = (desiredTarget - GlobalPosition).Normalized();
-				newVelocity = directDir * Spd;
-				
-				// Simple obstacle avoidance: check if we can move directly
-				// Use a raycast or space query to detect obstacles
-				var spaceState = GetWorld2D().DirectSpaceState;
-				var query = PhysicsRayQueryParameters2D.Create(GlobalPosition, GlobalPosition + directDir * 20f);
-				query.Exclude = new Godot.Collections.Array<Rid> { GetRid() };
-				var result = spaceState.IntersectRay(query);
-				
-				if (result.Count > 0)
+				float targetDistance = desiredTarget.DistanceTo(agent.TargetPosition);
+				if (targetDistance > TARGET_UPDATE_THRESHOLD)
 				{
-					// Obstacle detected, try to go around it
-					Vector2 obstacleNormal = ((Vector2)result["normal"]).Normalized();
-					// Move perpendicular to the obstacle
-					Vector2 avoidDir = new Vector2(-obstacleNormal.Y, obstacleNormal.X);
-					newVelocity = avoidDir * Spd;
+					agent.TargetPosition = desiredTarget;
+					_pathUpdateCooldown = PATH_UPDATE_INTERVAL;
 				}
 			}
-			
-			Velocity = newVelocity;
+	
+			if (agent.IsNavigationFinished())
+			{
+				Velocity = Vector2.Zero;
+			}
+			else
+			{
+				Vector2 next = agent.GetNextPathPosition();
+				Vector2 newVelocity = (next - GlobalPosition).Normalized() * Spd;
+	
+				if (agent.AvoidanceEnabled)
+					agent.SetVelocity(newVelocity);
+				else
+					Velocity = newVelocity;
+			}
 		}
 		else
 		{
@@ -193,12 +132,6 @@ public partial class MeleeEnemy : BasicEntity
 				scene.GetNodeOrNull<Node2D>("MainCharacter") ??
 				scene.GetNodeOrNull<Player>("Player") ??
 				scene.GetChildren().OfType<Player>().FirstOrDefault();
-			
-			// Set initial navigation target
-			if (TargetPlayer != null && agent != null)
-			{
-				agent.TargetPosition = TargetPlayer.GlobalPosition;
-			}
 		}
 	}
 

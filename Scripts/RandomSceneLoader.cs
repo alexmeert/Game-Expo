@@ -1,15 +1,23 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class RandomSceneLoader : Node
 {
 	public static RandomSceneLoader Instance { get; private set; }
 
-	[Export] public string LevelsFolder = "res://Scenes/Levels";
-	[Export] public string BossLevelPath = "res://Scenes/BossLevels/";
+	[Export] public string Difficulty0RoomsFolder = "res://Scenes/Levels/Difficulty0";
+	[Export] public string Difficulty1RoomsFolder = "res://Scenes/Levels/Difficulty1";
+	[Export] public string Difficulty2RoomsFolder = "res://Scenes/Levels/Difficulty2";
+	[Export] public string Difficulty3RoomsFolder = "res://Scenes/Levels/Difficulty3";
+	[Export] public string Difficulty4RoomsFolder = "res://Scenes/Levels/Difficulty4";
+	[Export] public string BossRoomsFolder = "res://Scenes/BossLevels/";
 	[Export] public AudioStreamPlayer MusicPlayer;
 
-	private int _currentLevel = 0; // 0 = not started, 1-5 = levels, 6+ = boss
+	private readonly List<List<string>> _difficultyDecks = new();
+	private readonly List<string> _bossDeck = new();
+
+	private int _currentDifficulty = 0;
 	private bool _isBossNext = false;
 
 	public override void _Ready()
@@ -17,66 +25,110 @@ public partial class RandomSceneLoader : Node
 		Instance = this;
 		GD.Randomize();
 
+		_difficultyDecks.Add(LoadAndShuffle(Difficulty0RoomsFolder));
+		_difficultyDecks.Add(LoadAndShuffle(Difficulty1RoomsFolder));
+		_difficultyDecks.Add(LoadAndShuffle(Difficulty2RoomsFolder));
+		_difficultyDecks.Add(LoadAndShuffle(Difficulty3RoomsFolder));
+		_difficultyDecks.Add(LoadAndShuffle(Difficulty4RoomsFolder));
+
+		LoadSceneList(BossRoomsFolder, _bossDeck);
+		Shuffle(_bossDeck);
+
 		if (MusicPlayer != null)
 			MusicPlayer.ProcessMode = ProcessModeEnum.Always;
 	}
 
+	private List<string> LoadAndShuffle(string folder)
+	{
+		var deck = new List<string>();
+		LoadSceneList(folder, deck);
+		Shuffle(deck);
+		return deck;
+	}
+
+	private void LoadSceneList(string folder, List<string> list)
+	{
+		list.Clear();
+		var dir = DirAccess.Open(folder);
+
+		if (dir == null)
+		{
+			GD.PrintErr($"Could not open folder: {folder}");
+			return;
+		}
+
+		dir.ListDirBegin();
+		string file;
+
+		while ((file = dir.GetNext()) != "")
+		{
+			if (!dir.CurrentIsDir() && file.EndsWith(".tscn"))
+				list.Add(folder + (folder.EndsWith("/") ? "" : "/") + file);
+		}
+
+		dir.ListDirEnd();
+
+		if (list.Count == 0)
+			GD.PrintErr($"No scenes found in folder: {folder}");
+	}
+
+	private void Shuffle(List<string> list)
+	{
+		for (int i = list.Count - 1; i > 0; i--)
+		{
+			int j = (int)GD.Randi() % (i + 1);
+			(list[i], list[j]) = (list[j], list[i]);
+		}
+	}
+
 	public void LoadNextRoom()
 	{
-		string scenePath;
-		bool isBoss = false;
-
-		if (_currentLevel < 5)
+		if (_currentDifficulty <= 4)
 		{
-			// Load Level1, Level2, Level3, Level4, or Level5
-			_currentLevel++;
-			scenePath = $"{LevelsFolder}/Level{_currentLevel}.tscn";
-			isBoss = false;
+			var deck = _difficultyDecks[_currentDifficulty];
+
+			if (deck.Count == 0)
+			{
+				GD.Print($"Difficulty {_currentDifficulty} deck empty — reshuffling.");
+				string folder = _currentDifficulty switch
+				{
+					0 => Difficulty0RoomsFolder,
+					1 => Difficulty1RoomsFolder,
+					2 => Difficulty2RoomsFolder,
+					3 => Difficulty3RoomsFolder,
+					4 => Difficulty4RoomsFolder,
+					_ => ""
+				};
+
+				LoadSceneList(folder, deck);
+				Shuffle(deck);
+			}
+
+			LoadNextFromDeck(deck, false);
+			_currentDifficulty++;
 		}
 		else
 		{
-			// After level 5, load boss level
-			// Try to find boss level in the BossLevels folder
-			var dir = DirAccess.Open(BossLevelPath);
-			if (dir != null)
+			if (_bossDeck.Count == 0)
 			{
-				dir.ListDirBegin();
-				string file;
-				string bossFile = null;
-				
-				while ((file = dir.GetNext()) != "")
-				{
-					if (!dir.CurrentIsDir() && file.EndsWith(".tscn"))
-					{
-						bossFile = file;
-						break; // Use first boss scene found
-					}
-				}
-				dir.ListDirEnd();
-				
-				if (bossFile != null)
-				{
-					scenePath = BossLevelPath + (BossLevelPath.EndsWith("/") ? "" : "/") + bossFile;
-				}
-				else
-				{
-					GD.PrintErr($"No boss level found in: {BossLevelPath}");
-					scenePath = $"{LevelsFolder}/Level5.tscn"; // Fallback
-				}
+				GD.Print("Boss deck empty — reshuffling.");
+				LoadSceneList(BossRoomsFolder, _bossDeck);
+				Shuffle(_bossDeck);
 			}
-			else
-			{
-				GD.PrintErr($"Could not open boss folder: {BossLevelPath}");
-				scenePath = $"{LevelsFolder}/Level5.tscn"; // Fallback
-			}
-			
-			isBoss = true;
+
+			LoadNextFromDeck(_bossDeck, true);
+			_currentDifficulty = 0;
 		}
+	}
+
+	private void LoadNextFromDeck(List<string> deck, bool isBoss)
+	{
+		string path = deck[0];
+		deck.RemoveAt(0);
 
 		_isBossNext = isBoss;
-		GD.Print($"Loading: {scenePath} (Boss: {isBoss})");
-		
-		GetTree().ChangeSceneToFile(scenePath);
+		GetTree().ChangeSceneToFile(path);
+
 		CallDeferred(nameof(ApplyBossFlag));
 	}
 
@@ -91,7 +143,24 @@ public partial class RandomSceneLoader : Node
 
 	public void Reset()
 	{
-		_currentLevel = 0;
+		_currentDifficulty = 0;
 		_isBossNext = false;
+	
+		// Clear decks
+		foreach (var deck in _difficultyDecks)
+			deck.Clear();
+	
+		_bossDeck.Clear();
+	
+		// Reload and reshuffle all decks
+		_difficultyDecks[0].AddRange(LoadAndShuffle(Difficulty0RoomsFolder));
+		_difficultyDecks[1].AddRange(LoadAndShuffle(Difficulty1RoomsFolder));
+		_difficultyDecks[2].AddRange(LoadAndShuffle(Difficulty2RoomsFolder));
+		_difficultyDecks[3].AddRange(LoadAndShuffle(Difficulty3RoomsFolder));
+		_difficultyDecks[4].AddRange(LoadAndShuffle(Difficulty4RoomsFolder));
+	
+		LoadSceneList(BossRoomsFolder, _bossDeck);
+		Shuffle(_bossDeck);
 	}
+
 }
