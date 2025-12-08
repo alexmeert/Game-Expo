@@ -1,4 +1,4 @@
-[gd_scene load_steps=154 format=4 uid="uid://c1aw4q02ut5i1"]
+[gd_scene load_steps=155 format=4 uid="uid://c1aw4q02ut5i1"]
 
 [ext_resource type="Script" uid="uid://bh5qd48qpm15n" path="res://Scripts/Player.cs" id="1_4flse"]
 [ext_resource type="Texture2D" uid="uid://dkbi2qmrosleb" path="res://Sprites/Characters/Player/CPUManIdle-Sheet.png" id="2_1go25"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://d0hg1eap8k7hr" path="res://Sprites/Items/Perks/Aura/FirewallAuraBreaking-Sheet.png" id="13_svvpg"]
 [ext_resource type="Texture2D" uid="uid://dftr7sxijpek3" path="res://Sprites/Items/Perks/Aura/FirewallAura.png" id="13_y5mqt"]
 [ext_resource type="FontFile" uid="uid://bkbyvaj1rkqvw" path="res://Assets/Fonts/8-bit-font/8Bit-44Pl.ttf" id="15_6h7n7"]
+[ext_resource type="PackedScene" uid="uid://degd3m0t3mk0b" path="res://Scenes/MonitorEffect.tscn" id="18_3oxmo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2h7ri"]
 atlas = ExtResource("2_vlt3l")
@@ -967,17 +968,17 @@ HitSound = NodePath("PlayerHit")
 DeathSound = NodePath("PlayerDeath")
 WalkSound = NodePath("WalkSound")
 HPValueLabel = NodePath("PlayerHPValue")
-AmmoLabel = NodePath("MagazineUI/AmmoLabel")
-AmmoBar = NodePath("MagazineUI/AmmoBar")
-ReloadBar = NodePath("MagazineUI/ReloadBar")
+AmmoLabel = NodePath("AmmoLabel")
+AmmoBar = NodePath("AmmoBar")
+ReloadBar = NodePath("ReloadBar")
 OverclockAura = NodePath("OverclockAura")
 FirewallAura = NodePath("FirewallAura")
-DamageLabel = NodePath("Control/DamageLabel")
-DefenseLabel = NodePath("Control/DefenseLabel")
-FireRateLabel = NodePath("Control/FireRateLabel")
-CooldownLabel = NodePath("Control/CooldownLabel")
-MagSizeLabel = NodePath("Control/MagSizeLabel")
-HealthLabel = NodePath("Control/HealthLabel")
+DamageLabel = NodePath("DamageLabel")
+DefenseLabel = NodePath("DefenseLabel")
+FireRateLabel = NodePath("FireRateLabel")
+CooldownLabel = NodePath("CooldownLabel")
+MagSizeLabel = NodePath("MagSizeLabel")
+HealthLabel = NodePath("HealthLabel")
 Healthbar = NodePath("Healthbar")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
@@ -991,7 +992,7 @@ position = Vector2(0, 5)
 shape = SubResource("CircleShape2D_4flse")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2.5, 2.5)
+zoom = Vector2(2, 2)
 
 [node name="Gun" parent="." instance=ExtResource("3_j5d3a")]
 visible = false
@@ -1013,20 +1014,13 @@ stream = ExtResource("8_4vx1o")
 volume_db = -15.0
 bus = &"SFX"
 
-[node name="Healthbar" parent="." instance=ExtResource("8_1go25")]
-offset_left = -224.0
-offset_top = 114.0
-offset_right = 16.0
-offset_bottom = 119.0
-scale = Vector2(0.997235, 1.84859)
-
 [node name="PauseMenu" parent="." instance=ExtResource("9_v5g80")]
 visible = false
-offset_left = -248.0
-offset_top = -136.0
-offset_right = -248.0
-offset_bottom = -136.0
-scale = Vector2(0.440001, 0.440001)
+offset_left = -327.0
+offset_top = -185.0
+offset_right = -327.0
+offset_bottom = -185.0
+scale = Vector2(0.560002, 0.560002)
 
 [node name="Background" type="ColorRect" parent="PauseMenu"]
 z_index = 4
@@ -1069,134 +1063,148 @@ scale = Vector2(1.97976, 1.97976)
 shape = SubResource("CircleShape2D_svvpg")
 
 [node name="PlayerHPValue" type="Label" parent="."]
-z_index = 5
+z_index = 6
 texture_filter = 1
-offset_left = -225.0
-offset_top = 114.0
-offset_right = 808.0
-offset_bottom = 153.0
-scale = Vector2(0.234217, 0.234217)
+offset_left = -274.0
+offset_top = 131.0
+offset_right = 759.0
+offset_bottom = 170.0
+scale = Vector2(0.323157, 0.323157)
 label_settings = SubResource("LabelSettings_4vx1o")
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
-[node name="MagazineUI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -225.0
-offset_top = 75.0
-offset_right = -99.0
-offset_bottom = 108.0
+[node name="Healthbar" parent="." instance=ExtResource("8_1go25")]
+offset_left = -274.0
+offset_top = 131.0
+offset_right = -34.0
+offset_bottom = 136.0
+scale = Vector2(1.37592, 2.55056)
+metadata/_edit_use_anchors_ = true
 
-[node name="AmmoLabel" type="Label" parent="MagazineUI"]
+[node name="AmmoLabel" type="Label" parent="."]
 z_index = 5
 texture_filter = 1
-layout_mode = 0
-offset_left = 1.0
-offset_top = 16.0
-offset_right = 257.0
-offset_bottom = 41.0
+anchors_preset = -1
+anchor_top = 0.637051
+anchor_bottom = 0.637051
+offset_left = -274.62
+offset_top = 102.0
+offset_right = -18.6203
+offset_bottom = 127.0
 scale = Vector2(0.445578, 0.445578)
 label_settings = SubResource("LabelSettings_6h7n7")
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
-[node name="ReloadBar" type="ProgressBar" parent="MagazineUI"]
+[node name="ReloadBar" type="ProgressBar" parent="."]
 z_index = 3
-layout_mode = 0
-offset_left = 1.0
-offset_top = 16.0
-offset_right = 115.0
-offset_bottom = 27.0
+anchors_preset = -1
+anchor_top = 0.637051
+anchor_bottom = 0.637051
+offset_left = -274.62
+offset_top = 102.0
+offset_right = -160.62
+offset_bottom = 113.0
 theme_override_styles/background = SubResource("StyleBoxFlat_6h7n7")
 theme_override_styles/fill = SubResource("StyleBoxFlat_4vx1o")
 max_value = 1.0
 value = 0.5
 show_percentage = false
+metadata/_edit_use_anchors_ = true
 
-[node name="AmmoBar" type="ProgressBar" parent="MagazineUI"]
+[node name="AmmoBar" type="ProgressBar" parent="."]
 z_index = 3
-layout_mode = 0
-offset_left = 1.0
-offset_top = 16.0
-offset_right = 115.0
-offset_bottom = 27.0
+anchors_preset = -1
+anchor_top = 0.637051
+anchor_bottom = 0.637051
+offset_left = -274.62
+offset_top = 102.0
+offset_right = -160.62
+offset_bottom = 113.0
 theme_override_styles/background = SubResource("StyleBoxFlat_6h7n7")
 theme_override_styles/fill = SubResource("StyleBoxFlat_4vx1o")
 max_value = 1.0
 value = 0.5
 show_percentage = false
+metadata/_edit_use_anchors_ = true
 
-[node name="Control" type="Control" parent="."]
+[node name="DamageLabel" type="Label" parent="."]
 z_index = 3
-texture_filter = 1
-layout_mode = 3
-anchors_preset = 0
-offset_left = 192.0
-offset_top = 96.0
-offset_right = 232.0
-offset_bottom = 136.0
-scale = Vector2(0.485523, 0.485523)
-
-[node name="DamageLabel" type="Label" parent="Control"]
-layout_mode = 0
-offset_left = -65.0
-offset_top = 17.0
-offset_right = -25.0
-offset_bottom = 40.0
+offset_left = 168.0
+offset_top = 120.0
+offset_right = 208.0
+offset_bottom = 143.0
+scale = Vector2(0.5749, 0.5749)
 text = "DMG"
 label_settings = SubResource("LabelSettings_vlt3l")
+metadata/_edit_use_anchors_ = true
 
-[node name="DefenseLabel" type="Label" parent="Control"]
-layout_mode = 0
-offset_left = -65.0
-offset_top = -6.0
-offset_right = -25.0
-offset_bottom = 17.0
+[node name="DefenseLabel" type="Label" parent="."]
+z_index = 3
+offset_left = 168.0
+offset_top = 104.0
+offset_right = 208.0
+offset_bottom = 127.0
+scale = Vector2(0.5749, 0.5749)
 text = "DEF"
 label_settings = SubResource("LabelSettings_3oxmo")
+metadata/_edit_use_anchors_ = true
 
-[node name="FireRateLabel" type="Label" parent="Control"]
-layout_mode = 0
-offset_left = -65.0
-offset_top = -77.0
-offset_right = -4.0
-offset_bottom = -54.0
+[node name="FireRateLabel" type="Label" parent="."]
+z_index = 3
+offset_left = 168.0
+offset_top = 56.0
+offset_right = 231.0
+offset_bottom = 79.0
+scale = Vector2(0.5749, 0.5749)
 text = "ATKSPD"
 label_settings = SubResource("LabelSettings_7is4a")
+metadata/_edit_use_anchors_ = true
 
-[node name="CooldownLabel" type="Label" parent="Control"]
-layout_mode = 0
-offset_left = -65.0
-offset_top = -29.0
-offset_right = -25.0
-offset_bottom = -6.0
+[node name="CooldownLabel" type="Label" parent="."]
+z_index = 3
+offset_left = 168.0
+offset_top = 88.0
+offset_right = 208.0
+offset_bottom = 111.0
+scale = Vector2(0.5749, 0.5749)
 text = "CD"
 label_settings = SubResource("LabelSettings_eyx8g")
+metadata/_edit_use_anchors_ = true
 
-[node name="MagSizeLabel" type="Label" parent="Control"]
-layout_mode = 0
-offset_left = -64.0
-offset_top = -54.0
-offset_right = -24.0
-offset_bottom = -31.0
+[node name="MagSizeLabel" type="Label" parent="."]
+z_index = 3
+offset_left = 168.0
+offset_top = 72.0
+offset_right = 208.0
+offset_bottom = 95.0
+scale = Vector2(0.5749, 0.5749)
 text = "MAG"
 label_settings = SubResource("LabelSettings_slls7")
+metadata/_edit_use_anchors_ = true
 
-[node name="HealthLabel" type="Label" parent="Control"]
-layout_mode = 0
-offset_left = -65.0
-offset_top = 43.0
-offset_right = -25.0
-offset_bottom = 66.0
+[node name="HealthLabel" type="Label" parent="."]
+z_index = 3
+offset_left = 168.0
+offset_top = 136.0
+offset_right = 208.0
+offset_bottom = 159.0
+scale = Vector2(0.5749, 0.5749)
 text = "HP"
 label_settings = SubResource("LabelSettings_d24ru")
+metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = 2
-offset_left = 152.0
-offset_top = 56.0
-offset_right = 198.0
-offset_bottom = 96.0
-scale = Vector2(1.72, 1.84)
+offset_left = 160.0
+offset_top = 48.0
+offset_right = 206.0
+offset_bottom = 88.0
+scale = Vector2(2.86899, 2.89203)
 color = Color(0, 0, 0, 0.364706)
+metadata/_edit_use_anchors_ = true
+
+[node name="MonitorEffect" parent="." instance=ExtResource("18_3oxmo")]

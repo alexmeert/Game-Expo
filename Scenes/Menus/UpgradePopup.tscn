@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cldx0q18vhthc"]
+[gd_scene load_steps=10 format=3 uid="uid://cldx0q18vhthc"]
 
 [ext_resource type="Texture2D" uid="uid://cbkuthp4rlbfn" path="res://Assets/Icons/PropertiesMenu.png" id="1_5pxwr"]
 [ext_resource type="Script" uid="uid://bax2ig07wsady" path="res://Scripts/UpgradePopup.cs" id="1_24tvh"]
@@ -12,9 +12,15 @@ font_size = 100
 font = ExtResource("3_45oxk")
 font_size = 200
 
+[sub_resource type="LabelSettings" id="LabelSettings_45oxk"]
+font = ExtResource("3_45oxk")
+
 [sub_resource type="LabelSettings" id="LabelSettings_dwgme"]
 font = ExtResource("3_45oxk")
 font_size = 200
+
+[sub_resource type="LabelSettings" id="LabelSettings_uxjsm"]
+font = ExtResource("3_45oxk")
 
 [sub_resource type="LabelSettings" id="LabelSettings_x544i"]
 font = ExtResource("3_45oxk")
@@ -80,12 +86,14 @@ vertical_alignment = 1
 
 [node name="NameLabel" type="Label" parent="."]
 z_index = 2
+texture_filter = 1
 layout_mode = 0
 offset_left = 832.0
 offset_top = 256.0
 offset_right = 1132.0
 offset_bottom = 306.0
 text = "text"
+label_settings = SubResource("LabelSettings_45oxk")
 horizontal_alignment = 1
 
 [node name="Effect" type="Label" parent="."]
@@ -102,12 +110,14 @@ vertical_alignment = 1
 
 [node name="EffectLabel" type="Label" parent="."]
 z_index = 2
+texture_filter = 1
 layout_mode = 0
 offset_left = 832.0
 offset_top = 346.0
 offset_right = 1132.0
 offset_bottom = 396.0
 text = "text"
+label_settings = SubResource("LabelSettings_uxjsm")
 horizontal_alignment = 1
 
 [node name="Description" type="Label" parent="."]
@@ -124,11 +134,13 @@ vertical_alignment = 1
 
 [node name="DescriptionLabel" type="Label" parent="."]
 z_index = 2
+texture_filter = 1
 layout_mode = 0
 offset_left = 832.0
 offset_top = 436.0
 offset_right = 1132.0
 offset_bottom = 486.0
 text = "text"
+label_settings = SubResource("LabelSettings_uxjsm")
 horizontal_alignment = 1
 autowrap_mode = 2

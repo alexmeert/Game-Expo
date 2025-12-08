@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://c1aw4q02ut5i1" path="res://Scenes/Characters/Player/MainCharacter.tscn" id="11_nho2g"]
 [ext_resource type="PackedScene" uid="uid://dwn4vukan1paf" path="res://Scenes/Characters/UI/Healthbar.tscn" id="12_xo5nl"]
 [ext_resource type="FontFile" uid="uid://bjtv1av4o6be8" path="res://Assets/Fonts/vermin-vibes-1989-font/VerminVibes1989Regular-m77m.ttf" id="13_214sx"]
-[ext_resource type="PackedScene" uid="uid://33ana158wlp0" path="res://Scenes/Chest/EnemySpawner.tscn" id="16_mbc2f"]
+[ext_resource type="PackedScene" uid="uid://cen8t8ucpecb1" path="res://Scenes/Chest/EnemySpawner.tscn" id="16_mbc2f"]
 [ext_resource type="PackedScene" uid="uid://bt7gih2h8lrlu" path="res://Scenes/Characters/Enemy/MeleeEnemy.tscn" id="17_tu6bq"]
 [ext_resource type="PackedScene" uid="uid://cq782euxa61ii" path="res://Scenes/Characters/Enemy/TankEnemy.tscn" id="18_g3lwm"]
 [ext_resource type="AudioStream" uid="uid://b1tn3d1kutgl3" path="res://Sounds/Music/Boss/BossMusic.mp3" id="19_5ygav"]
@@ -748,6 +748,7 @@ texture_filter = 1
 tile_set = SubResource("TileSet_4ilcc")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+visible = false
 navigation_polygon = SubResource("NavigationPolygon_giqrc")
 
 [node name="MainCharacter" parent="." instance=ExtResource("11_nho2g")]
@@ -759,24 +760,24 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -120.0
-offset_top = -118.0
+offset_top = -147.0
 offset_right = 120.0
-offset_bottom = -110.0
+offset_bottom = -139.0
 grow_horizontal = 2
 scale = Vector2(0.997235, 1.32859)
 
 [node name="LSpeakerHealthBar" parent="MainCharacter" instance=ExtResource("12_xo5nl")]
 offset_left = -229.0
-offset_top = -108.0
+offset_top = -137.0
 offset_right = 99.0
-offset_bottom = -99.0
+offset_bottom = -128.0
 scale = Vector2(0.317235, 0.80859)
 
 [node name="RSpeakerHealthBar" parent="MainCharacter" instance=ExtResource("12_xo5nl")]
 offset_left = 127.0
-offset_top = -108.0
+offset_top = -137.0
 offset_right = 449.0
-offset_bottom = -99.0
+offset_bottom = -128.0
 scale = Vector2(0.317235, 0.80859)
 
 [node name="BSODName" type="Label" parent="MainCharacter"]
@@ -786,9 +787,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -62.0
-offset_top = -128.0
+offset_top = -157.0
 offset_right = 62.0
-offset_bottom = -118.0
+offset_bottom = -147.0
 grow_horizontal = 2
 text = "The Blue Screen of Death"
 label_settings = SubResource("LabelSettings_gq2yr")
@@ -797,9 +798,9 @@ label_settings = SubResource("LabelSettings_gq2yr")
 z_index = 5
 texture_filter = 1
 offset_left = -212.0
-offset_top = -118.0
+offset_top = -147.0
 offset_right = -147.0
-offset_bottom = -108.0
+offset_bottom = -137.0
 text = "Left Speaker"
 label_settings = SubResource("LabelSettings_gq2yr")
 
@@ -807,9 +808,9 @@ label_settings = SubResource("LabelSettings_gq2yr")
 z_index = 5
 texture_filter = 1
 offset_left = 143.0
-offset_top = -118.0
+offset_top = -147.0
 offset_right = 209.0
-offset_bottom = -108.0
+offset_bottom = -137.0
 text = "Right Speaker"
 label_settings = SubResource("LabelSettings_gq2yr")
 
@@ -817,9 +818,9 @@ label_settings = SubResource("LabelSettings_gq2yr")
 z_index = 5
 texture_filter = 1
 offset_left = -120.0
-offset_top = -118.0
+offset_top = -147.0
 offset_right = 905.0
-offset_bottom = -71.0
+offset_bottom = -100.0
 scale = Vector2(0.234217, 0.234217)
 text = "10 / 100"
 label_settings = SubResource("LabelSettings_5ygav")
@@ -830,9 +831,9 @@ vertical_alignment = 1
 z_index = 5
 texture_filter = 1
 offset_left = -229.0
-offset_top = -109.0
+offset_top = -138.0
 offset_right = 215.0
-offset_bottom = -70.0
+offset_bottom = -99.0
 scale = Vector2(0.234217, 0.234217)
 text = "10 / 100"
 label_settings = SubResource("LabelSettings_5ygav")
@@ -843,9 +844,9 @@ vertical_alignment = 1
 z_index = 5
 texture_filter = 1
 offset_left = 127.0
-offset_top = -109.0
+offset_top = -138.0
 offset_right = 562.0
-offset_bottom = -70.0
+offset_bottom = -99.0
 scale = Vector2(0.234217, 0.234217)
 text = "10 / 100"
 label_settings = SubResource("LabelSettings_5ygav")
@@ -857,7 +858,6 @@ stream = ExtResource("19_5ygav")
 autoplay = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="InventoryUI" parent="CanvasLayer" instance=ExtResource("21_05qfh")]
 metadata/_edit_use_anchors_ = true

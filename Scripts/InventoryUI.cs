@@ -5,6 +5,7 @@ public partial class InventoryUI : Control
 {
 	[Export] public HBoxContainer IconListContainer;
 	[Export] public PackedScene UpgradePopupScene;
+	[Export] public Font UpgradeFont;
 
 	private UpgradePopup currentPopup;
 	private Control closeArea;
@@ -76,20 +77,25 @@ public partial class InventoryUI : Control
 		// Name label
 		var label = new Label
 		{
-			Text = u.ItemName,
-			HorizontalAlignment = HorizontalAlignment.Center
+		    Text = u.ItemName,
+		    HorizontalAlignment = HorizontalAlignment.Center
 		};
+		if (UpgradeFont != null)
+		    label.AddThemeFontOverride("font", UpgradeFont);
 		vbox.AddChild(label);
-
+		
 		// Stats label
 		var statsLabel = new Label
 		{
-			Text = u.GetStatSummary(),
-			HorizontalAlignment = HorizontalAlignment.Center,
-			Modulate = new Color(0.8f, 0.8f, 0.8f)
+		    Text = u.GetStatSummary(),
+		    HorizontalAlignment = HorizontalAlignment.Center,
+		    Modulate = new Color(0.8f, 0.8f, 0.8f)
 		};
 		statsLabel.AddThemeFontSizeOverride("font_size", 12);
+		if (UpgradeFont != null)
+		    statsLabel.AddThemeFontOverride("font", UpgradeFont);
 		vbox.AddChild(statsLabel);
+
 
 		IconListContainer.AddChild(vbox);
 

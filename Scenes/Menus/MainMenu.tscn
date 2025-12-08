@@ -1,20 +1,21 @@
-[gd_scene load_steps=8 format=3 uid="uid://byt026nu1wsbk"]
+[gd_scene load_steps=9 format=3 uid="uid://byt026nu1wsbk"]
 
 [ext_resource type="Script" uid="uid://bmxsy3nkmy1un" path="res://Scripts/MainMenu.cs" id="1_b42ut"]
 [ext_resource type="FontFile" uid="uid://bjtv1av4o6be8" path="res://Assets/Fonts/vermin-vibes-1989-font/VerminVibes1989Regular-m77m.ttf" id="1_v3fht"]
 [ext_resource type="Texture2D" uid="uid://da6xfqfd3gg2t" path="res://Assets/MainMenuPic.png" id="2_tfrft"]
 [ext_resource type="PackedScene" uid="uid://cfqgfd2sggx0" path="res://Scenes/Menus/FadeLayer.tscn" id="2_uv623"]
 [ext_resource type="Theme" uid="uid://xafkp44a81m5" path="res://Themes/ MainMenuButtons.tres" id="3_pbd8g"]
+[ext_resource type="PackedScene" uid="uid://degd3m0t3mk0b" path="res://Scenes/MonitorEffect.tscn" id="6_mc63j"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_bc4mk"]
 font = ExtResource("1_v3fht")
-font_size = 160
+font_size = 175
 font_color = Color(0.955963, 0.955963, 0.955963, 1)
 shadow_size = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_uv623"]
 font = ExtResource("1_v3fht")
-font_size = 26
+font_size = 35
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -30,7 +31,8 @@ metadata/_edit_use_anchors_ = true
 [node name="FadeLayer" parent="." instance=ExtResource("2_uv623")]
 
 [node name="MainMenuPic" type="Sprite2D" parent="."]
-position = Vector2(577, 324)
+position = Vector2(584, 336)
+scale = Vector2(1.05044, 1.05043)
 texture = ExtResource("2_tfrft")
 
 [node name="Title" type="Label" parent="."]
@@ -39,9 +41,9 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -718.0
+offset_left = -680.0
 offset_top = -10.0
-offset_right = 432.0
+offset_right = 470.0
 offset_bottom = 206.0
 grow_horizontal = 2
 text = "Corebound"
@@ -57,10 +59,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -565.0
-offset_top = -155.0
-offset_right = -210.0
-offset_bottom = -114.0
+offset_left = -560.0
+offset_top = -164.0
+offset_right = -117.0
+offset_bottom = -117.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "A game by Alex Joe & Jimmy"
@@ -70,15 +72,19 @@ vertical_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.423611
-anchor_top = 0.444444
-anchor_right = 0.577257
-anchor_bottom = 0.875
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -104.0
+offset_top = -112.0
+offset_right = 9.0
+offset_bottom = 167.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
+scale = Vector2(1.63959, 1.39959)
 theme_override_constants/separation = 35
-metadata/_edit_use_anchors_ = true
 
 [node name="PlayButton" type="Button" parent="VBoxContainer"]
 texture_filter = 1
@@ -124,3 +130,5 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_v3fht")
 theme_override_font_sizes/font_size = 35
 text = "Quit"
+
+[node name="MonitorEffect" parent="." instance=ExtResource("6_mc63j")]

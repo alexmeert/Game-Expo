@@ -8,6 +8,7 @@
 radius = 16.0
 
 [node name="MagSize" type="Node2D" node_paths=PackedStringArray("CollectSound")]
+z_index = 1
 scale = Vector2(0.985463, 1)
 script = ExtResource("1_0ovaj")
 MagSizeFlat = 4

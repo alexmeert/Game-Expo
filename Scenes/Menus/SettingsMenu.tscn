@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bv0sfgm0hdbb3"]
+[gd_scene load_steps=12 format=3 uid="uid://bv0sfgm0hdbb3"]
 
 [ext_resource type="FontFile" uid="uid://bjtv1av4o6be8" path="res://Assets/Fonts/vermin-vibes-1989-font/VerminVibes1989Regular-m77m.ttf" id="1_enyfb"]
 [ext_resource type="Script" uid="uid://b8bo1xw7r68if" path="res://Scripts/SettingsMenu.cs" id="1_leijj"]
 [ext_resource type="Theme" uid="uid://cae2thujxguc8" path="res://Themes/ButtonTheme.tres" id="2_leijj"]
+[ext_resource type="PackedScene" uid="uid://degd3m0t3mk0b" path="res://Scenes/MonitorEffect.tscn" id="4_nqyte"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_gl23i"]
 font = ExtResource("1_enyfb")
@@ -79,20 +80,20 @@ color = Color(0.054902, 0.054902, 1, 1)
 [node name="AudioBackground" type="ColorRect" parent="."]
 material = SubResource("CanvasItemMaterial_enyfb")
 layout_mode = 2
-offset_left = 344.0
-offset_top = 128.0
-offset_right = 792.0
-offset_bottom = 608.0
+offset_left = 416.0
+offset_top = 152.0
+offset_right = 864.0
+offset_bottom = 632.0
 size_flags_vertical = 4
 theme = SubResource("Theme_leijj")
 color = Color(0, 0, 0, 0.521569)
 
 [node name="Audio" type="Label" parent="."]
 layout_mode = 2
-offset_left = 408.0
-offset_top = 154.0
-offset_right = 728.0
-offset_bottom = 247.0
+offset_left = 480.0
+offset_top = 178.0
+offset_right = 800.0
+offset_bottom = 271.0
 text = "Audio
 "
 label_settings = SubResource("LabelSettings_enyfb")
@@ -100,28 +101,28 @@ horizontal_alignment = 1
 
 [node name="Master" type="Label" parent="."]
 layout_mode = 2
-offset_left = 408.0
-offset_top = 251.0
-offset_right = 728.0
-offset_bottom = 282.0
+offset_left = 480.0
+offset_top = 275.0
+offset_right = 800.0
+offset_bottom = 306.0
 text = "Master Volume"
 label_settings = SubResource("LabelSettings_leijj")
 
 [node name="MasterSlider" type="HSlider" parent="."]
 layout_mode = 2
-offset_left = 408.0
-offset_top = 286.0
-offset_right = 728.0
-offset_bottom = 302.0
+offset_left = 480.0
+offset_top = 310.0
+offset_right = 800.0
+offset_bottom = 326.0
 min_value = -40.0
 max_value = 0.0
 
 [node name="Music" type="Label" parent="."]
 layout_mode = 2
-offset_left = 408.0
-offset_top = 306.0
-offset_right = 728.0
-offset_bottom = 405.0
+offset_left = 480.0
+offset_top = 330.0
+offset_right = 800.0
+offset_bottom = 429.0
 text = "
 
 Music Volume"
@@ -129,19 +130,19 @@ label_settings = SubResource("LabelSettings_nqyte")
 
 [node name="MusicSlider" type="HSlider" parent="."]
 layout_mode = 2
-offset_left = 408.0
-offset_top = 409.0
-offset_right = 728.0
-offset_bottom = 425.0
+offset_left = 480.0
+offset_top = 433.0
+offset_right = 800.0
+offset_bottom = 449.0
 min_value = -80.0
 max_value = 0.0
 
 [node name="SFX" type="Label" parent="."]
 layout_mode = 2
-offset_left = 408.0
-offset_top = 429.0
-offset_right = 728.0
-offset_bottom = 528.0
+offset_left = 480.0
+offset_top = 453.0
+offset_right = 800.0
+offset_bottom = 552.0
 text = "
 
 SFX Volume"
@@ -149,10 +150,12 @@ label_settings = SubResource("LabelSettings_5a14u")
 
 [node name="SFXSlider" type="HSlider" parent="."]
 layout_mode = 2
-offset_left = 408.0
-offset_top = 532.0
-offset_right = 728.0
-offset_bottom = 548.0
+offset_left = 480.0
+offset_top = 556.0
+offset_right = 800.0
+offset_bottom = 572.0
 min_value = -80.0
 max_value = 1.0
 value = 1.0
+
+[node name="MonitorEffect" parent="." instance=ExtResource("4_nqyte")]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://e6h6e5hwv3eq"]
+[gd_scene load_steps=5 format=3 uid="uid://e6h6e5hwv3eq"]
 
 [ext_resource type="Script" uid="uid://0khlutlbemge" path="res://Scripts/InventoryUI.cs" id="1_7gt65"]
 [ext_resource type="PackedScene" uid="uid://cldx0q18vhthc" path="res://Scenes/Menus/UpgradePopup.tscn" id="2_484cb"]
 [ext_resource type="Texture2D" uid="uid://go5svlhl46ab" path="res://Assets/Individual Icons/InventoryMenu.png" id="2_shwpr"]
+[ext_resource type="FontFile" uid="uid://bkbyvaj1rkqvw" path="res://Assets/Fonts/8-bit-font/8Bit-44Pl.ttf" id="3_hs5xh"]
 
 [node name="InventoryUI" type="Control" node_paths=PackedStringArray("IconListContainer")]
 layout_mode = 3
@@ -12,6 +13,7 @@ offset_bottom = 650.0
 script = ExtResource("1_7gt65")
 IconListContainer = NodePath("ListContainer")
 UpgradePopupScene = ExtResource("2_484cb")
+UpgradeFont = ExtResource("3_hs5xh")
 
 [node name="InventoryMenu" type="Sprite2D" parent="."]
 z_as_relative = false
@@ -23,8 +25,8 @@ z_index = -1
 layout_mode = 0
 offset_left = -1.0
 offset_top = -4.0
-offset_right = 1152.0
-offset_bottom = 646.0
+offset_right = 1283.0
+offset_bottom = 720.0
 color = Color(0, 0, 0.0196078, 0.392157)
 
 [node name="ListContainer" type="HBoxContainer" parent="."]

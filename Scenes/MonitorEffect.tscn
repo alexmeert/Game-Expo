@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://degd3m0t3mk0b"]
+
+[ext_resource type="Shader" uid="uid://vyb1x3dicqej" path="res://Themes/MonitorEffect.gdshader" id="1_48uda"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3c4pj"]
+shader = ExtResource("1_48uda")
+shader_parameter/curvature = 6.0
+shader_parameter/vignette_multiplier = 2.0
+shader_parameter/ca_strength = 2.5
+shader_parameter/blur_strength = 0.5
+
+[sub_resource type="QuadMesh" id="QuadMesh_u3feb"]
+size = Vector2(1152, 648)
+center_offset = Vector3(577, 324, 0)
+
+[node name="MonitorEffect" type="CanvasLayer"]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+material = SubResource("ShaderMaterial_3c4pj")
+mesh = SubResource("QuadMesh_u3feb")

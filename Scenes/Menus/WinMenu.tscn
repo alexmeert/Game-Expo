@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dj4r1n5y6m6ur"]
+[gd_scene load_steps=8 format=3 uid="uid://dj4r1n5y6m6ur"]
 
 [ext_resource type="Script" uid="uid://b8x0wp7q2ldpj" path="res://Scripts/WinMenu.cs" id="1_c0id2"]
 [ext_resource type="Texture2D" uid="uid://80wtwsu4eekq" path="res://Sprites/WinPng.png" id="1_wtfv3"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cfqgfd2sggx0" path="res://Scenes/Menus/FadeLayer.tscn" id="2_mcvcw"]
 [ext_resource type="FontFile" uid="uid://bjtv1av4o6be8" path="res://Assets/Fonts/vermin-vibes-1989-font/VerminVibes1989Regular-m77m.ttf" id="3_vo2q2"]
 [ext_resource type="AudioStream" uid="uid://cy8vxgmloc4yi" path="res://Sounds/Music/Normal/EndGame.mp3" id="5_vo2q2"]
+[ext_resource type="PackedScene" uid="uid://degd3m0t3mk0b" path="res://Scenes/MonitorEffect.tscn" id="7_48g4r"]
 
 [node name="WinMenu" type="Control" node_paths=PackedStringArray("MainButton", "QuitButton")]
 layout_mode = 3
@@ -55,3 +56,5 @@ texture = ExtResource("1_wtfv3")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_vo2q2")
 autoplay = true
+
+[node name="MonitorEffect" parent="." instance=ExtResource("7_48g4r")]

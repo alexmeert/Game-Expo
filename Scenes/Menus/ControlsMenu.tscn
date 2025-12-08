@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cud7igc2oi4bc"]
+[gd_scene load_steps=17 format=3 uid="uid://cud7igc2oi4bc"]
 
 [ext_resource type="Script" uid="uid://dytdsgvqbnatx" path="res://Scripts/ControlsMenu.cs" id="1_h4g5a"]
 [ext_resource type="FontFile" uid="uid://bjtv1av4o6be8" path="res://Assets/Fonts/vermin-vibes-1989-font/VerminVibes1989Regular-m77m.ttf" id="1_vofmw"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://c56qu0jo4hrf4" path="res://Assets/Individual Icons/keyboard_15.png" id="8_ojvc1"]
 [ext_resource type="Texture2D" uid="uid://cdom5i2lm1x7k" path="res://Assets/Individual Icons/keyboard_94.png" id="9_uemt4"]
 [ext_resource type="Texture2D" uid="uid://n11m1emo4d2t" path="res://Assets/Icons/Mouse.png" id="10_xnbqm"]
+[ext_resource type="PackedScene" uid="uid://degd3m0t3mk0b" path="res://Scenes/MonitorEffect.tscn" id="11_4jtkf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_xnbqm"]
 font = ExtResource("1_vofmw")
@@ -75,49 +76,50 @@ offset_bottom = 56.0
 scale = Vector2(2.17004, 2.17004)
 theme = ExtResource("3_h4g5a")
 
-[node name="Keyboard23" type="Sprite2D" parent="."]
+[node name="A" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(151.32, 360.32)
-scale = Vector2(2.52, 2.52)
+position = Vector2(85.9219, 462.242)
+scale = Vector2(3.37012, 3.37012)
 texture = ExtResource("4_tpext")
 metadata/_edit_group_ = true
 
-[node name="Keyboard24" type="Sprite2D" parent="."]
+[node name="S" type="Sprite2D" parent="."]
 z_index = 1
 y_sort_enabled = true
 texture_filter = 1
-position = Vector2(231.32, 360.32)
-scale = Vector2(2.52, 2.52)
+position = Vector2(197.242, 462.242)
+scale = Vector2(3.37012, 3.37012)
 texture = ExtResource("5_ojvc1")
 metadata/_edit_group_ = true
 
-[node name="Keyboard25" type="Sprite2D" parent="."]
+[node name="D" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(311.32, 360.32)
-scale = Vector2(2.52, 2.52)
+position = Vector2(309.922, 461.922)
+scale = Vector2(3.37012, 3.37012)
 texture = ExtResource("6_uemt4")
 metadata/_edit_group_ = true
 
-[node name="Keyboard14" type="Sprite2D" parent="."]
+[node name="W" type="Sprite2D" parent="."]
 y_sort_enabled = true
 texture_filter = 1
-position = Vector2(231.32, 296.32)
-scale = Vector2(2.52, 2.52)
+position = Vector2(197.242, 373.922)
+scale = Vector2(3.37012, 3.37012)
 texture = ExtResource("7_xnbqm")
 metadata/_edit_group_ = true
 
-[node name="Keyboard15" type="Sprite2D" parent="."]
+[node name="E" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(576, 304)
-scale = Vector2(2.52, 2.52)
+position = Vector2(480, 376)
+scale = Vector2(3.37012, 3.37012)
 texture = ExtResource("8_ojvc1")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 144.0
-offset_top = 184.0
-offset_right = 324.0
-offset_bottom = 219.0
+offset_left = 87.9999
+offset_top = 192.0
+offset_right = 268.0
+offset_bottom = 227.0
+scale = Vector2(1.33735, 1.33735)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("1_vofmw")
@@ -129,10 +131,11 @@ vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="."]
 layout_mode = 0
-offset_left = 496.0
-offset_top = 184.0
-offset_right = 664.0
-offset_bottom = 219.0
+offset_left = 376.0
+offset_top = 192.0
+offset_right = 544.0
+offset_bottom = 227.0
+scale = Vector2(1.33735, 1.33735)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("1_vofmw")
@@ -144,10 +147,11 @@ vertical_alignment = 1
 
 [node name="Label4" type="Label" parent="."]
 layout_mode = 0
-offset_left = 792.0
-offset_top = 184.0
-offset_right = 960.0
-offset_bottom = 219.0
+offset_left = 902.08
+offset_top = 192.0
+offset_right = 1070.08
+offset_bottom = 227.0
+scale = Vector2(1.33735, 1.33735)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("1_vofmw")
@@ -159,10 +163,11 @@ vertical_alignment = 1
 
 [node name="Label3" type="Label" parent="."]
 layout_mode = 0
-offset_left = 496.0
-offset_top = 400.0
-offset_right = 665.0
-offset_bottom = 435.0
+offset_left = 664.0
+offset_top = 192.0
+offset_right = 833.0
+offset_bottom = 227.0
+scale = Vector2(1.33735, 1.33735)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("1_vofmw")
@@ -170,14 +175,16 @@ theme_override_font_sizes/font_size = 40
 text = "Inventory"
 label_settings = SubResource("LabelSettings_7j2q1")
 
-[node name="Keyboard94" type="Sprite2D" parent="."]
+[node name="Tab" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(576, 512)
-scale = Vector2(2.52, 2.52)
+position = Vector2(776, 368)
+scale = Vector2(3.37012, 3.37012)
 texture = ExtResource("9_uemt4")
 
 [node name="Mouse" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(864, 344)
-scale = Vector2(6.64, 6.64)
+position = Vector2(990.08, 440)
+scale = Vector2(8.88, 8.88)
 texture = ExtResource("10_xnbqm")
+
+[node name="MonitorEffect" parent="." instance=ExtResource("11_4jtkf")]

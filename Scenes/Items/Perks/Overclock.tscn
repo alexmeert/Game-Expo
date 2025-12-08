@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://blmvtokpudqpq"]
+[gd_scene load_steps=6 format=3 uid="uid://blmvtokpudqpq"]
 
 [ext_resource type="Script" uid="uid://c7bbfkpiiu25p" path="res://Scripts/Perk.cs" id="1_gk0mw"]
 [ext_resource type="Texture2D" uid="uid://ty7oasxfgr56" path="res://Sprites/Items/Perks/Perk_Overclock.png" id="1_yg1l2"]
 [ext_resource type="AudioStream" uid="uid://dpj873y8k2ohn" path="res://Sounds/Chest/CollectUpgrade.mp3" id="3_a7wgd"]
+[ext_resource type="Texture2D" uid="uid://2x3v68o8aafp" path="res://Assets/zelda_futuristic_asset_pack/zelda_futuristic_asset_pack/fx/light_blue.png" id="4_nna6k"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yg1l2"]
 radius = 16.0
@@ -30,3 +31,10 @@ texture = ExtResource("1_yg1l2")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_a7wgd")
 bus = &"SFX"
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(0.24, 0.234836)
+color = Color(1, 0, 1, 1)
+energy = 10.0
+shadow_enabled = true
+texture = ExtResource("4_nna6k")
